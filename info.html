@@ -568,105 +568,182 @@
     </footer>
 
     <script>
-        // API Configuration
-        const API_BASE_URL = 'http://localhost:3000/api';
+    // API Configuration - Use the config from config.js
+    const API_BASE_URL = window.AppConfig?.API_BASE_URL || 'http://localhost:3000';
 
-        // DOM elements
-        const loadingState = document.getElementById('loading-state');
-        const courseContent = document.getElementById('course-content');
-        const errorState = document.getElementById('error-state');
-        const toastContainer = document.getElementById('toast-container');
+    // DOM elements - will be initialized after DOM is loaded
+    let loadingState;
+    let courseContent;
+    let errorState;
+    let toastContainer;
+    let sellerBadge;
+    let sellerText;
+    let courseTitle;
+    let courseMiniDescription;
+    let courseFeatures;
+    let priceTag;
+    let onlinePrice;
+    let originalPrice;
+    let discountPercentage;
+    let courseImageOnline;
+    let courseImageOffline;
+    let courseDescription;
+    let toolsSection;
+    let toolsContainer;
+    let learnContainer;
+    let curriculumContainer;
 
-        // Course elements
-        const sellerBadge = document.getElementById('seller-badge');
-        const sellerText = document.getElementById('seller-text');
-        const courseTitle = document.getElementById('course-title');
-        const courseMiniDescription = document.getElementById('course-mini-description');
-        const courseFeatures = document.getElementById('course-features');
-        const priceTag = document.getElementById('price-tag');
-        const onlinePrice = document.getElementById('online-price');
-        const originalPrice = document.getElementById('original-price');
-        const discountPercentage = document.getElementById('discount-percentage');
-        const courseImageOnline = document.getElementById('course-image-online');
-        const courseImageOffline = document.getElementById('course-image-offline');
-        const courseDescription = document.getElementById('course-description');
-        const toolsSection = document.getElementById('tools-section');
-        const toolsContainer = document.getElementById('tools-container');
-        const learnContainer = document.getElementById('learn-container');
-        const curriculumContainer = document.getElementById('curriculum-container');
+    // Global variables
+    let currentCourse = null;
 
-        // Global variables
-        let currentCourse = null;
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize DOM elements
+        initializeDOMElements();
+        
+        // Load course data
+        loadCourseData();
+    });
 
-        // Toast Notification System
-        function showToast(title, message, type = 'info', duration = 5000) {
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
+    // Initialize all DOM elements
+    function initializeDOMElements() {
+        loadingState = document.getElementById('loading-state');
+        courseContent = document.getElementById('course-content');
+        errorState = document.getElementById('error-state');
+        toastContainer = document.getElementById('toast-container');
+        sellerBadge = document.getElementById('seller-badge');
+        sellerText = document.getElementById('seller-text');
+        courseTitle = document.getElementById('course-title');
+        courseMiniDescription = document.getElementById('course-mini-description');
+        courseFeatures = document.getElementById('course-features');
+        priceTag = document.getElementById('price-tag');
+        onlinePrice = document.getElementById('online-price');
+        originalPrice = document.getElementById('original-price');
+        discountPercentage = document.getElementById('discount-percentage');
+        courseImageOnline = document.getElementById('course-image-online');
+        courseImageOffline = document.getElementById('course-image-offline');
+        courseDescription = document.getElementById('course-description');
+        toolsSection = document.getElementById('tools-section');
+        toolsContainer = document.getElementById('tools-container');
+        learnContainer = document.getElementById('learn-container');
+        curriculumContainer = document.getElementById('curriculum-container');
+    }
 
-            const icons = {
-                success: 'fas fa-check-circle',
-                error: 'fas fa-exclamation-circle',
-                warning: 'fas fa-exclamation-triangle',
-                info: 'fas fa-info-circle'
-            };
+    // Toast Notification System
+    function showToast(title, message, type = 'info', duration = 5000) {
+        if (!toastContainer) return null;
 
-            toast.innerHTML = `
-                <i class="toast-icon ${icons[type]}"></i>
-                <div class="toast-content">
-                    <div class="toast-title">${title}</div>
-                    <div class="toast-message">${message}</div>
-                </div>
-                <button class="toast-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
 
-            toastContainer.appendChild(toast);
+        const icons = {
+            success: 'fas fa-check-circle',
+            error: 'fas fa-exclamation-circle',
+            warning: 'fas fa-exclamation-triangle',
+            info: 'fas fa-info-circle'
+        };
 
-            // Animate in
-            setTimeout(() => toast.classList.add('show'), 100);
+        toast.innerHTML = `
+            <i class="toast-icon ${icons[type]}"></i>
+            <div class="toast-content">
+                <div class="toast-title">${title}</div>
+                <div class="toast-message">${message}</div>
+            </div>
+            <button class="toast-close">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
 
-            // Close button functionality
-            const closeBtn = toast.querySelector('.toast-close');
-            closeBtn.addEventListener('click', () => {
-                removeToast(toast);
-            });
+        toastContainer.appendChild(toast);
 
-            // Auto remove after duration
-            if (duration > 0) {
-                setTimeout(() => {
-                    removeToast(toast);
-                }, duration);
-            }
+        // Animate in
+        setTimeout(() => toast.classList.add('show'), 100);
 
-            return toast;
-        }
+        // Close button functionality
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.addEventListener('click', () => {
+            removeToast(toast);
+        });
 
-        function removeToast(toast) {
-            toast.classList.remove('show');
+        // Auto remove after duration
+        if (duration > 0) {
             setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 300);
+                removeToast(toast);
+            }, duration);
         }
 
-        // Get course ID from URL
-        function getCourseIdFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('id');
+        return toast;
+    }
+
+    function removeToast(toast) {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 300);
+    }
+
+    // Get course ID from URL
+    function getCourseIdFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
+
+    // Format Indian Rupee
+    function formatINR(amount) {
+        if (!amount || isNaN(amount)) return '₹0';
+        return '₹' + amount.toLocaleString('en-IN');
+    }
+
+    // Load course data
+    async function loadCourseData() {
+        const courseId = getCourseIdFromURL();
+
+        if (!courseId) {
+            showErrorState('Course ID not found in URL');
+            return;
         }
 
-        // Format Indian Rupee
-        function formatINR(amount) {
-            return '₹' + amount.toLocaleString('en-IN');
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/courses/${courseId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+
+            if (result.success) {
+                currentCourse = result.data.course;
+                displayCourseData(currentCourse);
+                showToast('Success', 'Course information loaded successfully!', 'success', 3000);
+            } else {
+                showErrorState('Course not found or unavailable');
+                showToast('Error', 'Failed to load course information', 'error');
+            }
+        } catch (error) {
+            console.error('Error loading course:', error);
+            showErrorState('Unable to load course information');
+            showToast('Connection Error', 'Unable to connect to the server. Please check your connection.', 'error');
+        }
+    }
+
+    // Display course data
+    function displayCourseData(course) {
+        if (!course) {
+            showErrorState('No course data available');
+            return;
         }
 
-        // Create seller badge HTML
-        function createSellerBadge(seller) {
-            if (!seller) return '';
+        // Update page title
+        document.title = `${course.title || 'Course Details'} | U1 Technology Institute`;
 
-            const sellerClassMap = {
+        // Seller badge
+        if (course.seller) {
+            sellerText.textContent = course.seller;
+            // Apply the correct badge color based on seller type
+            const badgeClassMap = {
                 'Best Seller': 'best-seller',
                 'Top Rated': 'top-rated',
                 'Most Popular': 'most-popular',
@@ -680,173 +757,181 @@
                 'Top Choice': 'top-choice'
             };
 
-            const badgeClass = sellerClassMap[seller] || 'best-seller';
-
-            return `<span class="seller-badge ${badgeClass}">${seller}</span>`;
+            const badgeClass = badgeClassMap[course.seller] || 'best-seller';
+            sellerBadge.className = `seller-badge ${badgeClass} inline-flex items-center px-3 py-1 rounded-full mb-4`;
+            sellerBadge.innerHTML = `
+                <i class="fas fa-star mr-2"></i>
+                <span class="font-semibold uppercase tracking-wide text-sm">${course.seller}</span>
+            `;
+        } else {
+            sellerBadge.style.display = 'none';
         }
 
-        // Load course data
-        async function loadCourseData() {
-            const courseId = getCourseIdFromURL();
-
-            if (!courseId) {
-                showErrorState();
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_BASE_URL}/courses/${courseId}`);
-                const result = await response.json();
-
-                if (result.success) {
-                    currentCourse = result.data.course;
-                    displayCourseData(currentCourse);
-                    showToast('Success', 'Course information loaded successfully!', 'success', 3000);
-                } else {
-                    showErrorState();
-                    showToast('Error', 'Failed to load course information', 'error');
-                }
-            } catch (error) {
-                console.error('Error loading course:', error);
-                showErrorState();
-                showToast('Connection Error', 'Unable to connect to the server. Please check your connection.', 'error');
-            }
+        // Basic course info
+        courseTitle.textContent = course.title || 'Untitled Course';
+        
+        if (course.miniDescription) {
+            courseMiniDescription.textContent = course.miniDescription;
+        } else if (course.description) {
+            courseMiniDescription.textContent = course.description.substring(0, 150) + '...';
+        } else {
+            courseMiniDescription.textContent = 'No description available';
         }
 
-        // Display course data
-        function displayCourseData(course) {
-            // Update page title
-            document.title = `${course.title} | U1 Technology Institute`;
-
-            // Seller badge
-            if (course.seller) {
-                sellerText.textContent = course.seller;
-                // Apply the correct badge color based on seller type
-                const badgeClassMap = {
-                    'Best Seller': 'best-seller',
-                    'Top Rated': 'top-rated',
-                    'Most Popular': 'most-popular',
-                    'Trending Now': 'trending-now',
-                    'Student Favorite': 'student-favorite',
-                    'Bestseller': 'bestseller',
-                    'Hot Pick': 'hot-pick',
-                    'Editor\'s Choice': 'editors-choice',
-                    'Featured Course': 'featured-course',
-                    'Highly Recommended': 'highly-recommended',
-                    'Top Choice': 'top-choice'
-                };
-
-                const badgeClass = badgeClassMap[course.seller] || 'best-seller';
-                sellerBadge.className = `seller-badge ${badgeClass} inline-flex items-center px-3 py-1 rounded-full mb-4`;
-                sellerBadge.innerHTML = `
-                    <i class="fas fa-star mr-2"></i>
-                    <span class="font-semibold uppercase tracking-wide text-sm">${course.seller}</span>
-                `;
-            } else {
-                sellerBadge.style.display = 'none';
-            }
-
-            // Basic course info
-            courseTitle.textContent = course.title;
-            courseMiniDescription.textContent = course.miniDescription || course.description.substring(0, 150) + '...';
-
-            // Tools & Languages
-            if (course.toolsLanguage && course.toolsLanguage.length > 0) {
-                toolsSection.classList.remove('hidden');
-                toolsContainer.innerHTML = course.toolsLanguage.map(tool =>
-                    `<div class="flex items-center text-white">
-                        <i class="fas fa-check-circle text-accent mr-2"></i>
-                        <span>${tool}</span>
-                    </div>`
-                ).join('');
-            }
-
-            // Set initial pricing (online mode)
-            updatePricing('online');
-
-            // Images
-            if (course.images && course.images.length > 0) {
-                // Use first image for online, second for offline if available
-                courseImageOnline.src = course.images[0];
-                courseImageOffline.src = course.images[1] || course.images[0];
-
-                // Add error handling for images
-                courseImageOnline.onerror = () => {
-                    courseImageOnline.src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
-                };
-                courseImageOffline.onerror = () => {
-                    courseImageOffline.src = 'https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
-                };
-            }
-
-            // Course features
-            if (course.features && course.features.length > 0) {
-                courseFeatures.innerHTML = course.features.map(feature =>
-                    `<div class="flex items-center">
-                        <i class="fas fa-check-circle text-accent mr-3"></i>
-                        <span>${feature}</span>
-                    </div>`
-                ).join('');
-            }
-
-            // Course description
-            courseDescription.innerHTML = course.description.split('\n').map(paragraph =>
-                `<p>${paragraph}</p>`
+        // Tools & Languages
+        if (course.toolsLanguage && course.toolsLanguage.length > 0) {
+            toolsSection.classList.remove('hidden');
+            toolsContainer.innerHTML = course.toolsLanguage.map(tool =>
+                `<div class="flex items-center text-white">
+                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                    <span>${tool}</span>
+                </div>`
             ).join('');
+        } else {
+            toolsSection.classList.add('hidden');
+        }
 
-            // What You'll Learn
-            if (course.learn && course.learn.length > 0) {
-                learnContainer.innerHTML = course.learn.map(point =>
-                    `<div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow hover:-translate-y-1">
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
-                            <p>${point}</p>
-                        </div>
-                    </div>`
-                ).join('');
-            }
+        // Set initial pricing (online mode)
+        updatePricing('online');
 
-            // Curriculum
-            if (course.curriculum && course.curriculum.length > 0) {
-                curriculumContainer.innerHTML = course.curriculum.map((section, index) => `
-                    <div class="mb-4 overflow-hidden rounded-xl shadow-sm">
-                        <button class="accordion-header w-full flex justify-between items-center p-6 ${index % 2 === 0 ? 'bg-gray-50 hover:bg-gray-100' : 'bg-white hover:bg-gray-50'
-                    } transition-colors">
-                            <h3 class="text-xl font-semibold text-left">${section.section}</h3>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="accordion-content ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} max-h-0">
-                            <div class="p-6 border-t">
-                                <ul class="space-y-3">
-                                    ${section.lectures.map(lecture =>
-                        `<li class="flex items-center">
-                                            <i class="fas fa-play-circle text-primary mr-3"></i>
-                                            <span>${lecture}</span>
-                                        </li>`
-                    ).join('')}
-                                </ul>
-                            </div>
+        // Images
+        if (course.images && course.images.length > 0) {
+            // Use first image for online, second for offline if available
+            courseImageOnline.src = course.images[0];
+            courseImageOffline.src = course.images[1] || course.images[0];
+
+            // Add error handling for images
+            courseImageOnline.onerror = () => {
+                courseImageOnline.src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+            };
+            courseImageOffline.onerror = () => {
+                courseImageOffline.src = 'https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+            };
+        } else {
+            // Default images if no images provided
+            courseImageOnline.src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+            courseImageOffline.src = 'https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+        }
+
+        // Course features - using learn array as features if available
+        if (course.learn && course.learn.length > 0) {
+            courseFeatures.innerHTML = course.learn.slice(0, 4).map(feature =>
+                `<div class="flex items-center">
+                    <i class="fas fa-check-circle text-accent mr-3"></i>
+                    <span>${feature}</span>
+                </div>`
+            ).join('');
+        } else {
+            courseFeatures.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-accent mr-3"></i>
+                    <span>Comprehensive course content</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-accent mr-3"></i>
+                    <span>Expert instruction</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-accent mr-3"></i>
+                    <span>Hands-on projects</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-accent mr-3"></i>
+                    <span>Certificate of completion</span>
+                </div>
+            `;
+        }
+
+        // Course description
+        if (course.description) {
+            courseDescription.innerHTML = course.description.split('\n').map(paragraph =>
+                `<p class="mb-4">${paragraph}</p>`
+            ).join('');
+        } else {
+            courseDescription.innerHTML = '<p class="text-gray-500">No description available for this course.</p>';
+        }
+
+        // What You'll Learn
+        if (course.learn && course.learn.length > 0) {
+            learnContainer.innerHTML = course.learn.map(point =>
+                `<div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow hover:-translate-y-1">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
+                        <p>${point}</p>
+                    </div>
+                </div>`
+            ).join('');
+        } else {
+            learnContainer.innerHTML = `
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
+                        <p>Industry-relevant skills and knowledge</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
+                        <p>Practical hands-on experience</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
+                        <p>Career advancement opportunities</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Curriculum
+        if (course.curriculum && course.curriculum.length > 0) {
+            curriculumContainer.innerHTML = course.curriculum.map((section, index) => `
+                <div class="mb-4 overflow-hidden rounded-xl shadow-sm">
+                    <button class="accordion-header w-full flex justify-between items-center p-6 ${index % 2 === 0 ? 'bg-gray-50 hover:bg-gray-100' : 'bg-white hover:bg-gray-50'} transition-colors">
+                        <h3 class="text-xl font-semibold text-left">${section.section || 'Untitled Section'}</h3>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="accordion-content ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} max-h-0">
+                        <div class="p-6 border-t">
+                            <ul class="space-y-3">
+                                ${(section.lectures || []).map(lecture =>
+                                    `<li class="flex items-center">
+                                        <i class="fas fa-play-circle text-primary mr-3"></i>
+                                        <span>${lecture || 'Untitled Lecture'}</span>
+                                    </li>`
+                                ).join('')}
+                            </ul>
                         </div>
                     </div>
-                `).join('');
-            }
-
-            // Show content and hide loading
-            loadingState.classList.add('hidden');
-            courseContent.classList.remove('hidden');
-
-            // Initialize interactive components
-            initializeInteractiveComponents();
+                </div>
+            `).join('');
+        } else {
+            curriculumContainer.innerHTML = `
+                <div class="text-center py-8 text-gray-500">
+                    <i class="fas fa-book-open text-4xl mb-4"></i>
+                    <p>Curriculum details coming soon</p>
+                </div>
+            `;
         }
 
-        // Update pricing based on mode
-        function updatePricing(mode) {
-            if (!currentCourse) return;
+        // Show content and hide loading
+        loadingState.classList.add('hidden');
+        courseContent.classList.remove('hidden');
 
-            const hasOnlineDiscount = currentCourse.onlineOriginalPrice && currentCourse.onlineOriginalPrice > currentCourse.onlinePrice;
-            const hasOfflineDiscount = currentCourse.offlineOriginalPrice && currentCourse.offlineOriginalPrice > currentCourse.offlinePrice;
+        // Initialize interactive components
+        initializeInteractiveComponents();
+    }
 
-            if (mode === 'online') {
+    // Update pricing based on mode
+    function updatePricing(mode) {
+        if (!currentCourse) return;
+
+        const hasOnlineDiscount = currentCourse.onlineOriginalPrice && currentCourse.onlineOriginalPrice > currentCourse.onlinePrice;
+        const hasOfflineDiscount = currentCourse.offlineOriginalPrice && currentCourse.offlineOriginalPrice > currentCourse.offlinePrice;
+
+        if (mode === 'online') {
+            if (currentCourse.onlinePrice) {
                 onlinePrice.textContent = formatINR(currentCourse.onlinePrice);
 
                 if (hasOnlineDiscount) {
@@ -860,130 +945,142 @@
                     originalPrice.classList.add('hidden');
                     discountPercentage.classList.add('hidden');
                 }
-            } else if (mode === 'offline') {
-                if (currentCourse.offlinePrice) {
-                    onlinePrice.textContent = formatINR(currentCourse.offlinePrice);
+            } else {
+                priceTag.innerHTML = `<span class="font-bold text-xl">Contact for Online Pricing</span>`;
+            }
+        } else if (mode === 'offline') {
+            if (currentCourse.offlinePrice) {
+                onlinePrice.textContent = formatINR(currentCourse.offlinePrice);
 
-                    if (hasOfflineDiscount) {
-                        originalPrice.textContent = formatINR(currentCourse.offlineOriginalPrice);
-                        originalPrice.classList.remove('hidden');
+                if (hasOfflineDiscount) {
+                    originalPrice.textContent = formatINR(currentCourse.offlineOriginalPrice);
+                    originalPrice.classList.remove('hidden');
 
-                        const discountPercent = Math.round(((currentCourse.offlineOriginalPrice - currentCourse.offlinePrice) / currentCourse.offlineOriginalPrice) * 100);
-                        discountPercentage.textContent = `${discountPercent}% OFF`;
-                        discountPercentage.classList.remove('hidden');
-                    } else {
-                        originalPrice.classList.add('hidden');
-                        discountPercentage.classList.add('hidden');
-                    }
+                    const discountPercent = Math.round(((currentCourse.offlineOriginalPrice - currentCourse.offlinePrice) / currentCourse.offlineOriginalPrice) * 100);
+                    discountPercentage.textContent = `${discountPercent}% OFF`;
+                    discountPercentage.classList.remove('hidden');
                 } else {
-                    // If offline price is not available
-                    priceTag.innerHTML = `<span class="font-bold text-xl">Contact for Offline Pricing</span>`;
+                    originalPrice.classList.add('hidden');
+                    discountPercentage.classList.add('hidden');
                 }
+            } else {
+                priceTag.innerHTML = `<span class="font-bold text-xl">Contact for Offline Pricing</span>`;
             }
         }
+    }
 
-        // Show error state
-        function showErrorState() {
-            loadingState.classList.add('hidden');
+    // Show error state
+    function showErrorState(message = 'Course not found') {
+        if (loadingState) loadingState.classList.add('hidden');
+        if (courseContent) courseContent.classList.add('hidden');
+        if (errorState) {
             errorState.classList.remove('hidden');
+            // Update error message if needed
+            const errorMessage = errorState.querySelector('p');
+            if (errorMessage) {
+                errorMessage.textContent = message;
+            }
         }
+    }
 
-        // Initialize interactive components
-        function initializeInteractiveComponents() {
-            // Mode toggle functionality
-            const modeToggles = document.querySelectorAll('.mode-toggle');
-            const heroSlides = document.querySelectorAll('.hero-slide');
-            const modeDetails = document.querySelectorAll('.mode-details');
+    // Initialize interactive components
+    function initializeInteractiveComponents() {
+        // Mode toggle functionality
+        const modeToggles = document.querySelectorAll('.mode-toggle');
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const modeDetails = document.querySelectorAll('.mode-details');
 
-            function setMode(mode) {
-                // Update toggle buttons
-                modeToggles.forEach(toggle => {
-                    if (toggle.dataset.mode === mode) {
-                        toggle.classList.add('active');
-                    } else {
-                        toggle.classList.remove('active');
-                    }
-                });
+        function setMode(mode) {
+            // Update toggle buttons
+            modeToggles.forEach(toggle => {
+                if (toggle.dataset.mode === mode) {
+                    toggle.classList.add('active');
+                } else {
+                    toggle.classList.remove('active');
+                }
+            });
 
-                // Update slides
-                heroSlides.forEach(slide => {
-                    if (slide.dataset.mode === mode) {
-                        slide.style.opacity = '1';
-                    } else {
-                        slide.style.opacity = '0';
-                    }
-                });
+            // Update slides
+            heroSlides.forEach(slide => {
+                if (slide.dataset.mode === mode) {
+                    slide.style.opacity = '1';
+                } else {
+                    slide.style.opacity = '0';
+                }
+            });
 
-                // Update mode details
-                modeDetails.forEach(detail => {
-                    if (detail.dataset.mode === mode) {
-                        detail.classList.remove('hidden');
-                    } else {
-                        detail.classList.add('hidden');
-                    }
-                });
+            // Update mode details
+            modeDetails.forEach(detail => {
+                if (detail.dataset.mode === mode) {
+                    detail.classList.remove('hidden');
+                } else {
+                    detail.classList.add('hidden');
+                }
+            });
 
-                // Update pricing based on mode
-                updatePricing(mode);
+            // Update pricing based on mode
+            updatePricing(mode);
 
-                // Show toast notification
-                // showToast('Mode Changed', `Switched to ${mode} class mode`, 'info', 2000);
-
-                // Add animation
+            // Add animation
+            if (priceTag) {
                 priceTag.classList.add('animate-pulse');
                 setTimeout(() => {
                     priceTag.classList.remove('animate-pulse');
                 }, 300);
             }
+        }
 
-            modeToggles.forEach(toggle => {
-                toggle.addEventListener('click', () => {
-                    const mode = toggle.dataset.mode;
-                    setMode(mode);
-                });
+        modeToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const mode = toggle.dataset.mode;
+                setMode(mode);
             });
+        });
 
-            // Accordion functionality
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
+        // Accordion functionality
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
 
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const content = header.nextElementSibling;
-                    const icon = header.querySelector('i');
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('i');
 
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null;
-                        icon.style.transform = 'rotate(0deg)';
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        icon.style.transform = 'rotate(180deg)';
-                    }
-                });
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                }
             });
+        });
 
-            // Enroll button functionality
-            const enrollBtn = document.querySelector('.enroll-btn');
+        // Enroll button functionality
+        const enrollBtn = document.querySelector('.enroll-btn');
+        if (enrollBtn) {
             enrollBtn.addEventListener('click', () => {
-                const activeMode = document.querySelector('.mode-toggle.active').dataset.mode;
-                const courseTitle = document.getElementById('course-title').textContent;
+                const activeMode = document.querySelector('.mode-toggle.active')?.dataset.mode || 'online';
+                const courseTitleText = document.getElementById('course-title')?.textContent || 'this course';
 
                 showToast(
                     'Enrollment Process',
-                    `Starting enrollment for ${activeMode} "${courseTitle}" course. You will be redirected to the enrollment page shortly.`,
+                    `Starting enrollment for ${activeMode} "${courseTitleText}" course. You will be redirected to the enrollment page shortly.`,
                     'success',
                     4000
                 );
 
                 // Simulate redirect after delay
                 setTimeout(() => {
+                    showToast('Redirecting', 'Taking you to the enrollment page...', 'info', 2000);
                     // In a real implementation, you would redirect to the enrollment page
                     // window.location.href = `enroll.html?id=${getCourseIdFromURL()}&mode=${activeMode}`;
-                    showToast('Redirecting', 'Taking you to the enrollment page...', 'info', 2000);
                 }, 2000);
             });
+        }
 
-            // CTA button functionality
-            const ctaBtn = document.querySelector('.bg-white');
+        // CTA button functionality
+        const ctaBtn = document.querySelector('.bg-white');
+        if (ctaBtn) {
             ctaBtn.addEventListener('click', () => {
                 showToast(
                     'Get Started',
@@ -992,30 +1089,26 @@
                     3000
                 );
             });
-
-            // Scroll animations
-            const observerOptions = {
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-fadeIn');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('section').forEach(section => {
-                observer.observe(section);
-            });
         }
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function () {
-            loadCourseData();
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
         });
-    </script>
+    }
+</script>
 </body>
 
 </html>

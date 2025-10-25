@@ -495,6 +495,36 @@
             display: block !important;
             opacity: 1 !important;
         }
+
+        #auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+            display: none;
+            /* This should be changed to flex when opened */
+        }
+
+        /* Ensure modal content is properly positioned */
+        .modal-content {
+            position: relative;
+            background-color: var(--bg-color);
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+            max-height: 90vh;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+        }
     </style>
 
     <!-- JSON-LD Structured Data -->
@@ -1570,9 +1600,7 @@
                 constructor() {
                     this.currentUser = null;
                     this.isLoggedIn = false;
-                    this.apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-                        ? 'http://localhost:3000/api'
-                        : '/api';
+                    this.apiBaseUrl = window.AppConfig.API_BASE_URL + '/api';
                     this.init();
                 }
 
@@ -1586,63 +1614,6 @@
                     // Initialize animations
                     this.initializeAnimations();
                 }
-
-
-                // Add this method to your AuthSystem class
-                testRadioButtons() {
-                    const radios = document.querySelectorAll('input[name="experience"]');
-                    console.log('=== RADIO BUTTON TEST (Fixed) ===');
-                    console.log('Total radios found:', radios.length);
-
-                    radios.forEach((radio, index) => {
-                        console.log(`Radio ${index + 1}:`, {
-                            id: radio.id,
-                            value: radio.value,
-                            checked: radio.checked,
-                            type: radio.type,
-                            name: radio.name
-                        });
-                    });
-
-                    const selected = document.querySelector('input[name="experience"]:checked');
-                    console.log('Selected experience:', selected ? selected.value : 'None');
-
-                    if (selected && selected.value) {
-                        console.log('✅ Radio buttons are working correctly!');
-                    } else {
-                        console.log('❌ Radio buttons still have issues');
-                    }
-                }
-
-                debugRadioButtons() {
-                    const radios = document.querySelectorAll('input[name="experience"]');
-                    console.log('=== ENHANCED RADIO BUTTON DEBUG ===');
-
-                    radios.forEach((radio, index) => {
-                        console.log(`Radio ${index + 1}:`, {
-                            id: radio.id,
-                            value: radio.value,
-                            checked: radio.checked,
-                            type: radio.type,
-                            name: radio.name,
-                            element: radio
-                        });
-                    });
-
-                    // Force check the first radio if none are checked
-                    const checkedRadio = document.querySelector('input[name="experience"]:checked');
-                    if (!checkedRadio) {
-                        console.log('No radio checked, forcing first radio to be checked');
-                        radios[0].checked = true;
-                    }
-
-                    // Test getting value
-                    const selected = document.querySelector('input[name="experience"]:checked');
-                    console.log('Selected experience value:', selected ? selected.value : 'None');
-
-                    return selected ? selected.value : '';
-                }
-
 
                 checkLoginStatus() {
                     const token = localStorage.getItem('authToken');
@@ -1749,43 +1720,43 @@
                         const style = document.createElement('style');
                         style.id = 'auth-animations';
                         style.textContent = `
-                    .auth-modal-enter {
-                        opacity: 0;
-                        transform: scale(0.9);
-                    }
-                    .auth-modal-enter-active {
-                        opacity: 1;
-                        transform: scale(1);
-                        transition: opacity 0.3s ease, transform 0.3s ease;
-                    }
-                    .auth-modal-exit {
-                        opacity: 1;
-                        transform: scale(1);
-                    }
-                    .auth-modal-exit-active {
-                        opacity: 0;
-                        transform: scale(0.9);
-                        transition: opacity 0.3s ease, transform 0.3s ease;
-                    }
-                    .form-tab-enter {
-                        opacity: 0;
-                        transform: translateX(20px);
-                    }
-                    .form-tab-enter-active {
-                        opacity: 1;
-                        transform: translateX(0);
-                        transition: opacity 0.3s ease, transform 0.3s ease;
-                    }
-                    .form-tab-exit {
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
-                    .form-tab-exit-active {
-                        opacity: 0;
-                        transform: translateX(-20px);
-                        transition: opacity 0.3s ease, transform 0.3s ease;
-                    }
-                `;
+                .auth-modal-enter {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+                .auth-modal-enter-active {
+                    opacity: 1;
+                    transform: scale(1);
+                    transition: opacity 0.3s ease, transform 0.3s ease;
+                }
+                .auth-modal-exit {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                .auth-modal-exit-active {
+                    opacity: 0;
+                    transform: scale(0.9);
+                    transition: opacity 0.3s ease, transform 0.3s ease;
+                }
+                .form-tab-enter {
+                    opacity: 0;
+                    transform: translateX(20px);
+                }
+                .form-tab-enter-active {
+                    opacity: 1;
+                    transform: translateX(0);
+                    transition: opacity 0.3s ease, transform 0.3s ease;
+                }
+                .form-tab-exit {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                .form-tab-exit-active {
+                    opacity: 0;
+                    transform: translateX(-20px);
+                    transition: opacity 0.3s ease, transform 0.3s ease;
+                }
+            `;
                         document.head.appendChild(style);
                     }
                 }
@@ -1820,35 +1791,45 @@
 
                 openAuthModal() {
                     const modal = document.getElementById('auth-modal');
-                    modal.style.display = 'flex';
+                    console.log('Opening auth modal:', modal);
 
-                    // Add animation class
-                    setTimeout(() => {
-                        modal.classList.add('auth-modal-enter-active');
-                    }, 10);
+                    if (modal) {
+                        modal.style.display = 'flex';
 
-                    // Reset forms
-                    this.resetForms();
+                        // Force show the modal
+                        setTimeout(() => {
+                            modal.style.opacity = '1';
+                            modal.style.visibility = 'visible';
+                        }, 10);
 
-                    // Set focus to first input in active form
-                    setTimeout(() => {
-                        const activeForm = document.querySelector('.auth-form.active');
-                        const firstInput = activeForm.querySelector('input');
-                        if (firstInput) {
-                            firstInput.focus();
-                        }
-                    }, 300);
+                        // Reset forms
+                        this.resetForms();
+
+                        // Set focus to first input in active form
+                        setTimeout(() => {
+                            const activeForm = document.querySelector('.auth-form.active');
+                            if (activeForm) {
+                                const firstInput = activeForm.querySelector('input');
+                                if (firstInput) {
+                                    firstInput.focus();
+                                }
+                            }
+                        }, 300);
+                    } else {
+                        console.error('Auth modal element not found!');
+                    }
                 }
 
                 closeAuthModal() {
                     const modal = document.getElementById('auth-modal');
-                    modal.classList.remove('auth-modal-enter-active');
-                    modal.classList.add('auth-modal-exit-active');
+                    if (modal) {
+                        modal.style.opacity = '0';
+                        modal.style.visibility = 'hidden';
 
-                    setTimeout(() => {
-                        modal.style.display = 'none';
-                        modal.classList.remove('auth-modal-exit-active');
-                    }, 300);
+                        setTimeout(() => {
+                            modal.style.display = 'none';
+                        }, 300);
+                    }
                 }
 
                 switchTab(tabName) {
@@ -1872,25 +1853,37 @@
                     setTimeout(() => {
                         if (currentActiveForm) {
                             currentActiveForm.classList.remove('form-tab-exit-active');
+                            currentActiveForm.style.display = 'none';
+                            currentActiveForm.classList.remove('active');
+                            currentActiveForm.style.opacity = '0';
+                            currentActiveForm.style.transform = 'translateX(-20px)';
+                            currentActiveForm.style.transition = 'none';
+                            currentActiveForm.style.display = 'block';
+                            currentActiveForm.style.opacity = '0';
+                            currentActiveForm.style.transform = 'translateX(20px)';
                         }
 
                         if (tabName === 'login') {
                             document.getElementById('login-tab').classList.add('active');
-                            document.getElementById('login-form').classList.add('active', 'form-tab-enter-active');
+                            const loginForm = document.getElementById('login-form');
+                            loginForm.classList.add('active');
+                            loginForm.style.display = 'block';
+                            setTimeout(() => {
+                                loginForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                                loginForm.style.opacity = '1';
+                                loginForm.style.transform = 'translateX(0)';
+                            }, 10);
                         } else {
                             document.getElementById('signup-tab').classList.add('active');
-                            document.getElementById('signup-form').classList.add('active', 'form-tab-enter-active');
-
-                            // Test radio buttons when signup form becomes active
+                            const signupForm = document.getElementById('signup-form');
+                            signupForm.classList.add('active');
+                            signupForm.style.display = 'block';
                             setTimeout(() => {
-                                this.testRadioButtons();
-                            }, 100);
+                                signupForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                                signupForm.style.opacity = '1';
+                                signupForm.style.transform = 'translateX(0)';
+                            }, 10);
                         }
-
-                        // Remove enter animation after transition
-                        setTimeout(() => {
-                            document.querySelector('.auth-form.active').classList.remove('form-tab-enter-active');
-                        }, 300);
                     }, 300);
 
                     // Reset forgot password form
@@ -1899,8 +1892,6 @@
                     // Clear messages
                     this.clearAllMessages();
                 }
-
-
 
                 showForgotPassword() {
                     const currentActiveForm = document.querySelector('.auth-form.active');
@@ -1916,14 +1907,19 @@
                             currentActiveForm.classList.remove('active');
                             document.getElementById('login-tab').classList.remove('active');
                             document.getElementById('signup-tab').classList.remove('active');
-                            document.getElementById('forgot-password-form').classList.add('active', 'form-tab-enter-active');
-                            document.getElementById('forgot-password-form').style.display = 'block';
-                        }
 
-                        // Remove enter animation after transition
-                        setTimeout(() => {
-                            document.getElementById('forgot-password-form').classList.remove('form-tab-enter-active');
-                        }, 300);
+                            const forgotForm = document.getElementById('forgot-password-form');
+                            forgotForm.classList.add('active');
+                            forgotForm.style.display = 'block';
+                            forgotForm.style.opacity = '0';
+                            forgotForm.style.transform = 'translateX(20px)';
+
+                            setTimeout(() => {
+                                forgotForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                                forgotForm.style.opacity = '1';
+                                forgotForm.style.transform = 'translateX(0)';
+                            }, 10);
+                        }
                     }, 300);
 
                     // Reset form state
@@ -2146,37 +2142,12 @@
                     const password = document.getElementById('signup-password').value;
                     const confirmPassword = document.getElementById('signup-confirm-password').value;
 
-                    // Debug radio buttons first
-                    const experienceValue = this.debugRadioButtons();
-
-                    // Use the debugged value
-                    let experience = experienceValue;
-
-                    // Method 1: Direct DOM query
+                    // Get experience value
+                    let experience = '';
                     const selectedRadio = document.querySelector('input[name="experience"]:checked');
                     if (selectedRadio) {
                         experience = selectedRadio.value;
                     }
-
-                    // Method 2: Fallback - get by index if value is empty
-                    if (!experience) {
-                        const experienceRadios = document.querySelectorAll('input[name="experience"]');
-                        const labels = [
-                            "Working professional – Technical roles",
-                            "Working professional – Non-technical",
-                            "College student – Final year",
-                            "Internship",
-                            "Others"
-                        ];
-
-                        experienceRadios.forEach((radio, index) => {
-                            if (radio.checked) {
-                                experience = labels[index];
-                            }
-                        });
-                    }
-
-                    console.log('Final experience value:', experience);
 
                     const additionalInfo = document.getElementById('additional-info').value;
                     const errorElement = document.getElementById('signup-error');
@@ -2495,9 +2466,9 @@
                     };
 
                     toast.innerHTML = `
-                    <i class="fas ${icons[type]}" aria-hidden="true"></i>
-                    <span>${message}</span>
-                `;
+                <i class="fas ${icons[type]}" aria-hidden="true"></i>
+                <span>${message}</span>
+            `;
 
                     toastContainer.appendChild(toast);
 
@@ -2538,11 +2509,11 @@
                         signinButtons.forEach(button => {
                             if (button) {
                                 button.innerHTML = `
-                                <div class="flex items-center">
-                                    <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
-                                    <span>${this.currentUser.name}</span>
-                                </div>
-                            `;
+                            <div class="flex items-center">
+                                <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
+                                <span>${this.currentUser.name}</span>
+                            </div>
+                        `;
                                 button.onclick = () => this.showUserMenu();
                             }
                         });
@@ -2554,17 +2525,17 @@
                     const userMenu = document.createElement('div');
                     userMenu.className = 'absolute top-16 right-4 bg-white shadow-lg rounded-lg p-4 min-w-48 z-50';
                     userMenu.innerHTML = `
-                    <div class="border-b border-gray-200 pb-2 mb-2">
-                        <p class="font-semibold text-gray-800">${this.currentUser.name}</p>
-                        <p class="text-sm text-gray-600">${this.currentUser.email}</p>
-                    </div>
-                    <button id="user-profile-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-gray-700">
-                        <i class="fas fa-user mr-2"></i>Profile
-                    </button>
-                    <button id="user-logout-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-red-600">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </button>
-                `;
+                <div class="border-b border-gray-200 pb-2 mb-2">
+                    <p class="font-semibold text-gray-800">${this.currentUser.name}</p>
+                    <p class="text-sm text-gray-600">${this.currentUser.email}</p>
+                </div>
+                <button id="user-profile-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-gray-700">
+                    <i class="fas fa-user mr-2"></i>Profile
+                </button>
+                <button id="user-logout-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-red-600">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+            `;
 
                     // Remove any existing menu
                     const existingMenu = document.querySelector('.user-dropdown-menu');
@@ -2633,7 +2604,51 @@
             }
 
             // Initialize the authentication system
-            new AuthSystem();
+            const authSystem = new AuthSystem();
+
+            // Quick fix for sign in buttons to ensure they work
+            const headerSignInBtn = document.getElementById('header-signin-btn');
+            const mobileSignInBtn = document.getElementById('mobile-signin-btn');
+
+            function openAuthModalDirect() {
+                const modal = document.getElementById('auth-modal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                    modal.style.opacity = '1';
+                    modal.style.visibility = 'visible';
+
+                    // Ensure login form is active
+                    document.querySelectorAll('.auth-form').forEach(form => {
+                        form.classList.remove('active');
+                        form.style.display = 'none';
+                    });
+                    document.querySelectorAll('.tab-button').forEach(tab => tab.classList.remove('active'));
+
+                    document.getElementById('login-form').classList.add('active');
+                    document.getElementById('login-form').style.display = 'block';
+                    document.getElementById('login-tab').classList.add('active');
+
+                    // Clear any messages
+                    document.querySelectorAll('.message').forEach(msg => {
+                        msg.style.display = 'none';
+                        msg.textContent = '';
+                    });
+                }
+            }
+
+            if (headerSignInBtn) {
+                headerSignInBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openAuthModalDirect();
+                });
+            }
+
+            if (mobileSignInBtn) {
+                mobileSignInBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openAuthModalDirect();
+                });
+            }
 
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2693,37 +2708,36 @@
                 if (!coursesContainer) return;
 
                 coursesContainer.innerHTML = courses.map(course => `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
-                    <img src="${course.images[0]}" 
-                         alt="${course.title}" class="w-full h-48 object-cover" width="400" height="192" loading="lazy">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">${course.title}</h3>
-                            <span class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">${course.category || 'Course'}</span>
-                        </div>
-                        <p class="text-gray-600 mb-4 line-clamp-2">${course.description}</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="flex items-center">
-                                <span class="text-gray-600">${course.duration || 'Self-paced'}</span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <span class="text-[#800020] font-bold">₹${course.onlinePrice}</span>
-                                ${course.onlineOriginalPrice ? `<span class="text-gray-500 line-through text-sm">₹${course.onlineOriginalPrice}</span>` : ''}
-                            </div>
-                        </div>
-                        <button class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all view-course-btn" data-course-id="${course.id}">
-                            View Details
-                        </button>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
+                <img src="${course.images[0]}" 
+                     alt="${course.title}" class="w-full h-48 object-cover" width="400" height="192" loading="lazy">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold text-gray-900">${course.title}</h3>
+                        <span class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">${course.category || 'Course'}</span>
                     </div>
+                    <p class="text-gray-600 mb-4 line-clamp-2">${course.description}</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center">
+                            <span class="text-gray-600">${course.duration || 'Self-paced'}</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <span class="text-[#800020] font-bold">₹${course.onlinePrice}</span>
+                            ${course.onlineOriginalPrice ? `<span class="text-gray-500 line-through text-sm">₹${course.onlineOriginalPrice}</span>` : ''}
+                        </div>
+                    </div>
+                    <button class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all view-course-btn" data-course-id="${course.id}">
+                        View Details
+                    </button>
                 </div>
-            `).join('');
+            </div>
+        `).join('');
 
                 // Add event listeners to course buttons
                 document.querySelectorAll('.view-course-btn').forEach(button => {
                     button.addEventListener('click', function () {
                         const courseId = this.getAttribute('data-course-id');
                         // For demo, just show a toast
-                        const authSystem = new AuthSystem();
                         authSystem.showToast('Course details feature would open here', 'info');
                     });
                 });
