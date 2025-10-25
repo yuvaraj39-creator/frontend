@@ -1,0 +1,2739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U1 Technology Institute - Premier Education Destination</title>
+    <meta name="description"
+        content="U1 Technology Institute offers quality education with industry-relevant programs in engineering, science, commerce, and arts. Join our vibrant learning community.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.U1Technology.com/">
+    <meta property="og:title" content="U1 Technology Institute - Premier Education Destination">
+    <meta property="og:description"
+        content="Join our vibrant learning community and unlock your potential with industry-relevant programs.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.U1Technology.com/">
+    <meta property="twitter:title" content="U1 Technology Institute - Premier Education Destination">
+    <meta property="twitter:description"
+        content="Join our vibrant learning community and unlock your potential with industry-relevant programs.">
+    <meta property="twitter:image"
+        content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.U1Technology.com/">
+
+    <!-- Preload critical resources -->
+    <link rel="preload"
+        href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+        as="image">
+    <link rel="preconnect" href="https://images.unsplash.com">
+
+    <!-- CDN Resources -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        .hero-bg {
+            background: linear-gradient(rgba(128, 0, 32, 0.7), rgba(128, 0, 32, 0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Skip to content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #800020;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Authentication System Styles */
+        :root {
+            --primary-color: #800020;
+            --primary-dark: #600018;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --text-color: #333;
+            --text-light: #6b7280;
+            --bg-color: #fafafa;
+            --border-color: #dddddd;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        #toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            color: white;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            min-width: 250px;
+            max-width: 300px;
+        }
+
+        .toast-success {
+            background-color: var(--success-color);
+        }
+
+        .toast-error {
+            background-color: var(--error-color);
+        }
+
+        .toast-warning {
+            background-color: var(--warning-color);
+        }
+
+        .toast-info {
+            background-color: var(--info-color);
+        }
+
+        #auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+            display: none;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: var(--bg-color);
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+            max-height: 90vh;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .modal-content:hover {
+            box-shadow: 0 15px 30px rgba(128, 0, 32, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--primary-color);
+            transition: var(--transition);
+            background: none;
+            border: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-dark);
+        }
+
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: none;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .tab-button.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .tab-button:not(.active) {
+            color: var(--text-light);
+        }
+
+        .forms-container {
+            position: relative;
+            min-height: 400px;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-heading {
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            background-color: transparent;
+            color: inherit;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            background-color: transparent;
+            color: inherit;
+            transition: var(--transition);
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        .form-textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1);
+        }
+
+        .radio-group {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-input {
+            margin-right: 8px;
+            accent-color: var(--primary-color);
+        }
+
+        .radio-label {
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .form-link {
+            display: block;
+            text-align: right;
+            margin: 5px 0 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .form-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: var(--transition);
+        }
+
+        .form-button:hover:not(:disabled) {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(128, 0, 32, 0.3);
+        }
+
+        .form-button:disabled {
+            background-color: var(--text-light);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .message {
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .error-message {
+            color: var(--error-color);
+        }
+
+        .success-message {
+            color: var(--success-color);
+        }
+
+        .info-text {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .scrollable-container {
+            max-height: calc(90vh - 100px);
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .user-icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: none;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .user-icon-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 20px;
+            }
+
+            .form-heading {
+                font-size: 1.5rem;
+            }
+
+            .toast {
+                min-width: 200px;
+                max-width: 250px;
+            }
+        }
+
+        /* Password input container with toggle button */
+        .password-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-input-container .form-input {
+            padding-right: 45px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-color);
+            background-color: rgba(128, 0, 32, 0.1);
+        }
+
+        /* OTP input styling */
+        #forgot-otp {
+            letter-spacing: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Animation for showing sections */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ensure radio buttons are properly visible and clickable */
+        .radio-group {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .radio-group:hover {
+            background-color: rgba(128, 0, 32, 0.05);
+        }
+
+        .radio-input {
+            margin-right: 12px;
+            accent-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .radio-label {
+            cursor: pointer;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        /* Make sure the form is properly displayed */
+        .auth-form.active {
+            display: block !important;
+            opacity: 1 !important;
+        }
+    </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "U1 Technology Institute",
+        "description": "A premier educational institution dedicated to excellence in teaching, research, and innovation since 1988.",
+        "url": "https://www.U1Technology.com/",
+        "logo": "https://via.placeholder.com/50x50/800020/FFFFFF?text=U1",
+        "telephone": "+91-99523-91994",
+        "email": "info@U1Technology.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 Education Street",
+            "addressLocality": "Knowledge City",
+            "addressCountry": "India",
+            "postalCode": "110001"
+        },
+        "foundingDate": "1988",
+        "sameAs": [
+            "https://www.facebook.com/U1Technology",
+            "https://twitter.com/U1Technology",
+            "https://www.linkedin.com/company/U1Technology",
+            "https://www.instagram.com/U1Technology",
+            "https://www.youtube.com/channel/U1Technology"
+        ]
+    }
+    </script>
+</head>
+
+<body class="font-sans antialiased">
+    <!-- Skip to content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Top Header -->
+    <div class="bg-gray-900 text-white py-2 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex space-x-4 mb-2 md:mb-0">
+                <div class="flex items-center">
+                    <i class="fas fa-phone-alt mr-2 text-[#DC143C]" aria-hidden="true"></i>
+                    <span>+91 99523 91994</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-phone-alt mr-2 text-[#DC143C]" aria-hidden="true"></i>
+                    <span>+91 97900 66301</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope mr-2 text-[#DC143C]" aria-hidden="true"></i>
+                    <span>info@U1Technology.com</span>
+                </div>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-[#DC143C]" aria-label="Facebook"><i class="fab fa-facebook-f"
+                        aria-hidden="true"></i></a>
+                <a href="#" class="hover:text-[#DC143C]" aria-label="Twitter"><i class="fab fa-twitter"
+                        aria-hidden="true"></i></a>
+                <a href="#" class="hover:text-[#DC143C]" aria-label="LinkedIn"><i class="fab fa-linkedin-in"
+                        aria-hidden="true"></i></a>
+                <a href="#" class="hover:text-[#DC143C]" aria-label="Instagram"><i class="fab fa-instagram"
+                        aria-hidden="true"></i></a>
+                <a href="#" class="hover:text-[#DC143C]" aria-label="YouTube"><i class="fab fa-youtube"
+                        aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="h-12 w-12 bg-[#800020] rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white font-bold text-lg">U1</span>
+                </div>
+                <span class="text-xl font-bold text-gray-900">U1 Technology</span>
+            </div>
+            <div class="hidden md:flex space-x-8" id="main-nav">
+                <a href="#home" class="text-[#800020] font-medium">Home</a>
+                <a href="courses.html" class="text-gray-600 hover:text-[#800020]">Courses</a>
+                <a href="#departments" class="text-gray-600 hover:text-[#800020]">Departments</a>
+                <a href="#faculty" class="text-gray-600 hover:text-[#800020]">Faculty</a>
+                <a href="#admissions" class="text-gray-600 hover:text-[#800020]">Admissions</a>
+                <a href="#placements" class="text-gray-600 hover:text-[#800020]">Placements</a>
+                <a href="#contact" class="text-gray-600 hover:text-[#800020]">Contact</a>
+            </div>
+            <div class="flex items-center">
+                <button id="header-signin-btn"
+                    class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-all">
+                    Sign In
+                </button>
+                <button class="md:hidden text-gray-600 ml-4" id="mobile-menu-button" aria-controls="mobile-menu"
+                    aria-expanded="false" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden absolute top-16 left-0 w-full bg-white p-4 shadow-lg z-40" id="mobile-menu">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-[#800020] font-medium">Home</a>
+                <a href="courses.html" class="text-gray-600 hover:text-[#800020]">Courses</a>
+                <a href="#departments" class="text-gray-600 hover:text-[#800020]">Departments</a>
+                <a href="#faculty" class="text-gray-600 hover:text-[#800020]">Faculty</a>
+                <a href="#admissions" class="text-gray-600 hover:text-[#800020]">Admissions</a>
+                <a href="#placements" class="text-gray-600 hover:text-[#800020]">Placements</a>
+                <a href="#contact" class="text-gray-600 hover:text-[#800020]">Contact</a>
+                <button id="mobile-signin-btn"
+                    class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-all w-full">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-20 md:py-32">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Shape Your Future With Quality Education</h1>
+                <p class="text-xl mb-8">Join our vibrant learning community and unlock your potential with
+                    industry-relevant programs.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button
+                        class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
+                        Explore Programs
+                    </button>
+                    <button
+                        class="bg-white hover:bg-gray-100 text-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
+                        Apply Now
+                    </button>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                    alt="Students learning in a classroom" class="rounded-lg shadow-xl max-w-md w-full" width="600"
+                    height="400" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">About U1 Technology Institute</h2>
+                <div class="w-20 h-1 bg-[#800020] mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="U1 Technology Institute Campus" class="rounded-lg shadow-md w-full" width="700"
+                        height="467" loading="lazy">
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision & Mission</h3>
+                    <p class="text-gray-600 mb-6">To be a globally recognized center of excellence in education,
+                        research, and innovation that transforms students into leaders and responsible citizens.</p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">35+ Years of Excellence</h4>
+                                <p class="text-gray-600">Providing quality education since 1988</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Industry-Aligned Curriculum</h4>
+                                <p class="text-gray-600">Programs designed with industry experts</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Global Recognition</h4>
+                                <p class="text-gray-600">Accredited by international education bodies</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        class="mt-8 bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
+                        Learn More About Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses/Programs Section -->
+    <section id="courses" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Programs</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choose from our wide range of undergraduate, graduate, and
+                    professional programs</p>
+                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80"
+                        alt="Computer Science laboratory" class="w-full h-48 object-cover" width="400" height="192"
+                        loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">Computer Science</h3>
+                            <span
+                                class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">B.Tech</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                            </div>
+                            <span class="text-gray-600 ml-2">4.5 (120 reviews)</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Professor John Smith"
+                                    class="w-8 h-8 rounded-full mr-2" width="32" height="32" loading="lazy">
+                                <span class="text-gray-600">Prof. John Smith</span>
+                            </div>
+                            <span class="text-[#800020] font-bold">$3,200/yr</span>
+                        </div>
+                        <button
+                            class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Business Administration class" class="w-full h-48 object-cover" width="400" height="192"
+                        loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">Business Administration</h3>
+                            <span class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">MBA</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="far fa-star" aria-hidden="true"></i>
+                            </div>
+                            <span class="text-gray-600 ml-2">4.0 (95 reviews)</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg"
+                                    alt="Professor Sarah Johnson" class="w-8 h-8 rounded-full mr-2" width="32"
+                                    height="32" loading="lazy">
+                                <span class="text-gray-600">Prof. Sarah Johnson</span>
+                            </div>
+                            <span class="text-[#800020] font-bold">$4,500/yr</span>
+                        </div>
+                        <button
+                            class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
+                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Electrical Engineering laboratory" class="w-full h-48 object-cover" width="400"
+                        height="192" loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">Electrical Engineering</h3>
+                            <span
+                                class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">B.Tech</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                            </div>
+                            <span class="text-gray-600 ml-2">5.0 (86 reviews)</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Professor Michael Brown"
+                                    class="w-8 h-8 rounded-full mr-2" width="32" height="32" loading="lazy">
+                                <span class="text-gray-600">Prof. Michael Brown</span>
+                            </div>
+                            <span class="text-[#800020] font-bold">$3,400/yr</span>
+                        </div>
+                        <button
+                            class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button
+                    class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
+                    View All Programs
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section id="departments" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Departments</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Explore our diverse academic departments offering specialized
+                    education</p>
+                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Department Card 1 -->
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
+                    <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-laptop-code text-[#800020] text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Engineering</h3>
+                    <p class="text-gray-600 mb-4">Cutting-edge programs in various engineering disciplines</p>
+                    <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                </div>
+
+                <!-- Department Card 2 -->
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
+                    <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-flask text-[#800020] text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Science</h3>
+                    <p class="text-gray-600 mb-4">Innovative programs in pure and applied sciences</p>
+                    <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                </div>
+
+                <!-- Department Card 3 -->
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
+                    <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-line text-[#800020] text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Commerce</h3>
+                    <p class="text-gray-600 mb-4">Business and commerce programs for future leaders</p>
+                    <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                </div>
+
+                <!-- Department Card 4 -->
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
+                    <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-palette text-[#800020] text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Arts</h3>
+                    <p class="text-gray-600 mb-4">Creative programs in humanities and fine arts</p>
+                    <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section id="faculty" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Faculty</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Meet our distinguished faculty members who are experts in
+                    their fields</p>
+                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Faculty Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Professor John Smith"
+                        class="w-full h-64 object-cover" width="400" height="256" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Prof. John Smith</h3>
+                        <p class="text-[#800020] mb-4">Head of Computer Science</p>
+                        <p class="text-gray-600 mb-4">PhD in Computer Science from Stanford University with 15+ years of
+                            teaching experience.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-linkedin-in"
+                                    aria-hidden="true"></i></a>
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-twitter"
+                                    aria-hidden="true"></i></a>
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fas fa-envelope"
+                                    aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Professor Sarah Johnson"
+                        class="w-full h-64 object-cover" width="400" height="256" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Prof. Sarah Johnson</h3>
+                        <p class="text-[#800020] mb-4">Dean of Business Administration</p>
+                        <p class="text-gray-600 mb-4">MBA from Harvard Business School with extensive industry
+                            experience in corporate strategy.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-linkedin-in"
+                                    aria-hidden="true"></i></a>
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-twitter"
+                                    aria-hidden="true"></i></a>
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fas fa-envelope"
+                                    aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Professor Michael Brown"
+                        class="w-full h-64 object-cover" width="400" height="256" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Prof. Michael Brown</h3>
+                        <p class="text-[#800020] mb-4">Head of Electrical Engineering</p>
+                        <p class="text-gray-600 mb-4">PhD in Electrical Engineering from MIT with multiple patents in
+                            renewable energy systems.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-linkedin-in"
+                                    aria-hidden="true"></i></a>
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-twitter"
+                                    aria-hidden="true"></i></a>
+                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fas fa-envelope"
+                                    aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button
+                    class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
+                    View All Faculty
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admissions Section -->
+    <section id="admissions" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Admissions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Start your journey with U1 Technology Institute</p>
+                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-8 lg:mb-0">
+                    <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Students discussing in campus" class="rounded-lg shadow-md w-full" width="700" height="467"
+                        loading="lazy">
+                </div>
+                <div class="lg:w-1/2 lg:pl-12">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Join Our Community</h3>
+                    <p class="text-gray-600 mb-6">We're excited that you're considering U1 Technology Institute for your
+                        educational journey. Our admissions process is designed to identify talented and motivated
+                        students who will thrive in our academic environment.</p>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start">
+                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Application Process</h4>
+                                <p class="text-gray-600">Submit your application online with required documents</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Entrance Exams</h4>
+                                <p class="text-gray-600">Prepare for our entrance examination or submit standardized
+                                    test scores</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Interview</h4>
+                                <p class="text-gray-600">Selected candidates will be invited for an interview</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button
+                            class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
+                            Apply Now
+                        </button>
+                        <button
+                            class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
+                            Download Brochure
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Placements Section -->
+    <section id="placements" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Placements</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our graduates are placed in top companies worldwide</p>
+                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Placement Statistics</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Placement Rate</span>
+                                <span class="text-[#800020] font-bold">96%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-[#800020] h-2 rounded-full" style="width: 96%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Average Salary</span>
+                                <span class="text-[#800020] font-bold">₹70,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-[#800020] h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Highest Package</span>
+                                <span class="text-[#800020] font-bold">₹120,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-[#800020] h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Top Recruiters</h3>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-gray-700">Google</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-gray-700">Microsoft</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-gray-700">Amazon</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-gray-700">Infosys</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-gray-700">TCS</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-gray-700">Accenture</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Student Testimonials</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="flex flex-col items-center text-center testimonial-card transition-all">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Chen"
+                            class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
+                        <p class="text-gray-600 italic mb-4">"The placement cell at U1 Technology Institute provided
+                            excellent guidance and support. I received multiple job offers and joined my dream company."
+                        </p>
+                        <h4 class="font-bold text-gray-900">Emily Chen</h4>
+                        <p class="text-[#800020]">Software Engineer at Google</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center testimonial-card transition-all">
+                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Raj Patel"
+                            class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
+                        <p class="text-gray-600 italic mb-4">"The industry-oriented curriculum and internship
+                            opportunities prepared me well for my career. I secured a position at Microsoft even before
+                            graduation."</p>
+                        <h4 class="font-bold text-gray-900">Raj Patel</h4>
+                        <p class="text-[#800020]">Data Scientist at Microsoft</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Campus Life</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Experience our vibrant campus community</p>
+                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="gallery-item transition-all">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Students in library" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
+                        loading="lazy">
+                </div>
+                <div class="gallery-item transition-all">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Graduation ceremony" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
+                        loading="lazy">
+                </div>
+                <div class="gallery-item transition-all">
+                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1490&q=80"
+                        alt="Sports event" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
+                        loading="lazy">
+                </div>
+                <div class="gallery-item transition-all">
+                    <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                        alt="Cultural festival" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
+                        loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Contact Us</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Get in touch with us for any queries or information</p>
+                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-8">
+                    <div class="bg-white rounded-lg shadow-md p-8 h-full">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
+                                    <i class="fas fa-map-marker-alt text-[#800020]" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Address</h4>
+                                    <p class="text-gray-600">123 Education Street, Knowledge City, India 110001</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
+                                    <i class="fas fa-phone-alt text-[#800020]" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Phone</h4>
+                                    <p class="text-gray-600">+91 99523 91994, +91 97900 66301</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-[#800020]" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Email</h4>
+                                    <p class="text-gray-600">info@U1Technology.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
+                                    <i class="fas fa-clock text-[#800020]" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Office Hours</h4>
+                                    <p class="text-gray-600">Monday - Friday: 9:00 AM - 5:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <div class="bg-white rounded-lg shadow-md p-8 h-full">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" id="name"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" id="email"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 mb-2">Subject</label>
+                                <input type="text" id="subject"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 mb-2">Message</label>
+                                <textarea id="message" rows="5"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]"></textarea>
+                            </div>
+                            <button type="submit"
+                                class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all w-full">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="h-10 w-10 bg-[#800020] rounded-full flex items-center justify-center mr-2">
+                            <span class="text-white font-bold">U1</span>
+                        </div>
+                        <span class="text-xl font-bold">U1 Technology</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">A premier educational institution dedicated to excellence in teaching,
+                        research, and innovation since 1988.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="Facebook"><i
+                                class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="Twitter"><i
+                                class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="Instagram"><i
+                                class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="YouTube"><i
+                                class="fab fa-youtube" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">Courses</a></li>
+                        <li><a href="#departments"
+                                class="text-gray-400 hover:text-white transition-colors">Departments</a></li>
+                        <li><a href="#faculty" class="text-gray-400 hover:text-white transition-colors">Faculty</a></li>
+                        <li><a href="#admissions"
+                                class="text-gray-400 hover:text-white transition-colors">Admissions</a></li>
+                        <li><a href="#placements"
+                                class="text-gray-400 hover:text-white transition-colors">Placements</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Programs</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Engineering</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Science</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Commerce</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Arts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Professional
+                                Courses</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Research Programs</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Info</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-[#DC143C] mt-1 mr-2" aria-hidden="true"></i>
+                            <span class="text-gray-400">123 Education Street, Knowledge City, India 110001</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-[#DC143C] mt-1 mr-2" aria-hidden="true"></i>
+                            <span class="text-gray-400">+91 99523 91994</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-[#DC143C] mt-1 mr-2" aria-hidden="true"></i>
+                            <span class="text-gray-400">info@U1Technology.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 U1 Technology Institute. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Authentication System -->
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Close authentication modal">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+
+            <div class="tab-container">
+                <button class="tab-button active" id="login-tab">Login</button>
+                <button class="tab-button" id="signup-tab">Sign Up</button>
+            </div>
+
+            <div class="scrollable-container">
+                <div class="forms-container">
+                    <!-- Login Form -->
+                    <form class="auth-form active" id="login-form">
+                        <h2 class="form-heading">Welcome Back</h2>
+
+                        <div class="form-group">
+                            <label for="login-email" class="form-label">Email Address</label>
+                            <input type="email" id="login-email" class="form-input" placeholder="Enter your email"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password" class="form-label">Password</label>
+                            <div class="password-input-container">
+                                <input type="password" id="login-password" class="form-input"
+                                    placeholder="Enter your password" required>
+                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <a href="#" class="form-link" id="forgot-password-link">Forgot Password?</a>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="form-button">Login</button>
+                        </div>
+
+                        <div class="message error-message" id="login-error"></div>
+                        <div class="message success-message" id="login-success"></div>
+                    </form>
+
+                    <!-- Sign Up Form -->
+                    <form class="auth-form" id="signup-form">
+                        <h2 class="form-heading">Create Account</h2>
+
+                        <div class="form-group">
+                            <label for="signup-name" class="form-label">Full Name</label>
+                            <input type="text" id="signup-name" class="form-input" placeholder="Enter your full name"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-email" class="form-label">Email</label>
+                            <input type="email" id="signup-email" class="form-input" placeholder="Enter your email"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="signup-phone" class="form-input" placeholder="Enter your phone number"
+                                maxlength="10" required>
+                            <p class="info-text">Must be 10 digits</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Experience</label>
+                            <div class="radio-group">
+                                <input type="radio" id="exp-tech" name="experience" class="radio-input"
+                                    value="Working professional – Technical roles" checked>
+                                <label for="exp-tech" class="radio-label">Working professional – Technical roles</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="exp-nontech" name="experience" class="radio-input"
+                                    value="Working professional – Non-technical">
+                                <label for="exp-nontech" class="radio-label">Working professional –
+                                    Non-technical</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="exp-student" name="experience" class="radio-input"
+                                    value="College student – Final year">
+                                <label for="exp-student" class="radio-label">College student – Final year</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="exp-intern" name="experience" class="radio-input"
+                                    value="Internship">
+                                <label for="exp-intern" class="radio-label">Internship</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="exp-others" name="experience" class="radio-input"
+                                    value="Others">
+                                <label for="exp-others" class="radio-label">Others</label>
+                            </div>
+
+                            <div id="additional-info-container" style="margin-top: 10px; display: none;">
+                                <textarea id="additional-info" class="form-input"
+                                    placeholder="Please provide more information..." rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-password" class="form-label">Password</label>
+                            <div class="password-input-container">
+                                <input type="password" id="signup-password" class="form-input"
+                                    placeholder="Create a password" required>
+                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <p class="info-text">Password must be at least 8 characters with uppercase, lowercase,
+                                number, and special character</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-confirm-password" class="form-label">Confirm Password</label>
+                            <div class="password-input-container">
+                                <input type="password" id="signup-confirm-password" class="form-input"
+                                    placeholder="Confirm your password" required>
+                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="form-button">Sign Up</button>
+                        </div>
+
+                        <div class="message error-message" id="signup-error"></div>
+                        <div class="message success-message" id="signup-success"></div>
+                    </form>
+
+                    <!-- Forgot Password Form -->
+                    <form class="auth-form" id="forgot-password-form">
+                        <h2 class="form-heading">Reset Password</h2>
+
+                        <div class="form-group">
+                            <p class="info-text" style="text-align: center; margin-bottom: 20px;">
+                                Enter your email address and we will send you a password reset OTP.
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="forgot-email" class="form-label">Email Address</label>
+                            <input type="email" id="forgot-email" class="form-input" placeholder="Enter your email"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="form-button" id="send-otp-btn">Send OTP</button>
+                        </div>
+
+                        <div class="form-group" id="otp-section" style="display: none;">
+                            <label for="forgot-otp" class="form-label">Enter OTP</label>
+                            <input type="text" id="forgot-otp" class="form-input" placeholder="Enter 6-digit OTP"
+                                maxlength="6">
+                            <p class="info-text">Check your email for the OTP</p>
+                        </div>
+
+                        <div class="form-group" id="new-password-section" style="display: none;">
+                            <label for="new-password" class="form-label">New Password</label>
+                            <div class="password-input-container">
+                                <input type="password" id="new-password" class="form-input"
+                                    placeholder="Enter new password">
+                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <p class="info-text">Password must be at least 8 characters with uppercase, lowercase,
+                                number, and special character</p>
+                        </div>
+
+                        <div class="form-group" id="confirm-new-password-section" style="display: none;">
+                            <label for="confirm-new-password" class="form-label">Confirm New Password</label>
+                            <div class="password-input-container">
+                                <input type="password" id="confirm-new-password" class="form-input"
+                                    placeholder="Confirm new password">
+                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="reset-password-btn-container" style="display: none;">
+                            <button type="submit" class="form-button">Reset Password</button>
+                        </div>
+
+                        <div class="form-group">
+                            <a href="#" class="form-link" id="back-to-login"
+                                style="text-align: center; display: block;">Back to Login</a>
+                        </div>
+
+                        <div class="message error-message" id="forgot-error"></div>
+                        <div class="message success-message" id="forgot-success"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Main content ID for accessibility
+            const mainContent = document.createElement('main');
+            mainContent.id = 'main-content';
+            mainContent.setAttribute('tabindex', '-1');
+            document.body.insertBefore(mainContent, document.querySelector('nav').nextSibling);
+
+            // Move all sections to main content
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                mainContent.appendChild(section);
+            });
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', function () {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                mobileMenu.classList.toggle('hidden');
+                this.setAttribute('aria-expanded', !isExpanded);
+
+                // Update icon
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Authentication System with API Integration
+            class AuthSystem {
+                constructor() {
+                    this.currentUser = null;
+                    this.isLoggedIn = false;
+                    this.apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                        ? 'http://localhost:3000/api'
+                        : '/api';
+                    this.init();
+                }
+
+                init() {
+                    // Check if user is already logged in
+                    this.checkLoginStatus();
+
+                    // Set up event listeners
+                    this.setupEventListeners();
+
+                    // Initialize animations
+                    this.initializeAnimations();
+                }
+
+
+                // Add this method to your AuthSystem class
+                testRadioButtons() {
+                    const radios = document.querySelectorAll('input[name="experience"]');
+                    console.log('=== RADIO BUTTON TEST (Fixed) ===');
+                    console.log('Total radios found:', radios.length);
+
+                    radios.forEach((radio, index) => {
+                        console.log(`Radio ${index + 1}:`, {
+                            id: radio.id,
+                            value: radio.value,
+                            checked: radio.checked,
+                            type: radio.type,
+                            name: radio.name
+                        });
+                    });
+
+                    const selected = document.querySelector('input[name="experience"]:checked');
+                    console.log('Selected experience:', selected ? selected.value : 'None');
+
+                    if (selected && selected.value) {
+                        console.log('✅ Radio buttons are working correctly!');
+                    } else {
+                        console.log('❌ Radio buttons still have issues');
+                    }
+                }
+
+                debugRadioButtons() {
+                    const radios = document.querySelectorAll('input[name="experience"]');
+                    console.log('=== ENHANCED RADIO BUTTON DEBUG ===');
+
+                    radios.forEach((radio, index) => {
+                        console.log(`Radio ${index + 1}:`, {
+                            id: radio.id,
+                            value: radio.value,
+                            checked: radio.checked,
+                            type: radio.type,
+                            name: radio.name,
+                            element: radio
+                        });
+                    });
+
+                    // Force check the first radio if none are checked
+                    const checkedRadio = document.querySelector('input[name="experience"]:checked');
+                    if (!checkedRadio) {
+                        console.log('No radio checked, forcing first radio to be checked');
+                        radios[0].checked = true;
+                    }
+
+                    // Test getting value
+                    const selected = document.querySelector('input[name="experience"]:checked');
+                    console.log('Selected experience value:', selected ? selected.value : 'None');
+
+                    return selected ? selected.value : '';
+                }
+
+
+                checkLoginStatus() {
+                    const token = localStorage.getItem('authToken');
+                    const userData = localStorage.getItem('currentUser');
+
+                    if (token && userData) {
+                        this.currentUser = JSON.parse(userData);
+                        this.isLoggedIn = true;
+                        this.updateUIForLoggedInUser();
+
+                        // Verify token is still valid
+                        this.verifyToken();
+                    }
+                }
+
+                setupEventListeners() {
+                    // Modal open buttons
+                    const signinButtons = [
+                        document.getElementById('header-signin-btn'),
+                        document.getElementById('mobile-signin-btn')
+                    ];
+
+                    signinButtons.forEach(button => {
+                        if (button) {
+                            button.addEventListener('click', () => {
+                                if (!this.isLoggedIn) {
+                                    this.openAuthModal();
+                                } else {
+                                    this.showUserMenu();
+                                }
+                            });
+                        }
+                    });
+
+                    // Modal close button
+                    document.getElementById('modal-close').addEventListener('click', () => {
+                        this.closeAuthModal();
+                    });
+
+                    // Tab switching
+                    document.getElementById('login-tab').addEventListener('click', () => {
+                        this.switchTab('login');
+                    });
+
+                    document.getElementById('signup-tab').addEventListener('click', () => {
+                        this.switchTab('signup');
+                    });
+
+                    // Form submissions
+                    document.getElementById('login-form').addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleLogin();
+                    });
+
+                    document.getElementById('signup-form').addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleSignup();
+                    });
+
+                    document.getElementById('forgot-password-form').addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handlePasswordReset();
+                    });
+
+                    // Forgot password functionality
+                    document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showForgotPassword();
+                    });
+
+                    document.getElementById('back-to-login').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.switchTab('login');
+                    });
+
+                    // Send OTP button
+                    document.getElementById('send-otp-btn').addEventListener('click', () => {
+                        this.handleSendOTP();
+                    });
+
+                    // Close modal when clicking outside
+                    document.getElementById('auth-modal').addEventListener('click', (e) => {
+                        if (e.target.id === 'auth-modal') {
+                            this.closeAuthModal();
+                        }
+                    });
+
+                    // Password visibility toggles
+                    this.initializePasswordToggles();
+
+                    // Experience radio buttons
+                    this.initializeExperienceRadios();
+
+                    // Phone number validation
+                    this.initializePhoneValidation();
+
+                    // Form input validation
+                    this.initializeFormValidation();
+                }
+
+                initializeAnimations() {
+                    // Add CSS for animations if not already present
+                    if (!document.getElementById('auth-animations')) {
+                        const style = document.createElement('style');
+                        style.id = 'auth-animations';
+                        style.textContent = `
+                    .auth-modal-enter {
+                        opacity: 0;
+                        transform: scale(0.9);
+                    }
+                    .auth-modal-enter-active {
+                        opacity: 1;
+                        transform: scale(1);
+                        transition: opacity 0.3s ease, transform 0.3s ease;
+                    }
+                    .auth-modal-exit {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                    .auth-modal-exit-active {
+                        opacity: 0;
+                        transform: scale(0.9);
+                        transition: opacity 0.3s ease, transform 0.3s ease;
+                    }
+                    .form-tab-enter {
+                        opacity: 0;
+                        transform: translateX(20px);
+                    }
+                    .form-tab-enter-active {
+                        opacity: 1;
+                        transform: translateX(0);
+                        transition: opacity 0.3s ease, transform 0.3s ease;
+                    }
+                    .form-tab-exit {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                    .form-tab-exit-active {
+                        opacity: 0;
+                        transform: translateX(-20px);
+                        transition: opacity 0.3s ease, transform 0.3s ease;
+                    }
+                `;
+                        document.head.appendChild(style);
+                    }
+                }
+
+                // API Methods
+                async apiRequest(endpoint, options = {}) {
+                    const url = `${this.apiBaseUrl}${endpoint}`;
+
+                    const defaultOptions = {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            ...options.headers
+                        }
+                    };
+
+                    const config = { ...defaultOptions, ...options };
+
+                    try {
+                        const response = await fetch(url, config);
+                        const data = await response.json();
+
+                        if (!response.ok) {
+                            throw new Error(data.message || `HTTP error! status: ${response.status}`);
+                        }
+
+                        return data;
+                    } catch (error) {
+                        console.error('API request failed:', error);
+                        throw error;
+                    }
+                }
+
+                openAuthModal() {
+                    const modal = document.getElementById('auth-modal');
+                    modal.style.display = 'flex';
+
+                    // Add animation class
+                    setTimeout(() => {
+                        modal.classList.add('auth-modal-enter-active');
+                    }, 10);
+
+                    // Reset forms
+                    this.resetForms();
+
+                    // Set focus to first input in active form
+                    setTimeout(() => {
+                        const activeForm = document.querySelector('.auth-form.active');
+                        const firstInput = activeForm.querySelector('input');
+                        if (firstInput) {
+                            firstInput.focus();
+                        }
+                    }, 300);
+                }
+
+                closeAuthModal() {
+                    const modal = document.getElementById('auth-modal');
+                    modal.classList.remove('auth-modal-enter-active');
+                    modal.classList.add('auth-modal-exit-active');
+
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        modal.classList.remove('auth-modal-exit-active');
+                    }, 300);
+                }
+
+                switchTab(tabName) {
+                    const currentActiveForm = document.querySelector('.auth-form.active');
+                    const currentActiveTab = document.querySelector('.tab-button.active');
+
+                    // Update tabs
+                    document.querySelectorAll('.tab-button').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+
+                    document.querySelectorAll('.auth-form').forEach(form => {
+                        form.classList.remove('active');
+                    });
+
+                    // Add exit animation to current form
+                    if (currentActiveForm) {
+                        currentActiveForm.classList.add('form-tab-exit-active');
+                    }
+
+                    setTimeout(() => {
+                        if (currentActiveForm) {
+                            currentActiveForm.classList.remove('form-tab-exit-active');
+                        }
+
+                        if (tabName === 'login') {
+                            document.getElementById('login-tab').classList.add('active');
+                            document.getElementById('login-form').classList.add('active', 'form-tab-enter-active');
+                        } else {
+                            document.getElementById('signup-tab').classList.add('active');
+                            document.getElementById('signup-form').classList.add('active', 'form-tab-enter-active');
+
+                            // Test radio buttons when signup form becomes active
+                            setTimeout(() => {
+                                this.testRadioButtons();
+                            }, 100);
+                        }
+
+                        // Remove enter animation after transition
+                        setTimeout(() => {
+                            document.querySelector('.auth-form.active').classList.remove('form-tab-enter-active');
+                        }, 300);
+                    }, 300);
+
+                    // Reset forgot password form
+                    this.resetForgotPasswordForm();
+
+                    // Clear messages
+                    this.clearAllMessages();
+                }
+
+
+
+                showForgotPassword() {
+                    const currentActiveForm = document.querySelector('.auth-form.active');
+
+                    // Add exit animation to current form
+                    if (currentActiveForm) {
+                        currentActiveForm.classList.add('form-tab-exit-active');
+                    }
+
+                    setTimeout(() => {
+                        if (currentActiveForm) {
+                            currentActiveForm.classList.remove('form-tab-exit-active');
+                            currentActiveForm.classList.remove('active');
+                            document.getElementById('login-tab').classList.remove('active');
+                            document.getElementById('signup-tab').classList.remove('active');
+                            document.getElementById('forgot-password-form').classList.add('active', 'form-tab-enter-active');
+                            document.getElementById('forgot-password-form').style.display = 'block';
+                        }
+
+                        // Remove enter animation after transition
+                        setTimeout(() => {
+                            document.getElementById('forgot-password-form').classList.remove('form-tab-enter-active');
+                        }, 300);
+                    }, 300);
+
+                    // Reset form state
+                    this.resetForgotPasswordForm();
+                }
+
+                resetForgotPasswordForm() {
+                    // Hide OTP and password sections
+                    document.getElementById('otp-section').style.display = 'none';
+                    document.getElementById('new-password-section').style.display = 'none';
+                    document.getElementById('confirm-new-password-section').style.display = 'none';
+                    document.getElementById('reset-password-btn-container').style.display = 'none';
+
+                    // Show send OTP button
+                    const sendOtpBtn = document.getElementById('send-otp-btn');
+                    sendOtpBtn.style.display = 'block';
+                    sendOtpBtn.textContent = 'Send OTP';
+                    sendOtpBtn.disabled = false;
+
+                    // Clear inputs
+                    document.getElementById('forgot-email').value = '';
+                    document.getElementById('forgot-otp').value = '';
+                    document.getElementById('new-password').value = '';
+                    document.getElementById('confirm-new-password').value = '';
+
+                    // Clear messages
+                    this.clearForgotPasswordMessages();
+                }
+
+                initializePasswordToggles() {
+                    document.querySelectorAll('.password-toggle').forEach(toggle => {
+                        toggle.addEventListener('click', function () {
+                            const input = this.parentElement.querySelector('input');
+                            const icon = this.querySelector('i');
+
+                            if (input.type === 'password') {
+                                input.type = 'text';
+                                icon.classList.remove('fa-eye');
+                                icon.classList.add('fa-eye-slash');
+                                this.setAttribute('aria-label', 'Hide password');
+                            } else {
+                                input.type = 'password';
+                                icon.classList.remove('fa-eye-slash');
+                                icon.classList.add('fa-eye');
+                                this.setAttribute('aria-label', 'Show password');
+                            }
+                        });
+                    });
+                }
+
+                initializeExperienceRadios() {
+                    const experienceRadios = document.querySelectorAll('input[name="experience"]');
+                    const additionalInfoContainer = document.getElementById('additional-info-container');
+                    const additionalInfo = document.getElementById('additional-info');
+
+                    console.log('Experience radios found:', experienceRadios.length);
+
+                    // Set explicit values for each radio button
+                    const radioValues = [
+                        "Working professional – Technical roles",
+                        "Working professional – Non-technical",
+                        "College student – Final year",
+                        "Internship",
+                        "Others"
+                    ];
+
+                    experienceRadios.forEach((radio, index) => {
+                        // Set the value explicitly
+                        radio.value = radioValues[index];
+
+                        console.log(`Radio ${index + 1}:`, {
+                            id: radio.id,
+                            value: radio.value,
+                            checked: radio.checked,
+                            type: radio.type,
+                            name: radio.name
+                        });
+                    });
+
+                    // Ensure first radio is checked by default
+                    if (!document.querySelector('input[name="experience"]:checked')) {
+                        experienceRadios[0].checked = true;
+                        console.log('Forced first radio to be checked');
+                    }
+
+                    experienceRadios.forEach(radio => {
+                        radio.addEventListener('change', () => {
+                            console.log('Radio changed - Value:', radio.value, 'Checked:', radio.checked);
+
+                            if (radio.checked && radio.value === 'Others') {
+                                additionalInfoContainer.style.display = 'block';
+                                additionalInfo.required = true;
+                                additionalInfoContainer.style.opacity = '0';
+                                setTimeout(() => {
+                                    additionalInfoContainer.style.opacity = '1';
+                                    additionalInfoContainer.style.transition = 'opacity 0.3s ease';
+                                }, 10);
+                            } else if (radio.checked) {
+                                additionalInfoContainer.style.opacity = '1';
+                                setTimeout(() => {
+                                    additionalInfoContainer.style.display = 'none';
+                                }, 300);
+                                additionalInfo.required = false;
+                                additionalInfo.value = '';
+                            }
+                        });
+                    });
+
+                    // Test the current selection
+                    const selected = document.querySelector('input[name="experience"]:checked');
+                    console.log('Currently selected experience:', selected ? selected.value : 'None');
+                }
+
+                initializePhoneValidation() {
+                    const phoneInput = document.getElementById('signup-phone');
+                    phoneInput.addEventListener('input', function () {
+                        this.value = this.value.replace(/\D/g, '').slice(0, 10);
+                    });
+                }
+
+                initializeFormValidation() {
+                    // Real-time email validation
+                    document.querySelectorAll('input[type="email"]').forEach(input => {
+                        input.addEventListener('blur', (e) => {
+                            const email = e.target.value.trim();
+                            if (email && !this.validateEmail(email)) {
+                                e.target.style.borderColor = 'var(--error-color)';
+                            } else {
+                                e.target.style.borderColor = 'var(--primary-color)';
+                            }
+                        });
+                    });
+
+                    // Real-time password validation
+                    document.getElementById('signup-password').addEventListener('input', (e) => {
+                        const password = e.target.value;
+                        if (password && !this.validatePassword(password)) {
+                            e.target.style.borderColor = 'var(--error-color)';
+                        } else {
+                            e.target.style.borderColor = 'var(--primary-color)';
+                        }
+                    });
+
+                    // Confirm password match validation
+                    document.getElementById('signup-confirm-password').addEventListener('input', (e) => {
+                        const password = document.getElementById('signup-password').value;
+                        const confirmPassword = e.target.value;
+
+                        if (confirmPassword && password !== confirmPassword) {
+                            e.target.style.borderColor = 'var(--error-color)';
+                        } else {
+                            e.target.style.borderColor = 'var(--primary-color)';
+                        }
+                    });
+                }
+
+                async handleLogin() {
+                    const email = document.getElementById('login-email').value.trim();
+                    const password = document.getElementById('login-password').value;
+                    const errorElement = document.getElementById('login-error');
+                    const successElement = document.getElementById('login-success');
+                    const submitBtn = document.getElementById('login-form').querySelector('.form-button');
+
+                    // Basic validation
+                    if (!email || !password) {
+                        this.showMessage(errorElement, 'Please fill in all fields');
+                        return;
+                    }
+
+                    if (!this.validateEmail(email)) {
+                        this.showMessage(errorElement, 'Please enter a valid email address');
+                        return;
+                    }
+
+                    // Show loading state
+                    this.setButtonLoading(submitBtn, true);
+
+                    try {
+                        const response = await this.apiRequest('/auth/login', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                email: email.toLowerCase(),
+                                password: password
+                            })
+                        });
+
+                        if (response.success) {
+                            // Store token and user data
+                            const token = response.data.token;
+                            const user = response.data.user;
+
+                            localStorage.setItem('authToken', token);
+                            localStorage.setItem('currentUser', JSON.stringify(user));
+
+                            this.currentUser = user;
+                            this.isLoggedIn = true;
+
+                            this.showMessage(successElement, 'Login successful!');
+                            this.updateUIForLoggedInUser();
+
+                            setTimeout(() => {
+                                this.closeAuthModal();
+                                this.showToast('Login successful! Welcome back.', 'success');
+                            }, 1000);
+                        } else {
+                            this.showMessage(errorElement, response.message || 'Login failed');
+                        }
+                    } catch (error) {
+                        console.error('Login error:', error);
+                        this.showMessage(errorElement, error.message || 'Login failed. Please try again.');
+                    } finally {
+                        this.setButtonLoading(submitBtn, false);
+                    }
+                }
+
+                async handleSignup() {
+                    const name = document.getElementById('signup-name').value.trim();
+                    const email = document.getElementById('signup-email').value.trim();
+                    const phone = document.getElementById('signup-phone').value;
+                    const password = document.getElementById('signup-password').value;
+                    const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+                    // Debug radio buttons first
+                    const experienceValue = this.debugRadioButtons();
+
+                    // Use the debugged value
+                    let experience = experienceValue;
+
+                    // Method 1: Direct DOM query
+                    const selectedRadio = document.querySelector('input[name="experience"]:checked');
+                    if (selectedRadio) {
+                        experience = selectedRadio.value;
+                    }
+
+                    // Method 2: Fallback - get by index if value is empty
+                    if (!experience) {
+                        const experienceRadios = document.querySelectorAll('input[name="experience"]');
+                        const labels = [
+                            "Working professional – Technical roles",
+                            "Working professional – Non-technical",
+                            "College student – Final year",
+                            "Internship",
+                            "Others"
+                        ];
+
+                        experienceRadios.forEach((radio, index) => {
+                            if (radio.checked) {
+                                experience = labels[index];
+                            }
+                        });
+                    }
+
+                    console.log('Final experience value:', experience);
+
+                    const additionalInfo = document.getElementById('additional-info').value;
+                    const errorElement = document.getElementById('signup-error');
+                    const successElement = document.getElementById('signup-success');
+                    const submitBtn = document.getElementById('signup-form').querySelector('.form-button');
+
+                    // Debug log
+                    console.log('Form submission data:', {
+                        name, email, phone, experience, additionalInfo
+                    });
+
+                    // Validation
+                    if (!name || !email || !phone || !password || !confirmPassword) {
+                        this.showMessage(errorElement, 'Please fill in all required fields');
+                        return;
+                    }
+
+                    if (!experience) {
+                        this.showMessage(errorElement, 'Please select your experience level');
+                        return;
+                    }
+
+                    if (!this.validateEmail(email)) {
+                        this.showMessage(errorElement, 'Please enter a valid email address');
+                        return;
+                    }
+
+                    if (phone.length !== 10) {
+                        this.showMessage(errorElement, 'Phone number must be 10 digits');
+                        return;
+                    }
+
+                    if (!this.validatePassword(password)) {
+                        this.showMessage(errorElement, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
+                        return;
+                    }
+
+                    if (password !== confirmPassword) {
+                        this.showMessage(errorElement, 'Passwords do not match');
+                        return;
+                    }
+
+                    // Show loading state
+                    this.setButtonLoading(submitBtn, true);
+
+                    try {
+                        const response = await this.apiRequest('/auth/register', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                name: name,
+                                email: email.toLowerCase(),
+                                phone: phone,
+                                password: password,
+                                experience: experience,
+                                additionalInfo: experience === 'Others' ? additionalInfo : ''
+                            })
+                        });
+
+                        if (response.success) {
+                            // Store token and user data
+                            const token = response.data.token;
+                            const user = response.data.user;
+
+                            localStorage.setItem('authToken', token);
+                            localStorage.setItem('currentUser', JSON.stringify(user));
+
+                            this.currentUser = user;
+                            this.isLoggedIn = true;
+
+                            this.showMessage(successElement, 'Account created successfully!');
+                            this.updateUIForLoggedInUser();
+
+                            setTimeout(() => {
+                                this.closeAuthModal();
+                                this.showToast('Account created successfully!', 'success');
+                            }, 1500);
+                        } else {
+                            this.showMessage(errorElement, response.message || 'Registration failed');
+                        }
+                    } catch (error) {
+                        console.error('Signup error:', error);
+                        this.showMessage(errorElement, error.message || 'Registration failed. Please try again.');
+                    } finally {
+                        this.setButtonLoading(submitBtn, false);
+                    }
+                }
+
+                async handleSendOTP() {
+                    const email = document.getElementById('forgot-email').value.trim();
+                    const errorElement = document.getElementById('forgot-error');
+                    const successElement = document.getElementById('forgot-success');
+                    const sendOtpBtn = document.getElementById('send-otp-btn');
+
+                    // Reset messages
+                    this.clearForgotPasswordMessages();
+
+                    // Validation
+                    if (!email) {
+                        this.showMessage(errorElement, 'Please enter your email address');
+                        return;
+                    }
+
+                    if (!this.validateEmail(email)) {
+                        this.showMessage(errorElement, 'Please enter a valid email address');
+                        return;
+                    }
+
+                    // Show loading state
+                    this.setButtonLoading(sendOtpBtn, true, 'Sending OTP...');
+
+                    try {
+                        const response = await this.apiRequest('/auth/send-otp', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                email: email.toLowerCase(),
+                                purpose: 'password_reset'
+                            })
+                        });
+
+                        if (response.success) {
+                            this.showMessage(successElement, response.message || 'OTP sent successfully! Check your email.');
+
+                            // Show OTP section with animation
+                            this.showSectionWithAnimation('otp-section');
+
+                            // Show password sections with staggered animation
+                            setTimeout(() => {
+                                this.showSectionWithAnimation('new-password-section');
+                            }, 300);
+
+                            setTimeout(() => {
+                                this.showSectionWithAnimation('confirm-new-password-section');
+                            }, 600);
+
+                            setTimeout(() => {
+                                this.showSectionWithAnimation('reset-password-btn-container');
+                            }, 900);
+
+                            this.showToast('OTP sent successfully!', 'success');
+                        } else {
+                            this.showMessage(errorElement, response.message || 'Failed to send OTP');
+                        }
+                    } catch (error) {
+                        console.error('Send OTP error:', error);
+                        this.showMessage(errorElement, error.message || 'Failed to send OTP. Please try again.');
+                    } finally {
+                        this.setButtonLoading(sendOtpBtn, false, 'Resend OTP');
+                    }
+                }
+
+                async handlePasswordReset() {
+                    const email = document.getElementById('forgot-email').value.trim();
+                    const otp = document.getElementById('forgot-otp').value;
+                    const newPassword = document.getElementById('new-password').value;
+                    const confirmPassword = document.getElementById('confirm-new-password').value;
+                    const errorElement = document.getElementById('forgot-error');
+                    const successElement = document.getElementById('forgot-success');
+                    const resetBtn = document.getElementById('reset-password-btn-container').querySelector('button');
+
+                    // Reset messages
+                    this.clearForgotPasswordMessages();
+
+                    // Validation
+                    if (!otp) {
+                        this.showMessage(errorElement, 'Please enter the OTP');
+                        return;
+                    }
+
+                    if (!newPassword || !confirmPassword) {
+                        this.showMessage(errorElement, 'Please fill in all password fields');
+                        return;
+                    }
+
+                    if (!this.validatePassword(newPassword)) {
+                        this.showMessage(errorElement, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
+                        return;
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        this.showMessage(errorElement, 'Passwords do not match');
+                        return;
+                    }
+
+                    // Show loading state
+                    this.setButtonLoading(resetBtn, true, 'Resetting Password...');
+
+                    try {
+                        const response = await this.apiRequest('/auth/reset-password', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                email: email.toLowerCase(),
+                                otp: otp,
+                                newPassword: newPassword
+                            })
+                        });
+
+                        if (response.success) {
+                            this.showMessage(successElement, response.message || 'Password reset successfully!');
+
+                            // Redirect to login after success
+                            setTimeout(() => {
+                                this.switchTab('login');
+                                this.resetForgotPasswordForm();
+                                this.showToast('Password reset successfully! You can now login with your new password.', 'success');
+                            }, 2000);
+                        } else {
+                            this.showMessage(errorElement, response.message || 'Failed to reset password');
+                        }
+                    } catch (error) {
+                        console.error('Reset password error:', error);
+                        this.showMessage(errorElement, error.message || 'Failed to reset password. Please try again.');
+                        this.setButtonLoading(resetBtn, false);
+                    }
+                }
+
+                async verifyToken() {
+                    try {
+                        const token = localStorage.getItem('authToken');
+                        if (!token) {
+                            this.handleLogout();
+                            return;
+                        }
+
+                        const response = await this.apiRequest('/auth/me', {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        });
+
+                        if (!response.success) {
+                            this.handleLogout();
+                        }
+                    } catch (error) {
+                        console.error('Token verification failed:', error);
+                        this.handleLogout();
+                    }
+                }
+
+                // Utility functions
+                validateEmail = (email) => {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return emailRegex.test(email);
+                }
+
+                validatePassword = (password) => {
+                    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                    return passwordRegex.test(password);
+                }
+
+                setButtonLoading(button, isLoading, loadingText = 'Loading...') {
+                    if (isLoading) {
+                        button.disabled = true;
+                        button.dataset.originalText = button.textContent;
+                        button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${loadingText}`;
+                    } else {
+                        button.disabled = false;
+                        button.textContent = button.dataset.originalText || button.textContent;
+                    }
+                }
+
+                showSectionWithAnimation(sectionId) {
+                    const section = document.getElementById(sectionId);
+                    section.style.display = 'block';
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(10px)';
+
+                    setTimeout(() => {
+                        section.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }, 10);
+                }
+
+                showMessage(element, message) {
+                    element.textContent = message;
+                    element.style.display = 'block';
+                    element.style.opacity = '0';
+
+                    setTimeout(() => {
+                        element.style.transition = 'opacity 0.3s ease';
+                        element.style.opacity = '1';
+                    }, 10);
+
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        element.style.opacity = '0';
+                        setTimeout(() => {
+                            element.style.display = 'none';
+                        }, 300);
+                    }, 5000);
+                }
+
+                clearAllMessages() {
+                    document.querySelectorAll('.message').forEach(message => {
+                        message.style.display = 'none';
+                        message.textContent = '';
+                    });
+                }
+
+                clearForgotPasswordMessages() {
+                    document.getElementById('forgot-error').style.display = 'none';
+                    document.getElementById('forgot-success').style.display = 'none';
+                }
+
+                showToast(message, type = 'info') {
+                    const toastContainer = document.getElementById('toast-container');
+                    const toast = document.createElement('div');
+                    toast.className = `toast toast-${type}`;
+
+                    // Add icon based on type
+                    const icons = {
+                        success: 'fa-check-circle',
+                        error: 'fa-exclamation-circle',
+                        warning: 'fa-exclamation-triangle',
+                        info: 'fa-info-circle'
+                    };
+
+                    toast.innerHTML = `
+                    <i class="fas ${icons[type]}" aria-hidden="true"></i>
+                    <span>${message}</span>
+                `;
+
+                    toastContainer.appendChild(toast);
+
+                    // Animate in
+                    setTimeout(() => {
+                        toast.style.transform = 'translateX(0)';
+                    }, 10);
+
+                    // Auto remove after 5 seconds
+                    const autoRemove = setTimeout(() => {
+                        toast.style.transform = 'translateX(100%)';
+                        setTimeout(() => {
+                            if (toast.parentNode) {
+                                toast.parentNode.removeChild(toast);
+                            }
+                        }, 300);
+                    }, 5000);
+
+                    // Allow manual dismissal
+                    toast.addEventListener('click', () => {
+                        clearTimeout(autoRemove);
+                        toast.style.transform = 'translateX(100%)';
+                        setTimeout(() => {
+                            if (toast.parentNode) {
+                                toast.parentNode.removeChild(toast);
+                            }
+                        }, 300);
+                    });
+                }
+
+                updateUIForLoggedInUser() {
+                    if (this.isLoggedIn && this.currentUser) {
+                        const signinButtons = [
+                            document.getElementById('header-signin-btn'),
+                            document.getElementById('mobile-signin-btn')
+                        ];
+
+                        signinButtons.forEach(button => {
+                            if (button) {
+                                button.innerHTML = `
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
+                                    <span>${this.currentUser.name}</span>
+                                </div>
+                            `;
+                                button.onclick = () => this.showUserMenu();
+                            }
+                        });
+                    }
+                }
+
+                showUserMenu() {
+                    // Create user dropdown menu
+                    const userMenu = document.createElement('div');
+                    userMenu.className = 'absolute top-16 right-4 bg-white shadow-lg rounded-lg p-4 min-w-48 z-50';
+                    userMenu.innerHTML = `
+                    <div class="border-b border-gray-200 pb-2 mb-2">
+                        <p class="font-semibold text-gray-800">${this.currentUser.name}</p>
+                        <p class="text-sm text-gray-600">${this.currentUser.email}</p>
+                    </div>
+                    <button id="user-profile-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-gray-700">
+                        <i class="fas fa-user mr-2"></i>Profile
+                    </button>
+                    <button id="user-logout-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-red-600">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                `;
+
+                    // Remove any existing menu
+                    const existingMenu = document.querySelector('.user-dropdown-menu');
+                    if (existingMenu) {
+                        existingMenu.remove();
+                    }
+
+                    userMenu.classList.add('user-dropdown-menu');
+                    document.body.appendChild(userMenu);
+
+                    // Add event listeners
+                    document.getElementById('user-profile-btn').addEventListener('click', () => {
+                        this.showToast(`Welcome, ${this.currentUser.name}!`, 'info');
+                        userMenu.remove();
+                    });
+
+                    document.getElementById('user-logout-btn').addEventListener('click', () => {
+                        this.handleLogout();
+                        userMenu.remove();
+                    });
+
+                    // Close menu when clicking outside
+                    const closeMenu = (e) => {
+                        if (!userMenu.contains(e.target) && !e.target.closest('#header-signin-btn') && !e.target.closest('#mobile-signin-btn')) {
+                            userMenu.remove();
+                            document.removeEventListener('click', closeMenu);
+                        }
+                    };
+
+                    setTimeout(() => {
+                        document.addEventListener('click', closeMenu);
+                    }, 100);
+                }
+
+                handleLogout() {
+                    // Clear user data from localStorage
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('currentUser');
+
+                    this.currentUser = null;
+                    this.isLoggedIn = false;
+
+                    const signinButtons = [
+                        document.getElementById('header-signin-btn'),
+                        document.getElementById('mobile-signin-btn')
+                    ];
+
+                    signinButtons.forEach(button => {
+                        if (button) {
+                            button.innerHTML = 'Sign In';
+                            button.onclick = () => this.openAuthModal();
+                        }
+                    });
+
+                    this.showToast('Logged out successfully', 'success');
+                }
+
+                resetForms() {
+                    document.querySelectorAll('.auth-form input').forEach(input => {
+                        input.value = '';
+                        input.style.borderColor = '';
+                    });
+                    this.clearAllMessages();
+                    this.switchTab('login');
+                }
+            }
+
+            // Initialize the authentication system
+            new AuthSystem();
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Demo courses data
+            const demoCourses = [
+                {
+                    id: '1',
+                    title: 'Computer Science',
+                    description: 'Learn programming, algorithms, and software development with industry experts.',
+                    category: 'B.Tech',
+                    images: ['https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80'],
+                    onlinePrice: 3200,
+                    onlineOriginalPrice: 4000,
+                    duration: '4 Years'
+                },
+                {
+                    id: '2',
+                    title: 'Business Administration',
+                    description: 'Master business strategies, management principles, and leadership skills.',
+                    category: 'MBA',
+                    images: ['https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
+                    onlinePrice: 4500,
+                    onlineOriginalPrice: 5500,
+                    duration: '2 Years'
+                },
+                {
+                    id: '3',
+                    title: 'Electrical Engineering',
+                    description: 'Explore electrical systems, power generation, and electronic circuits.',
+                    category: 'B.Tech',
+                    images: ['https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
+                    onlinePrice: 3400,
+                    onlineOriginalPrice: 4200,
+                    duration: '4 Years'
+                }
+            ];
+
+            // Load courses data
+            function loadCourses() {
+                updateCoursesSection(demoCourses);
+            }
+
+            function updateCoursesSection(courses) {
+                const coursesContainer = document.querySelector('#courses .grid');
+                if (!coursesContainer) return;
+
+                coursesContainer.innerHTML = courses.map(course => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
+                    <img src="${course.images[0]}" 
+                         alt="${course.title}" class="w-full h-48 object-cover" width="400" height="192" loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">${course.title}</h3>
+                            <span class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">${course.category || 'Course'}</span>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-2">${course.description}</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center">
+                                <span class="text-gray-600">${course.duration || 'Self-paced'}</span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <span class="text-[#800020] font-bold">₹${course.onlinePrice}</span>
+                                ${course.onlineOriginalPrice ? `<span class="text-gray-500 line-through text-sm">₹${course.onlineOriginalPrice}</span>` : ''}
+                            </div>
+                        </div>
+                        <button class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all view-course-btn" data-course-id="${course.id}">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+                // Add event listeners to course buttons
+                document.querySelectorAll('.view-course-btn').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const courseId = this.getAttribute('data-course-id');
+                        // For demo, just show a toast
+                        const authSystem = new AuthSystem();
+                        authSystem.showToast('Course details feature would open here', 'info');
+                    });
+                });
+            }
+
+            // Load courses when page loads
+            loadCourses();
+        });
+    </script>
+
+</body>
+
+</html>
