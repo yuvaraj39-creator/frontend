@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>U1 Technology Institute - Premier Education Destination</title>
+    <script src="config.js"></script>
     <meta name="description"
         content="U1 Technology Institute offers quality education with industry-relevant programs in engineering, science, commerce, and arts. Join our vibrant learning community.">
 
@@ -525,6 +526,99 @@
             transition: var(--transition);
             overflow: hidden;
         }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            border: 4px solid rgba(128, 0, 32, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Seller Badge Styles */
+        .seller-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .seller-badge.best-seller {
+            background-color: #FFD700;
+            color: #000000;
+        }
+
+        .seller-badge.top-rated {
+            background-color: #4ADE80;
+            color: #000000;
+        }
+
+        .seller-badge.most-popular {
+            background-color: #60A5FA;
+            color: #000000;
+        }
+
+        .seller-badge.trending-now {
+            background-color: #F97316;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.student-favorite {
+            background-color: #A855F7;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.bestseller {
+            background-color: #FACC15;
+            color: #000000;
+        }
+
+        .seller-badge.hot-pick {
+            background-color: #EF4444;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.editors-choice {
+            background-color: #3B82F6;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.featured-course {
+            background-color: #10B981;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.highly-recommended {
+            background-color: #EAB308;
+            color: #000000;
+        }
+
+        .seller-badge.top-choice {
+            background-color: #6366F1;
+            color: #FFFFFF;
+        }
+
+        /* Line clamp utility */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
     </style>
 
     <!-- JSON-LD Structured Data -->
@@ -734,121 +828,22 @@
                 <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Course Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
-                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80"
-                        alt="Computer Science laboratory" class="w-full h-48 object-cover" width="400" height="192"
-                        loading="lazy">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Computer Science</h3>
-                            <span
-                                class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">B.Tech</span>
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                            </div>
-                            <span class="text-gray-600 ml-2">4.5 (120 reviews)</span>
-                        </div>
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="flex items-center">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Professor John Smith"
-                                    class="w-8 h-8 rounded-full mr-2" width="32" height="32" loading="lazy">
-                                <span class="text-gray-600">Prof. John Smith</span>
-                            </div>
-                            <span class="text-[#800020] font-bold">$3,200/yr</span>
-                        </div>
-                        <button
-                            class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all">
-                            View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Course Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
-                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                        alt="Business Administration class" class="w-full h-48 object-cover" width="400" height="192"
-                        loading="lazy">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Business Administration</h3>
-                            <span class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">MBA</span>
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="far fa-star" aria-hidden="true"></i>
-                            </div>
-                            <span class="text-gray-600 ml-2">4.0 (95 reviews)</span>
-                        </div>
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="flex items-center">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg"
-                                    alt="Professor Sarah Johnson" class="w-8 h-8 rounded-full mr-2" width="32"
-                                    height="32" loading="lazy">
-                                <span class="text-gray-600">Prof. Sarah Johnson</span>
-                            </div>
-                            <span class="text-[#800020] font-bold">$4,500/yr</span>
-                        </div>
-                        <button
-                            class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all">
-                            View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Course Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
-                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                        alt="Electrical Engineering laboratory" class="w-full h-48 object-cover" width="400"
-                        height="192" loading="lazy">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">Electrical Engineering</h3>
-                            <span
-                                class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">B.Tech</span>
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                            </div>
-                            <span class="text-gray-600 ml-2">5.0 (86 reviews)</span>
-                        </div>
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="flex items-center">
-                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Professor Michael Brown"
-                                    class="w-8 h-8 rounded-full mr-2" width="32" height="32" loading="lazy">
-                                <span class="text-gray-600">Prof. Michael Brown</span>
-                            </div>
-                            <span class="text-[#800020] font-bold">$3,400/yr</span>
-                        </div>
-                        <button
-                            class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all">
-                            View Details
-                        </button>
-                    </div>
+            <!-- Courses Container -->
+            <div id="courses-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Loading State -->
+                <div class="col-span-3 text-center py-8">
+                    <div class="loading-spinner mx-auto"></div>
+                    <p class="text-gray-600 mt-4">Loading courses...</p>
                 </div>
             </div>
 
             <div class="text-center mt-12">
-                <button
-                    class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
-                    View All Programs
-                </button>
+                <a href="courses.html">
+                    <button
+                        class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
+                        View All Programs
+                    </button>
+                </a>
             </div>
         </div>
     </section>
@@ -1080,7 +1075,7 @@
                         <div>
                             <div class="flex justify-between mb-1">
                                 <span class="text-gray-700">Average Salary</span>
-                                <span class="text-[#800020] font-bold">₹70,000</span>
+                                <span class="text-[#800020] font-bold">₹40,000</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2">
                                 <div class="bg-[#800020] h-2 rounded-full" style="width: 85%"></div>
@@ -1089,7 +1084,7 @@
                         <div>
                             <div class="flex justify-between mb-1">
                                 <span class="text-gray-700">Highest Package</span>
-                                <span class="text-[#800020] font-bold">₹120,000</span>
+                                <span class="text-[#800020] font-bold">₹20,00,000</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2">
                                 <div class="bg-[#800020] h-2 rounded-full" style="width: 100%"></div>
@@ -1165,7 +1160,7 @@
                         loading="lazy">
                 </div>
                 <div class="gallery-item transition-all">
-                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                    <img src="https://media.istockphoto.com/id/882215368/photo/hes-a-great-tutor.webp?a=1&b=1&s=612x612&w=0&k=20&c=CSIs1x0XKDDptmpffMlQGewM280I4PmQFd7ujpdrEyc="
                         alt="Graduation ceremony" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
                         loading="lazy">
                 </div>
@@ -1203,7 +1198,8 @@
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-gray-900 mb-1">Address</h4>
-                                    <p class="text-gray-600">123 Education Street, Knowledge City, India 110001</p>
+                                    <p class="text-gray-600">1, OMR Service Rd, near Jain College, Customs Colony, Jothi
+                                        Nagar, Thoraipakkam, Chennai, Tamil Nadu 600097</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
@@ -1230,7 +1226,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-gray-900 mb-1">Office Hours</h4>
-                                    <p class="text-gray-600">Monday - Friday: 9:00 AM - 5:00 PM</p>
+                                    <p class="text-gray-600">Monday - Friday: 9:00 AM - 7:00 PM</p>
                                 </div>
                             </div>
                         </div>
@@ -1563,1191 +1559,1319 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Main content ID for accessibility
-            const mainContent = document.createElement('main');
-            mainContent.id = 'main-content';
-            mainContent.setAttribute('tabindex', '-1');
-            document.body.insertBefore(mainContent, document.querySelector('nav').nextSibling);
-
-            // Move all sections to main content
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                mainContent.appendChild(section);
-            });
-
-            // Mobile menu toggle
-            document.getElementById('mobile-menu-button').addEventListener('click', function () {
-                const mobileMenu = document.getElementById('mobile-menu');
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-
-                mobileMenu.classList.toggle('hidden');
-                this.setAttribute('aria-expanded', !isExpanded);
-
-                // Update icon
-                const icon = this.querySelector('i');
-                if (icon.classList.contains('fa-bars')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-
-            // Authentication System with API Integration
-            class AuthSystem {
-                constructor() {
-                    this.currentUser = null;
-                    this.isLoggedIn = false;
-                    this.apiBaseUrl = window.AppConfig.API_BASE_URL + '/api';
-                    this.init();
-                }
-
-                init() {
-                    // Check if user is already logged in
-                    this.checkLoginStatus();
-
-                    // Set up event listeners
-                    this.setupEventListeners();
-
-                    // Initialize animations
-                    this.initializeAnimations();
-                }
-
-                checkLoginStatus() {
-                    const token = localStorage.getItem('authToken');
-                    const userData = localStorage.getItem('currentUser');
-
-                    if (token && userData) {
-                        this.currentUser = JSON.parse(userData);
-                        this.isLoggedIn = true;
-                        this.updateUIForLoggedInUser();
-
-                        // Verify token is still valid
-                        this.verifyToken();
-                    }
-                }
-
-                setupEventListeners() {
-                    // Modal open buttons
-                    const signinButtons = [
-                        document.getElementById('header-signin-btn'),
-                        document.getElementById('mobile-signin-btn')
-                    ];
-
-                    signinButtons.forEach(button => {
-                        if (button) {
-                            button.addEventListener('click', () => {
-                                if (!this.isLoggedIn) {
-                                    this.openAuthModal();
-                                } else {
-                                    this.showUserMenu();
-                                }
-                            });
-                        }
-                    });
-
-                    // Modal close button
-                    document.getElementById('modal-close').addEventListener('click', () => {
-                        this.closeAuthModal();
-                    });
-
-                    // Tab switching
-                    document.getElementById('login-tab').addEventListener('click', () => {
-                        this.switchTab('login');
-                    });
-
-                    document.getElementById('signup-tab').addEventListener('click', () => {
-                        this.switchTab('signup');
-                    });
-
-                    // Form submissions
-                    document.getElementById('login-form').addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        this.handleLogin();
-                    });
-
-                    document.getElementById('signup-form').addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        this.handleSignup();
-                    });
-
-                    document.getElementById('forgot-password-form').addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        this.handlePasswordReset();
-                    });
-
-                    // Forgot password functionality
-                    document.getElementById('forgot-password-link').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.showForgotPassword();
-                    });
-
-                    document.getElementById('back-to-login').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.switchTab('login');
-                    });
-
-                    // Send OTP button
-                    document.getElementById('send-otp-btn').addEventListener('click', () => {
-                        this.handleSendOTP();
-                    });
-
-                    // Close modal when clicking outside
-                    document.getElementById('auth-modal').addEventListener('click', (e) => {
-                        if (e.target.id === 'auth-modal') {
-                            this.closeAuthModal();
-                        }
-                    });
-
-                    // Password visibility toggles
-                    this.initializePasswordToggles();
-
-                    // Experience radio buttons
-                    this.initializeExperienceRadios();
-
-                    // Phone number validation
-                    this.initializePhoneValidation();
-
-                    // Form input validation
-                    this.initializeFormValidation();
-                }
-
-                initializeAnimations() {
-                    // Add CSS for animations if not already present
-                    if (!document.getElementById('auth-animations')) {
-                        const style = document.createElement('style');
-                        style.id = 'auth-animations';
-                        style.textContent = `
-                .auth-modal-enter {
-                    opacity: 0;
-                    transform: scale(0.9);
-                }
-                .auth-modal-enter-active {
-                    opacity: 1;
-                    transform: scale(1);
-                    transition: opacity 0.3s ease, transform 0.3s ease;
-                }
-                .auth-modal-exit {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-                .auth-modal-exit-active {
-                    opacity: 0;
-                    transform: scale(0.9);
-                    transition: opacity 0.3s ease, transform 0.3s ease;
-                }
-                .form-tab-enter {
-                    opacity: 0;
-                    transform: translateX(20px);
-                }
-                .form-tab-enter-active {
-                    opacity: 1;
-                    transform: translateX(0);
-                    transition: opacity 0.3s ease, transform 0.3s ease;
-                }
-                .form-tab-exit {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-                .form-tab-exit-active {
-                    opacity: 0;
-                    transform: translateX(-20px);
-                    transition: opacity 0.3s ease, transform 0.3s ease;
-                }
-            `;
-                        document.head.appendChild(style);
-                    }
-                }
-
-                // API Methods
-                async apiRequest(endpoint, options = {}) {
-                    const url = `${this.apiBaseUrl}${endpoint}`;
-
-                    const defaultOptions = {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            ...options.headers
-                        }
-                    };
-
-                    const config = { ...defaultOptions, ...options };
-
-                    try {
-                        const response = await fetch(url, config);
-                        const data = await response.json();
-
-                        if (!response.ok) {
-                            throw new Error(data.message || `HTTP error! status: ${response.status}`);
-                        }
-
-                        return data;
-                    } catch (error) {
-                        console.error('API request failed:', error);
-                        throw error;
-                    }
-                }
-
-                openAuthModal() {
-                    const modal = document.getElementById('auth-modal');
-                    console.log('Opening auth modal:', modal);
-
-                    if (modal) {
-                        modal.style.display = 'flex';
-
-                        // Force show the modal
-                        setTimeout(() => {
-                            modal.style.opacity = '1';
-                            modal.style.visibility = 'visible';
-                        }, 10);
-
-                        // Reset forms
-                        this.resetForms();
-
-                        // Set focus to first input in active form
-                        setTimeout(() => {
-                            const activeForm = document.querySelector('.auth-form.active');
-                            if (activeForm) {
-                                const firstInput = activeForm.querySelector('input');
-                                if (firstInput) {
-                                    firstInput.focus();
-                                }
-                            }
-                        }, 300);
-                    } else {
-                        console.error('Auth modal element not found!');
-                    }
-                }
-
-                closeAuthModal() {
-                    const modal = document.getElementById('auth-modal');
-                    if (modal) {
-                        modal.style.opacity = '0';
-                        modal.style.visibility = 'hidden';
-
-                        setTimeout(() => {
-                            modal.style.display = 'none';
-                        }, 300);
-                    }
-                }
-
-                switchTab(tabName) {
-                    const currentActiveForm = document.querySelector('.auth-form.active');
-                    const currentActiveTab = document.querySelector('.tab-button.active');
-
-                    // Update tabs
-                    document.querySelectorAll('.tab-button').forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-
-                    document.querySelectorAll('.auth-form').forEach(form => {
-                        form.classList.remove('active');
-                    });
-
-                    // Add exit animation to current form
-                    if (currentActiveForm) {
-                        currentActiveForm.classList.add('form-tab-exit-active');
-                    }
-
-                    setTimeout(() => {
-                        if (currentActiveForm) {
-                            currentActiveForm.classList.remove('form-tab-exit-active');
-                            currentActiveForm.style.display = 'none';
-                            currentActiveForm.classList.remove('active');
-                            currentActiveForm.style.opacity = '0';
-                            currentActiveForm.style.transform = 'translateX(-20px)';
-                            currentActiveForm.style.transition = 'none';
-                            currentActiveForm.style.display = 'block';
-                            currentActiveForm.style.opacity = '0';
-                            currentActiveForm.style.transform = 'translateX(20px)';
-                        }
-
-                        if (tabName === 'login') {
-                            document.getElementById('login-tab').classList.add('active');
-                            const loginForm = document.getElementById('login-form');
-                            loginForm.classList.add('active');
-                            loginForm.style.display = 'block';
-                            setTimeout(() => {
-                                loginForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                                loginForm.style.opacity = '1';
-                                loginForm.style.transform = 'translateX(0)';
-                            }, 10);
-                        } else {
-                            document.getElementById('signup-tab').classList.add('active');
-                            const signupForm = document.getElementById('signup-form');
-                            signupForm.classList.add('active');
-                            signupForm.style.display = 'block';
-                            setTimeout(() => {
-                                signupForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                                signupForm.style.opacity = '1';
-                                signupForm.style.transform = 'translateX(0)';
-                            }, 10);
-                        }
-                    }, 300);
-
-                    // Reset forgot password form
-                    this.resetForgotPasswordForm();
-
-                    // Clear messages
-                    this.clearAllMessages();
-                }
-
-                showForgotPassword() {
-                    const currentActiveForm = document.querySelector('.auth-form.active');
-
-                    // Add exit animation to current form
-                    if (currentActiveForm) {
-                        currentActiveForm.classList.add('form-tab-exit-active');
-                    }
-
-                    setTimeout(() => {
-                        if (currentActiveForm) {
-                            currentActiveForm.classList.remove('form-tab-exit-active');
-                            currentActiveForm.classList.remove('active');
-                            document.getElementById('login-tab').classList.remove('active');
-                            document.getElementById('signup-tab').classList.remove('active');
-
-                            const forgotForm = document.getElementById('forgot-password-form');
-                            forgotForm.classList.add('active');
-                            forgotForm.style.display = 'block';
-                            forgotForm.style.opacity = '0';
-                            forgotForm.style.transform = 'translateX(20px)';
-
-                            setTimeout(() => {
-                                forgotForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                                forgotForm.style.opacity = '1';
-                                forgotForm.style.transform = 'translateX(0)';
-                            }, 10);
-                        }
-                    }, 300);
-
-                    // Reset form state
-                    this.resetForgotPasswordForm();
-                }
-
-                resetForgotPasswordForm() {
-                    // Hide OTP and password sections
-                    document.getElementById('otp-section').style.display = 'none';
-                    document.getElementById('new-password-section').style.display = 'none';
-                    document.getElementById('confirm-new-password-section').style.display = 'none';
-                    document.getElementById('reset-password-btn-container').style.display = 'none';
-
-                    // Show send OTP button
-                    const sendOtpBtn = document.getElementById('send-otp-btn');
-                    sendOtpBtn.style.display = 'block';
-                    sendOtpBtn.textContent = 'Send OTP';
-                    sendOtpBtn.disabled = false;
-
-                    // Clear inputs
-                    document.getElementById('forgot-email').value = '';
-                    document.getElementById('forgot-otp').value = '';
-                    document.getElementById('new-password').value = '';
-                    document.getElementById('confirm-new-password').value = '';
-
-                    // Clear messages
-                    this.clearForgotPasswordMessages();
-                }
-
-                initializePasswordToggles() {
-                    document.querySelectorAll('.password-toggle').forEach(toggle => {
-                        toggle.addEventListener('click', function () {
-                            const input = this.parentElement.querySelector('input');
-                            const icon = this.querySelector('i');
-
-                            if (input.type === 'password') {
-                                input.type = 'text';
-                                icon.classList.remove('fa-eye');
-                                icon.classList.add('fa-eye-slash');
-                                this.setAttribute('aria-label', 'Hide password');
-                            } else {
-                                input.type = 'password';
-                                icon.classList.remove('fa-eye-slash');
-                                icon.classList.add('fa-eye');
-                                this.setAttribute('aria-label', 'Show password');
-                            }
-                        });
-                    });
-                }
-
-                initializeExperienceRadios() {
-                    const experienceRadios = document.querySelectorAll('input[name="experience"]');
-                    const additionalInfoContainer = document.getElementById('additional-info-container');
-                    const additionalInfo = document.getElementById('additional-info');
-
-                    console.log('Experience radios found:', experienceRadios.length);
-
-                    // Set explicit values for each radio button
-                    const radioValues = [
-                        "Working professional – Technical roles",
-                        "Working professional – Non-technical",
-                        "College student – Final year",
-                        "Internship",
-                        "Others"
-                    ];
-
-                    experienceRadios.forEach((radio, index) => {
-                        // Set the value explicitly
-                        radio.value = radioValues[index];
-
-                        console.log(`Radio ${index + 1}:`, {
-                            id: radio.id,
-                            value: radio.value,
-                            checked: radio.checked,
-                            type: radio.type,
-                            name: radio.name
-                        });
-                    });
-
-                    // Ensure first radio is checked by default
-                    if (!document.querySelector('input[name="experience"]:checked')) {
-                        experienceRadios[0].checked = true;
-                        console.log('Forced first radio to be checked');
-                    }
-
-                    experienceRadios.forEach(radio => {
-                        radio.addEventListener('change', () => {
-                            console.log('Radio changed - Value:', radio.value, 'Checked:', radio.checked);
-
-                            if (radio.checked && radio.value === 'Others') {
-                                additionalInfoContainer.style.display = 'block';
-                                additionalInfo.required = true;
-                                additionalInfoContainer.style.opacity = '0';
-                                setTimeout(() => {
-                                    additionalInfoContainer.style.opacity = '1';
-                                    additionalInfoContainer.style.transition = 'opacity 0.3s ease';
-                                }, 10);
-                            } else if (radio.checked) {
-                                additionalInfoContainer.style.opacity = '1';
-                                setTimeout(() => {
-                                    additionalInfoContainer.style.display = 'none';
-                                }, 300);
-                                additionalInfo.required = false;
-                                additionalInfo.value = '';
-                            }
-                        });
-                    });
-
-                    // Test the current selection
-                    const selected = document.querySelector('input[name="experience"]:checked');
-                    console.log('Currently selected experience:', selected ? selected.value : 'None');
-                }
-
-                initializePhoneValidation() {
-                    const phoneInput = document.getElementById('signup-phone');
-                    phoneInput.addEventListener('input', function () {
-                        this.value = this.value.replace(/\D/g, '').slice(0, 10);
-                    });
-                }
-
-                initializeFormValidation() {
-                    // Real-time email validation
-                    document.querySelectorAll('input[type="email"]').forEach(input => {
-                        input.addEventListener('blur', (e) => {
-                            const email = e.target.value.trim();
-                            if (email && !this.validateEmail(email)) {
-                                e.target.style.borderColor = 'var(--error-color)';
-                            } else {
-                                e.target.style.borderColor = 'var(--primary-color)';
-                            }
-                        });
-                    });
-
-                    // Real-time password validation
-                    document.getElementById('signup-password').addEventListener('input', (e) => {
-                        const password = e.target.value;
-                        if (password && !this.validatePassword(password)) {
-                            e.target.style.borderColor = 'var(--error-color)';
-                        } else {
-                            e.target.style.borderColor = 'var(--primary-color)';
-                        }
-                    });
-
-                    // Confirm password match validation
-                    document.getElementById('signup-confirm-password').addEventListener('input', (e) => {
-                        const password = document.getElementById('signup-password').value;
-                        const confirmPassword = e.target.value;
-
-                        if (confirmPassword && password !== confirmPassword) {
-                            e.target.style.borderColor = 'var(--error-color)';
-                        } else {
-                            e.target.style.borderColor = 'var(--primary-color)';
-                        }
-                    });
-                }
-
-                async handleLogin() {
-                    const email = document.getElementById('login-email').value.trim();
-                    const password = document.getElementById('login-password').value;
-                    const errorElement = document.getElementById('login-error');
-                    const successElement = document.getElementById('login-success');
-                    const submitBtn = document.getElementById('login-form').querySelector('.form-button');
-
-                    // Basic validation
-                    if (!email || !password) {
-                        this.showMessage(errorElement, 'Please fill in all fields');
-                        return;
-                    }
-
-                    if (!this.validateEmail(email)) {
-                        this.showMessage(errorElement, 'Please enter a valid email address');
-                        return;
-                    }
-
-                    // Show loading state
-                    this.setButtonLoading(submitBtn, true);
-
-                    try {
-                        const response = await this.apiRequest('/auth/login', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                email: email.toLowerCase(),
-                                password: password
-                            })
-                        });
-
-                        if (response.success) {
-                            // Store token and user data
-                            const token = response.data.token;
-                            const user = response.data.user;
-
-                            localStorage.setItem('authToken', token);
-                            localStorage.setItem('currentUser', JSON.stringify(user));
-
-                            this.currentUser = user;
-                            this.isLoggedIn = true;
-
-                            this.showMessage(successElement, 'Login successful!');
-                            this.updateUIForLoggedInUser();
-
-                            setTimeout(() => {
-                                this.closeAuthModal();
-                                this.showToast('Login successful! Welcome back.', 'success');
-                            }, 1000);
-                        } else {
-                            this.showMessage(errorElement, response.message || 'Login failed');
-                        }
-                    } catch (error) {
-                        console.error('Login error:', error);
-                        this.showMessage(errorElement, error.message || 'Login failed. Please try again.');
-                    } finally {
-                        this.setButtonLoading(submitBtn, false);
-                    }
-                }
-
-                async handleSignup() {
-                    const name = document.getElementById('signup-name').value.trim();
-                    const email = document.getElementById('signup-email').value.trim();
-                    const phone = document.getElementById('signup-phone').value;
-                    const password = document.getElementById('signup-password').value;
-                    const confirmPassword = document.getElementById('signup-confirm-password').value;
-
-                    // Get experience value
-                    let experience = '';
-                    const selectedRadio = document.querySelector('input[name="experience"]:checked');
-                    if (selectedRadio) {
-                        experience = selectedRadio.value;
-                    }
-
-                    const additionalInfo = document.getElementById('additional-info').value;
-                    const errorElement = document.getElementById('signup-error');
-                    const successElement = document.getElementById('signup-success');
-                    const submitBtn = document.getElementById('signup-form').querySelector('.form-button');
-
-                    // Debug log
-                    console.log('Form submission data:', {
-                        name, email, phone, experience, additionalInfo
-                    });
-
-                    // Validation
-                    if (!name || !email || !phone || !password || !confirmPassword) {
-                        this.showMessage(errorElement, 'Please fill in all required fields');
-                        return;
-                    }
-
-                    if (!experience) {
-                        this.showMessage(errorElement, 'Please select your experience level');
-                        return;
-                    }
-
-                    if (!this.validateEmail(email)) {
-                        this.showMessage(errorElement, 'Please enter a valid email address');
-                        return;
-                    }
-
-                    if (phone.length !== 10) {
-                        this.showMessage(errorElement, 'Phone number must be 10 digits');
-                        return;
-                    }
-
-                    if (!this.validatePassword(password)) {
-                        this.showMessage(errorElement, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
-                        return;
-                    }
-
-                    if (password !== confirmPassword) {
-                        this.showMessage(errorElement, 'Passwords do not match');
-                        return;
-                    }
-
-                    // Show loading state
-                    this.setButtonLoading(submitBtn, true);
-
-                    try {
-                        const response = await this.apiRequest('/auth/register', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                name: name,
-                                email: email.toLowerCase(),
-                                phone: phone,
-                                password: password,
-                                experience: experience,
-                                additionalInfo: experience === 'Others' ? additionalInfo : ''
-                            })
-                        });
-
-                        if (response.success) {
-                            // Store token and user data
-                            const token = response.data.token;
-                            const user = response.data.user;
-
-                            localStorage.setItem('authToken', token);
-                            localStorage.setItem('currentUser', JSON.stringify(user));
-
-                            this.currentUser = user;
-                            this.isLoggedIn = true;
-
-                            this.showMessage(successElement, 'Account created successfully!');
-                            this.updateUIForLoggedInUser();
-
-                            setTimeout(() => {
-                                this.closeAuthModal();
-                                this.showToast('Account created successfully!', 'success');
-                            }, 1500);
-                        } else {
-                            this.showMessage(errorElement, response.message || 'Registration failed');
-                        }
-                    } catch (error) {
-                        console.error('Signup error:', error);
-                        this.showMessage(errorElement, error.message || 'Registration failed. Please try again.');
-                    } finally {
-                        this.setButtonLoading(submitBtn, false);
-                    }
-                }
-
-                async handleSendOTP() {
-                    const email = document.getElementById('forgot-email').value.trim();
-                    const errorElement = document.getElementById('forgot-error');
-                    const successElement = document.getElementById('forgot-success');
-                    const sendOtpBtn = document.getElementById('send-otp-btn');
-
-                    // Reset messages
-                    this.clearForgotPasswordMessages();
-
-                    // Validation
-                    if (!email) {
-                        this.showMessage(errorElement, 'Please enter your email address');
-                        return;
-                    }
-
-                    if (!this.validateEmail(email)) {
-                        this.showMessage(errorElement, 'Please enter a valid email address');
-                        return;
-                    }
-
-                    // Show loading state
-                    this.setButtonLoading(sendOtpBtn, true, 'Sending OTP...');
-
-                    try {
-                        const response = await this.apiRequest('/auth/send-otp', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                email: email.toLowerCase(),
-                                purpose: 'password_reset'
-                            })
-                        });
-
-                        if (response.success) {
-                            this.showMessage(successElement, response.message || 'OTP sent successfully! Check your email.');
-
-                            // Show OTP section with animation
-                            this.showSectionWithAnimation('otp-section');
-
-                            // Show password sections with staggered animation
-                            setTimeout(() => {
-                                this.showSectionWithAnimation('new-password-section');
-                            }, 300);
-
-                            setTimeout(() => {
-                                this.showSectionWithAnimation('confirm-new-password-section');
-                            }, 600);
-
-                            setTimeout(() => {
-                                this.showSectionWithAnimation('reset-password-btn-container');
-                            }, 900);
-
-                            this.showToast('OTP sent successfully!', 'success');
-                        } else {
-                            this.showMessage(errorElement, response.message || 'Failed to send OTP');
-                        }
-                    } catch (error) {
-                        console.error('Send OTP error:', error);
-                        this.showMessage(errorElement, error.message || 'Failed to send OTP. Please try again.');
-                    } finally {
-                        this.setButtonLoading(sendOtpBtn, false, 'Resend OTP');
-                    }
-                }
-
-                async handlePasswordReset() {
-                    const email = document.getElementById('forgot-email').value.trim();
-                    const otp = document.getElementById('forgot-otp').value;
-                    const newPassword = document.getElementById('new-password').value;
-                    const confirmPassword = document.getElementById('confirm-new-password').value;
-                    const errorElement = document.getElementById('forgot-error');
-                    const successElement = document.getElementById('forgot-success');
-                    const resetBtn = document.getElementById('reset-password-btn-container').querySelector('button');
-
-                    // Reset messages
-                    this.clearForgotPasswordMessages();
-
-                    // Validation
-                    if (!otp) {
-                        this.showMessage(errorElement, 'Please enter the OTP');
-                        return;
-                    }
-
-                    if (!newPassword || !confirmPassword) {
-                        this.showMessage(errorElement, 'Please fill in all password fields');
-                        return;
-                    }
-
-                    if (!this.validatePassword(newPassword)) {
-                        this.showMessage(errorElement, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
-                        return;
-                    }
-
-                    if (newPassword !== confirmPassword) {
-                        this.showMessage(errorElement, 'Passwords do not match');
-                        return;
-                    }
-
-                    // Show loading state
-                    this.setButtonLoading(resetBtn, true, 'Resetting Password...');
-
-                    try {
-                        const response = await this.apiRequest('/auth/reset-password', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                email: email.toLowerCase(),
-                                otp: otp,
-                                newPassword: newPassword
-                            })
-                        });
-
-                        if (response.success) {
-                            this.showMessage(successElement, response.message || 'Password reset successfully!');
-
-                            // Redirect to login after success
-                            setTimeout(() => {
-                                this.switchTab('login');
-                                this.resetForgotPasswordForm();
-                                this.showToast('Password reset successfully! You can now login with your new password.', 'success');
-                            }, 2000);
-                        } else {
-                            this.showMessage(errorElement, response.message || 'Failed to reset password');
-                        }
-                    } catch (error) {
-                        console.error('Reset password error:', error);
-                        this.showMessage(errorElement, error.message || 'Failed to reset password. Please try again.');
-                        this.setButtonLoading(resetBtn, false);
-                    }
-                }
-
-                async verifyToken() {
-                    try {
-                        const token = localStorage.getItem('authToken');
-                        if (!token) {
-                            this.handleLogout();
-                            return;
-                        }
-
-                        const response = await this.apiRequest('/auth/me', {
-                            headers: {
-                                'Authorization': `Bearer ${token}`
-                            }
-                        });
-
-                        if (!response.success) {
-                            this.handleLogout();
-                        }
-                    } catch (error) {
-                        console.error('Token verification failed:', error);
-                        this.handleLogout();
-                    }
-                }
-
-                // Utility functions
-                validateEmail = (email) => {
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    return emailRegex.test(email);
-                }
-
-                validatePassword = (password) => {
-                    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                    return passwordRegex.test(password);
-                }
-
-                setButtonLoading(button, isLoading, loadingText = 'Loading...') {
-                    if (isLoading) {
-                        button.disabled = true;
-                        button.dataset.originalText = button.textContent;
-                        button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${loadingText}`;
-                    } else {
-                        button.disabled = false;
-                        button.textContent = button.dataset.originalText || button.textContent;
-                    }
-                }
-
-                showSectionWithAnimation(sectionId) {
-                    const section = document.getElementById(sectionId);
-                    section.style.display = 'block';
-                    section.style.opacity = '0';
-                    section.style.transform = 'translateY(10px)';
-
-                    setTimeout(() => {
-                        section.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                        section.style.opacity = '1';
-                        section.style.transform = 'translateY(0)';
-                    }, 10);
-                }
-
-                showMessage(element, message) {
-                    element.textContent = message;
-                    element.style.display = 'block';
-                    element.style.opacity = '0';
-
-                    setTimeout(() => {
-                        element.style.transition = 'opacity 0.3s ease';
-                        element.style.opacity = '1';
-                    }, 10);
-
-                    // Hide message after 5 seconds
-                    setTimeout(() => {
-                        element.style.opacity = '0';
-                        setTimeout(() => {
-                            element.style.display = 'none';
-                        }, 300);
-                    }, 5000);
-                }
-
-                clearAllMessages() {
-                    document.querySelectorAll('.message').forEach(message => {
-                        message.style.display = 'none';
-                        message.textContent = '';
-                    });
-                }
-
-                clearForgotPasswordMessages() {
-                    document.getElementById('forgot-error').style.display = 'none';
-                    document.getElementById('forgot-success').style.display = 'none';
-                }
-
-                showToast(message, type = 'info') {
-                    const toastContainer = document.getElementById('toast-container');
-                    const toast = document.createElement('div');
-                    toast.className = `toast toast-${type}`;
-
-                    // Add icon based on type
-                    const icons = {
-                        success: 'fa-check-circle',
-                        error: 'fa-exclamation-circle',
-                        warning: 'fa-exclamation-triangle',
-                        info: 'fa-info-circle'
-                    };
-
-                    toast.innerHTML = `
-                <i class="fas ${icons[type]}" aria-hidden="true"></i>
-                <span>${message}</span>
-            `;
-
-                    toastContainer.appendChild(toast);
-
-                    // Animate in
-                    setTimeout(() => {
-                        toast.style.transform = 'translateX(0)';
-                    }, 10);
-
-                    // Auto remove after 5 seconds
-                    const autoRemove = setTimeout(() => {
-                        toast.style.transform = 'translateX(100%)';
-                        setTimeout(() => {
-                            if (toast.parentNode) {
-                                toast.parentNode.removeChild(toast);
-                            }
-                        }, 300);
-                    }, 5000);
-
-                    // Allow manual dismissal
-                    toast.addEventListener('click', () => {
-                        clearTimeout(autoRemove);
-                        toast.style.transform = 'translateX(100%)';
-                        setTimeout(() => {
-                            if (toast.parentNode) {
-                                toast.parentNode.removeChild(toast);
-                            }
-                        }, 300);
-                    });
-                }
-
-                updateUIForLoggedInUser() {
-                    if (this.isLoggedIn && this.currentUser) {
-                        const signinButtons = [
-                            document.getElementById('header-signin-btn'),
-                            document.getElementById('mobile-signin-btn')
-                        ];
-
-                        signinButtons.forEach(button => {
-                            if (button) {
-                                button.innerHTML = `
-                            <div class="flex items-center">
-                                <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
-                                <span>${this.currentUser.name}</span>
-                            </div>
-                        `;
-                                button.onclick = () => this.showUserMenu();
-                            }
-                        });
-                    }
-                }
-
-                showUserMenu() {
-                    // Create user dropdown menu
-                    const userMenu = document.createElement('div');
-                    userMenu.className = 'absolute top-16 right-4 bg-white shadow-lg rounded-lg p-4 min-w-48 z-50';
-                    userMenu.innerHTML = `
-                <div class="border-b border-gray-200 pb-2 mb-2">
-                    <p class="font-semibold text-gray-800">${this.currentUser.name}</p>
-                    <p class="text-sm text-gray-600">${this.currentUser.email}</p>
-                </div>
-                <button id="user-profile-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-gray-700">
-                    <i class="fas fa-user mr-2"></i>Profile
-                </button>
-                <button id="user-logout-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-red-600">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                </button>
-            `;
-
-                    // Remove any existing menu
-                    const existingMenu = document.querySelector('.user-dropdown-menu');
-                    if (existingMenu) {
-                        existingMenu.remove();
-                    }
-
-                    userMenu.classList.add('user-dropdown-menu');
-                    document.body.appendChild(userMenu);
-
-                    // Add event listeners
-                    document.getElementById('user-profile-btn').addEventListener('click', () => {
-                        this.showToast(`Welcome, ${this.currentUser.name}!`, 'info');
-                        userMenu.remove();
-                    });
-
-                    document.getElementById('user-logout-btn').addEventListener('click', () => {
-                        this.handleLogout();
-                        userMenu.remove();
-                    });
-
-                    // Close menu when clicking outside
-                    const closeMenu = (e) => {
-                        if (!userMenu.contains(e.target) && !e.target.closest('#header-signin-btn') && !e.target.closest('#mobile-signin-btn')) {
-                            userMenu.remove();
-                            document.removeEventListener('click', closeMenu);
-                        }
-                    };
-
-                    setTimeout(() => {
-                        document.addEventListener('click', closeMenu);
-                    }, 100);
-                }
-
-                handleLogout() {
-                    // Clear user data from localStorage
-                    localStorage.removeItem('authToken');
-                    localStorage.removeItem('currentUser');
-
-                    this.currentUser = null;
-                    this.isLoggedIn = false;
-
-                    const signinButtons = [
-                        document.getElementById('header-signin-btn'),
-                        document.getElementById('mobile-signin-btn')
-                    ];
-
-                    signinButtons.forEach(button => {
-                        if (button) {
-                            button.innerHTML = 'Sign In';
-                            button.onclick = () => this.openAuthModal();
-                        }
-                    });
-
-                    this.showToast('Logged out successfully', 'success');
-                }
-
-                resetForms() {
-                    document.querySelectorAll('.auth-form input').forEach(input => {
-                        input.value = '';
-                        input.style.borderColor = '';
-                    });
-                    this.clearAllMessages();
-                    this.switchTab('login');
+    document.addEventListener('DOMContentLoaded', function () {
+        // Main content ID for accessibility
+        const mainContent = document.createElement('main');
+        mainContent.id = 'main-content';
+        mainContent.setAttribute('tabindex', '-1');
+        document.body.insertBefore(mainContent, document.querySelector('nav').nextSibling);
+
+        // Move all sections to main content
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            mainContent.appendChild(section);
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+            mobileMenu.classList.toggle('hidden');
+            this.setAttribute('aria-expanded', !isExpanded);
+
+            // Update icon
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Authentication System with API Integration
+        class AuthSystem {
+            constructor() {
+                this.currentUser = null;
+                this.isLoggedIn = false;
+                this.apiBaseUrl = window.AppConfig.API_BASE_URL + '/api';
+                this.init();
+            }
+
+            init() {
+                // Check if user is already logged in
+                this.checkLoginStatus();
+
+                // Set up event listeners
+                this.setupEventListeners();
+
+                // Initialize animations
+                this.initializeAnimations();
+            }
+
+            checkLoginStatus() {
+                const token = localStorage.getItem('authToken');
+                const userData = localStorage.getItem('currentUser');
+
+                if (token && userData) {
+                    this.currentUser = JSON.parse(userData);
+                    this.isLoggedIn = true;
+                    this.updateUIForLoggedInUser();
+
+                    // Verify token is still valid
+                    this.verifyToken();
                 }
             }
 
-            // Initialize the authentication system
-            const authSystem = new AuthSystem();
+            setupEventListeners() {
+                // Modal open buttons
+                const signinButtons = [
+                    document.getElementById('header-signin-btn'),
+                    document.getElementById('mobile-signin-btn')
+                ];
 
-            // Quick fix for sign in buttons to ensure they work
-            const headerSignInBtn = document.getElementById('header-signin-btn');
-            const mobileSignInBtn = document.getElementById('mobile-signin-btn');
+                signinButtons.forEach(button => {
+                    if (button) {
+                        button.addEventListener('click', () => {
+                            if (!this.isLoggedIn) {
+                                this.openAuthModal();
+                            } else {
+                                this.showUserMenu();
+                            }
+                        });
+                    }
+                });
 
-            function openAuthModalDirect() {
+                // Modal close button
+                document.getElementById('modal-close').addEventListener('click', () => {
+                    this.closeAuthModal();
+                });
+
+                // Tab switching
+                document.getElementById('login-tab').addEventListener('click', () => {
+                    this.switchTab('login');
+                });
+
+                document.getElementById('signup-tab').addEventListener('click', () => {
+                    this.switchTab('signup');
+                });
+
+                // Form submissions
+                document.getElementById('login-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleLogin();
+                });
+
+                document.getElementById('signup-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleSignup();
+                });
+
+                document.getElementById('forgot-password-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handlePasswordReset();
+                });
+
+                // Forgot password functionality
+                document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showForgotPassword();
+                });
+
+                document.getElementById('back-to-login').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.switchTab('login');
+                });
+
+                // Send OTP button
+                document.getElementById('send-otp-btn').addEventListener('click', () => {
+                    this.handleSendOTP();
+                });
+
+                // Close modal when clicking outside
+                document.getElementById('auth-modal').addEventListener('click', (e) => {
+                    if (e.target.id === 'auth-modal') {
+                        this.closeAuthModal();
+                    }
+                });
+
+                // Password visibility toggles
+                this.initializePasswordToggles();
+
+                // Experience radio buttons
+                this.initializeExperienceRadios();
+
+                // Phone number validation
+                this.initializePhoneValidation();
+
+                // Form input validation
+                this.initializeFormValidation();
+            }
+
+            initializeAnimations() {
+                // Add CSS for animations if not already present
+                if (!document.getElementById('auth-animations')) {
+                    const style = document.createElement('style');
+                    style.id = 'auth-animations';
+                    style.textContent = `
+                        .auth-modal-enter {
+                            opacity: 0;
+                            transform: scale(0.9);
+                        }
+                        .auth-modal-enter-active {
+                            opacity: 1;
+                            transform: scale(1);
+                            transition: opacity 0.3s ease, transform 0.3s ease;
+                        }
+                        .auth-modal-exit {
+                            opacity: 1;
+                            transform: scale(1);
+                        }
+                        .auth-modal-exit-active {
+                            opacity: 0;
+                            transform: scale(0.9);
+                            transition: opacity 0.3s ease, transform 0.3s ease;
+                        }
+                        .form-tab-enter {
+                            opacity: 0;
+                            transform: translateX(20px);
+                        }
+                        .form-tab-enter-active {
+                            opacity: 1;
+                            transform: translateX(0);
+                            transition: opacity 0.3s ease, transform 0.3s ease;
+                        }
+                        .form-tab-exit {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
+                        .form-tab-exit-active {
+                            opacity: 0;
+                            transform: translateX(-20px);
+                            transition: opacity 0.3s ease, transform 0.3s ease;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
+
+            // API Methods
+            async apiRequest(endpoint, options = {}) {
+                const url = `${this.apiBaseUrl}${endpoint}`;
+
+                const defaultOptions = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    }
+                };
+
+                const config = { ...defaultOptions, ...options };
+
+                try {
+                    const response = await fetch(url, config);
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.message || `HTTP error! status: ${response.status}`);
+                    }
+
+                    return data;
+                } catch (error) {
+                    console.error('API request failed:', error);
+                    throw error;
+                }
+            }
+
+            openAuthModal() {
                 const modal = document.getElementById('auth-modal');
+                console.log('Opening auth modal:', modal);
+
                 if (modal) {
                     modal.style.display = 'flex';
-                    modal.style.opacity = '1';
-                    modal.style.visibility = 'visible';
 
-                    // Ensure login form is active
-                    document.querySelectorAll('.auth-form').forEach(form => {
-                        form.classList.remove('active');
-                        form.style.display = 'none';
-                    });
-                    document.querySelectorAll('.tab-button').forEach(tab => tab.classList.remove('active'));
+                    // Force show the modal
+                    setTimeout(() => {
+                        modal.style.opacity = '1';
+                        modal.style.visibility = 'visible';
+                    }, 10);
 
-                    document.getElementById('login-form').classList.add('active');
-                    document.getElementById('login-form').style.display = 'block';
-                    document.getElementById('login-tab').classList.add('active');
+                    // Reset forms
+                    this.resetForms();
 
-                    // Clear any messages
-                    document.querySelectorAll('.message').forEach(msg => {
-                        msg.style.display = 'none';
-                        msg.textContent = '';
-                    });
+                    // Set focus to first input in active form
+                    setTimeout(() => {
+                        const activeForm = document.querySelector('.auth-form.active');
+                        if (activeForm) {
+                            const firstInput = activeForm.querySelector('input');
+                            if (firstInput) {
+                                firstInput.focus();
+                            }
+                        }
+                    }, 300);
+                } else {
+                    console.error('Auth modal element not found!');
                 }
             }
 
-            if (headerSignInBtn) {
-                headerSignInBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    openAuthModalDirect();
+            closeAuthModal() {
+                const modal = document.getElementById('auth-modal');
+                if (modal) {
+                    modal.style.opacity = '0';
+                    modal.style.visibility = 'hidden';
+
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                    }, 300);
+                }
+            }
+
+            switchTab(tabName) {
+                const currentActiveForm = document.querySelector('.auth-form.active');
+                const currentActiveTab = document.querySelector('.tab-button.active');
+
+                // Update tabs
+                document.querySelectorAll('.tab-button').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.classList.remove('active');
+                });
+
+                // Add exit animation to current form
+                if (currentActiveForm) {
+                    currentActiveForm.classList.add('form-tab-exit-active');
+                }
+
+                setTimeout(() => {
+                    if (currentActiveForm) {
+                        currentActiveForm.classList.remove('form-tab-exit-active');
+                        currentActiveForm.style.display = 'none';
+                        currentActiveForm.classList.remove('active');
+                        currentActiveForm.style.opacity = '0';
+                        currentActiveForm.style.transform = 'translateX(-20px)';
+                        currentActiveForm.style.transition = 'none';
+                        currentActiveForm.style.display = 'block';
+                        currentActiveForm.style.opacity = '0';
+                        currentActiveForm.style.transform = 'translateX(20px)';
+                    }
+
+                    if (tabName === 'login') {
+                        document.getElementById('login-tab').classList.add('active');
+                        const loginForm = document.getElementById('login-form');
+                        loginForm.classList.add('active');
+                        loginForm.style.display = 'block';
+                        setTimeout(() => {
+                            loginForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            loginForm.style.opacity = '1';
+                            loginForm.style.transform = 'translateX(0)';
+                        }, 10);
+                    } else {
+                        document.getElementById('signup-tab').classList.add('active');
+                        const signupForm = document.getElementById('signup-form');
+                        signupForm.classList.add('active');
+                        signupForm.style.display = 'block';
+                        setTimeout(() => {
+                            signupForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            signupForm.style.opacity = '1';
+                            signupForm.style.transform = 'translateX(0)';
+                        }, 10);
+                    }
+                }, 300);
+
+                // Reset forgot password form
+                this.resetForgotPasswordForm();
+
+                // Clear messages
+                this.clearAllMessages();
+            }
+
+            showForgotPassword() {
+                const currentActiveForm = document.querySelector('.auth-form.active');
+
+                // Add exit animation to current form
+                if (currentActiveForm) {
+                    currentActiveForm.classList.add('form-tab-exit-active');
+                }
+
+                setTimeout(() => {
+                    if (currentActiveForm) {
+                        currentActiveForm.classList.remove('form-tab-exit-active');
+                        currentActiveForm.classList.remove('active');
+                        document.getElementById('login-tab').classList.remove('active');
+                        document.getElementById('signup-tab').classList.remove('active');
+
+                        const forgotForm = document.getElementById('forgot-password-form');
+                        forgotForm.classList.add('active');
+                        forgotForm.style.display = 'block';
+                        forgotForm.style.opacity = '0';
+                        forgotForm.style.transform = 'translateX(20px)';
+
+                        setTimeout(() => {
+                            forgotForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            forgotForm.style.opacity = '1';
+                            forgotForm.style.transform = 'translateX(0)';
+                        }, 10);
+                    }
+                }, 300);
+
+                // Reset form state
+                this.resetForgotPasswordForm();
+            }
+
+            resetForgotPasswordForm() {
+                // Hide OTP and password sections
+                document.getElementById('otp-section').style.display = 'none';
+                document.getElementById('new-password-section').style.display = 'none';
+                document.getElementById('confirm-new-password-section').style.display = 'none';
+                document.getElementById('reset-password-btn-container').style.display = 'none';
+
+                // Show send OTP button
+                const sendOtpBtn = document.getElementById('send-otp-btn');
+                sendOtpBtn.style.display = 'block';
+                sendOtpBtn.textContent = 'Send OTP';
+                sendOtpBtn.disabled = false;
+
+                // Clear inputs
+                document.getElementById('forgot-email').value = '';
+                document.getElementById('forgot-otp').value = '';
+                document.getElementById('new-password').value = '';
+                document.getElementById('confirm-new-password').value = '';
+
+                // Clear messages
+                this.clearForgotPasswordMessages();
+            }
+
+            initializePasswordToggles() {
+                document.querySelectorAll('.password-toggle').forEach(toggle => {
+                    toggle.addEventListener('click', function () {
+                        const input = this.parentElement.querySelector('input');
+                        const icon = this.querySelector('i');
+
+                        if (input.type === 'password') {
+                            input.type = 'text';
+                            icon.classList.remove('fa-eye');
+                            icon.classList.add('fa-eye-slash');
+                            this.setAttribute('aria-label', 'Hide password');
+                        } else {
+                            input.type = 'password';
+                            icon.classList.remove('fa-eye-slash');
+                            icon.classList.add('fa-eye');
+                            this.setAttribute('aria-label', 'Show password');
+                        }
+                    });
                 });
             }
 
-            if (mobileSignInBtn) {
-                mobileSignInBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    openAuthModalDirect();
+            initializeExperienceRadios() {
+                const experienceRadios = document.querySelectorAll('input[name="experience"]');
+                const additionalInfoContainer = document.getElementById('additional-info-container');
+                const additionalInfo = document.getElementById('additional-info');
+
+                console.log('Experience radios found:', experienceRadios.length);
+
+                // Set explicit values for each radio button
+                const radioValues = [
+                    "Working professional – Technical roles",
+                    "Working professional – Non-technical",
+                    "College student – Final year",
+                    "Internship",
+                    "Others"
+                ];
+
+                experienceRadios.forEach((radio, index) => {
+                    // Set the value explicitly
+                    radio.value = radioValues[index];
+
+                    console.log(`Radio ${index + 1}:`, {
+                        id: radio.id,
+                        value: radio.value,
+                        checked: radio.checked,
+                        type: radio.type,
+                        name: radio.name
+                    });
+                });
+
+                // Ensure first radio is checked by default
+                if (!document.querySelector('input[name="experience"]:checked')) {
+                    experienceRadios[0].checked = true;
+                    console.log('Forced first radio to be checked');
+                }
+
+                experienceRadios.forEach(radio => {
+                    radio.addEventListener('change', () => {
+                        console.log('Radio changed - Value:', radio.value, 'Checked:', radio.checked);
+
+                        if (radio.checked && radio.value === 'Others') {
+                            additionalInfoContainer.style.display = 'block';
+                            additionalInfo.required = true;
+                            additionalInfoContainer.style.opacity = '0';
+                            setTimeout(() => {
+                                additionalInfoContainer.style.opacity = '1';
+                                additionalInfoContainer.style.transition = 'opacity 0.3s ease';
+                            }, 10);
+                        } else if (radio.checked) {
+                            additionalInfoContainer.style.opacity = '1';
+                            setTimeout(() => {
+                                additionalInfoContainer.style.display = 'none';
+                            }, 300);
+                            additionalInfo.required = false;
+                            additionalInfo.value = '';
+                        }
+                    });
+                });
+
+                // Test the current selection
+                const selected = document.querySelector('input[name="experience"]:checked');
+                console.log('Currently selected experience:', selected ? selected.value : 'None');
+            }
+
+            initializePhoneValidation() {
+                const phoneInput = document.getElementById('signup-phone');
+                phoneInput.addEventListener('input', function () {
+                    this.value = this.value.replace(/\D/g, '').slice(0, 10);
                 });
             }
 
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+            initializeFormValidation() {
+                // Real-time email validation
+                document.querySelectorAll('input[type="email"]').forEach(input => {
+                    input.addEventListener('blur', (e) => {
+                        const email = e.target.value.trim();
+                        if (email && !this.validateEmail(email)) {
+                            e.target.style.borderColor = 'var(--error-color)';
+                        } else {
+                            e.target.style.borderColor = 'var(--primary-color)';
+                        }
+                    });
+                });
+
+                // Real-time password validation
+                document.getElementById('signup-password').addEventListener('input', (e) => {
+                    const password = e.target.value;
+                    if (password && !this.validatePassword(password)) {
+                        e.target.style.borderColor = 'var(--error-color)';
+                    } else {
+                        e.target.style.borderColor = 'var(--primary-color)';
                     }
                 });
-            });
 
-            // Demo courses data
-            const demoCourses = [
-                {
-                    id: '1',
-                    title: 'Computer Science',
-                    description: 'Learn programming, algorithms, and software development with industry experts.',
-                    category: 'B.Tech',
-                    images: ['https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80'],
-                    onlinePrice: 3200,
-                    onlineOriginalPrice: 4000,
-                    duration: '4 Years'
-                },
-                {
-                    id: '2',
-                    title: 'Business Administration',
-                    description: 'Master business strategies, management principles, and leadership skills.',
-                    category: 'MBA',
-                    images: ['https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
-                    onlinePrice: 4500,
-                    onlineOriginalPrice: 5500,
-                    duration: '2 Years'
-                },
-                {
-                    id: '3',
-                    title: 'Electrical Engineering',
-                    description: 'Explore electrical systems, power generation, and electronic circuits.',
-                    category: 'B.Tech',
-                    images: ['https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
-                    onlinePrice: 3400,
-                    onlineOriginalPrice: 4200,
-                    duration: '4 Years'
-                }
-            ];
+                // Confirm password match validation
+                document.getElementById('signup-confirm-password').addEventListener('input', (e) => {
+                    const password = document.getElementById('signup-password').value;
+                    const confirmPassword = e.target.value;
 
-            // Load courses data
-            function loadCourses() {
-                updateCoursesSection(demoCourses);
-            }
-
-            function updateCoursesSection(courses) {
-                const coursesContainer = document.querySelector('#courses .grid');
-                if (!coursesContainer) return;
-
-                coursesContainer.innerHTML = courses.map(course => `
-            <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
-                <img src="${course.images[0]}" 
-                     alt="${course.title}" class="w-full h-48 object-cover" width="400" height="192" loading="lazy">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-gray-900">${course.title}</h3>
-                        <span class="bg-[#FFB6C1] text-[#800020] px-2 py-1 rounded text-sm font-medium">${course.category || 'Course'}</span>
-                    </div>
-                    <p class="text-gray-600 mb-4 line-clamp-2">${course.description}</p>
-                    <div class="flex justify-between items-center mb-4">
-                        <div class="flex items-center">
-                            <span class="text-gray-600">${course.duration || 'Self-paced'}</span>
-                        </div>
-                        <div class="flex space-x-2">
-                            <span class="text-[#800020] font-bold">₹${course.onlinePrice}</span>
-                            ${course.onlineOriginalPrice ? `<span class="text-gray-500 line-through text-sm">₹${course.onlineOriginalPrice}</span>` : ''}
-                        </div>
-                    </div>
-                    <button class="w-full bg-[#800020] hover:bg-[#600018] text-white py-2 rounded-lg transition-all view-course-btn" data-course-id="${course.id}">
-                        View Details
-                    </button>
-                </div>
-            </div>
-        `).join('');
-
-                // Add event listeners to course buttons
-                document.querySelectorAll('.view-course-btn').forEach(button => {
-                    button.addEventListener('click', function () {
-                        const courseId = this.getAttribute('data-course-id');
-                        // For demo, just show a toast
-                        authSystem.showToast('Course details feature would open here', 'info');
-                    });
+                    if (confirmPassword && password !== confirmPassword) {
+                        e.target.style.borderColor = 'var(--error-color)';
+                    } else {
+                        e.target.style.borderColor = 'var(--primary-color)';
+                    }
                 });
             }
 
-            // Load courses when page loads
-            loadCourses();
-        });
-    </script>
+            async handleLogin() {
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+                const errorElement = document.getElementById('login-error');
+                const successElement = document.getElementById('login-success');
+                const submitBtn = document.getElementById('login-form').querySelector('.form-button');
 
-</body>
+                // Basic validation
+                if (!email || !password) {
+                    this.showMessage(errorElement, 'Please fill in all fields');
+                    return;
+                }
+
+                if (!this.validateEmail(email)) {
+                    this.showMessage(errorElement, 'Please enter a valid email address');
+                    return;
+                }
+
+                // Show loading state
+                this.setButtonLoading(submitBtn, true);
+
+                try {
+                    const response = await this.apiRequest('/auth/login', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            email: email.toLowerCase(),
+                            password: password
+                        })
+                    });
+
+                    if (response.success) {
+                        // Store token and user data
+                        const token = response.data.token;
+                        const user = response.data.user;
+
+                        localStorage.setItem('authToken', token);
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+
+                        this.currentUser = user;
+                        this.isLoggedIn = true;
+
+                        this.showMessage(successElement, 'Login successful!');
+                        this.updateUIForLoggedInUser();
+
+                        setTimeout(() => {
+                            this.closeAuthModal();
+                            this.showToast('Login successful! Welcome back.', 'success');
+                        }, 1000);
+                    } else {
+                        this.showMessage(errorElement, response.message || 'Login failed');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    this.showMessage(errorElement, error.message || 'Login failed. Please try again.');
+                } finally {
+                    this.setButtonLoading(submitBtn, false);
+                }
+            }
+
+            async handleSignup() {
+                const name = document.getElementById('signup-name').value.trim();
+                const email = document.getElementById('signup-email').value.trim();
+                const phone = document.getElementById('signup-phone').value;
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+                // Get experience value
+                let experience = '';
+                const selectedRadio = document.querySelector('input[name="experience"]:checked');
+                if (selectedRadio) {
+                    experience = selectedRadio.value;
+                }
+
+                const additionalInfo = document.getElementById('additional-info').value;
+                const errorElement = document.getElementById('signup-error');
+                const successElement = document.getElementById('signup-success');
+                const submitBtn = document.getElementById('signup-form').querySelector('.form-button');
+
+                // Debug log
+                console.log('Form submission data:', {
+                    name, email, phone, experience, additionalInfo
+                });
+
+                // Validation
+                if (!name || !email || !phone || !password || !confirmPassword) {
+                    this.showMessage(errorElement, 'Please fill in all required fields');
+                    return;
+                }
+
+                if (!experience) {
+                    this.showMessage(errorElement, 'Please select your experience level');
+                    return;
+                }
+
+                if (!this.validateEmail(email)) {
+                    this.showMessage(errorElement, 'Please enter a valid email address');
+                    return;
+                }
+
+                if (phone.length !== 10) {
+                    this.showMessage(errorElement, 'Phone number must be 10 digits');
+                    return;
+                }
+
+                if (!this.validatePassword(password)) {
+                    this.showMessage(errorElement, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    this.showMessage(errorElement, 'Passwords do not match');
+                    return;
+                }
+
+                // Show loading state
+                this.setButtonLoading(submitBtn, true);
+
+                try {
+                    const response = await this.apiRequest('/auth/register', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            name: name,
+                            email: email.toLowerCase(),
+                            phone: phone,
+                            password: password,
+                            experience: experience,
+                            additionalInfo: experience === 'Others' ? additionalInfo : ''
+                        })
+                    });
+
+                    if (response.success) {
+                        // Store token and user data
+                        const token = response.data.token;
+                        const user = response.data.user;
+
+                        localStorage.setItem('authToken', token);
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+
+                        this.currentUser = user;
+                        this.isLoggedIn = true;
+
+                        this.showMessage(successElement, 'Account created successfully!');
+                        this.updateUIForLoggedInUser();
+
+                        setTimeout(() => {
+                            this.closeAuthModal();
+                            this.showToast('Account created successfully!', 'success');
+                        }, 1500);
+                    } else {
+                        this.showMessage(errorElement, response.message || 'Registration failed');
+                    }
+                } catch (error) {
+                    console.error('Signup error:', error);
+                    this.showMessage(errorElement, error.message || 'Registration failed. Please try again.');
+                } finally {
+                    this.setButtonLoading(submitBtn, false);
+                }
+            }
+
+            async handleSendOTP() {
+                const email = document.getElementById('forgot-email').value.trim();
+                const errorElement = document.getElementById('forgot-error');
+                const successElement = document.getElementById('forgot-success');
+                const sendOtpBtn = document.getElementById('send-otp-btn');
+
+                // Reset messages
+                this.clearForgotPasswordMessages();
+
+                // Validation
+                if (!email) {
+                    this.showMessage(errorElement, 'Please enter your email address');
+                    return;
+                }
+
+                if (!this.validateEmail(email)) {
+                    this.showMessage(errorElement, 'Please enter a valid email address');
+                    return;
+                }
+
+                // Show loading state
+                this.setButtonLoading(sendOtpBtn, true, 'Sending OTP...');
+
+                try {
+                    const response = await this.apiRequest('/auth/send-otp', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            email: email.toLowerCase(),
+                            purpose: 'password_reset'
+                        })
+                    });
+
+                    if (response.success) {
+                        this.showMessage(successElement, response.message || 'OTP sent successfully! Check your email.');
+
+                        // Show OTP section with animation
+                        this.showSectionWithAnimation('otp-section');
+
+                        // Show password sections with staggered animation
+                        setTimeout(() => {
+                            this.showSectionWithAnimation('new-password-section');
+                        }, 300);
+
+                        setTimeout(() => {
+                            this.showSectionWithAnimation('confirm-new-password-section');
+                        }, 600);
+
+                        setTimeout(() => {
+                            this.showSectionWithAnimation('reset-password-btn-container');
+                        }, 900);
+
+                        this.showToast('OTP sent successfully!', 'success');
+                    } else {
+                        this.showMessage(errorElement, response.message || 'Failed to send OTP');
+                    }
+                } catch (error) {
+                    console.error('Send OTP error:', error);
+                    this.showMessage(errorElement, error.message || 'Failed to send OTP. Please try again.');
+                } finally {
+                    this.setButtonLoading(sendOtpBtn, false, 'Resend OTP');
+                }
+            }
+
+            async handlePasswordReset() {
+                const email = document.getElementById('forgot-email').value.trim();
+                const otp = document.getElementById('forgot-otp').value;
+                const newPassword = document.getElementById('new-password').value;
+                const confirmPassword = document.getElementById('confirm-new-password').value;
+                const errorElement = document.getElementById('forgot-error');
+                const successElement = document.getElementById('forgot-success');
+                const resetBtn = document.getElementById('reset-password-btn-container').querySelector('button');
+
+                // Reset messages
+                this.clearForgotPasswordMessages();
+
+                // Validation
+                if (!otp) {
+                    this.showMessage(errorElement, 'Please enter the OTP');
+                    return;
+                }
+
+                if (!newPassword || !confirmPassword) {
+                    this.showMessage(errorElement, 'Please fill in all password fields');
+                    return;
+                }
+
+                if (!this.validatePassword(newPassword)) {
+                    this.showMessage(errorElement, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
+                    return;
+                }
+
+                if (newPassword !== confirmPassword) {
+                    this.showMessage(errorElement, 'Passwords do not match');
+                    return;
+                }
+
+                // Show loading state
+                this.setButtonLoading(resetBtn, true, 'Resetting Password...');
+
+                try {
+                    const response = await this.apiRequest('/auth/reset-password', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            email: email.toLowerCase(),
+                            otp: otp,
+                            newPassword: newPassword
+                        })
+                    });
+
+                    if (response.success) {
+                        this.showMessage(successElement, response.message || 'Password reset successfully!');
+
+                        // Redirect to login after success
+                        setTimeout(() => {
+                            this.switchTab('login');
+                            this.resetForgotPasswordForm();
+                            this.showToast('Password reset successfully! You can now login with your new password.', 'success');
+                        }, 2000);
+                    } else {
+                        this.showMessage(errorElement, response.message || 'Failed to reset password');
+                    }
+                } catch (error) {
+                    console.error('Reset password error:', error);
+                    this.showMessage(errorElement, error.message || 'Failed to reset password. Please try again.');
+                    this.setButtonLoading(resetBtn, false);
+                }
+            }
+
+            async verifyToken() {
+                try {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        this.handleLogout();
+                        return;
+                    }
+
+                    const response = await this.apiRequest('/auth/me', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.success) {
+                        this.handleLogout();
+                    }
+                } catch (error) {
+                    console.error('Token verification failed:', error);
+                    this.handleLogout();
+                }
+            }
+
+            // Utility functions
+            validateEmail = (email) => {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            validatePassword = (password) => {
+                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                return passwordRegex.test(password);
+            }
+
+            setButtonLoading(button, isLoading, loadingText = 'Loading...') {
+                if (isLoading) {
+                    button.disabled = true;
+                    button.dataset.originalText = button.textContent;
+                    button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${loadingText}`;
+                } else {
+                    button.disabled = false;
+                    button.textContent = button.dataset.originalText || button.textContent;
+                }
+            }
+
+            showSectionWithAnimation(sectionId) {
+                const section = document.getElementById(sectionId);
+                section.style.display = 'block';
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(10px)';
+
+                setTimeout(() => {
+                    section.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 10);
+            }
+
+            showMessage(element, message) {
+                element.textContent = message;
+                element.style.display = 'block';
+                element.style.opacity = '0';
+
+                setTimeout(() => {
+                    element.style.transition = 'opacity 0.3s ease';
+                    element.style.opacity = '1';
+                }, 10);
+
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        element.style.display = 'none';
+                    }, 300);
+                }, 5000);
+            }
+
+            clearAllMessages() {
+                document.querySelectorAll('.message').forEach(message => {
+                    message.style.display = 'none';
+                    message.textContent = '';
+                });
+            }
+
+            clearForgotPasswordMessages() {
+                document.getElementById('forgot-error').style.display = 'none';
+                document.getElementById('forgot-success').style.display = 'none';
+            }
+
+            showToast(message, type = 'info') {
+                const toastContainer = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = `toast toast-${type}`;
+
+                // Add icon based on type
+                const icons = {
+                    success: 'fa-check-circle',
+                    error: 'fa-exclamation-circle',
+                    warning: 'fa-exclamation-triangle',
+                    info: 'fa-info-circle'
+                };
+
+                toast.innerHTML = `
+                    <i class="fas ${icons[type]}" aria-hidden="true"></i>
+                    <span>${message}</span>
+                `;
+
+                toastContainer.appendChild(toast);
+
+                // Animate in
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(0)';
+                }, 10);
+
+                // Auto remove after 5 seconds
+                const autoRemove = setTimeout(() => {
+                    toast.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                    }, 300);
+                }, 5000);
+
+                // Allow manual dismissal
+                toast.addEventListener('click', () => {
+                    clearTimeout(autoRemove);
+                    toast.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                    }, 300);
+                });
+            }
+
+            updateUIForLoggedInUser() {
+                if (this.isLoggedIn && this.currentUser) {
+                    const signinButtons = [
+                        document.getElementById('header-signin-btn'),
+                        document.getElementById('mobile-signin-btn')
+                    ];
+
+                    signinButtons.forEach(button => {
+                        if (button) {
+                            button.innerHTML = `
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
+                                    <span>${this.currentUser.name}</span>
+                                </div>
+                            `;
+                            button.onclick = () => this.showUserMenu();
+                        }
+                    });
+                }
+            }
+
+            showUserMenu() {
+                // Create user dropdown menu
+                const userMenu = document.createElement('div');
+                userMenu.className = 'absolute top-16 right-4 bg-white shadow-lg rounded-lg p-4 min-w-48 z-50';
+                userMenu.innerHTML = `
+                    <div class="border-b border-gray-200 pb-2 mb-2">
+                        <p class="font-semibold text-gray-800">${this.currentUser.name}</p>
+                        <p class="text-sm text-gray-600">${this.currentUser.email}</p>
+                    </div>
+                    <button id="user-profile-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-gray-700">
+                        <i class="fas fa-user mr-2"></i>Profile
+                    </button>
+                    <button id="user-logout-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-red-600">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                `;
+
+                // Remove any existing menu
+                const existingMenu = document.querySelector('.user-dropdown-menu');
+                if (existingMenu) {
+                    existingMenu.remove();
+                }
+
+                userMenu.classList.add('user-dropdown-menu');
+                document.body.appendChild(userMenu);
+
+                // Add event listeners
+                document.getElementById('user-profile-btn').addEventListener('click', () => {
+                    this.showToast(`Welcome, ${this.currentUser.name}!`, 'info');
+                    userMenu.remove();
+                });
+
+                document.getElementById('user-logout-btn').addEventListener('click', () => {
+                    this.handleLogout();
+                    userMenu.remove();
+                });
+
+                // Close menu when clicking outside
+                const closeMenu = (e) => {
+                    if (!userMenu.contains(e.target) && !e.target.closest('#header-signin-btn') && !e.target.closest('#mobile-signin-btn')) {
+                        userMenu.remove();
+                        document.removeEventListener('click', closeMenu);
+                    }
+                };
+
+                setTimeout(() => {
+                    document.addEventListener('click', closeMenu);
+                }, 100);
+            }
+
+            handleLogout() {
+                // Clear user data from localStorage
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('currentUser');
+
+                this.currentUser = null;
+                this.isLoggedIn = false;
+
+                const signinButtons = [
+                    document.getElementById('header-signin-btn'),
+                    document.getElementById('mobile-signin-btn')
+                ];
+
+                signinButtons.forEach(button => {
+                    if (button) {
+                        button.innerHTML = 'Sign In';
+                        button.onclick = () => this.openAuthModal();
+                    }
+                });
+
+                this.showToast('Logged out successfully', 'success');
+            }
+
+            resetForms() {
+                document.querySelectorAll('.auth-form input').forEach(input => {
+                    input.value = '';
+                    input.style.borderColor = '';
+                });
+                this.clearAllMessages();
+                this.switchTab('login');
+            }
+        }
+
+        // Initialize the authentication system
+        const authSystem = new AuthSystem();
+
+        // Quick fix for sign in buttons to ensure they work
+        const headerSignInBtn = document.getElementById('header-signin-btn');
+        const mobileSignInBtn = document.getElementById('mobile-signin-btn');
+
+        function openAuthModalDirect() {
+            const modal = document.getElementById('auth-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+
+                // Ensure login form is active
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.classList.remove('active');
+                    form.style.display = 'none';
+                });
+                document.querySelectorAll('.tab-button').forEach(tab => tab.classList.remove('active'));
+
+                document.getElementById('login-form').classList.add('active');
+                document.getElementById('login-form').style.display = 'block';
+                document.getElementById('login-tab').classList.add('active');
+
+                // Clear any messages
+                document.querySelectorAll('.message').forEach(msg => {
+                    msg.style.display = 'none';
+                    msg.textContent = '';
+                });
+            }
+        }
+
+        if (headerSignInBtn) {
+            headerSignInBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                openAuthModalDirect();
+            });
+        }
+
+        if (mobileSignInBtn) {
+            mobileSignInBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                openAuthModalDirect();
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Courses/Programs Section Functionality
+        class CoursesManager {
+            constructor() {
+                this.apiBaseUrl = window.AppConfig.API_BASE_URL + '/api';
+                this.init();
+            }
+
+            init() {
+                this.loadCourses();
+            }
+
+            async loadCourses() {
+                const coursesContainer = document.getElementById('courses-container');
+                if (!coursesContainer) return;
+
+                try {
+                    // Show loading state
+                    coursesContainer.innerHTML = this.getLoadingHTML();
+
+                    const response = await fetch(`${this.apiBaseUrl}/courses?limit=100&status=active`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.success && result.data.courses.length > 0) {
+                        const allCourses = result.data.courses;
+                        
+                        // Get 3 random courses
+                        const randomCourses = this.getRandomCourses(allCourses, 3);
+                        
+                        // Update the courses section
+                        this.updateCoursesSection(randomCourses);
+                    } else {
+                        // Fallback to demo courses if no courses found
+                        this.showFallbackCourses();
+                    }
+                } catch (error) {
+                    console.error('Error loading courses:', error);
+                    // Fallback to demo courses on error
+                    this.showFallbackCourses();
+                }
+            }
+
+            getRandomCourses(courses, count) {
+                const shuffled = [...courses].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+
+            formatINR(amount) {
+                return '₹' + amount.toLocaleString('en-IN');
+            }
+
+            generateRandomRating() {
+                return (Math.random() * 0.6 + 4.2).toFixed(1);
+            }
+
+            createSellerBadge(seller) {
+                if (!seller) return '';
+
+                const sellerClassMap = {
+                    'Best Seller': 'best-seller',
+                    'Top Rated': 'top-rated',
+                    'Most Popular': 'most-popular',
+                    'Trending Now': 'trending-now',
+                    'Student Favorite': 'student-favorite',
+                    'Bestseller': 'bestseller',
+                    'Hot Pick': 'hot-pick',
+                    'Editor\'s Choice': 'editors-choice',
+                    'Featured Course': 'featured-course',
+                    'Highly Recommended': 'highly-recommended',
+                    'Top Choice': 'top-choice'
+                };
+
+                const badgeClass = sellerClassMap[seller] || 'best-seller';
+
+                return `<span class="seller-badge ${badgeClass}">${seller}</span>`;
+            }
+
+            updateCoursesSection(courses) {
+                const coursesContainer = document.getElementById('courses-container');
+                if (!coursesContainer) return;
+
+                if (courses.length === 0) {
+                    coursesContainer.innerHTML = this.getNoCoursesHTML();
+                    return;
+                }
+
+                coursesContainer.innerHTML = courses.map(course => {
+                    // Generate random rating between 4.2 and 4.8
+                    const rating = this.generateRandomRating();
+                    
+                    // Check if course has discount
+                    const hasDiscount = course.onlineOriginalPrice && course.onlineOriginalPrice > course.onlinePrice;
+                    
+                    // Ensure image URL is valid
+                    const courseImage = course.images && course.images[0] 
+                        ? course.images[0] 
+                        : 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
+
+                    // Get course description (prefer miniDescription, fallback to description)
+                    const courseDescription = course.miniDescription || course.description || 'No description available.';
+
+                    return `
+                        <div class="course-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl">
+                            <div class="relative">
+                                <img src="${courseImage}" 
+                                     alt="${course.title || 'Course Image'}" 
+                                     class="w-full h-48 object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'">
+                                ${course.seller ? 
+                                    `<div class="absolute top-2 right-2">
+                                        ${this.createSellerBadge(course.seller)}
+                                    </div>` : ''
+                                }
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">${course.title || 'Untitled Course'}</h3>
+                                <p class="text-sm text-gray-600 mb-3">${course.category || 'General'}</p>
+                                
+                                <div class="flex items-center mb-4">
+                                    <div class="text-yellow-400 mr-2">
+                                        ${'★'.repeat(Math.floor(rating))}${'☆'.repeat(5 - Math.floor(rating))}
+                                    </div>
+                                    <span class="text-sm text-gray-600">${rating}</span>
+                                </div>
+                                
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                                    ${courseDescription}
+                                </p>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-lg font-bold text-[#800020]">${this.formatINR(course.onlinePrice || 0)}</span>
+                                        ${hasDiscount ? 
+                                            `<span class="text-sm text-gray-500 line-through ml-2">${this.formatINR(course.onlineOriginalPrice)}</span>` : ''
+                                        }
+                                    </div>
+                                    <a href="info.html?id=${course._id || course.id}">
+                                        <button class="px-4 py-2 bg-[#800020] hover:bg-[#600018] text-white text-sm rounded transition duration-300">
+                                            View Details
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            getLoadingHTML() {
+                return `
+                    <div class="col-span-3 text-center py-8">
+                        <div class="loading-spinner mx-auto"></div>
+                        <p class="text-gray-600 mt-4">Loading courses...</p>
+                    </div>
+                `;
+            }
+
+            getNoCoursesHTML() {
+                return `
+                    <div class="col-span-3 text-center py-8">
+                        <p class="text-gray-600">No courses available at the moment.</p>
+                    </div>
+                `;
+            }
+
+            showFallbackCourses() {
+                // Demo courses data as fallback
+                const demoCourses = [
+                    {
+                        id: '1',
+                        title: 'Computer Science',
+                        description: 'Learn programming, algorithms, and software development with industry experts.',
+                        category: 'B.Tech',
+                        images: ['https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80'],
+                        onlinePrice: 3200,
+                        onlineOriginalPrice: 4000,
+                        duration: '4 Years'
+                    },
+                    {
+                        id: '2',
+                        title: 'Business Administration',
+                        description: 'Master business strategies, management principles, and leadership skills.',
+                        category: 'MBA',
+                        images: ['https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
+                        onlinePrice: 4500,
+                        onlineOriginalPrice: 5500,
+                        duration: '2 Years'
+                    },
+                    {
+                        id: '3',
+                        title: 'Electrical Engineering',
+                        description: 'Explore electrical systems, power generation, and electronic circuits.',
+                        category: 'B.Tech',
+                        images: ['https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
+                        onlinePrice: 3400,
+                        onlineOriginalPrice: 4200,
+                        duration: '4 Years'
+                    }
+                ];
+
+                this.updateCoursesSection(demoCourses);
+            }
+        }
+
+        // Initialize the courses manager
+        const coursesManager = new CoursesManager();
+    });
+</script>
+
 
 </html>
