@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Courses | U1 Technology</title>
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png">
+
     <script src="config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -248,6 +250,90 @@
         .category-section {
             margin-bottom: 3rem;
         }
+
+        /* Skeleton Loading Styles */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .skeleton-card {
+            height: 320px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .skeleton-image {
+            height: 192px;
+            width: 100%;
+        }
+
+        .skeleton-text {
+            height: 16px;
+            margin: 8px 0;
+        }
+
+        .skeleton-text.short {
+            width: 60%;
+        }
+
+        .skeleton-text.medium {
+            width: 80%;
+        }
+
+        .skeleton-rating {
+            height: 16px;
+            width: 100px;
+            margin: 8px 0;
+        }
+
+        .skeleton-price {
+            height: 20px;
+            width: 80px;
+            margin: 8px 0;
+        }
+
+        .skeleton-button {
+            height: 32px;
+            width: 100px;
+            border-radius: 4px;
+        }
+
+        .skeleton-category {
+            height: 40px;
+            width: 120px;
+            border-radius: 20px;
+            margin: 0 8px 8px 0;
+        }
+
+        .category-nav-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 16px 0;
+            margin-bottom: 16px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .category-nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-nav {
+            display: inline-flex;
+            gap: 8px;
+        }
     </style>
 </head>
 
@@ -259,9 +345,8 @@
             <div class="flex justify-between h-16 relative">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <div class="h-12 w-12 bg-[#800020] rounded-full flex items-center justify-center mr-2">
-                    <span class="text-white font-bold text-lg">U1</span>
-                </div>
+                        <img src="img/favicon-32x32.png" alt="logo">
+
                         <span class="text-xl font-bold text-gray-900">U1 Technology</span>
                     </div>
                 </div>
@@ -283,7 +368,19 @@
             </div>
 
             <!-- Category Navigation -->
-
+            <div class="border-t border-gray-200 py-3">
+                <div class="category-nav-container">
+                    <div class="category-nav" id="category-navigation">
+                        <!-- Categories will be loaded here -->
+                        <div class="skeleton skeleton-category"></div>
+                        <div class="skeleton skeleton-category"></div>
+                        <div class="skeleton skeleton-category"></div>
+                        <div class="skeleton skeleton-category"></div>
+                        <div class="skeleton skeleton-category"></div>
+                        <div class="skeleton skeleton-category"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Mobile menu -->
@@ -319,6 +416,7 @@
                     <i class="fas fa-search absolute left-4 top-4 text-gray-400"></i>
                 </div>
             </div>
+            
 
             <!-- Promo Banner -->
             <div id="promo-banner-container">
@@ -333,15 +431,117 @@
                         Show All
                     </button>
                 </div>
-                <div id="featured-courses-container">
-                    <!-- Featured courses will be inserted here -->
-                    <div class="loading-spinner"></div>
+                <div id="featured-courses-container" class="courses-grid">
+                    <!-- Skeleton loading for featured courses -->
+                    <div class="skeleton-card bg-white rounded-lg overflow-hidden shadow-sm">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-4">
+                            <div class="skeleton skeleton-text medium"></div>
+                            <div class="skeleton skeleton-text short"></div>
+                            <div class="skeleton skeleton-rating"></div>
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="skeleton skeleton-price"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skeleton-card bg-white rounded-lg overflow-hidden shadow-sm">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-4">
+                            <div class="skeleton skeleton-text medium"></div>
+                            <div class="skeleton skeleton-text short"></div>
+                            <div class="skeleton skeleton-rating"></div>
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="skeleton skeleton-price"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skeleton-card bg-white rounded-lg overflow-hidden shadow-sm">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-4">
+                            <div class="skeleton skeleton-text medium"></div>
+                            <div class="skeleton skeleton-text short"></div>
+                            <div class="skeleton skeleton-rating"></div>
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="skeleton skeleton-price"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skeleton-card bg-white rounded-lg overflow-hidden shadow-sm">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-4">
+                            <div class="skeleton skeleton-text medium"></div>
+                            <div class="skeleton skeleton-text short"></div>
+                            <div class="skeleton skeleton-rating"></div>
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="skeleton skeleton-price"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Category-based Course Sections -->
             <div id="category-sections-container">
                 <!-- Category sections will be dynamically generated here -->
+                <div class="category-section">
+                    <div class="section-header">
+                        <h2 class="text-2xl font-bold text-gray-900 skeleton skeleton-text medium"></h2>
+                    </div>
+                    <div class="courses-grid">
+                        <div class="skeleton-card bg-white rounded-lg overflow-hidden shadow-sm">
+                            <div class="skeleton skeleton-image"></div>
+                            <div class="p-4">
+                                <div class="skeleton skeleton-text medium"></div>
+                                <div class="skeleton skeleton-text short"></div>
+                                <div class="skeleton skeleton-rating"></div>
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="skeleton skeleton-price"></div>
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skeleton-card bg-white rounded-lg overflow-hidden shadow-sm">
+                            <div class="skeleton skeleton-image"></div>
+                            <div class="p-4">
+                                <div class="skeleton skeleton-text medium"></div>
+                                <div class="skeleton skeleton-text short"></div>
+                                <div class="skeleton skeleton-rating"></div>
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="skeleton skeleton-price"></div>
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skeleton-card bg-white rounded-lg overflow-hidden shadow-sm">
+                            <div class="skeleton skeleton-image"></div>
+                            <div class="p-4">
+                                <div class="skeleton skeleton-text medium"></div>
+                                <div class="skeleton skeleton-text short"></div>
+                                <div class="skeleton skeleton-rating"></div>
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="skeleton skeleton-price"></div>
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skeleton-card bg-white rounded-lg overflow-hidden shadow-sm">
+                            <div class="skeleton skeleton-image"></div>
+                            <div class="p-4">
+                                <div class="skeleton skeleton-text medium"></div>
+                                <div class="skeleton skeleton-text short"></div>
+                                <div class="skeleton skeleton-rating"></div>
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="skeleton skeleton-price"></div>
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -351,6 +551,8 @@
         <div class="container">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
+                    <img src="img/favicon-32x32.png" alt="logo">
+
                     <h3 class="text-lg font-semibold mb-4">U1 Technology</h3>
                     <p class="text-gray-400">Empowering learners with industry-relevant skills and knowledge.</p>
                 </div>
@@ -388,183 +590,211 @@
     </footer>
 
     <script>
-    // DOM elements - will be initialized after DOM is loaded
-    let featuredCoursesContainer;
-    let categorySectionsContainer;
-    let searchInputMobile;
-    let categoryChips;
-    let resetBtn;
-    let headerSearchInput;
-    let promoBannerContainer;
-    let showAllFeaturedBtn;
+        // DOM elements - will be initialized after DOM is loaded
+        let featuredCoursesContainer;
+        let categorySectionsContainer;
+        let searchInputMobile;
+        let categoryChips;
+        let resetBtn;
+        let headerSearchInput;
+        let promoBannerContainer;
+        let showAllFeaturedBtn;
+        let categoryNavigation;
 
-    // Global variables
-    let allCourses = [];
-    let featuredCourses = [];
-    let categories = [];
-    let expandedSections = new Set();
+        // Global variables
+        let allCourses = [];
+        let featuredCourses = [];
+        let categories = [];
+        let expandedSections = new Set();
 
-    // Format Indian Rupee
-    function formatINR(amount) {
-        return '₹' + amount.toLocaleString('en-IN');
-    }
-
-    // Generate random rating between 4.2 and 4.8
-    function generateRandomRating() {
-        return (Math.random() * 0.6 + 4.2).toFixed(1);
-    }
-
-    // Initialize the page
-    document.addEventListener('DOMContentLoaded', function () {
-        // Initialize DOM elements
-        featuredCoursesContainer = document.getElementById('featured-courses-container');
-        categorySectionsContainer = document.getElementById('category-sections-container');
-        searchInputMobile = document.getElementById('search-input-mobile');
-        categoryChips = document.querySelectorAll('.category-chip');
-        resetBtn = document.getElementById('reset-btn');
-        headerSearchInput = document.getElementById('header-search-input');
-        promoBannerContainer = document.getElementById('promo-banner-container');
-        showAllFeaturedBtn = document.getElementById('show-all-featured');
-
-        // Load initial data
-        loadPromoBanner();
-        loadCategories();
-        loadCourses();
-
-        // Set up event listeners only if elements exist
-        setupEventListeners();
-
-        // Mobile menu toggle
-        setupMobileMenu();
-    });
-
-    // Set up all event listeners
-    function setupEventListeners() {
-        // Show all featured courses
-        if (showAllFeaturedBtn) {
-            showAllFeaturedBtn.addEventListener('click', () => {
-                toggleSectionExpansion('featured');
-            });
+        // Format Indian Rupee
+        function formatINR(amount) {
+            return '₹' + amount.toLocaleString('en-IN');
         }
 
-        // Reset filters
-        if (resetBtn) {
-            resetBtn.addEventListener('click', resetFilters);
+        // Generate random rating between 4.2 and 4.8
+        function generateRandomRating() {
+            return (Math.random() * 0.6 + 4.2).toFixed(1);
         }
 
-        // Search functionality for header search
-        if (headerSearchInput) {
-            headerSearchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                filterCourses(searchTerm);
-            });
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize DOM elements
+            featuredCoursesContainer = document.getElementById('featured-courses-container');
+            categorySectionsContainer = document.getElementById('category-sections-container');
+            searchInputMobile = document.getElementById('search-input-mobile');
+            categoryChips = document.querySelectorAll('.category-chip');
+            resetBtn = document.getElementById('reset-btn');
+            headerSearchInput = document.getElementById('header-search-input');
+            promoBannerContainer = document.getElementById('promo-banner-container');
+            showAllFeaturedBtn = document.getElementById('show-all-featured');
+            categoryNavigation = document.getElementById('category-navigation');
+
+            // Load initial data
+            loadPromoBanner();
+            loadCategories();
+            loadCourses();
+
+            // Set up event listeners only if elements exist
+            setupEventListeners();
+
+            // Mobile menu toggle
+            setupMobileMenu();
+        });
+
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Show all featured courses
+            if (showAllFeaturedBtn) {
+                showAllFeaturedBtn.addEventListener('click', () => {
+                    toggleSectionExpansion('featured');
+                });
+            }
+
+            // Reset filters
+            if (resetBtn) {
+                resetBtn.addEventListener('click', resetFilters);
+            }
+
+            // Search functionality for header search
+            if (headerSearchInput) {
+                headerSearchInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    filterCourses(searchTerm);
+                });
+            }
+
+            // Search functionality for mobile search
+            if (searchInputMobile) {
+                searchInputMobile.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    filterCourses(searchTerm);
+                });
+            }
         }
 
-        // Search functionality for mobile search
-        if (searchInputMobile) {
-            searchInputMobile.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                filterCourses(searchTerm);
-            });
+        // Set up mobile menu functionality
+        function setupMobileMenu() {
+            const mobileMenuButton = document.querySelector('button[aria-controls="mobile-menu"]');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    mobileMenuButton.setAttribute('aria-expanded', !expanded);
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
         }
 
-        // Filter courses by category
-        if (categoryChips && categoryChips.length > 0) {
-            categoryChips.forEach(chip => {
-                if (chip.id !== 'reset-btn') {
-                    chip.addEventListener('click', () => {
-                        // Update active state
-                        categoryChips.forEach(c => c.classList.remove('active-category'));
-                        chip.classList.add('active-category');
+        // Reset all filters
+        function resetFilters() {
+            // Clear active states
+            if (categoryChips) {
+                categoryChips.forEach(chip => chip.classList.remove('active-category'));
+            }
 
-                        // Filter by category
-                        const category = chip.getAttribute('data-category');
-                        filterCourses('', category);
-                    });
+            // Reset search inputs
+            if (searchInputMobile) searchInputMobile.value = '';
+            if (headerSearchInput) headerSearchInput.value = '';
+
+            // Show all courses
+            categorizeCourses();
+            displayCourses();
+        }
+
+        // Load categories from API and display in navigation
+        async function loadCategories() {
+            try {
+                const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/courses/categories`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    categories = result.data.categories;
+                    displayCategoryNavigation();
+                }
+            } catch (error) {
+                console.error('Error loading categories:', error);
+                // Continue without categories - the page will still work
+            }
+        }
+
+        // Display category navigation
+        function displayCategoryNavigation() {
+            if (!categoryNavigation) return;
+            
+            // Clear skeleton loading
+            categoryNavigation.innerHTML = '';
+            
+            // Add "All Courses" option
+            const allCoursesChip = document.createElement('button');
+            allCoursesChip.className = 'category-chip active-category px-4 py-2 rounded-full font-medium text-sm';
+            allCoursesChip.textContent = 'All Courses';
+            allCoursesChip.addEventListener('click', () => {
+                // Remove active class from all chips
+                document.querySelectorAll('.category-chip').forEach(chip => {
+                    chip.classList.remove('active-category');
+                });
+                // Add active class to clicked chip
+                allCoursesChip.classList.add('active-category');
+                // Reset filters
+                resetFilters();
+            });
+            categoryNavigation.appendChild(allCoursesChip);
+            
+            // Add each category as a chip
+            categories.forEach(category => {
+                const categoryChip = document.createElement('button');
+                categoryChip.className = 'category-chip px-4 py-2 rounded-full font-medium text-sm';
+                categoryChip.textContent = category;
+                categoryChip.addEventListener('click', () => {
+                    // Remove active class from all chips
+                    document.querySelectorAll('.category-chip').forEach(chip => {
+                        chip.classList.remove('active-category');
+                    });
+                    // Add active class to clicked chip
+                    categoryChip.classList.add('active-category');
+                    // Filter by category
+                    filterCourses('', category);
+                });
+                categoryNavigation.appendChild(categoryChip);
             });
         }
-    }
 
-    // Set up mobile menu functionality
-    function setupMobileMenu() {
-        const mobileMenuButton = document.querySelector('button[aria-controls="mobile-menu"]');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Load promo banner from API
+        async function loadPromoBanner() {
+            try {
+                const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/posters?status=active&limit=1`);
 
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-                mobileMenuButton.setAttribute('aria-expanded', !expanded);
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-    }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-    // Reset all filters
-    function resetFilters() {
-        // Clear active states
-        if (categoryChips) {
-            categoryChips.forEach(chip => chip.classList.remove('active-category'));
-        }
+                const result = await response.json();
 
-        // Reset search inputs
-        if (searchInputMobile) searchInputMobile.value = '';
-        if (headerSearchInput) headerSearchInput.value = '';
-
-        // Show all courses
-        categorizeCourses();
-        displayCourses();
-    }
-
-    // Load categories from API
-    async function loadCategories() {
-        try {
-            const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/courses/categories`);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const result = await response.json();
-
-            if (result.success) {
-                categories = result.data.categories;
-            }
-        } catch (error) {
-            console.error('Error loading categories:', error);
-            // Continue without categories - the page will still work
-        }
-    }
-
-    // Load promo banner from API
-    async function loadPromoBanner() {
-        try {
-            const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/posters?status=active&limit=1`);
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const result = await response.json();
-
-            if (result.success && result.data.posters.length > 0) {
-                const poster = result.data.posters[0];
-                displayPromoBanner(poster);
-            } else {
-                // Fallback to default banner
+                if (result.success && result.data.posters.length > 0) {
+                    const poster = result.data.posters[0];
+                    displayPromoBanner(poster);
+                } else {
+                    // Fallback to default banner
+                    displayDefaultBanner();
+                }
+            } catch (error) {
+                console.error('Error loading promo banner:', error);
                 displayDefaultBanner();
             }
-        } catch (error) {
-            console.error('Error loading promo banner:', error);
-            displayDefaultBanner();
         }
-    }
 
-    // Display promo banner
-    function displayPromoBanner(poster) {
-        if (!promoBannerContainer) return;
-        
-        promoBannerContainer.innerHTML = `
+        // Display promo banner
+        function displayPromoBanner(poster) {
+            if (!promoBannerContainer) return;
+
+            promoBannerContainer.innerHTML = `
             <div class="promo-banner rounded-lg overflow-hidden mb-10" style="background-image: url('${poster.image}')">
                 <div class="h-full flex items-center justify-center promo-content text-white p-8 text-center">
                     <div>
@@ -577,13 +807,13 @@
                 </div>
             </div>
         `;
-    }
+        }
 
-    // Display default banner
-    function displayDefaultBanner() {
-        if (!promoBannerContainer) return;
-        
-        promoBannerContainer.innerHTML = `
+        // Display default banner
+        function displayDefaultBanner() {
+            if (!promoBannerContainer) return;
+
+            promoBannerContainer.innerHTML = `
             <div class="promo-banner rounded-lg overflow-hidden mb-10" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
                 <div class="h-full flex items-center justify-center promo-content text-white p-8 text-center">
                     <div>
@@ -596,185 +826,181 @@
                 </div>
             </div>
         `;
-    }
+        }
 
-    // Load courses from API
-    async function loadCourses() {
-        try {
-            // Show loading state
-            showLoadingState();
+        // Load courses from API
+        async function loadCourses() {
+            try {
+                // Show skeleton loading state
+                showSkeletonLoading();
 
-            const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/courses?limit=100`);
+                const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/courses?limit=100`);
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    allCourses = result.data.courses;
+                    categorizeCourses();
+                    displayCourses();
+                } else {
+                    showErrorState('Failed to load courses. Please try again later.');
+                }
+            } catch (error) {
+                console.error('Error loading courses:', error);
+                showErrorState('Failed to load courses. Please check your connection and try again.');
+            }
+        }
+
+        // Show skeleton loading state
+        function showSkeletonLoading() {
+            // Skeleton loading is already implemented in the HTML
+            // This function is kept for consistency but doesn't need to do anything
+        }
+
+        // Show error state
+        function showErrorState(message) {
+            const errorHtml = `<div class="error-message">${message}</div>`;
+
+            if (featuredCoursesContainer) {
+                featuredCoursesContainer.innerHTML = errorHtml;
+            }
+            if (categorySectionsContainer) {
+                categorySectionsContainer.innerHTML = errorHtml;
+            }
+        }
+
+        // Categorize courses
+        function categorizeCourses() {
+            // Reset categories
+            featuredCourses = [];
+
+            // Simple categorization logic - you can customize this based on your needs
+            allCourses.forEach(course => {
+                // Featured courses - courses with highest discount or special flag
+                if (course.onlineDiscountPercentage > 30 || course.students > 100) {
+                    featuredCourses.push(course);
+                }
+            });
+
+            // If no featured courses, use first few courses as featured
+            if (featuredCourses.length === 0 && allCourses.length > 0) {
+                featuredCourses = allCourses.slice(0, Math.min(6, allCourses.length));
+            }
+        }
+
+        // Filter courses based on search term and category
+        function filterCourses(searchTerm = '', category = '') {
+            let tempAllCourses = [...allCourses];
+
+            // Apply category filter if specified
+            if (category) {
+                tempAllCourses = tempAllCourses.filter(course =>
+                    course.category && course.category.toLowerCase().includes(category.toLowerCase())
+                );
             }
 
-            const result = await response.json();
-
-            if (result.success) {
-                allCourses = result.data.courses;
-                categorizeCourses();
-                displayCourses();
-            } else {
-                showErrorState('Failed to load courses. Please try again later.');
+            // Apply search filter if specified
+            if (searchTerm) {
+                tempAllCourses = tempAllCourses.filter(course =>
+                    (course.title && course.title.toLowerCase().includes(searchTerm)) ||
+                    (course.description && course.description.toLowerCase().includes(searchTerm)) ||
+                    (course.miniDescription && course.miniDescription.toLowerCase().includes(searchTerm)) ||
+                    (course.seller && course.seller.toLowerCase().includes(searchTerm))
+                );
             }
-        } catch (error) {
-            console.error('Error loading courses:', error);
-            showErrorState('Failed to load courses. Please check your connection and try again.');
-        }
-    }
 
-    // Categorize courses
-    function categorizeCourses() {
-        // Reset categories
-        featuredCourses = [];
+            // Categorize the filtered courses
+            let tempFeaturedCourses = [];
+            tempAllCourses.forEach(course => {
+                // Featured courses - courses with highest discount or special flag
+                if (course.onlineDiscountPercentage > 30 || course.students > 100) {
+                    tempFeaturedCourses.push(course);
+                }
+            });
 
-        // Simple categorization logic - you can customize this based on your needs
-        allCourses.forEach(course => {
-            // Featured courses - courses with highest discount or special flag
-            if (course.onlineDiscountPercentage > 30 || course.students > 100) {
-                featuredCourses.push(course);
+            // If no featured courses, use first few courses as featured
+            if (tempFeaturedCourses.length === 0 && tempAllCourses.length > 0) {
+                tempFeaturedCourses = tempAllCourses.slice(0, Math.min(6, tempAllCourses.length));
             }
-        });
 
-        // If no featured courses, use first few courses as featured
-        if (featuredCourses.length === 0 && allCourses.length > 0) {
-            featuredCourses = allCourses.slice(0, Math.min(6, allCourses.length));
-        }
-    }
-
-    // Show loading state
-    function showLoadingState() {
-        if (featuredCoursesContainer) {
-            featuredCoursesContainer.innerHTML = '<div class="loading-spinner"></div>';
-        }
-        if (categorySectionsContainer) {
-            categorySectionsContainer.innerHTML = '<div class="loading-spinner"></div>';
-        }
-    }
-
-    // Show error state
-    function showErrorState(message) {
-        const errorHtml = `<div class="error-message">${message}</div>`;
-        
-        if (featuredCoursesContainer) {
-            featuredCoursesContainer.innerHTML = errorHtml;
-        }
-        if (categorySectionsContainer) {
-            categorySectionsContainer.innerHTML = errorHtml;
-        }
-    }
-
-    // Filter courses based on search term and category
-    function filterCourses(searchTerm = '', category = '') {
-        let tempAllCourses = [...allCourses];
-
-        // Apply category filter if specified
-        if (category) {
-            tempAllCourses = tempAllCourses.filter(course =>
-                course.category && course.category.toLowerCase().includes(category.toLowerCase())
-            );
+            // Display filtered courses
+            displayCourses(tempAllCourses, tempFeaturedCourses);
         }
 
-        // Apply search filter if specified
-        if (searchTerm) {
-            tempAllCourses = tempAllCourses.filter(course =>
-                (course.title && course.title.toLowerCase().includes(searchTerm)) ||
-                (course.description && course.description.toLowerCase().includes(searchTerm)) ||
-                (course.miniDescription && course.miniDescription.toLowerCase().includes(searchTerm)) ||
-                (course.seller && course.seller.toLowerCase().includes(searchTerm))
-            );
+        // Function to display courses
+        function displayCourses(allCoursesToDisplay = null, featuredCoursesToDisplay = null) {
+            // Use provided courses if available, otherwise use categorized courses
+            const allCoursesData = allCoursesToDisplay || allCourses;
+            const featuredCoursesData = featuredCoursesToDisplay || featuredCourses;
+
+            // Display featured courses
+            displayFeaturedCourses(featuredCoursesData);
+
+            // Display category-based sections
+            displayCategorySections(allCoursesData);
         }
 
-        // Categorize the filtered courses
-        let tempFeaturedCourses = [];
-        tempAllCourses.forEach(course => {
-            // Featured courses - courses with highest discount or special flag
-            if (course.onlineDiscountPercentage > 30 || course.students > 100) {
-                tempFeaturedCourses.push(course);
-            }
-        });
+        // Display featured courses section
+        function displayFeaturedCourses(featuredCoursesData) {
+            if (!featuredCoursesContainer) return;
 
-        // If no featured courses, use first few courses as featured
-        if (tempFeaturedCourses.length === 0 && tempAllCourses.length > 0) {
-            tempFeaturedCourses = tempAllCourses.slice(0, Math.min(6, tempAllCourses.length));
-        }
+            if (featuredCoursesData.length > 0) {
+                const isExpanded = expandedSections.has('featured');
+                const coursesToShow = isExpanded ? featuredCoursesData : featuredCoursesData.slice(0, 4);
 
-        // Display filtered courses
-        displayCourses(tempAllCourses, tempFeaturedCourses);
-    }
-
-    // Function to display courses
-    function displayCourses(allCoursesToDisplay = null, featuredCoursesToDisplay = null) {
-        // Use provided courses if available, otherwise use categorized courses
-        const allCoursesData = allCoursesToDisplay || allCourses;
-        const featuredCoursesData = featuredCoursesToDisplay || featuredCourses;
-
-        // Display featured courses
-        displayFeaturedCourses(featuredCoursesData);
-
-        // Display category-based sections
-        displayCategorySections(allCoursesData);
-    }
-
-    // Display featured courses section
-    function displayFeaturedCourses(featuredCoursesData) {
-        if (!featuredCoursesContainer) return;
-
-        if (featuredCoursesData.length > 0) {
-            const isExpanded = expandedSections.has('featured');
-            const coursesToShow = isExpanded ? featuredCoursesData : featuredCoursesData.slice(0, 4);
-
-            featuredCoursesContainer.innerHTML = `
+                featuredCoursesContainer.innerHTML = `
                 <div class="courses-grid">
                     ${coursesToShow.map(course => createCourseCard(course)).join('')}
                 </div>
             `;
 
-            // Show "Show All" button if there are more than 4 featured courses
-            if (showAllFeaturedBtn) {
-                if (featuredCoursesData.length > 4) {
-                    showAllFeaturedBtn.classList.remove('hidden');
-                    showAllFeaturedBtn.textContent = isExpanded ? 'Show Less' : 'Show All';
-                } else {
+                // Show "Show All" button if there are more than 4 featured courses
+                if (showAllFeaturedBtn) {
+                    if (featuredCoursesData.length > 4) {
+                        showAllFeaturedBtn.classList.remove('hidden');
+                        showAllFeaturedBtn.textContent = isExpanded ? 'Show Less' : 'Show All';
+                    } else {
+                        showAllFeaturedBtn.classList.add('hidden');
+                    }
+                }
+            } else {
+                featuredCoursesContainer.innerHTML = '<div class="no-courses">No featured courses found.</div>';
+                if (showAllFeaturedBtn) {
                     showAllFeaturedBtn.classList.add('hidden');
                 }
             }
-        } else {
-            featuredCoursesContainer.innerHTML = '<div class="no-courses">No featured courses found.</div>';
-            if (showAllFeaturedBtn) {
-                showAllFeaturedBtn.classList.add('hidden');
-            }
         }
-    }
 
-    // Display category-based sections
-    function displayCategorySections(allCoursesData) {
-        if (!categorySectionsContainer) return;
-        
-        categorySectionsContainer.innerHTML = '';
+        // Display category-based sections
+        function displayCategorySections(allCoursesData) {
+            if (!categorySectionsContainer) return;
 
-        // Group courses by category
-        const coursesByCategory = {};
-        allCoursesData.forEach(course => {
-            if (course.category) {
-                if (!coursesByCategory[course.category]) {
-                    coursesByCategory[course.category] = [];
+            categorySectionsContainer.innerHTML = '';
+
+            // Group courses by category
+            const coursesByCategory = {};
+            allCoursesData.forEach(course => {
+                if (course.category) {
+                    if (!coursesByCategory[course.category]) {
+                        coursesByCategory[course.category] = [];
+                    }
+                    coursesByCategory[course.category].push(course);
                 }
-                coursesByCategory[course.category].push(course);
-            }
-        });
+            });
 
-        // Create sections for each category with at least 1 course
-        Object.keys(coursesByCategory).forEach(category => {
-            const categoryCourses = coursesByCategory[category];
-            if (categoryCourses.length > 0) {
-                const isExpanded = expandedSections.has(category);
-                const coursesToShow = isExpanded ? categoryCourses : categoryCourses.slice(0, 4);
+            // Create sections for each category with at least 1 course
+            Object.keys(coursesByCategory).forEach(category => {
+                const categoryCourses = coursesByCategory[category];
+                if (categoryCourses.length > 0) {
+                    const isExpanded = expandedSections.has(category);
+                    const coursesToShow = isExpanded ? categoryCourses : categoryCourses.slice(0, 4);
 
-                const sectionId = `category-${category.replace(/\s+/g, '-').toLowerCase()}`;
-                const sectionHtml = `
+                    const sectionId = `category-${category.replace(/\s+/g, '-').toLowerCase()}`;
+                    const sectionHtml = `
                     <div class="category-section" id="${sectionId}">
                         <div class="section-header">
                             <h2 class="text-2xl font-bold text-gray-900">${category}</h2>
@@ -790,68 +1016,68 @@
                     </div>
                 `;
 
-                categorySectionsContainer.innerHTML += sectionHtml;
-            }
-        });
-
-        // Add event listeners to "Show All" buttons
-        document.querySelectorAll('.category-section .show-all-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const category = e.target.getAttribute('data-category');
-                toggleSectionExpansion(category);
+                    categorySectionsContainer.innerHTML += sectionHtml;
+                }
             });
-        });
-    }
 
-    // Toggle section expansion
-    function toggleSectionExpansion(sectionId) {
-        if (expandedSections.has(sectionId)) {
-            expandedSections.delete(sectionId);
-        } else {
-            expandedSections.add(sectionId);
+            // Add event listeners to "Show All" buttons
+            document.querySelectorAll('.category-section .show-all-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const category = e.target.getAttribute('data-category');
+                    toggleSectionExpansion(category);
+                });
+            });
         }
 
-        // Re-render the courses
-        displayCourses();
-    }
+        // Toggle section expansion
+        function toggleSectionExpansion(sectionId) {
+            if (expandedSections.has(sectionId)) {
+                expandedSections.delete(sectionId);
+            } else {
+                expandedSections.add(sectionId);
+            }
 
-    // Function to create seller badge HTML
-    function createSellerBadge(seller) {
-        if (!seller) return '';
+            // Re-render the courses
+            displayCourses();
+        }
 
-        const sellerClassMap = {
-            'Best Seller': 'best-seller',
-            'Top Rated': 'top-rated',
-            'Most Popular': 'most-popular',
-            'Trending Now': 'trending-now',
-            'Student Favorite': 'student-favorite',
-            'Bestseller': 'bestseller',
-            'Hot Pick': 'hot-pick',
-            'Editor\'s Choice': 'editors-choice',
-            'Featured Course': 'featured-course',
-            'Highly Recommended': 'highly-recommended',
-            'Top Choice': 'top-choice'
-        };
+        // Function to create seller badge HTML
+        function createSellerBadge(seller) {
+            if (!seller) return '';
 
-        const badgeClass = sellerClassMap[seller] || 'best-seller';
+            const sellerClassMap = {
+                'Best Seller': 'best-seller',
+                'Top Rated': 'top-rated',
+                'Most Popular': 'most-popular',
+                'Trending Now': 'trending-now',
+                'Student Favorite': 'student-favorite',
+                'Bestseller': 'bestseller',
+                'Hot Pick': 'hot-pick',
+                'Editor\'s Choice': 'editors-choice',
+                'Featured Course': 'featured-course',
+                'Highly Recommended': 'highly-recommended',
+                'Top Choice': 'top-choice'
+            };
 
-        return `<span class="seller-badge ${badgeClass}">${seller}</span>`;
-    }
+            const badgeClass = sellerClassMap[seller] || 'best-seller';
 
-    // Function to create course card HTML
-    function createCourseCard(course) {
-        // Generate random rating between 4.2 and 4.8
-        const rating = generateRandomRating();
+            return `<span class="seller-badge ${badgeClass}">${seller}</span>`;
+        }
 
-        // Check if course has discount
-        const hasDiscount = course.onlineOriginalPrice && course.onlineOriginalPrice > course.onlinePrice;
+        // Function to create course card HTML
+        function createCourseCard(course) {
+            // Generate random rating between 4.2 and 4.8
+            const rating = generateRandomRating();
 
-        // Ensure image URL is valid
-        const courseImage = course.images && course.images[0] 
-            ? course.images[0] 
-            : 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
+            // Check if course has discount
+            const hasDiscount = course.onlineOriginalPrice && course.onlineOriginalPrice > course.onlinePrice;
 
-        return `
+            // Ensure image URL is valid
+            const courseImage = course.images && course.images[0]
+                ? course.images[0]
+                : 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
+
+            return `
             <div class="course-card bg-white rounded-lg overflow-hidden shadow-sm">
                 <div class="relative">
                     <img class="w-full h-48 object-cover" src="${courseImage}" alt="${course.title || 'Course Image'}" onerror="this.src='https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'">
@@ -886,8 +1112,8 @@
                 </div>
             </div>
         `;
-    }
-</script>
+        }
+    </script>
 </body>
 
 </html>

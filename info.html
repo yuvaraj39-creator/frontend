@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Details | U1 Technology Institute</title>
-    <link rel="icon" type="image/x-icon" href="https://via.placeholder.com/32x32/800020/FFFFFF?text=U1">
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png">
     <script src="config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -69,25 +69,13 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .animate-fadeIn {
@@ -105,62 +93,18 @@
             margin-bottom: 4px;
         }
 
-        .seller-badge.best-seller {
-            background-color: #FFD700;
-            color: #000000;
-        }
+        .seller-badge.best-seller { background-color: #FFD700; color: #000000; }
+        .seller-badge.top-rated { background-color: #4ADE80; color: #000000; }
+        .seller-badge.most-popular { background-color: #60A5FA; color: #000000; }
+        .seller-badge.trending-now { background-color: #F97316; color: #FFFFFF; }
+        .seller-badge.student-favorite { background-color: #A855F7; color: #FFFFFF; }
+        .seller-badge.bestseller { background-color: #FACC15; color: #000000; }
+        .seller-badge.hot-pick { background-color: #EF4444; color: #FFFFFF; }
+        .seller-badge.editors-choice { background-color: #3B82F6; color: #FFFFFF; }
+        .seller-badge.featured-course { background-color: #10B981; color: #FFFFFF; }
+        .seller-badge.highly-recommended { background-color: #EAB308; color: #000000; }
+        .seller-badge.top-choice { background-color: #6366F1; color: #FFFFFF; }
 
-        .seller-badge.top-rated {
-            background-color: #4ADE80;
-            color: #000000;
-        }
-
-        .seller-badge.most-popular {
-            background-color: #60A5FA;
-            color: #000000;
-        }
-
-        .seller-badge.trending-now {
-            background-color: #F97316;
-            color: #FFFFFF;
-        }
-
-        .seller-badge.student-favorite {
-            background-color: #A855F7;
-            color: #FFFFFF;
-        }
-
-        .seller-badge.bestseller {
-            background-color: #FACC15;
-            color: #000000;
-        }
-
-        .seller-badge.hot-pick {
-            background-color: #EF4444;
-            color: #FFFFFF;
-        }
-
-        .seller-badge.editors-choice {
-            background-color: #3B82F6;
-            color: #FFFFFF;
-        }
-
-        .seller-badge.featured-course {
-            background-color: #10B981;
-            color: #FFFFFF;
-        }
-
-        .seller-badge.highly-recommended {
-            background-color: #EAB308;
-            color: #000000;
-        }
-
-        .seller-badge.top-choice {
-            background-color: #6366F1;
-            color: #FFFFFF;
-        }
-
-        /* Toast Notification Styles */
         .toast-container {
             position: fixed;
             top: 100px;
@@ -185,50 +129,23 @@
             border-left: 4px solid #800020;
         }
 
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast.success {
-            border-left-color: #10B981;
-        }
-
-        .toast.error {
-            border-left-color: #EF4444;
-        }
-
-        .toast.warning {
-            border-left-color: #F59E0B;
-        }
-
-        .toast.info {
-            border-left-color: #3B82F6;
-        }
+        .toast.show { transform: translateX(0); }
+        .toast.success { border-left-color: #10B981; }
+        .toast.error { border-left-color: #EF4444; }
+        .toast.warning { border-left-color: #F59E0B; }
+        .toast.info { border-left-color: #3B82F6; }
 
         .toast-icon {
             font-size: 20px;
             flex-shrink: 0;
         }
 
-        .toast.success .toast-icon {
-            color: #10B981;
-        }
+        .toast.success .toast-icon { color: #10B981; }
+        .toast.error .toast-icon { color: #EF4444; }
+        .toast.warning .toast-icon { color: #F59E0B; }
+        .toast.info .toast-icon { color: #3B82F6; }
 
-        .toast.error .toast-icon {
-            color: #EF4444;
-        }
-
-        .toast.warning .toast-icon {
-            color: #F59E0B;
-        }
-
-        .toast.info .toast-icon {
-            color: #3B82F6;
-        }
-
-        .toast-content {
-            flex: 1;
-        }
+        .toast-content { flex: 1; }
 
         .toast-title {
             font-weight: 600;
@@ -256,32 +173,35 @@
             color: #6B7280;
             background: #F3F4F6;
         }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
     </style>
 </head>
 
 <body class="antialiased">
-    <!-- Toast Container -->
     <div class="toast-container" id="toast-container"></div>
 
-    <!-- Sticky Header -->
     <header class="sticky top-0 z-50 bg-white shadow-md">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <div class="h-12 w-12 bg-[#800020] rounded-full flex items-center justify-center mr-2">
-                    <span class="text-white font-bold text-lg">U1</span>
-                </div>
+                <img src="img/favicon-32x32.png" alt="logo" class="w-8 h-8">
                 <span class="text-xl font-semibold text-primary">U1 Technology Institute</span>
             </div>
 
             <div class="hidden md:flex space-x-8">
-                <a href="index.html"
-                    class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Home</a>
-                <a href="courses.html"
-                    class="text-primary font-medium relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary">Courses</a>
-                <a href="#"
-                    class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Faculty</a>
-                <a href="#"
-                    class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Contact</a>
+                <a href="index.html" class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Home</a>
+                <a href="courses.html" class="text-primary font-medium relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary">Courses</a>
+                <a href="index.html#contact" class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Contact</a>
             </div>
 
             <button class="md:hidden text-gray-700 focus:outline-none">
@@ -290,67 +210,181 @@
         </nav>
     </header>
 
-    <!-- Loading State -->
-    <div id="loading-state" class="container mx-auto px-6 py-16">
-        <div class="text-center">
-            <div class="loading-spinner mb-4"></div>
-            <p class="text-gray-600">Loading course information...</p>
-        </div>
+    <!-- Loading state with skeleton screens -->
+    <div id="loading-state">
+        <!-- Hero section skeleton -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-gray-900 to-primaryDark">
+            <div class="container mx-auto px-6 py-12 md:py-20">
+                <div class="flex flex-col lg:flex-row items-center gap-10">
+                    <div class="lg:w-1/2 text-white">
+                        <div class="skeleton h-6 w-32 mb-4"></div>
+                        <div class="skeleton h-12 w-3/4 mb-4"></div>
+                        <div class="skeleton h-6 w-full mb-8"></div>
+                        
+                        <div class="flex flex-wrap gap-4 mb-8">
+                            <div class="skeleton h-6 w-24"></div>
+                            <div class="skeleton h-6 w-28"></div>
+                            <div class="skeleton h-6 w-20"></div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
+                            <div class="skeleton h-12 w-40 rounded-full"></div>
+                            <div class="skeleton h-12 w-40 rounded-lg"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:w-1/2">
+                        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                            <div class="flex border-b">
+                                <div class="flex-1 py-4 text-center">
+                                    <div class="skeleton h-6 w-32 mx-auto"></div>
+                                </div>
+                                <div class="flex-1 py-4 text-center">
+                                    <div class="skeleton h-6 w-32 mx-auto"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative h-80 md:h-96 overflow-hidden">
+                                <div class="skeleton h-full w-full"></div>
+                            </div>
+                            
+                            <div class="p-6">
+                                <div class="skeleton h-6 w-48 mb-4"></div>
+                                <div class="space-y-3">
+                                    <div class="skeleton h-4 w-full"></div>
+                                    <div class="skeleton h-4 w-5/6"></div>
+                                    <div class="skeleton h-4 w-4/5"></div>
+                                    <div class="skeleton h-4 w-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Course description skeleton -->
+        <section class="container mx-auto px-6 py-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="skeleton h-8 w-64 mb-6"></div>
+                <div class="space-y-4">
+                    <div class="skeleton h-4 w-full"></div>
+                    <div class="skeleton h-4 w-full"></div>
+                    <div class="skeleton h-4 w-5/6"></div>
+                    <div class="skeleton h-4 w-full"></div>
+                    <div class="skeleton h-4 w-4/5"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- What you'll learn skeleton -->
+        <section class="bg-gray-50 py-16">
+            <div class="container mx-auto px-6">
+                <div class="skeleton h-8 w-64 mx-auto mb-12"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="skeleton h-4 w-full mb-2"></div>
+                        <div class="skeleton h-4 w-3/4"></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="skeleton h-4 w-full mb-2"></div>
+                        <div class="skeleton h-4 w-3/4"></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="skeleton h-4 w-full mb-2"></div>
+                        <div class="skeleton h-4 w-3/4"></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="skeleton h-4 w-full mb-2"></div>
+                        <div class="skeleton h-4 w-3/4"></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="skeleton h-4 w-full mb-2"></div>
+                        <div class="skeleton h-4 w-3/4"></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="skeleton h-4 w-full mb-2"></div>
+                        <div class="skeleton h-4 w-3/4"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Curriculum skeleton -->
+        <section class="container mx-auto px-6 py-16">
+            <div class="skeleton h-8 w-64 mx-auto mb-12"></div>
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-4 overflow-hidden rounded-xl shadow-sm">
+                    <div class="w-full flex justify-between items-center p-6 bg-gray-50">
+                        <div class="skeleton h-6 w-1/2"></div>
+                        <div class="skeleton h-4 w-4 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="mb-4 overflow-hidden rounded-xl shadow-sm">
+                    <div class="w-full flex justify-between items-center p-6 bg-white">
+                        <div class="skeleton h-6 w-2/3"></div>
+                        <div class="skeleton h-4 w-4 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="mb-4 overflow-hidden rounded-xl shadow-sm">
+                    <div class="w-full flex justify-between items-center p-6 bg-gray-50">
+                        <div class="skeleton h-6 w-3/4"></div>
+                        <div class="skeleton h-4 w-4 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="mb-4 overflow-hidden rounded-xl shadow-sm">
+                    <div class="w-full flex justify-between items-center p-6 bg-white">
+                        <div class="skeleton h-6 w-1/2"></div>
+                        <div class="skeleton h-4 w-4 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA section skeleton -->
+        <section class="bg-primary py-16">
+            <div class="container mx-auto px-6 text-center">
+                <div class="skeleton h-8 w-3/4 mx-auto mb-6 bg-white/20"></div>
+                <div class="skeleton h-6 w-2/3 mx-auto mb-8 bg-white/20"></div>
+                <div class="skeleton h-12 w-40 mx-auto rounded-lg bg-white/20"></div>
+            </div>
+        </section>
     </div>
 
-    <!-- Course Content (initially hidden) -->
+    <!-- Actual course content (hidden initially) -->
     <div id="course-content" class="hidden">
-        <!-- Improved Hero Slider -->
         <section class="relative overflow-hidden bg-gradient-to-br from-gray-900 to-primaryDark">
             <div class="container mx-auto px-6 py-12 md:py-20">
                 <div class="flex flex-col lg:flex-row items-center gap-10">
 
-                    <!-- Left Content -->
                     <div class="lg:w-1/2 text-white">
-                        <!-- Seller Badge -->
-                        <div id="seller-badge"
-                            class="inline-flex items-center bg-badgeOrange px-3 py-1 rounded-full mb-4">
+                        <div id="seller-badge" class="inline-flex items-center bg-badgeOrange px-3 py-1 rounded-full mb-4">
                             <i class="fas fa-star text-white mr-2"></i>
-                            <span id="seller-text" class="text-white font-semibold uppercase tracking-wide text-sm">Best
-                                Seller</span>
+                            <span id="seller-text" class="text-white font-semibold uppercase tracking-wide text-sm">Best Seller</span>
                         </div>
                         <h1 id="course-title" class="text-4xl md:text-5xl font-bold mb-4">Course Title</h1>
                         <p id="course-mini-description" class="text-xl mb-8 text-gray-200">Course mini description</p>
 
-                        <!-- Tools & Languages -->
                         <div id="tools-section" class="mb-8 hidden">
-                            <div id="tools-container" class="flex flex-wrap gap-4">
-                                <!-- Tools will be dynamically added here -->
-                            </div>
+                            <div id="tools-container" class="flex flex-wrap gap-4"></div>
                         </div>
 
-                        <!-- Features List -->
-                        <div id="course-features" class="mb-8 space-y-4">
-                            <!-- Features will be dynamically added here -->
-                        </div>
-
-                        <!-- Price and Enroll Button -->
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-                            <div id="price-tag"
-                                class="price-tag bg-primary text-white px-6 py-3 rounded-full shadow-lg">
+                            <div id="price-tag" class="price-tag bg-primary text-white px-6 py-3 rounded-full shadow-lg">
                                 <span id="online-price" class="font-bold text-xl">₹2999</span>
                                 <span id="original-price" class="text-sm line-through ml-2 opacity-75 hidden"></span>
                                 <span id="discount-percentage" class="text-sm font-bold ml-2 hidden"></span>
                             </div>
-                            <button
-                                class="enroll-btn bg-accent text-primary px-8 py-3 rounded-lg font-bold shadow-lg transition-all hover:bg-white hover:text-primaryDark transform hover:scale-105">
+                            <button class="enroll-btn bg-accent text-primary px-8 py-3 rounded-lg font-bold shadow-lg transition-all hover:bg-white hover:text-primaryDark transform hover:scale-105">
                                 Enroll Now
                             </button>
                         </div>
                     </div>
 
-                    <!-- Right Content with Mode Toggle -->
                     <div class="lg:w-1/2">
                         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-                            <!-- Mode Toggle -->
                             <div class="flex border-b">
-                                <button class="mode-toggle flex-1 py-4 text-center font-semibold active"
-                                    data-mode="online">
+                                <button class="mode-toggle flex-1 py-4 text-center font-semibold active" data-mode="online">
                                     <i class="fas fa-laptop-house mr-2"></i>Online Class
                                 </button>
                                 <button class="mode-toggle flex-1 py-4 text-center font-semibold" data-mode="offline">
@@ -358,14 +392,10 @@
                                 </button>
                             </div>
 
-                            <!-- Image Container -->
                             <div class="relative h-80 md:h-96 overflow-hidden">
-                                <!-- Online Class Image -->
                                 <div class="hero-slide absolute inset-0 opacity-100" data-mode="online">
-                                    <img id="course-image-online" src="" alt="Online Course"
-                                        class="h-full w-full object-cover">
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end">
+                                    <img id="course-image-online" src="" alt="Online Course" class="h-full w-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end">
                                         <div class="p-6 text-white">
                                             <h3 class="text-xl font-bold mb-2">Learn from Anywhere</h3>
                                             <p>Join live interactive sessions with expert instructors</p>
@@ -373,12 +403,9 @@
                                     </div>
                                 </div>
 
-                                <!-- Offline Class Image -->
                                 <div class="hero-slide absolute inset-0 opacity-0" data-mode="offline">
-                                    <img id="course-image-offline" src="" alt="Offline Course"
-                                        class="h-full w-full object-cover">
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end">
+                                    <img id="course-image-offline" src="" alt="Offline Course" class="h-full w-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end">
                                         <div class="p-6 text-white">
                                             <h3 class="text-xl font-bold mb-2">Hands-on Classroom Experience</h3>
                                             <p>Learn in our state-of-the-art facilities with direct mentorship</p>
@@ -387,7 +414,6 @@
                                 </div>
                             </div>
 
-                            <!-- Mode-specific Details -->
                             <div class="p-6">
                                 <div class="mode-details" data-mode="online">
                                     <h3 class="font-bold text-lg text-primary mb-2">Online Class Features</h3>
@@ -439,85 +465,64 @@
             </div>
         </section>
 
-        <!-- Course Info Section -->
         <section class="container mx-auto px-6 py-16">
             <div class="max-w-4xl mx-auto">
                 <h2 class="text-3xl font-bold mb-6 text-primary">Course Description</h2>
-                <div id="course-description" class="text-justify leading-relaxed space-y-4">
-                    <!-- Course description will be inserted here -->
-                </div>
+                <div id="course-description" class="text-justify leading-relaxed space-y-4"></div>
             </div>
         </section>
 
-        <!-- What You'll Learn -->
         <section class="bg-gray-50 py-16">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold mb-12 text-center text-primary">What You'll Learn</h2>
-                <div id="learn-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Learning points will be dynamically added here -->
-                </div>
+                <div id="learn-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </div>
         </section>
 
-        <!-- Curriculum -->
         <section class="container mx-auto px-6 py-16">
             <h2 class="text-3xl font-bold mb-12 text-center text-primary">Course Curriculum</h2>
-            <div id="curriculum-container" class="max-w-4xl mx-auto">
-                <!-- Curriculum sections will be dynamically added here -->
-            </div>
+            <div id="curriculum-container" class="max-w-4xl mx-auto"></div>
         </section>
 
-        <!-- CTA Banner -->
         <section class="bg-primary py-16">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Take the next step in your learning journey
-                </h2>
-                <p class="text-white/90 mb-8 max-w-2xl mx-auto">Join thousands of students who have transformed their
-                    careers with our comprehensive courses.</p>
-                <button
-                    class="bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all hover:bg-primaryDark hover:text-white transform hover:scale-105">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Take the next step in your learning journey</h2>
+                <p class="text-white/90 mb-8 max-w-2xl mx-auto">Join thousands of students who have transformed their careers with our comprehensive courses.</p>
+                <button class="bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all hover:bg-primaryDark hover:text-white transform hover:scale-105">
                     Join Now
                 </button>
             </div>
         </section>
     </div>
 
-    <!-- Error State -->
     <div id="error-state" class="container mx-auto px-6 py-16 hidden">
         <div class="text-center">
             <i class="fas fa-exclamation-triangle text-6xl text-red-500 mb-4"></i>
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Course Not Found</h2>
             <p class="text-gray-600 mb-8">The course you're looking for doesn't exist or may have been removed.</p>
-            <a href="courses.html"
-                class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primaryDark transition-colors">
+            <a href="courses.html" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primaryDark transition-colors">
                 Browse All Courses
             </a>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div>
-                    <div class="flex items-center space-x-2 mb-6">
-                        <div class="h-12 w-12 bg-[#800020] rounded-full flex items-center justify-center mr-2">
-                            <span class="text-white font-bold text-lg">U1</span>
-                        </div>
+                    <div class="flex items-center mb-4">
+                        <img src="img/favicon-32x32.png" alt="logo" class="w-8 h-8 mr-2">
                         <span class="text-xl font-semibold">U1 Technology Institute</span>
                     </div>
-                    <p class="text-gray-400">Empowering the next generation of technology professionals through
-                        innovative education.</p>
+                    <p class="text-gray-400">Empowering the next generation of technology professionals through innovative education.</p>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
                         <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors">Courses</a>
-                        </li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Faculty</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors">Courses</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
@@ -542,20 +547,16 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
                     <div class="flex space-x-4">
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
@@ -569,547 +570,435 @@
     </footer>
 
     <script>
-    // API Configuration - Use the config from config.js
-    const API_BASE_URL = window.AppConfig?.API_BASE_URL || 'http://localhost:3000';
+        const API_BASE_URL = window.AppConfig?.API_BASE_URL || 'http://localhost:3000';
 
-    // DOM elements - will be initialized after DOM is loaded
-    let loadingState;
-    let courseContent;
-    let errorState;
-    let toastContainer;
-    let sellerBadge;
-    let sellerText;
-    let courseTitle;
-    let courseMiniDescription;
-    let courseFeatures;
-    let priceTag;
-    let onlinePrice;
-    let originalPrice;
-    let discountPercentage;
-    let courseImageOnline;
-    let courseImageOffline;
-    let courseDescription;
-    let toolsSection;
-    let toolsContainer;
-    let learnContainer;
-    let curriculumContainer;
+        let loadingState;
+        let courseContent;
+        let errorState;
+        let toastContainer;
+        let sellerBadge;
+        let sellerText;
+        let courseTitle;
+        let courseMiniDescription;
+        let priceTag;
+        let onlinePrice;
+        let originalPrice;
+        let discountPercentage;
+        let courseImageOnline;
+        let courseImageOffline;
+        let courseDescription;
+        let toolsSection;
+        let toolsContainer;
+        let learnContainer;
+        let curriculumContainer;
 
-    // Global variables
-    let currentCourse = null;
+        let currentCourse = null;
 
-    // Initialize the page
-    document.addEventListener('DOMContentLoaded', function () {
-        // Initialize DOM elements
-        initializeDOMElements();
-        
-        // Load course data
-        loadCourseData();
-    });
-
-    // Initialize all DOM elements
-    function initializeDOMElements() {
-        loadingState = document.getElementById('loading-state');
-        courseContent = document.getElementById('course-content');
-        errorState = document.getElementById('error-state');
-        toastContainer = document.getElementById('toast-container');
-        sellerBadge = document.getElementById('seller-badge');
-        sellerText = document.getElementById('seller-text');
-        courseTitle = document.getElementById('course-title');
-        courseMiniDescription = document.getElementById('course-mini-description');
-        courseFeatures = document.getElementById('course-features');
-        priceTag = document.getElementById('price-tag');
-        onlinePrice = document.getElementById('online-price');
-        originalPrice = document.getElementById('original-price');
-        discountPercentage = document.getElementById('discount-percentage');
-        courseImageOnline = document.getElementById('course-image-online');
-        courseImageOffline = document.getElementById('course-image-offline');
-        courseDescription = document.getElementById('course-description');
-        toolsSection = document.getElementById('tools-section');
-        toolsContainer = document.getElementById('tools-container');
-        learnContainer = document.getElementById('learn-container');
-        curriculumContainer = document.getElementById('curriculum-container');
-    }
-
-    // Toast Notification System
-    function showToast(title, message, type = 'info', duration = 5000) {
-        if (!toastContainer) return null;
-
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-
-        const icons = {
-            success: 'fas fa-check-circle',
-            error: 'fas fa-exclamation-circle',
-            warning: 'fas fa-exclamation-triangle',
-            info: 'fas fa-info-circle'
-        };
-
-        toast.innerHTML = `
-            <i class="toast-icon ${icons[type]}"></i>
-            <div class="toast-content">
-                <div class="toast-title">${title}</div>
-                <div class="toast-message">${message}</div>
-            </div>
-            <button class="toast-close">
-                <i class="fas fa-times"></i>
-            </button>
-        `;
-
-        toastContainer.appendChild(toast);
-
-        // Animate in
-        setTimeout(() => toast.classList.add('show'), 100);
-
-        // Close button functionality
-        const closeBtn = toast.querySelector('.toast-close');
-        closeBtn.addEventListener('click', () => {
-            removeToast(toast);
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeDOMElements();
+            loadCourseData();
         });
 
-        // Auto remove after duration
-        if (duration > 0) {
-            setTimeout(() => {
+        function initializeDOMElements() {
+            loadingState = document.getElementById('loading-state');
+            courseContent = document.getElementById('course-content');
+            errorState = document.getElementById('error-state');
+            toastContainer = document.getElementById('toast-container');
+            sellerBadge = document.getElementById('seller-badge');
+            sellerText = document.getElementById('seller-text');
+            courseTitle = document.getElementById('course-title');
+            courseMiniDescription = document.getElementById('course-mini-description');
+            priceTag = document.getElementById('price-tag');
+            onlinePrice = document.getElementById('online-price');
+            originalPrice = document.getElementById('original-price');
+            discountPercentage = document.getElementById('discount-percentage');
+            courseImageOnline = document.getElementById('course-image-online');
+            courseImageOffline = document.getElementById('course-image-offline');
+            courseDescription = document.getElementById('course-description');
+            toolsSection = document.getElementById('tools-section');
+            toolsContainer = document.getElementById('tools-container');
+            learnContainer = document.getElementById('learn-container');
+            curriculumContainer = document.getElementById('curriculum-container');
+        }
+
+        function showToast(title, message, type = 'info', duration = 5000) {
+            if (!toastContainer) return null;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            const icons = {
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle',
+                warning: 'fas fa-exclamation-triangle',
+                info: 'fas fa-info-circle'
+            };
+
+            toast.innerHTML = `
+                <i class="toast-icon ${icons[type]}"></i>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => toast.classList.add('show'), 100);
+
+            const closeBtn = toast.querySelector('.toast-close');
+            closeBtn.addEventListener('click', () => {
                 removeToast(toast);
-            }, duration);
+            });
+
+            if (duration > 0) {
+                setTimeout(() => {
+                    removeToast(toast);
+                }, duration);
+            }
+
+            return toast;
         }
 
-        return toast;
-    }
-
-    function removeToast(toast) {
-        toast.classList.remove('show');
-        setTimeout(() => {
-            if (toast.parentNode) {
-                toast.parentNode.removeChild(toast);
-            }
-        }, 300);
-    }
-
-    // Get course ID from URL
-    function getCourseIdFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('id');
-    }
-
-    // Format Indian Rupee
-    function formatINR(amount) {
-        if (!amount || isNaN(amount)) return '₹0';
-        return '₹' + amount.toLocaleString('en-IN');
-    }
-
-    // Load course data
-    async function loadCourseData() {
-        const courseId = getCourseIdFromURL();
-
-        if (!courseId) {
-            showErrorState('Course ID not found in URL');
-            return;
+        function removeToast(toast) {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
         }
 
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/courses/${courseId}`);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const result = await response.json();
+        function getCourseIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
 
-            if (result.success) {
-                currentCourse = result.data.course;
-                displayCourseData(currentCourse);
-                showToast('Success', 'Course information loaded successfully!', 'success', 3000);
+        function formatINR(amount) {
+            if (!amount || isNaN(amount)) return '₹0';
+            return '₹' + amount.toLocaleString('en-IN');
+        }
+
+        async function loadCourseData() {
+            const courseId = getCourseIdFromURL();
+
+            if (!courseId) {
+                showErrorState('Course ID not found in URL');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/courses/${courseId}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    currentCourse = result.data.course;
+                    displayCourseData(currentCourse);
+                    showToast('Success', 'Course information loaded successfully!', 'success', 3000);
+                } else {
+                    showErrorState('Course not found or unavailable');
+                    showToast('Error', 'Failed to load course information', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading course:', error);
+                showErrorState('Unable to load course information');
+                showToast('Connection Error', 'Unable to connect to the server. Please check your connection.', 'error');
+            }
+        }
+
+        function displayCourseData(course) {
+            if (!course) {
+                showErrorState('No course data available');
+                return;
+            }
+
+            document.title = `${course.title || 'Course Details'} | U1 Technology Institute`;
+
+            if (course.seller) {
+                sellerText.textContent = course.seller;
+                const badgeClassMap = {
+                    'Best Seller': 'best-seller',
+                    'Top Rated': 'top-rated',
+                    'Most Popular': 'most-popular',
+                    'Trending Now': 'trending-now',
+                    'Student Favorite': 'student-favorite',
+                    'Bestseller': 'bestseller',
+                    'Hot Pick': 'hot-pick',
+                    'Editor\'s Choice': 'editors-choice',
+                    'Featured Course': 'featured-course',
+                    'Highly Recommended': 'highly-recommended',
+                    'Top Choice': 'top-choice'
+                };
+
+                const badgeClass = badgeClassMap[course.seller] || 'best-seller';
+                sellerBadge.className = `seller-badge ${badgeClass} inline-flex items-center px-3 py-1 rounded-full mb-4`;
+                sellerBadge.innerHTML = `
+                    <i class="fas fa-star mr-2"></i>
+                    <span class="font-semibold uppercase tracking-wide text-sm">${course.seller}</span>
+                `;
             } else {
-                showErrorState('Course not found or unavailable');
-                showToast('Error', 'Failed to load course information', 'error');
+                sellerBadge.style.display = 'none';
             }
-        } catch (error) {
-            console.error('Error loading course:', error);
-            showErrorState('Unable to load course information');
-            showToast('Connection Error', 'Unable to connect to the server. Please check your connection.', 'error');
-        }
-    }
 
-    // Display course data
-    function displayCourseData(course) {
-        if (!course) {
-            showErrorState('No course data available');
-            return;
-        }
+            courseTitle.textContent = course.title || 'Untitled Course';
 
-        // Update page title
-        document.title = `${course.title || 'Course Details'} | U1 Technology Institute`;
+            if (course.miniDescription) {
+                courseMiniDescription.textContent = course.miniDescription;
+            } else if (course.description) {
+                courseMiniDescription.textContent = course.description.substring(0, 150) + '...';
+            } else {
+                courseMiniDescription.textContent = 'No description available';
+            }
 
-        // Seller badge
-        if (course.seller) {
-            sellerText.textContent = course.seller;
-            // Apply the correct badge color based on seller type
-            const badgeClassMap = {
-                'Best Seller': 'best-seller',
-                'Top Rated': 'top-rated',
-                'Most Popular': 'most-popular',
-                'Trending Now': 'trending-now',
-                'Student Favorite': 'student-favorite',
-                'Bestseller': 'bestseller',
-                'Hot Pick': 'hot-pick',
-                'Editor\'s Choice': 'editors-choice',
-                'Featured Course': 'featured-course',
-                'Highly Recommended': 'highly-recommended',
-                'Top Choice': 'top-choice'
-            };
+            if (course.toolsLanguage && course.toolsLanguage.length > 0) {
+                toolsSection.classList.remove('hidden');
+                toolsContainer.innerHTML = course.toolsLanguage.map(tool =>
+                    `<div class="flex items-center text-white">
+                        <i class="fas fa-check-circle text-accent mr-2"></i>
+                        <span>${tool}</span>
+                    </div>`
+                ).join('');
+            } else {
+                toolsSection.classList.add('hidden');
+            }
 
-            const badgeClass = badgeClassMap[course.seller] || 'best-seller';
-            sellerBadge.className = `seller-badge ${badgeClass} inline-flex items-center px-3 py-1 rounded-full mb-4`;
-            sellerBadge.innerHTML = `
-                <i class="fas fa-star mr-2"></i>
-                <span class="font-semibold uppercase tracking-wide text-sm">${course.seller}</span>
-            `;
-        } else {
-            sellerBadge.style.display = 'none';
-        }
+            updatePricing('online');
 
-        // Basic course info
-        courseTitle.textContent = course.title || 'Untitled Course';
-        
-        if (course.miniDescription) {
-            courseMiniDescription.textContent = course.miniDescription;
-        } else if (course.description) {
-            courseMiniDescription.textContent = course.description.substring(0, 150) + '...';
-        } else {
-            courseMiniDescription.textContent = 'No description available';
-        }
+            if (course.images && course.images.length > 0) {
+                courseImageOnline.src = course.images[0];
+                courseImageOffline.src = course.images[1] || course.images[0];
 
-        // Tools & Languages
-        if (course.toolsLanguage && course.toolsLanguage.length > 0) {
-            toolsSection.classList.remove('hidden');
-            toolsContainer.innerHTML = course.toolsLanguage.map(tool =>
-                `<div class="flex items-center text-white">
-                    <i class="fas fa-check-circle text-accent mr-2"></i>
-                    <span>${tool}</span>
-                </div>`
-            ).join('');
-        } else {
-            toolsSection.classList.add('hidden');
-        }
-
-        // Set initial pricing (online mode)
-        updatePricing('online');
-
-        // Images
-        if (course.images && course.images.length > 0) {
-            // Use first image for online, second for offline if available
-            courseImageOnline.src = course.images[0];
-            courseImageOffline.src = course.images[1] || course.images[0];
-
-            // Add error handling for images
-            courseImageOnline.onerror = () => {
+                courseImageOnline.onerror = () => {
+                    courseImageOnline.src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+                };
+                courseImageOffline.onerror = () => {
+                    courseImageOffline.src = 'https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+                };
+            } else {
                 courseImageOnline.src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
-            };
-            courseImageOffline.onerror = () => {
                 courseImageOffline.src = 'https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
-            };
-        } else {
-            // Default images if no images provided
-            courseImageOnline.src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
-            courseImageOffline.src = 'https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
-        }
+            }
 
-        // Course features - using learn array as features if available
-        if (course.learn && course.learn.length > 0) {
-            courseFeatures.innerHTML = course.learn.slice(0, 4).map(feature =>
-                `<div class="flex items-center">
-                    <i class="fas fa-check-circle text-accent mr-3"></i>
-                    <span>${feature}</span>
-                </div>`
-            ).join('');
-        } else {
-            courseFeatures.innerHTML = `
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle text-accent mr-3"></i>
-                    <span>Comprehensive course content</span>
-                </div>
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle text-accent mr-3"></i>
-                    <span>Expert instruction</span>
-                </div>
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle text-accent mr-3"></i>
-                    <span>Hands-on projects</span>
-                </div>
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle text-accent mr-3"></i>
-                    <span>Certificate of completion</span>
-                </div>
-            `;
-        }
+            if (course.description) {
+                courseDescription.innerHTML = course.description.split('\n').map(paragraph =>
+                    `<p class="mb-4">${paragraph}</p>`
+                ).join('');
+            } else {
+                courseDescription.innerHTML = '<p class="text-gray-500">No description available for this course.</p>';
+            }
 
-        // Course description
-        if (course.description) {
-            courseDescription.innerHTML = course.description.split('\n').map(paragraph =>
-                `<p class="mb-4">${paragraph}</p>`
-            ).join('');
-        } else {
-            courseDescription.innerHTML = '<p class="text-gray-500">No description available for this course.</p>';
-        }
-
-        // What You'll Learn
-        if (course.learn && course.learn.length > 0) {
-            learnContainer.innerHTML = course.learn.map(point =>
-                `<div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow hover:-translate-y-1">
-                    <div class="flex items-start">
-                        <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
-                        <p>${point}</p>
-                    </div>
-                </div>`
-            ).join('');
-        } else {
-            learnContainer.innerHTML = `
-                <div class="bg-white p-6 rounded-xl shadow-sm">
-                    <div class="flex items-start">
-                        <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
-                        <p>Industry-relevant skills and knowledge</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm">
-                    <div class="flex items-start">
-                        <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
-                        <p>Practical hands-on experience</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm">
-                    <div class="flex items-start">
-                        <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
-                        <p>Career advancement opportunities</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Curriculum
-        if (course.curriculum && course.curriculum.length > 0) {
-            curriculumContainer.innerHTML = course.curriculum.map((section, index) => `
-                <div class="mb-4 overflow-hidden rounded-xl shadow-sm">
-                    <button class="accordion-header w-full flex justify-between items-center p-6 ${index % 2 === 0 ? 'bg-gray-50 hover:bg-gray-100' : 'bg-white hover:bg-gray-50'} transition-colors">
-                        <h3 class="text-xl font-semibold text-left">${section.section || 'Untitled Section'}</h3>
-                        <i class="fas fa-chevron-down transition-transform"></i>
-                    </button>
-                    <div class="accordion-content ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} max-h-0">
-                        <div class="p-6 border-t">
-                            <ul class="space-y-3">
-                                ${(section.lectures || []).map(lecture =>
-                                    `<li class="flex items-center">
-                                        <i class="fas fa-play-circle text-primary mr-3"></i>
-                                        <span>${lecture || 'Untitled Lecture'}</span>
-                                    </li>`
-                                ).join('')}
-                            </ul>
+            if (course.learn && course.learn.length > 0) {
+                learnContainer.innerHTML = course.learn.map(point =>
+                    `<div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow hover:-translate-y-1">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
+                            <p>${point}</p>
+                        </div>
+                    </div>`
+                ).join('');
+            } else {
+                learnContainer.innerHTML = `
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
+                            <p>Industry-relevant skills and knowledge</p>
                         </div>
                     </div>
-                </div>
-            `).join('');
-        } else {
-            curriculumContainer.innerHTML = `
-                <div class="text-center py-8 text-gray-500">
-                    <i class="fas fa-book-open text-4xl mb-4"></i>
-                    <p>Curriculum details coming soon</p>
-                </div>
-            `;
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
+                            <p>Practical hands-on experience</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mr-3 mt-1"></i>
+                            <p>Career advancement opportunities</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (course.curriculum && course.curriculum.length > 0) {
+                curriculumContainer.innerHTML = course.curriculum.map((section, index) => `
+                    <div class="mb-4 overflow-hidden rounded-xl shadow-sm">
+                        <button class="accordion-header w-full flex justify-between items-center p-6 ${index % 2 === 0 ? 'bg-gray-50 hover:bg-gray-100' : 'bg-white hover:bg-gray-50'} transition-colors">
+                            <h3 class="text-xl font-semibold text-left">${section.section || 'Untitled Section'}</h3>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} max-h-0">
+                            <div class="p-6 border-t">
+                                <ul class="space-y-3">
+                                    ${(section.lectures || []).map(lecture =>
+                                        `<li class="flex items-center">
+                                            <i class="fas fa-play-circle text-primary mr-3"></i>
+                                            <span>${lecture || 'Untitled Lecture'}</span>
+                                        </li>`
+                                    ).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                curriculumContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-book-open text-4xl mb-4"></i>
+                        <p>Curriculum details coming soon</p>
+                    </div>
+                `;
+            }
+
+            loadingState.classList.add('hidden');
+            courseContent.classList.remove('hidden');
+
+            initializeInteractiveComponents();
         }
 
-        // Show content and hide loading
-        loadingState.classList.add('hidden');
-        courseContent.classList.remove('hidden');
+        function updatePricing(mode) {
+            if (!currentCourse) return;
 
-        // Initialize interactive components
-        initializeInteractiveComponents();
-    }
+            const hasOnlineDiscount = currentCourse.onlineOriginalPrice && currentCourse.onlineOriginalPrice > currentCourse.onlinePrice;
+            const hasOfflineDiscount = currentCourse.offlineOriginalPrice && currentCourse.offlineOriginalPrice > currentCourse.offlinePrice;
 
-    // Update pricing based on mode
-    function updatePricing(mode) {
-        if (!currentCourse) return;
+            if (mode === 'online') {
+                if (currentCourse.onlinePrice) {
+                    onlinePrice.textContent = formatINR(currentCourse.onlinePrice);
 
-        const hasOnlineDiscount = currentCourse.onlineOriginalPrice && currentCourse.onlineOriginalPrice > currentCourse.onlinePrice;
-        const hasOfflineDiscount = currentCourse.offlineOriginalPrice && currentCourse.offlineOriginalPrice > currentCourse.offlinePrice;
+                    if (hasOnlineDiscount) {
+                        originalPrice.textContent = formatINR(currentCourse.onlineOriginalPrice);
+                        originalPrice.classList.remove('hidden');
 
-        if (mode === 'online') {
-            if (currentCourse.onlinePrice) {
-                onlinePrice.textContent = formatINR(currentCourse.onlinePrice);
-
-                if (hasOnlineDiscount) {
-                    originalPrice.textContent = formatINR(currentCourse.onlineOriginalPrice);
-                    originalPrice.classList.remove('hidden');
-
-                    const discountPercent = Math.round(((currentCourse.onlineOriginalPrice - currentCourse.onlinePrice) / currentCourse.onlineOriginalPrice) * 100);
-                    discountPercentage.textContent = `${discountPercent}% OFF`;
-                    discountPercentage.classList.remove('hidden');
+                        const discountPercent = Math.round(((currentCourse.onlineOriginalPrice - currentCourse.onlinePrice) / currentCourse.onlineOriginalPrice) * 100);
+                        discountPercentage.textContent = `${discountPercent}% OFF`;
+                        discountPercentage.classList.remove('hidden');
+                    } else {
+                        originalPrice.classList.add('hidden');
+                        discountPercentage.classList.add('hidden');
+                    }
                 } else {
-                    originalPrice.classList.add('hidden');
-                    discountPercentage.classList.add('hidden');
+                    priceTag.innerHTML = `<span class="font-bold text-xl">Contact for Online Pricing</span>`;
                 }
-            } else {
-                priceTag.innerHTML = `<span class="font-bold text-xl">Contact for Online Pricing</span>`;
-            }
-        } else if (mode === 'offline') {
-            if (currentCourse.offlinePrice) {
-                onlinePrice.textContent = formatINR(currentCourse.offlinePrice);
+            } else if (mode === 'offline') {
+                if (currentCourse.offlinePrice) {
+                    onlinePrice.textContent = formatINR(currentCourse.offlinePrice);
 
-                if (hasOfflineDiscount) {
-                    originalPrice.textContent = formatINR(currentCourse.offlineOriginalPrice);
-                    originalPrice.classList.remove('hidden');
+                    if (hasOfflineDiscount) {
+                        originalPrice.textContent = formatINR(currentCourse.offlineOriginalPrice);
+                        originalPrice.classList.remove('hidden');
 
-                    const discountPercent = Math.round(((currentCourse.offlineOriginalPrice - currentCourse.offlinePrice) / currentCourse.offlineOriginalPrice) * 100);
-                    discountPercentage.textContent = `${discountPercent}% OFF`;
-                    discountPercentage.classList.remove('hidden');
+                        const discountPercent = Math.round(((currentCourse.offlineOriginalPrice - currentCourse.offlinePrice) / currentCourse.offlineOriginalPrice) * 100);
+                        discountPercentage.textContent = `${discountPercent}% OFF`;
+                        discountPercentage.classList.remove('hidden');
+                    } else {
+                        originalPrice.classList.add('hidden');
+                        discountPercentage.classList.add('hidden');
+                    }
                 } else {
-                    originalPrice.classList.add('hidden');
-                    discountPercentage.classList.add('hidden');
+                    priceTag.innerHTML = `<span class="font-bold text-xl">Contact for Offline Pricing</span>`;
                 }
-            } else {
-                priceTag.innerHTML = `<span class="font-bold text-xl">Contact for Offline Pricing</span>`;
             }
         }
-    }
 
-    // Show error state
-    function showErrorState(message = 'Course not found') {
-        if (loadingState) loadingState.classList.add('hidden');
-        if (courseContent) courseContent.classList.add('hidden');
-        if (errorState) {
+        function showErrorState(message) {
+            loadingState.classList.add('hidden');
+            courseContent.classList.add('hidden');
             errorState.classList.remove('hidden');
-            // Update error message if needed
-            const errorMessage = errorState.querySelector('p');
-            if (errorMessage) {
-                errorMessage.textContent = message;
+
+            if (message) {
+                const errorMessage = errorState.querySelector('p');
+                if (errorMessage) {
+                    errorMessage.textContent = message;
+                }
             }
         }
-    }
 
-    // Initialize interactive components
-    function initializeInteractiveComponents() {
-        // Mode toggle functionality
-        const modeToggles = document.querySelectorAll('.mode-toggle');
-        const heroSlides = document.querySelectorAll('.hero-slide');
-        const modeDetails = document.querySelectorAll('.mode-details');
+        function initializeInteractiveComponents() {
+            const modeToggles = document.querySelectorAll('.mode-toggle');
+            const heroSlides = document.querySelectorAll('.hero-slide');
+            const modeDetails = document.querySelectorAll('.mode-details');
 
-        function setMode(mode) {
-            // Update toggle buttons
             modeToggles.forEach(toggle => {
-                if (toggle.dataset.mode === mode) {
-                    toggle.classList.add('active');
-                } else {
-                    toggle.classList.remove('active');
-                }
+                toggle.addEventListener('click', function () {
+                    const mode = this.getAttribute('data-mode');
+
+                    modeToggles.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    heroSlides.forEach(slide => {
+                        if (slide.getAttribute('data-mode') === mode) {
+                            slide.style.opacity = '1';
+                        } else {
+                            slide.style.opacity = '0';
+                        }
+                    });
+
+                    modeDetails.forEach(detail => {
+                        if (detail.getAttribute('data-mode') === mode) {
+                            detail.classList.remove('hidden');
+                        } else {
+                            detail.classList.add('hidden');
+                        }
+                    });
+
+                    updatePricing(mode);
+                });
             });
 
-            // Update slides
-            heroSlides.forEach(slide => {
-                if (slide.dataset.mode === mode) {
-                    slide.style.opacity = '1';
-                } else {
-                    slide.style.opacity = '0';
-                }
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+
+                    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                        content.style.maxHeight = '0';
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
             });
 
-            // Update mode details
-            modeDetails.forEach(detail => {
-                if (detail.dataset.mode === mode) {
-                    detail.classList.remove('hidden');
-                } else {
-                    detail.classList.add('hidden');
-                }
+            const enrollButtons = document.querySelectorAll('.enroll-btn');
+            enrollButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const activeMode = document.querySelector('.mode-toggle.active').getAttribute('data-mode');
+                    const price = activeMode === 'online' ?
+                        (currentCourse.onlinePrice ? formatINR(currentCourse.onlinePrice) : 'Contact for pricing') :
+                        (currentCourse.offlinePrice ? formatINR(currentCourse.offlinePrice) : 'Contact for pricing');
+
+                    showToast(
+                        'Enrollment',
+                        `You've selected ${activeMode} mode. Price: ${price}`,
+                        'info',
+                        4000
+                    );
+                });
             });
 
-            // Update pricing based on mode
-            updatePricing(mode);
-
-            // Add animation
-            if (priceTag) {
-                priceTag.classList.add('animate-pulse');
-                setTimeout(() => {
-                    priceTag.classList.remove('animate-pulse');
-                }, 300);
+            const ctaButton = document.querySelector('.bg-white.text-primary');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function () {
+                    showToast(
+                        'Join Now',
+                        'Redirecting to enrollment page...',
+                        'info',
+                        3000
+                    );
+                });
             }
         }
-
-        modeToggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const mode = toggle.dataset.mode;
-                setMode(mode);
-            });
-        });
-
-        // Accordion functionality
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                const icon = header.querySelector('i');
-
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    icon.style.transform = 'rotate(180deg)';
-                }
-            });
-        });
-
-        // Enroll button functionality
-        const enrollBtn = document.querySelector('.enroll-btn');
-        if (enrollBtn) {
-            enrollBtn.addEventListener('click', () => {
-                const activeMode = document.querySelector('.mode-toggle.active')?.dataset.mode || 'online';
-                const courseTitleText = document.getElementById('course-title')?.textContent || 'this course';
-
-                showToast(
-                    'Enrollment Process',
-                    `Starting enrollment for ${activeMode} "${courseTitleText}" course. You will be redirected to the enrollment page shortly.`,
-                    'success',
-                    4000
-                );
-
-                // Simulate redirect after delay
-                setTimeout(() => {
-                    showToast('Redirecting', 'Taking you to the enrollment page...', 'info', 2000);
-                    // In a real implementation, you would redirect to the enrollment page
-                    // window.location.href = `enroll.html?id=${getCourseIdFromURL()}&mode=${activeMode}`;
-                }, 2000);
-            });
-        }
-
-        // CTA button functionality
-        const ctaBtn = document.querySelector('.bg-white');
-        if (ctaBtn) {
-            ctaBtn.addEventListener('click', () => {
-                showToast(
-                    'Get Started',
-                    'Exploring all available courses for you!',
-                    'info',
-                    3000
-                );
-            });
-        }
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fadeIn');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-    }
-</script>
+    </script>
 </body>
 
 </html>

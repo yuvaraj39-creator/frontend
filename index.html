@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>U1 Technology Institute - Premier Education Destination</title>
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png">
+
     <script src="config.js"></script>
     <meta name="description"
-        content="U1 Technology Institute offers quality education with industry-relevant programs in engineering, science, commerce, and arts. Join our vibrant learning community.">
+        content="U1 Technology Institute provides industry-focused training in engineering, science, commerce, and arts. Empower your future with expert faculty, hands-on learning, and real-world career opportunities. Join us today!">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.U1Technology.com/">
+    <meta property="og:url" content="https://www.U1Technology.co.in/">
     <meta property="og:title" content="U1 Technology Institute - Premier Education Destination">
     <meta property="og:description"
         content="Join our vibrant learning community and unlock your potential with industry-relevant programs.">
     <meta property="og:image"
         content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
 
+        
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.U1Technology.com/">
+    <meta property="twitter:url" content="https://www.U1Technology.co.in/">
     <meta property="twitter:title" content="U1 Technology Institute - Premier Education Destination">
     <meta property="twitter:description"
         content="Join our vibrant learning community and unlock your potential with industry-relevant programs.">
@@ -28,7 +31,7 @@
         content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.U1Technology.com/">
+    <link rel="canonical" href="https://www.U1Technology.co.in/">
 
     <!-- Preload critical resources -->
     <link rel="preload"
@@ -55,7 +58,9 @@
         }
 
         .testimonial-card:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            z-index: 10;
         }
 
         .gallery-item:hover {
@@ -86,465 +91,6 @@
 
         .skip-link:focus {
             top: 0;
-        }
-
-        /* Authentication System Styles */
-        :root {
-            --primary-color: #800020;
-            --primary-dark: #600018;
-            --success-color: #10b981;
-            --error-color: #ef4444;
-            --warning-color: #f59e0b;
-            --info-color: #3b82f6;
-            --text-color: #333;
-            --text-light: #6b7280;
-            --bg-color: #fafafa;
-            --border-color: #dddddd;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
-            --border-radius: 8px;
-            --transition: all 0.3s ease;
-        }
-
-        #toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .toast {
-            padding: 12px 20px;
-            border-radius: var(--border-radius);
-            color: white;
-            font-weight: 500;
-            box-shadow: var(--shadow);
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-            cursor: pointer;
-            min-width: 250px;
-            max-width: 300px;
-        }
-
-        .toast-success {
-            background-color: var(--success-color);
-        }
-
-        .toast-error {
-            background-color: var(--error-color);
-        }
-
-        .toast-warning {
-            background-color: var(--warning-color);
-        }
-
-        .toast-info {
-            background-color: var(--info-color);
-        }
-
-        #auth-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            transition: var(--transition);
-            display: none;
-        }
-
-        .modal-content {
-            position: relative;
-            background-color: var(--bg-color);
-            border-radius: 15px;
-            padding: 30px;
-            width: 400px;
-            max-width: 90%;
-            max-height: 90vh;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            overflow: hidden;
-        }
-
-        .modal-content:hover {
-            box-shadow: 0 15px 30px rgba(128, 0, 32, 0.3);
-            transform: translateY(-5px);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            color: var(--primary-color);
-            transition: var(--transition);
-            background: none;
-            border: none;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-close:hover {
-            color: var(--primary-dark);
-        }
-
-        .tab-container {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(221, 221, 221, 0.5);
-        }
-
-        .tab-button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            background: none;
-            font-weight: bold;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .tab-button.active {
-            border-bottom-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .tab-button:not(.active) {
-            color: var(--text-light);
-        }
-
-        .forms-container {
-            position: relative;
-            min-height: 400px;
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-        }
-
-        .form-heading {
-            margin-bottom: 20px;
-            text-align: center;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--primary-color);
-            border-radius: var(--border-radius);
-            background-color: transparent;
-            color: inherit;
-            transition: var(--transition);
-            box-sizing: border-box;
-        }
-
-        .form-input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1);
-        }
-
-        .form-textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--primary-color);
-            border-radius: var(--border-radius);
-            background-color: transparent;
-            color: inherit;
-            transition: var(--transition);
-            resize: vertical;
-            min-height: 80px;
-            font-family: inherit;
-        }
-
-        .form-textarea:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1);
-        }
-
-        .radio-group {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .radio-input {
-            margin-right: 8px;
-            accent-color: var(--primary-color);
-        }
-
-        .radio-label {
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .form-link {
-            display: block;
-            text-align: right;
-            margin: 5px 0 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .form-link:hover {
-            color: var(--primary-dark);
-        }
-
-        .form-button {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: var(--transition);
-        }
-
-        .form-button:hover:not(:disabled) {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(128, 0, 32, 0.3);
-        }
-
-        .form-button:disabled {
-            background-color: var(--text-light);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .message {
-            margin-top: 10px;
-            text-align: center;
-            display: none;
-        }
-
-        .error-message {
-            color: var(--error-color);
-        }
-
-        .success-message {
-            color: var(--success-color);
-        }
-
-        .info-text {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-top: 5px;
-        }
-
-        .scrollable-container {
-            max-height: calc(90vh - 100px);
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .user-icon-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            background: none;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .user-icon-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        @media (max-width: 480px) {
-            .modal-content {
-                padding: 20px;
-            }
-
-            .form-heading {
-                font-size: 1.5rem;
-            }
-
-            .toast {
-                min-width: 200px;
-                max-width: 250px;
-            }
-        }
-
-        /* Password input container with toggle button */
-        .password-input-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .password-input-container .form-input {
-            padding-right: 45px;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 12px;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        .password-toggle:hover {
-            color: var(--primary-color);
-            background-color: rgba(128, 0, 32, 0.1);
-        }
-
-        /* OTP input styling */
-        #forgot-otp {
-            letter-spacing: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        /* Animation for showing sections */
-        .fade-in {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Ensure radio buttons are properly visible and clickable */
-        .radio-group {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-
-        .radio-group:hover {
-            background-color: rgba(128, 0, 32, 0.05);
-        }
-
-        .radio-input {
-            margin-right: 12px;
-            accent-color: var(--primary-color);
-            transform: scale(1.2);
-        }
-
-        .radio-label {
-            cursor: pointer;
-            font-size: 14px;
-            flex: 1;
-        }
-
-        /* Make sure the form is properly displayed */
-        .auth-form.active {
-            display: block !important;
-            opacity: 1 !important;
-        }
-
-        #auth-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            transition: var(--transition);
-            display: none;
-            /* This should be changed to flex when opened */
-        }
-
-        /* Ensure modal content is properly positioned */
-        .modal-content {
-            position: relative;
-            background-color: var(--bg-color);
-            border-radius: 15px;
-            padding: 30px;
-            width: 400px;
-            max-width: 90%;
-            max-height: 90vh;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            overflow: hidden;
-        }
-
-        /* Loading Spinner */
-        .loading-spinner {
-            border: 4px solid rgba(128, 0, 32, 0.3);
-            border-radius: 50%;
-            border-top: 4px solid var(--primary);
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
         }
 
         /* Seller Badge Styles */
@@ -619,6 +165,198 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
+        /* Skeleton Loading Styles */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        .skeleton-text {
+            height: 16px;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-title {
+            height: 24px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-image {
+            height: 192px;
+            width: 100%;
+        }
+
+        .skeleton-button {
+            height: 40px;
+            width: 120px;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* How It Works Section Styles */
+        .how-it-works-step {
+            position: relative;
+            padding: 30px 20px;
+            text-align: center;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background-color: white;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .how-it-works-step:hover {
+            border-color: #800020;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: #800020;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 0 auto 20px;
+        }
+
+        .step-connector {
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            transform: translateY(-50%);
+            color: #800020;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        .step-connector.bottom {
+            top: auto;
+            bottom: -25px;
+            right: 50%;
+            transform: translateX(50%);
+            display: none;
+        }
+
+        /* Map Container Styles */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* About Section Flip Animation */
+        .about-container {
+            perspective: 1000px;
+            position: relative;
+            width: 100%;
+            height: 500px;
+        }
+
+        .about-flip-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .about-flip-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .about-front, .about-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .about-back {
+            transform: rotateY(180deg);
+        }
+
+        .about-image {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content {
+            flex: 1;
+            padding: 0 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Testimonial Zoom Effect */
+        .testimonial-zoom {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-zoom:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                height: auto;
+                min-height: 600px;
+            }
+            
+            .about-flip-card, .about-front, .about-back {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .about-image {
+                width: 100%;
+                height: 300px;
+                margin-bottom: 20px;
+            }
+            
+            .about-content {
+                padding: 0 20px;
+            }
+        }
     </style>
 
     <!-- JSON-LD Structured Data -->
@@ -628,10 +366,10 @@
         "@type": "EducationalOrganization",
         "name": "U1 Technology Institute",
         "description": "A premier educational institution dedicated to excellence in teaching, research, and innovation since 1988.",
-        "url": "https://www.U1Technology.com/",
+        "url": "https://www.U1Technology.co.in/",
         "logo": "https://via.placeholder.com/50x50/800020/FFFFFF?text=U1",
         "telephone": "+91-99523-91994",
-        "email": "info@U1Technology.com",
+        "email": "info@U1Technology.co.in",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "123 Education Street",
@@ -669,7 +407,7 @@
                 </div>
                 <div class="flex items-center">
                     <i class="fas fa-envelope mr-2 text-[#DC143C]" aria-hidden="true"></i>
-                    <span>info@U1Technology.com</span>
+                    <span>info@U1Technology.co.in</span>
                 </div>
             </div>
             <div class="flex space-x-4">
@@ -691,24 +429,22 @@
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <div class="h-12 w-12 bg-[#800020] rounded-full flex items-center justify-center mr-2">
-                    <span class="text-white font-bold text-lg">U1</span>
-                </div>
-                <span class="text-xl font-bold text-gray-900">U1 Technology</span>
+                <img src="img/favicon-32x32.png" alt="logo">
+                <span class="text-xl font-bold text-gray-900"> U1 Technology</span>
             </div>
             <div class="hidden md:flex space-x-8" id="main-nav">
                 <a href="#home" class="text-[#800020] font-medium">Home</a>
                 <a href="courses.html" class="text-gray-600 hover:text-[#800020]">Courses</a>
                 <a href="#departments" class="text-gray-600 hover:text-[#800020]">Departments</a>
-                <a href="#faculty" class="text-gray-600 hover:text-[#800020]">Faculty</a>
                 <a href="#admissions" class="text-gray-600 hover:text-[#800020]">Admissions</a>
                 <a href="#placements" class="text-gray-600 hover:text-[#800020]">Placements</a>
+                <a href="quiz.html" class="text-gray-600 hover:text-[#800020]">Quiz</a>
                 <a href="#contact" class="text-gray-600 hover:text-[#800020]">Contact</a>
             </div>
             <div class="flex items-center">
-                <button id="header-signin-btn"
+                <button onclick="createCoursePopupForm()"
                     class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-all">
-                    Sign In
+                    Apply Now
                 </button>
                 <button class="md:hidden text-gray-600 ml-4" id="mobile-menu-button" aria-controls="mobile-menu"
                     aria-expanded="false" aria-label="Toggle navigation menu">
@@ -722,553 +458,624 @@
                 <a href="#home" class="text-[#800020] font-medium">Home</a>
                 <a href="courses.html" class="text-gray-600 hover:text-[#800020]">Courses</a>
                 <a href="#departments" class="text-gray-600 hover:text-[#800020]">Departments</a>
-                <a href="#faculty" class="text-gray-600 hover:text-[#800020]">Faculty</a>
                 <a href="#admissions" class="text-gray-600 hover:text-[#800020]">Admissions</a>
                 <a href="#placements" class="text-gray-600 hover:text-[#800020]">Placements</a>
                 <a href="#contact" class="text-gray-600 hover:text-[#800020]">Contact</a>
-                <button id="mobile-signin-btn"
+                <button
                     class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-all w-full">
-                    Sign In
+                    Apply Now
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-bg text-white py-20 md:py-32">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Shape Your Future With Quality Education</h1>
-                <p class="text-xl mb-8">Join our vibrant learning community and unlock your potential with
-                    industry-relevant programs.</p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button
-                        class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
-                        Explore Programs
-                    </button>
-                    <button
-                        class="bg-white hover:bg-gray-100 text-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
-                        Apply Now
-                    </button>
-                </div>
-            </div>
-            <div class="md:w-1/2 flex justify-center">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
-                    alt="Students learning in a classroom" class="rounded-lg shadow-xl max-w-md w-full" width="600"
-                    height="400" loading="lazy">
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">About U1 Technology Institute</h2>
-                <div class="w-20 h-1 bg-[#800020] mx-auto"></div>
-            </div>
-
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                        alt="U1 Technology Institute Campus" class="rounded-lg shadow-md w-full" width="700"
-                        height="467" loading="lazy">
-                </div>
-                <div class="md:w-1/2 md:pl-12">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision & Mission</h3>
-                    <p class="text-gray-600 mb-6">To be a globally recognized center of excellence in education,
-                        research, and innovation that transforms students into leaders and responsible citizens.</p>
-
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">35+ Years of Excellence</h4>
-                                <p class="text-gray-600">Providing quality education since 1988</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">Industry-Aligned Curriculum</h4>
-                                <p class="text-gray-600">Programs designed with industry experts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">Global Recognition</h4>
-                                <p class="text-gray-600">Accredited by international education bodies</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button
-                        class="mt-8 bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
-                        Learn More About Us
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Courses/Programs Section -->
-    <section id="courses" class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Programs</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Choose from our wide range of undergraduate, graduate, and
-                    professional programs</p>
-                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
-            </div>
-
-            <!-- Courses Container -->
-            <div id="courses-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Loading State -->
-                <div class="col-span-3 text-center py-8">
-                    <div class="loading-spinner mx-auto"></div>
-                    <p class="text-gray-600 mt-4">Loading courses...</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="courses.html">
-                    <button
-                        class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
-                        View All Programs
-                    </button>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Departments Section -->
-    <section id="departments" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Departments</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Explore our diverse academic departments offering specialized
-                    education</p>
-                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Department Card 1 -->
-                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
-                    <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-laptop-code text-[#800020] text-2xl" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Engineering</h3>
-                    <p class="text-gray-600 mb-4">Cutting-edge programs in various engineering disciplines</p>
-                    <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
-                </div>
-
-                <!-- Department Card 2 -->
-                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
-                    <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-flask text-[#800020] text-2xl" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Science</h3>
-                    <p class="text-gray-600 mb-4">Innovative programs in pure and applied sciences</p>
-                    <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
-                </div>
-
-                <!-- Department Card 3 -->
-                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
-                    <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-chart-line text-[#800020] text-2xl" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Commerce</h3>
-                    <p class="text-gray-600 mb-4">Business and commerce programs for future leaders</p>
-                    <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
-                </div>
-
-                <!-- Department Card 4 -->
-                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
-                    <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-palette text-[#800020] text-2xl" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Arts</h3>
-                    <p class="text-gray-600 mb-4">Creative programs in humanities and fine arts</p>
-                    <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Faculty Section -->
-    <section id="faculty" class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Faculty</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Meet our distinguished faculty members who are experts in
-                    their fields</p>
-                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Faculty Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Professor John Smith"
-                        class="w-full h-64 object-cover" width="400" height="256" loading="lazy">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-1">Prof. John Smith</h3>
-                        <p class="text-[#800020] mb-4">Head of Computer Science</p>
-                        <p class="text-gray-600 mb-4">PhD in Computer Science from Stanford University with 15+ years of
-                            teaching experience.</p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-linkedin-in"
-                                    aria-hidden="true"></i></a>
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-twitter"
-                                    aria-hidden="true"></i></a>
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fas fa-envelope"
-                                    aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Faculty Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Professor Sarah Johnson"
-                        class="w-full h-64 object-cover" width="400" height="256" loading="lazy">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-1">Prof. Sarah Johnson</h3>
-                        <p class="text-[#800020] mb-4">Dean of Business Administration</p>
-                        <p class="text-gray-600 mb-4">MBA from Harvard Business School with extensive industry
-                            experience in corporate strategy.</p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-linkedin-in"
-                                    aria-hidden="true"></i></a>
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-twitter"
-                                    aria-hidden="true"></i></a>
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fas fa-envelope"
-                                    aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Faculty Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover transition-all">
-                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Professor Michael Brown"
-                        class="w-full h-64 object-cover" width="400" height="256" loading="lazy">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-1">Prof. Michael Brown</h3>
-                        <p class="text-[#800020] mb-4">Head of Electrical Engineering</p>
-                        <p class="text-gray-600 mb-4">PhD in Electrical Engineering from MIT with multiple patents in
-                            renewable energy systems.</p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-linkedin-in"
-                                    aria-hidden="true"></i></a>
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fab fa-twitter"
-                                    aria-hidden="true"></i></a>
-                            <a href="#" class="text-gray-600 hover:text-[#800020]"><i class="fas fa-envelope"
-                                    aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <button
-                    class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
-                    View All Faculty
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Admissions Section -->
-    <section id="admissions" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Admissions</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Start your journey with U1 Technology Institute</p>
-                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
-            </div>
-
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 mb-8 lg:mb-0">
-                    <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                        alt="Students discussing in campus" class="rounded-lg shadow-md w-full" width="700" height="467"
-                        loading="lazy">
-                </div>
-                <div class="lg:w-1/2 lg:pl-12">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Join Our Community</h3>
-                    <p class="text-gray-600 mb-6">We're excited that you're considering U1 Technology Institute for your
-                        educational journey. Our admissions process is designed to identify talented and motivated
-                        students who will thrive in our academic environment.</p>
-
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-start">
-                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">Application Process</h4>
-                                <p class="text-gray-600">Submit your application online with required documents</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">Entrance Exams</h4>
-                                <p class="text-gray-600">Prepare for our entrance examination or submit standardized
-                                    test scores</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">Interview</h4>
-                                <p class="text-gray-600">Selected candidates will be invited for an interview</p>
-                            </div>
-                        </div>
-                    </div>
-
+    <!-- Main Content -->
+    <main id="main-content" tabindex="-1">
+        <!-- Hero Section -->
+        <section id="home" class="hero-bg text-white py-20 md:py-32">
+            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Shape Your Future With Quality Education</h1>
+                    <p class="text-xl mb-8">Join our vibrant learning community and unlock your potential with
+                        industry-relevant programs.</p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <button
+                        <button id="explore-programs-btn"
                             class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
+                            Explore Programs
+                        </button>
+                        <button
+                            class="bg-white hover:bg-gray-100 text-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
                             Apply Now
                         </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                        alt="Students learning in a classroom" class="rounded-lg shadow-xl max-w-md w-full" width="600"
+                        height="400" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">About U1 Technology Institute</h2>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto"></div>
+                </div>
+
+                <!-- Flip Card Container -->
+                <div class="about-container">
+                    <div class="about-flip-card" id="about-flip-card">
+                        <!-- Front Side (Default View) -->
+                        <div class="about-front">
+                            <div class="about-image">
+                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                    alt="U1 Technology Institute Campus" loading="lazy">
+                            </div>
+                            <div class="about-content">
+                                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision & Mission</h3>
+                                <p class="text-gray-600 mb-6">To be a globally recognized center of excellence in education,
+                                    research, and innovation that transforms students into leaders and responsible citizens.</p>
+
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                            <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">35+ Years of Excellence</h4>
+                                            <p class="text-gray-600">Providing quality education since 1988</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                            <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Industry-Aligned Curriculum</h4>
+                                            <p class="text-gray-600">Programs designed with industry experts</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                            <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Global Recognition</h4>
+                                            <p class="text-gray-600">Accredited by international education bodies</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button id="learn-more-btn"
+                                    class="mt-8 bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
+                                    Learn More About Us
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Back Side (Detailed View) -->
+                        <div class="about-back">
+                            <div class="about-content">
+                                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our History & Achievements</h3>
+                                <p class="text-gray-600 mb-6">Founded in 1988, U1 Technology Institute has grown from a small technical training center to a premier educational institution with over 10,000 successful alumni worldwide.</p>
+
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex items-start">
+                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                            <i class="fas fa-trophy text-[#800020]" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Award-Winning Faculty</h4>
+                                            <p class="text-gray-600">Our faculty members have received numerous national and international awards for teaching excellence</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                            <i class="fas fa-graduation-cap text-[#800020]" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">95% Placement Rate</h4>
+                                            <p class="text-gray-600">Consistently high placement rates with top companies across industries</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                            <i class="fas fa-handshake text-[#800020]" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Industry Partnerships</h4>
+                                            <p class="text-gray-600">Strong collaborations with 200+ companies for internships and research projects</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button id="back-to-normal-btn"
+                                    class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition-all">
+                                    Back to Overview
+                                </button>
+                            </div>
+                            <div class="about-image">
+                                <img src="https://images.unsplash.com/photo-1562813733-b31f71025d54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                                    alt="U1 Technology Institute Achievements" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Your Skill Growth Simplified</p>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                    <div class="how-it-works-step">
+                        <div class="step-number">01</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Select Your Path</h3>
+                        <p class="text-gray-600">Browse through our curated learning tracks designed for every career level. Pick the course that aligns with your ambitions and start your journey toward mastery.</p>
+                    </div>
+
+                    <div class="how-it-works-step">
+                        <div class="step-number">02</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Join Our Community</h3>
+                        <p class="text-gray-600">Connect with mentors and peers who share your passion. Collaborate on projects, exchange ideas, and stay motivated throughout your learning experience.</p>
+                    </div>
+
+                    <div class="how-it-works-step">
+                        <div class="step-number">03</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Achieve Excellence</h3>
+                        <p class="text-gray-600">Apply what you learn through real-world challenges and guided practice. Gain confidence, earn certifications, and elevate your professional profile.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rest of the content remains the same -->
+        <!-- Courses/Programs Section -->
+        <section id="courses" class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Programs</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Choose from our wide range of undergraduate, graduate,
+                        and
+                        professional programs</p>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+                </div>
+
+                <!-- Courses Container -->
+                <div id="courses-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Skeleton Loading State -->
+                    <div class="course-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-6">
+                            <div class="skeleton skeleton-title mb-2"></div>
+                            <div class="skeleton skeleton-text mb-3 w-3/4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="flex items-center justify-between">
+                                <div class="skeleton skeleton-text w-1/3"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-6">
+                            <div class="skeleton skeleton-title mb-2"></div>
+                            <div class="skeleton skeleton-text mb-3 w-3/4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="flex items-center justify-between">
+                                <div class="skeleton skeleton-text w-1/3"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-6">
+                            <div class="skeleton skeleton-title mb-2"></div>
+                            <div class="skeleton skeleton-text mb-3 w-3/4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="flex items-center justify-between">
+                                <div class="skeleton skeleton-text w-1/3"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="courses.html">
                         <button
                             class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
-                            Download Brochure
+                            View All Programs
                         </button>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Departments Section -->
+        <section id="departments" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Departments</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Explore our diverse IT and technology-focused departments</p>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Department Card 1 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
+                        <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-laptop-code text-[#800020] text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Software Development</h3>
+                        <p class="text-gray-600 mb-4">Full-stack development, mobile apps, and software engineering</p>
+                        <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                    </div>
+
+                    <!-- Department Card 2 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
+                        <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-database text-[#800020] text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Data Science & AI</h3>
+                        <p class="text-gray-600 mb-4">Machine learning, data analytics, and artificial intelligence</p>
+                        <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                    </div>
+
+                    <!-- Department Card 3 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
+                        <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-[#800020] text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Cyber Security</h3>
+                        <p class="text-gray-600 mb-4">Network security, ethical hacking, and digital forensics</p>
+                        <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                    </div>
+
+                    <!-- Department Card 4 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover transition-all">
+                        <div class="bg-[#FFB6C1] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cloud text-[#800020] text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Cloud Computing</h3>
+                        <p class="text-gray-600 mb-4">AWS, Azure, Google Cloud, and cloud infrastructure management</p>
+                        <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Placements Section -->
-    <section id="placements" class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Placements</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Our graduates are placed in top companies worldwide</p>
-                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
-            </div>
+        <!-- Admissions Section -->
+        <section id="admissions" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Admissions</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Start your journey with U1 Technology Institute</p>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div class="bg-white rounded-lg shadow-md p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Placement Statistics</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-gray-700">Placement Rate</span>
-                                <span class="text-[#800020] font-bold">96%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-[#800020] h-2 rounded-full" style="width: 96%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-gray-700">Average Salary</span>
-                                <span class="text-[#800020] font-bold">₹40,000</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-[#800020] h-2 rounded-full" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-gray-700">Highest Package</span>
-                                <span class="text-[#800020] font-bold">₹20,00,000</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-[#800020] h-2 rounded-full" style="width: 100%"></div>
-                            </div>
-                        </div>
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 mb-8 lg:mb-0">
+                        <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Students discussing in campus" class="rounded-lg shadow-md w-full" width="700"
+                            height="467" loading="lazy">
                     </div>
-                </div>
+                    <div class="lg:w-1/2 lg:pl-12">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Join Our Community</h3>
+                        <p class="text-gray-600 mb-6">We're excited that you're considering U1 Technology Institute for
+                            your
+                            educational journey. Our admissions process is designed to identify talented and motivated
+                            students who will thrive in our academic environment.</p>
 
-                <div class="bg-white rounded-lg shadow-md p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Top Recruiters</h3>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                            <span class="font-bold text-gray-700">Google</span>
-                        </div>
-                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                            <span class="font-bold text-gray-700">Microsoft</span>
-                        </div>
-                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                            <span class="font-bold text-gray-700">Amazon</span>
-                        </div>
-                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                            <span class="font-bold text-gray-700">Infosys</span>
-                        </div>
-                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                            <span class="font-bold text-gray-700">TCS</span>
-                        </div>
-                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                            <span class="font-bold text-gray-700">Accenture</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md p-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Student Testimonials</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="flex flex-col items-center text-center testimonial-card transition-all">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Chen"
-                            class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
-                        <p class="text-gray-600 italic mb-4">"The placement cell at U1 Technology Institute provided
-                            excellent guidance and support. I received multiple job offers and joined my dream company."
-                        </p>
-                        <h4 class="font-bold text-gray-900">Emily Chen</h4>
-                        <p class="text-[#800020]">Software Engineer at Google</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center testimonial-card transition-all">
-                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Raj Patel"
-                            class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
-                        <p class="text-gray-600 italic mb-4">"The industry-oriented curriculum and internship
-                            opportunities prepared me well for my career. I secured a position at Microsoft even before
-                            graduation."</p>
-                        <h4 class="font-bold text-gray-900">Raj Patel</h4>
-                        <p class="text-[#800020]">Data Scientist at Microsoft</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Campus Life</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Experience our vibrant campus community</p>
-                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="gallery-item transition-all">
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                        alt="Students in library" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
-                        loading="lazy">
-                </div>
-                <div class="gallery-item transition-all">
-                    <img src="https://media.istockphoto.com/id/882215368/photo/hes-a-great-tutor.webp?a=1&b=1&s=612x612&w=0&k=20&c=CSIs1x0XKDDptmpffMlQGewM280I4PmQFd7ujpdrEyc="
-                        alt="Graduation ceremony" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
-                        loading="lazy">
-                </div>
-                <div class="gallery-item transition-all">
-                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1490&q=80"
-                        alt="Sports event" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
-                        loading="lazy">
-                </div>
-                <div class="gallery-item transition-all">
-                    <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
-                        alt="Cultural festival" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
-                        loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Contact Us</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Get in touch with us for any queries or information</p>
-                <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
-            </div>
-
-            <div class="flex flex-col lg:flex-row">
-                <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-8">
-                    <div class="bg-white rounded-lg shadow-md p-8 h-full">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h3>
-                        <div class="space-y-6">
+                        <div class="space-y-4 mb-8">
                             <div class="flex items-start">
-                                <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
-                                    <i class="fas fa-map-marker-alt text-[#800020]" aria-hidden="true"></i>
+                                <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                    <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-900 mb-1">Address</h4>
-                                    <p class="text-gray-600">1, OMR Service Rd, near Jain College, Customs Colony, Jothi
-                                        Nagar, Thoraipakkam, Chennai, Tamil Nadu 600097</p>
+                                    <h4 class="font-medium text-gray-900">Application Process</h4>
+                                    <p class="text-gray-600">Submit your application online with required documents</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
-                                <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
-                                    <i class="fas fa-phone-alt text-[#800020]" aria-hidden="true"></i>
+                                <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                    <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-900 mb-1">Phone</h4>
-                                    <p class="text-gray-600">+91 99523 91994, +91 97900 66301</p>
+                                    <h4 class="font-medium text-gray-900">Entrance Exams</h4>
+                                    <p class="text-gray-600">Prepare for our entrance examination or submit standardized
+                                        test scores</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
-                                <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
-                                    <i class="fas fa-envelope text-[#800020]" aria-hidden="true"></i>
+                                <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
+                                    <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-900 mb-1">Email</h4>
-                                    <p class="text-gray-600">info@U1Technology.com</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
-                                    <i class="fas fa-clock text-[#800020]" aria-hidden="true"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900 mb-1">Office Hours</h4>
-                                    <p class="text-gray-600">Monday - Friday: 9:00 AM - 7:00 PM</p>
+                                    <h4 class="font-medium text-gray-900">Interview</h4>
+                                    <p class="text-gray-600">Selected candidates will be invited for an interview</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="lg:w-1/2">
-                    <div class="bg-white rounded-lg shadow-md p-8 h-full">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
-                        <form>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                <div>
-                                    <label for="name" class="block text-gray-700 mb-2">Full Name</label>
-                                    <input type="text" id="name"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
-                                </div>
-                                <div>
-                                    <label for="email" class="block text-gray-700 mb-2">Email Address</label>
-                                    <input type="email" id="email"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label for="subject" class="block text-gray-700 mb-2">Subject</label>
-                                <input type="text" id="subject"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
-                            </div>
-                            <div class="mb-4">
-                                <label for="message" class="block text-gray-700 mb-2">Message</label>
-                                <textarea id="message" rows="5"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]"></textarea>
-                            </div>
-                            <button type="submit"
-                                class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all w-full">
-                                Send Message
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <button onclick="createCommunityPopupForm()"
+                                class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
+                                Join Now
                             </button>
-                        </form>
+                            <button
+                                class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
+                                Download Brochure
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Placements Section -->
+        <section id="placements" class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Placements</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Our graduates are placed in top companies worldwide</p>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white rounded-lg shadow-md p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Placement Statistics</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">Placement Rate</span>
+                                    <span class="text-[#800020] font-bold">96%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-[#800020] h-2 rounded-full" style="width: 96%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">Average Salary</span>
+                                    <span class="text-[#800020] font-bold">₹40,000</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-[#800020] h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">Highest Package</span>
+                                    <span class="text-[#800020] font-bold">₹20,00,000</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-[#800020] h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Top Recruiters</h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                                <span class="font-bold text-gray-700">Google</span>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                                <span class="font-bold text-gray-700">Microsoft</span>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                                <span class="font-bold text-gray-700">Amazon</span>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                                <span class="font-bold text-gray-700">Infosys</span>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                                <span class="font-bold text-gray-700">TCS</span>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
+                                <span class="font-bold text-gray-700">Accenture</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Student Testimonials</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="flex flex-col items-center text-center testimonial-zoom transition-all p-6 bg-gray-50 rounded-lg">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Chen"
+                                class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
+                            <p class="text-gray-600 italic mb-4">"The placement cell at U1 Technology Institute provided
+                                excellent guidance and support. I received multiple job offers and joined my dream
+                                company."
+                            </p>
+                            <h4 class="font-bold text-gray-900">Emily Chen</h4>
+                            <p class="text-[#800020]">Software Engineer at Google</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center testimonial-zoom transition-all p-6 bg-gray-50 rounded-lg">
+                            <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Raj Patel"
+                                class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
+                            <p class="text-gray-600 italic mb-4">"The industry-oriented curriculum and internship
+                                opportunities prepared me well for my career. I secured a position at Microsoft even
+                                before
+                                graduation."</p>
+                            <h4 class="font-bold text-gray-900">Raj Patel</h4>
+                            <p class="text-[#800020]">Data Scientist at Microsoft</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center testimonial-zoom transition-all p-6 bg-gray-50 rounded-lg">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya Sharma"
+                                class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
+                            <p class="text-gray-600 italic mb-4">"The hands-on projects and industry mentorship at U1 Technology gave me the confidence to excel in my role as a cybersecurity analyst at Amazon."</p>
+                            <h4 class="font-bold text-gray-900">Priya Sharma</h4>
+                            <p class="text-[#800020]">Cybersecurity Analyst at Amazon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Campus Life</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Experience our vibrant campus community</p>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="gallery-item transition-all">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Students in library" class="w-full h-48 object-cover rounded-lg" width="300"
+                            height="192" loading="lazy">
+                    </div>
+                    <div class="gallery-item transition-all">
+                        <img src="https://media.istockphoto.com/id/882215368/photo/hes-a-great-tutor.webp?a=1&b=1&s=612x612&w=0&k=20&c=CSIs1x0XKDDptmpffMlQGewM280I4PmQFd7ujpdrEyc="
+                            alt="Graduation ceremony" class="w-full h-48 object-cover rounded-lg" width="300"
+                            height="192" loading="lazy">
+                    </div>
+                    <div class="gallery-item transition-all">
+                        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1490&q=80"
+                            alt="Sports event" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
+                            loading="lazy">
+                    </div>
+                    <div class="gallery-item transition-all">
+                        <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                            alt="Cultural festival" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Contact Us</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Get in touch with us for any queries or information</p>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+                </div>
+
+                <div class="flex flex-col lg:flex-row">
+                    <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-8">
+                        <div class="bg-white rounded-lg shadow-md p-8 h-full">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
+                                        <i class="fas fa-map-marker-alt text-[#800020]" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 mb-1">Address</h4>
+                                        <p class="text-gray-600">1, OMR Service Rd, near Jain College, Customs Colony,
+                                            Jothi
+                                            Nagar, Thoraipakkam, Chennai, Tamil Nadu 600097</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
+                                        <i class="fas fa-phone-alt text-[#800020]" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 mb-1">Phone</h4>
+                                        <p class="text-gray-600">+91 99523 91994, +91 97900 66301</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
+                                        <i class="fas fa-envelope text-[#800020]" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 mb-1">Email</h4>
+                                        <p class="text-gray-600">info@U1Technology.co.in</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-[#FFB6C1] p-3 rounded-full mr-4">
+                                        <i class="fas fa-clock text-[#800020]" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 mb-1">Office Hours</h4>
+                                        <p class="text-gray-600">Monday - Friday: 9:00 AM - 7:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-1/2">
+                        <div class="bg-white rounded-lg shadow-md p-8 h-full">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
+                            <form id="contact-form">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                                        <input type="text" id="name" name="name"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-gray-700 mb-2">Email Address</label>
+                                        <input type="email" id="email" name="email"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="subject" class="block text-gray-700 mb-2">Subject</label>
+                                    <input type="text" id="subject" name="subject"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message" class="block text-gray-700 mb-2">Message</label>
+                                    <textarea id="message" name="message" rows="5"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]"></textarea>
+                                </div>
+                                <button type="submit"
+                                    class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all w-full">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Map Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Location</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Visit us at our campus in Chennai</p>
+                    <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
+                </div>
+
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.210012408072!2d80.2346010750847!3d12.97148651482248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d7e4c7e3c0d%3A0x1b02e4f6c0b5b5a5!2sU1%20Technology%20Institute!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
@@ -1276,9 +1083,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center mb-4">
-                        <div class="h-10 w-10 bg-[#800020] rounded-full flex items-center justify-center mr-2">
-                            <span class="text-white font-bold">U1</span>
-                        </div>
+                        <img src="img/favicon-32x32.png" alt="logo">
                         <span class="text-xl font-bold">U1 Technology</span>
                     </div>
                     <p class="text-gray-400 mb-4">A premier educational institution dedicated to excellence in teaching,
@@ -1304,21 +1109,21 @@
                         <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">Courses</a></li>
                         <li><a href="#departments"
                                 class="text-gray-400 hover:text-white transition-colors">Departments</a></li>
-                        <li><a href="#faculty" class="text-gray-400 hover:text-white transition-colors">Faculty</a></li>
                         <li><a href="#admissions"
                                 class="text-gray-400 hover:text-white transition-colors">Admissions</a></li>
                         <li><a href="#placements"
                                 class="text-gray-400 hover:text-white transition-colors">Placements</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-bold mb-4">Programs</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Engineering</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Science</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Commerce</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Arts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Software Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Data Science & AI</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cyber Security</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cloud Computing</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Professional
                                 Courses</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Research Programs</a>
@@ -1331,7 +1136,8 @@
                     <ul class="space-y-2">
                         <li class="flex items-start">
                             <i class="fas fa-map-marker-alt text-[#DC143C] mt-1 mr-2" aria-hidden="true"></i>
-                            <span class="text-gray-400">123 Education Street, Knowledge City, India 110001</span>
+                            <span class="text-gray-400">1, OMR Service Rd, near Jain College, Customs Colony, Jothi
+                                Nagar, Thoraipakkam, Chennai, Tamil Nadu 600097</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-phone-alt text-[#DC143C] mt-1 mr-2" aria-hidden="true"></i>
@@ -1339,7 +1145,7 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-envelope text-[#DC143C] mt-1 mr-2" aria-hidden="true"></i>
-                            <span class="text-gray-400">info@U1Technology.com</span>
+                            <span class="text-gray-400">info@U1Technology.co.in</span>
                         </li>
                     </ul>
                 </div>
@@ -1351,1432 +1157,227 @@
         </div>
     </footer>
 
-    <!-- Authentication System -->
-    <!-- Toast Container -->
-    <div id="toast-container"></div>
-
-    <!-- Authentication Modal -->
-    <div id="auth-modal">
-        <div class="modal-content">
-            <button class="modal-close" id="modal-close" aria-label="Close authentication modal">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-
-            <div class="tab-container">
-                <button class="tab-button active" id="login-tab">Login</button>
-                <button class="tab-button" id="signup-tab">Sign Up</button>
-            </div>
-
-            <div class="scrollable-container">
-                <div class="forms-container">
-                    <!-- Login Form -->
-                    <form class="auth-form active" id="login-form">
-                        <h2 class="form-heading">Welcome Back</h2>
-
-                        <div class="form-group">
-                            <label for="login-email" class="form-label">Email Address</label>
-                            <input type="email" id="login-email" class="form-input" placeholder="Enter your email"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="login-password" class="form-label">Password</label>
-                            <div class="password-input-container">
-                                <input type="password" id="login-password" class="form-input"
-                                    placeholder="Enter your password" required>
-                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                                    <i class="fas fa-eye" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <a href="#" class="form-link" id="forgot-password-link">Forgot Password?</a>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="form-button">Login</button>
-                        </div>
-
-                        <div class="message error-message" id="login-error"></div>
-                        <div class="message success-message" id="login-success"></div>
-                    </form>
-
-                    <!-- Sign Up Form -->
-                    <form class="auth-form" id="signup-form">
-                        <h2 class="form-heading">Create Account</h2>
-
-                        <div class="form-group">
-                            <label for="signup-name" class="form-label">Full Name</label>
-                            <input type="text" id="signup-name" class="form-input" placeholder="Enter your full name"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="signup-email" class="form-label">Email</label>
-                            <input type="email" id="signup-email" class="form-input" placeholder="Enter your email"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="signup-phone" class="form-label">Phone Number</label>
-                            <input type="tel" id="signup-phone" class="form-input" placeholder="Enter your phone number"
-                                maxlength="10" required>
-                            <p class="info-text">Must be 10 digits</p>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Experience</label>
-                            <div class="radio-group">
-                                <input type="radio" id="exp-tech" name="experience" class="radio-input"
-                                    value="Working professional – Technical roles" checked>
-                                <label for="exp-tech" class="radio-label">Working professional – Technical roles</label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="exp-nontech" name="experience" class="radio-input"
-                                    value="Working professional – Non-technical">
-                                <label for="exp-nontech" class="radio-label">Working professional –
-                                    Non-technical</label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="exp-student" name="experience" class="radio-input"
-                                    value="College student – Final year">
-                                <label for="exp-student" class="radio-label">College student – Final year</label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="exp-intern" name="experience" class="radio-input"
-                                    value="Internship">
-                                <label for="exp-intern" class="radio-label">Internship</label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="exp-others" name="experience" class="radio-input"
-                                    value="Others">
-                                <label for="exp-others" class="radio-label">Others</label>
-                            </div>
-
-                            <div id="additional-info-container" style="margin-top: 10px; display: none;">
-                                <textarea id="additional-info" class="form-input"
-                                    placeholder="Please provide more information..." rows="3"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="signup-password" class="form-label">Password</label>
-                            <div class="password-input-container">
-                                <input type="password" id="signup-password" class="form-input"
-                                    placeholder="Create a password" required>
-                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                                    <i class="fas fa-eye" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <p class="info-text">Password must be at least 8 characters with uppercase, lowercase,
-                                number, and special character</p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="signup-confirm-password" class="form-label">Confirm Password</label>
-                            <div class="password-input-container">
-                                <input type="password" id="signup-confirm-password" class="form-input"
-                                    placeholder="Confirm your password" required>
-                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                                    <i class="fas fa-eye" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="form-button">Sign Up</button>
-                        </div>
-
-                        <div class="message error-message" id="signup-error"></div>
-                        <div class="message success-message" id="signup-success"></div>
-                    </form>
-
-                    <!-- Forgot Password Form -->
-                    <form class="auth-form" id="forgot-password-form">
-                        <h2 class="form-heading">Reset Password</h2>
-
-                        <div class="form-group">
-                            <p class="info-text" style="text-align: center; margin-bottom: 20px;">
-                                Enter your email address and we will send you a password reset OTP.
-                            </p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="forgot-email" class="form-label">Email Address</label>
-                            <input type="email" id="forgot-email" class="form-input" placeholder="Enter your email"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="button" class="form-button" id="send-otp-btn">Send OTP</button>
-                        </div>
-
-                        <div class="form-group" id="otp-section" style="display: none;">
-                            <label for="forgot-otp" class="form-label">Enter OTP</label>
-                            <input type="text" id="forgot-otp" class="form-input" placeholder="Enter 6-digit OTP"
-                                maxlength="6">
-                            <p class="info-text">Check your email for the OTP</p>
-                        </div>
-
-                        <div class="form-group" id="new-password-section" style="display: none;">
-                            <label for="new-password" class="form-label">New Password</label>
-                            <div class="password-input-container">
-                                <input type="password" id="new-password" class="form-input"
-                                    placeholder="Enter new password">
-                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                                    <i class="fas fa-eye" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <p class="info-text">Password must be at least 8 characters with uppercase, lowercase,
-                                number, and special character</p>
-                        </div>
-
-                        <div class="form-group" id="confirm-new-password-section" style="display: none;">
-                            <label for="confirm-new-password" class="form-label">Confirm New Password</label>
-                            <div class="password-input-container">
-                                <input type="password" id="confirm-new-password" class="form-input"
-                                    placeholder="Confirm new password">
-                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                                    <i class="fas fa-eye" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="reset-password-btn-container" style="display: none;">
-                            <button type="submit" class="form-button">Reset Password</button>
-                        </div>
-
-                        <div class="form-group">
-                            <a href="#" class="form-link" id="back-to-login"
-                                style="text-align: center; display: block;">Back to Login</a>
-                        </div>
-
-                        <div class="message error-message" id="forgot-error"></div>
-                        <div class="message success-message" id="forgot-success"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Main content ID for accessibility
-        const mainContent = document.createElement('main');
-        mainContent.id = 'main-content';
-        mainContent.setAttribute('tabindex', '-1');
-        document.body.insertBefore(mainContent, document.querySelector('nav').nextSibling);
+        document.addEventListener('DOMContentLoaded', function () {
+            // Main content ID for accessibility
+            const mainContent = document.getElementById('main-content');
 
-        // Move all sections to main content
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            mainContent.appendChild(section);
-        });
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', function () {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
 
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function () {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                mobileMenu.classList.toggle('hidden');
+                this.setAttribute('aria-expanded', !isExpanded);
 
-            mobileMenu.classList.toggle('hidden');
-            this.setAttribute('aria-expanded', !isExpanded);
-
-            // Update icon
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-
-        // Authentication System with API Integration
-        class AuthSystem {
-            constructor() {
-                this.currentUser = null;
-                this.isLoggedIn = false;
-                this.apiBaseUrl = window.AppConfig.API_BASE_URL + '/api';
-                this.init();
-            }
-
-            init() {
-                // Check if user is already logged in
-                this.checkLoginStatus();
-
-                // Set up event listeners
-                this.setupEventListeners();
-
-                // Initialize animations
-                this.initializeAnimations();
-            }
-
-            checkLoginStatus() {
-                const token = localStorage.getItem('authToken');
-                const userData = localStorage.getItem('currentUser');
-
-                if (token && userData) {
-                    this.currentUser = JSON.parse(userData);
-                    this.isLoggedIn = true;
-                    this.updateUIForLoggedInUser();
-
-                    // Verify token is still valid
-                    this.verifyToken();
+                // Update icon
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
                 }
-            }
+            });
 
-            setupEventListeners() {
-                // Modal open buttons
-                const signinButtons = [
-                    document.getElementById('header-signin-btn'),
-                    document.getElementById('mobile-signin-btn')
-                ];
-
-                signinButtons.forEach(button => {
-                    if (button) {
-                        button.addEventListener('click', () => {
-                            if (!this.isLoggedIn) {
-                                this.openAuthModal();
-                            } else {
-                                this.showUserMenu();
-                            }
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
                         });
                     }
                 });
+            });
 
-                // Modal close button
-                document.getElementById('modal-close').addEventListener('click', () => {
-                    this.closeAuthModal();
+            // Explore Programs button scroll to courses section
+            document.getElementById('explore-programs-btn').addEventListener('click', function() {
+                document.getElementById('courses').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
+            });
 
-                // Tab switching
-                document.getElementById('login-tab').addEventListener('click', () => {
-                    this.switchTab('login');
-                });
+            // About section flip functionality
+            const learnMoreBtn = document.getElementById('learn-more-btn');
+            const backToNormalBtn = document.getElementById('back-to-normal-btn');
+            const aboutFlipCard = document.getElementById('about-flip-card');
 
-                document.getElementById('signup-tab').addEventListener('click', () => {
-                    this.switchTab('signup');
-                });
+            learnMoreBtn.addEventListener('click', function() {
+                aboutFlipCard.classList.add('flipped');
+            });
 
-                // Form submissions
-                document.getElementById('login-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleLogin();
-                });
+            backToNormalBtn.addEventListener('click', function() {
+                aboutFlipCard.classList.remove('flipped');
+            });
 
-                document.getElementById('signup-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleSignup();
-                });
+            // Contact Form Handler
+            document.getElementById('contact-form').addEventListener('submit', function (e) {
+                e.preventDefault();
 
-                document.getElementById('forgot-password-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handlePasswordReset();
-                });
+                // Get form data
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
 
-                // Forgot password functionality
-                document.getElementById('forgot-password-link').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showForgotPassword();
-                });
-
-                document.getElementById('back-to-login').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.switchTab('login');
-                });
-
-                // Send OTP button
-                document.getElementById('send-otp-btn').addEventListener('click', () => {
-                    this.handleSendOTP();
-                });
-
-                // Close modal when clicking outside
-                document.getElementById('auth-modal').addEventListener('click', (e) => {
-                    if (e.target.id === 'auth-modal') {
-                        this.closeAuthModal();
-                    }
-                });
-
-                // Password visibility toggles
-                this.initializePasswordToggles();
-
-                // Experience radio buttons
-                this.initializeExperienceRadios();
-
-                // Phone number validation
-                this.initializePhoneValidation();
-
-                // Form input validation
-                this.initializeFormValidation();
-            }
-
-            initializeAnimations() {
-                // Add CSS for animations if not already present
-                if (!document.getElementById('auth-animations')) {
-                    const style = document.createElement('style');
-                    style.id = 'auth-animations';
-                    style.textContent = `
-                        .auth-modal-enter {
-                            opacity: 0;
-                            transform: scale(0.9);
-                        }
-                        .auth-modal-enter-active {
-                            opacity: 1;
-                            transform: scale(1);
-                            transition: opacity 0.3s ease, transform 0.3s ease;
-                        }
-                        .auth-modal-exit {
-                            opacity: 1;
-                            transform: scale(1);
-                        }
-                        .auth-modal-exit-active {
-                            opacity: 0;
-                            transform: scale(0.9);
-                            transition: opacity 0.3s ease, transform 0.3s ease;
-                        }
-                        .form-tab-enter {
-                            opacity: 0;
-                            transform: translateX(20px);
-                        }
-                        .form-tab-enter-active {
-                            opacity: 1;
-                            transform: translateX(0);
-                            transition: opacity 0.3s ease, transform 0.3s ease;
-                        }
-                        .form-tab-exit {
-                            opacity: 1;
-                            transform: translateX(0);
-                        }
-                        .form-tab-exit-active {
-                            opacity: 0;
-                            transform: translateX(-20px);
-                            transition: opacity 0.3s ease, transform 0.3s ease;
-                        }
-                    `;
-                    document.head.appendChild(style);
+                // Simple validation
+                if (!data.name || !data.email || !data.subject || !data.message) {
+                    alert('Please fill in all fields');
+                    return;
                 }
-            }
 
-            // API Methods
-            async apiRequest(endpoint, options = {}) {
-                const url = `${this.apiBaseUrl}${endpoint}`;
-
-                const defaultOptions = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        ...options.headers
-                    }
-                };
-
-                const config = { ...defaultOptions, ...options };
-
-                try {
-                    const response = await fetch(url, config);
-                    const data = await response.json();
-
-                    if (!response.ok) {
-                        throw new Error(data.message || `HTTP error! status: ${response.status}`);
-                    }
-
-                    return data;
-                } catch (error) {
-                    console.error('API request failed:', error);
-                    throw error;
+                // Simple email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.email)) {
+                    alert('Please enter a valid email address');
+                    return;
                 }
-            }
 
-            openAuthModal() {
-                const modal = document.getElementById('auth-modal');
-                console.log('Opening auth modal:', modal);
+                // Simulate form submission
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
 
-                if (modal) {
-                    modal.style.display = 'flex';
+                // Simulate API call
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                    alert('Message sent successfully! We will get back to you soon.');
+                    this.reset();
+                }, 2000);
+            });
 
-                    // Force show the modal
-                    setTimeout(() => {
-                        modal.style.opacity = '1';
-                        modal.style.visibility = 'visible';
-                    }, 10);
+            // Courses/Programs Section Functionality
+            class CoursesManager {
+                constructor() {
+                    this.apiBaseUrl = window.AppConfig ? window.AppConfig.API_BASE_URL + '/api' : '/api';
+                    this.init();
+                }
 
-                    // Reset forms
-                    this.resetForms();
+                init() {
+                    this.loadCourses();
+                }
 
-                    // Set focus to first input in active form
-                    setTimeout(() => {
-                        const activeForm = document.querySelector('.auth-form.active');
-                        if (activeForm) {
-                            const firstInput = activeForm.querySelector('input');
-                            if (firstInput) {
-                                firstInput.focus();
+                async loadCourses() {
+                    const coursesContainer = document.getElementById('courses-container');
+                    if (!coursesContainer) return;
+
+                    try {
+                        // Show skeleton loading state
+                        coursesContainer.innerHTML = this.getSkeletonHTML();
+
+                        // Simulate API call delay
+                        setTimeout(async () => {
+                            try {
+                                const response = await fetch(`${this.apiBaseUrl}/courses?limit=100&status=active`);
+
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+
+                                const result = await response.json();
+
+                                if (result.success && result.data.courses.length > 0) {
+                                    const allCourses = result.data.courses;
+
+                                    // Get 3 random courses
+                                    const randomCourses = this.getRandomCourses(allCourses, 3);
+
+                                    // Update the courses section
+                                    this.updateCoursesSection(randomCourses);
+                                } else {
+                                    // Fallback to demo courses if no courses found
+                                    this.showFallbackCourses();
+                                }
+                            } catch (error) {
+                                console.error('Error loading courses:', error);
+                                // Fallback to demo courses on error
+                                this.showFallbackCourses();
                             }
-                        }
-                    }, 300);
-                } else {
-                    console.error('Auth modal element not found!');
-                }
-            }
-
-            closeAuthModal() {
-                const modal = document.getElementById('auth-modal');
-                if (modal) {
-                    modal.style.opacity = '0';
-                    modal.style.visibility = 'hidden';
-
-                    setTimeout(() => {
-                        modal.style.display = 'none';
-                    }, 300);
-                }
-            }
-
-            switchTab(tabName) {
-                const currentActiveForm = document.querySelector('.auth-form.active');
-                const currentActiveTab = document.querySelector('.tab-button.active');
-
-                // Update tabs
-                document.querySelectorAll('.tab-button').forEach(tab => {
-                    tab.classList.remove('active');
-                });
-
-                document.querySelectorAll('.auth-form').forEach(form => {
-                    form.classList.remove('active');
-                });
-
-                // Add exit animation to current form
-                if (currentActiveForm) {
-                    currentActiveForm.classList.add('form-tab-exit-active');
-                }
-
-                setTimeout(() => {
-                    if (currentActiveForm) {
-                        currentActiveForm.classList.remove('form-tab-exit-active');
-                        currentActiveForm.style.display = 'none';
-                        currentActiveForm.classList.remove('active');
-                        currentActiveForm.style.opacity = '0';
-                        currentActiveForm.style.transform = 'translateX(-20px)';
-                        currentActiveForm.style.transition = 'none';
-                        currentActiveForm.style.display = 'block';
-                        currentActiveForm.style.opacity = '0';
-                        currentActiveForm.style.transform = 'translateX(20px)';
+                        }, 1500); // Simulate network delay
+                    } catch (error) {
+                        console.error('Error loading courses:', error);
+                        // Fallback to demo courses on error
+                        this.showFallbackCourses();
                     }
-
-                    if (tabName === 'login') {
-                        document.getElementById('login-tab').classList.add('active');
-                        const loginForm = document.getElementById('login-form');
-                        loginForm.classList.add('active');
-                        loginForm.style.display = 'block';
-                        setTimeout(() => {
-                            loginForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                            loginForm.style.opacity = '1';
-                            loginForm.style.transform = 'translateX(0)';
-                        }, 10);
-                    } else {
-                        document.getElementById('signup-tab').classList.add('active');
-                        const signupForm = document.getElementById('signup-form');
-                        signupForm.classList.add('active');
-                        signupForm.style.display = 'block';
-                        setTimeout(() => {
-                            signupForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                            signupForm.style.opacity = '1';
-                            signupForm.style.transform = 'translateX(0)';
-                        }, 10);
-                    }
-                }, 300);
-
-                // Reset forgot password form
-                this.resetForgotPasswordForm();
-
-                // Clear messages
-                this.clearAllMessages();
-            }
-
-            showForgotPassword() {
-                const currentActiveForm = document.querySelector('.auth-form.active');
-
-                // Add exit animation to current form
-                if (currentActiveForm) {
-                    currentActiveForm.classList.add('form-tab-exit-active');
                 }
 
-                setTimeout(() => {
-                    if (currentActiveForm) {
-                        currentActiveForm.classList.remove('form-tab-exit-active');
-                        currentActiveForm.classList.remove('active');
-                        document.getElementById('login-tab').classList.remove('active');
-                        document.getElementById('signup-tab').classList.remove('active');
-
-                        const forgotForm = document.getElementById('forgot-password-form');
-                        forgotForm.classList.add('active');
-                        forgotForm.style.display = 'block';
-                        forgotForm.style.opacity = '0';
-                        forgotForm.style.transform = 'translateX(20px)';
-
-                        setTimeout(() => {
-                            forgotForm.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                            forgotForm.style.opacity = '1';
-                            forgotForm.style.transform = 'translateX(0)';
-                        }, 10);
-                    }
-                }, 300);
-
-                // Reset form state
-                this.resetForgotPasswordForm();
-            }
-
-            resetForgotPasswordForm() {
-                // Hide OTP and password sections
-                document.getElementById('otp-section').style.display = 'none';
-                document.getElementById('new-password-section').style.display = 'none';
-                document.getElementById('confirm-new-password-section').style.display = 'none';
-                document.getElementById('reset-password-btn-container').style.display = 'none';
-
-                // Show send OTP button
-                const sendOtpBtn = document.getElementById('send-otp-btn');
-                sendOtpBtn.style.display = 'block';
-                sendOtpBtn.textContent = 'Send OTP';
-                sendOtpBtn.disabled = false;
-
-                // Clear inputs
-                document.getElementById('forgot-email').value = '';
-                document.getElementById('forgot-otp').value = '';
-                document.getElementById('new-password').value = '';
-                document.getElementById('confirm-new-password').value = '';
-
-                // Clear messages
-                this.clearForgotPasswordMessages();
-            }
-
-            initializePasswordToggles() {
-                document.querySelectorAll('.password-toggle').forEach(toggle => {
-                    toggle.addEventListener('click', function () {
-                        const input = this.parentElement.querySelector('input');
-                        const icon = this.querySelector('i');
-
-                        if (input.type === 'password') {
-                            input.type = 'text';
-                            icon.classList.remove('fa-eye');
-                            icon.classList.add('fa-eye-slash');
-                            this.setAttribute('aria-label', 'Hide password');
-                        } else {
-                            input.type = 'password';
-                            icon.classList.remove('fa-eye-slash');
-                            icon.classList.add('fa-eye');
-                            this.setAttribute('aria-label', 'Show password');
-                        }
-                    });
-                });
-            }
-
-            initializeExperienceRadios() {
-                const experienceRadios = document.querySelectorAll('input[name="experience"]');
-                const additionalInfoContainer = document.getElementById('additional-info-container');
-                const additionalInfo = document.getElementById('additional-info');
-
-                console.log('Experience radios found:', experienceRadios.length);
-
-                // Set explicit values for each radio button
-                const radioValues = [
-                    "Working professional – Technical roles",
-                    "Working professional – Non-technical",
-                    "College student – Final year",
-                    "Internship",
-                    "Others"
-                ];
-
-                experienceRadios.forEach((radio, index) => {
-                    // Set the value explicitly
-                    radio.value = radioValues[index];
-
-                    console.log(`Radio ${index + 1}:`, {
-                        id: radio.id,
-                        value: radio.value,
-                        checked: radio.checked,
-                        type: radio.type,
-                        name: radio.name
-                    });
-                });
-
-                // Ensure first radio is checked by default
-                if (!document.querySelector('input[name="experience"]:checked')) {
-                    experienceRadios[0].checked = true;
-                    console.log('Forced first radio to be checked');
+                getRandomCourses(courses, count) {
+                    const shuffled = [...courses].sort(() => 0.5 - Math.random());
+                    return shuffled.slice(0, count);
                 }
 
-                experienceRadios.forEach(radio => {
-                    radio.addEventListener('change', () => {
-                        console.log('Radio changed - Value:', radio.value, 'Checked:', radio.checked);
-
-                        if (radio.checked && radio.value === 'Others') {
-                            additionalInfoContainer.style.display = 'block';
-                            additionalInfo.required = true;
-                            additionalInfoContainer.style.opacity = '0';
-                            setTimeout(() => {
-                                additionalInfoContainer.style.opacity = '1';
-                                additionalInfoContainer.style.transition = 'opacity 0.3s ease';
-                            }, 10);
-                        } else if (radio.checked) {
-                            additionalInfoContainer.style.opacity = '1';
-                            setTimeout(() => {
-                                additionalInfoContainer.style.display = 'none';
-                            }, 300);
-                            additionalInfo.required = false;
-                            additionalInfo.value = '';
-                        }
-                    });
-                });
-
-                // Test the current selection
-                const selected = document.querySelector('input[name="experience"]:checked');
-                console.log('Currently selected experience:', selected ? selected.value : 'None');
-            }
-
-            initializePhoneValidation() {
-                const phoneInput = document.getElementById('signup-phone');
-                phoneInput.addEventListener('input', function () {
-                    this.value = this.value.replace(/\D/g, '').slice(0, 10);
-                });
-            }
-
-            initializeFormValidation() {
-                // Real-time email validation
-                document.querySelectorAll('input[type="email"]').forEach(input => {
-                    input.addEventListener('blur', (e) => {
-                        const email = e.target.value.trim();
-                        if (email && !this.validateEmail(email)) {
-                            e.target.style.borderColor = 'var(--error-color)';
-                        } else {
-                            e.target.style.borderColor = 'var(--primary-color)';
-                        }
-                    });
-                });
-
-                // Real-time password validation
-                document.getElementById('signup-password').addEventListener('input', (e) => {
-                    const password = e.target.value;
-                    if (password && !this.validatePassword(password)) {
-                        e.target.style.borderColor = 'var(--error-color)';
-                    } else {
-                        e.target.style.borderColor = 'var(--primary-color)';
-                    }
-                });
-
-                // Confirm password match validation
-                document.getElementById('signup-confirm-password').addEventListener('input', (e) => {
-                    const password = document.getElementById('signup-password').value;
-                    const confirmPassword = e.target.value;
-
-                    if (confirmPassword && password !== confirmPassword) {
-                        e.target.style.borderColor = 'var(--error-color)';
-                    } else {
-                        e.target.style.borderColor = 'var(--primary-color)';
-                    }
-                });
-            }
-
-            async handleLogin() {
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value;
-                const errorElement = document.getElementById('login-error');
-                const successElement = document.getElementById('login-success');
-                const submitBtn = document.getElementById('login-form').querySelector('.form-button');
-
-                // Basic validation
-                if (!email || !password) {
-                    this.showMessage(errorElement, 'Please fill in all fields');
-                    return;
+                formatINR(amount) {
+                    return '₹' + amount.toLocaleString('en-IN');
                 }
 
-                if (!this.validateEmail(email)) {
-                    this.showMessage(errorElement, 'Please enter a valid email address');
-                    return;
+                generateRandomRating() {
+                    return (Math.random() * 0.6 + 4.2).toFixed(1);
                 }
 
-                // Show loading state
-                this.setButtonLoading(submitBtn, true);
+                createSellerBadge(seller) {
+                    if (!seller) return '';
 
-                try {
-                    const response = await this.apiRequest('/auth/login', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            email: email.toLowerCase(),
-                            password: password
-                        })
-                    });
+                    const sellerClassMap = {
+                        'Best Seller': 'best-seller',
+                        'Top Rated': 'top-rated',
+                        'Most Popular': 'most-popular',
+                        'Trending Now': 'trending-now',
+                        'Student Favorite': 'student-favorite',
+                        'Bestseller': 'bestseller',
+                        'Hot Pick': 'hot-pick',
+                        'Editor\'s Choice': 'editors-choice',
+                        'Featured Course': 'featured-course',
+                        'Highly Recommended': 'highly-recommended',
+                        'Top Choice': 'top-choice'
+                    };
 
-                    if (response.success) {
-                        // Store token and user data
-                        const token = response.data.token;
-                        const user = response.data.user;
+                    const badgeClass = sellerClassMap[seller] || 'best-seller';
 
-                        localStorage.setItem('authToken', token);
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-
-                        this.currentUser = user;
-                        this.isLoggedIn = true;
-
-                        this.showMessage(successElement, 'Login successful!');
-                        this.updateUIForLoggedInUser();
-
-                        setTimeout(() => {
-                            this.closeAuthModal();
-                            this.showToast('Login successful! Welcome back.', 'success');
-                        }, 1000);
-                    } else {
-                        this.showMessage(errorElement, response.message || 'Login failed');
-                    }
-                } catch (error) {
-                    console.error('Login error:', error);
-                    this.showMessage(errorElement, error.message || 'Login failed. Please try again.');
-                } finally {
-                    this.setButtonLoading(submitBtn, false);
-                }
-            }
-
-            async handleSignup() {
-                const name = document.getElementById('signup-name').value.trim();
-                const email = document.getElementById('signup-email').value.trim();
-                const phone = document.getElementById('signup-phone').value;
-                const password = document.getElementById('signup-password').value;
-                const confirmPassword = document.getElementById('signup-confirm-password').value;
-
-                // Get experience value
-                let experience = '';
-                const selectedRadio = document.querySelector('input[name="experience"]:checked');
-                if (selectedRadio) {
-                    experience = selectedRadio.value;
+                    return `<span class="seller-badge ${badgeClass}">${seller}</span>`;
                 }
 
-                const additionalInfo = document.getElementById('additional-info').value;
-                const errorElement = document.getElementById('signup-error');
-                const successElement = document.getElementById('signup-success');
-                const submitBtn = document.getElementById('signup-form').querySelector('.form-button');
+                updateCoursesSection(courses) {
+                    const coursesContainer = document.getElementById('courses-container');
+                    if (!coursesContainer) return;
 
-                // Debug log
-                console.log('Form submission data:', {
-                    name, email, phone, experience, additionalInfo
-                });
-
-                // Validation
-                if (!name || !email || !phone || !password || !confirmPassword) {
-                    this.showMessage(errorElement, 'Please fill in all required fields');
-                    return;
-                }
-
-                if (!experience) {
-                    this.showMessage(errorElement, 'Please select your experience level');
-                    return;
-                }
-
-                if (!this.validateEmail(email)) {
-                    this.showMessage(errorElement, 'Please enter a valid email address');
-                    return;
-                }
-
-                if (phone.length !== 10) {
-                    this.showMessage(errorElement, 'Phone number must be 10 digits');
-                    return;
-                }
-
-                if (!this.validatePassword(password)) {
-                    this.showMessage(errorElement, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
-                    return;
-                }
-
-                if (password !== confirmPassword) {
-                    this.showMessage(errorElement, 'Passwords do not match');
-                    return;
-                }
-
-                // Show loading state
-                this.setButtonLoading(submitBtn, true);
-
-                try {
-                    const response = await this.apiRequest('/auth/register', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            name: name,
-                            email: email.toLowerCase(),
-                            phone: phone,
-                            password: password,
-                            experience: experience,
-                            additionalInfo: experience === 'Others' ? additionalInfo : ''
-                        })
-                    });
-
-                    if (response.success) {
-                        // Store token and user data
-                        const token = response.data.token;
-                        const user = response.data.user;
-
-                        localStorage.setItem('authToken', token);
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-
-                        this.currentUser = user;
-                        this.isLoggedIn = true;
-
-                        this.showMessage(successElement, 'Account created successfully!');
-                        this.updateUIForLoggedInUser();
-
-                        setTimeout(() => {
-                            this.closeAuthModal();
-                            this.showToast('Account created successfully!', 'success');
-                        }, 1500);
-                    } else {
-                        this.showMessage(errorElement, response.message || 'Registration failed');
-                    }
-                } catch (error) {
-                    console.error('Signup error:', error);
-                    this.showMessage(errorElement, error.message || 'Registration failed. Please try again.');
-                } finally {
-                    this.setButtonLoading(submitBtn, false);
-                }
-            }
-
-            async handleSendOTP() {
-                const email = document.getElementById('forgot-email').value.trim();
-                const errorElement = document.getElementById('forgot-error');
-                const successElement = document.getElementById('forgot-success');
-                const sendOtpBtn = document.getElementById('send-otp-btn');
-
-                // Reset messages
-                this.clearForgotPasswordMessages();
-
-                // Validation
-                if (!email) {
-                    this.showMessage(errorElement, 'Please enter your email address');
-                    return;
-                }
-
-                if (!this.validateEmail(email)) {
-                    this.showMessage(errorElement, 'Please enter a valid email address');
-                    return;
-                }
-
-                // Show loading state
-                this.setButtonLoading(sendOtpBtn, true, 'Sending OTP...');
-
-                try {
-                    const response = await this.apiRequest('/auth/send-otp', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            email: email.toLowerCase(),
-                            purpose: 'password_reset'
-                        })
-                    });
-
-                    if (response.success) {
-                        this.showMessage(successElement, response.message || 'OTP sent successfully! Check your email.');
-
-                        // Show OTP section with animation
-                        this.showSectionWithAnimation('otp-section');
-
-                        // Show password sections with staggered animation
-                        setTimeout(() => {
-                            this.showSectionWithAnimation('new-password-section');
-                        }, 300);
-
-                        setTimeout(() => {
-                            this.showSectionWithAnimation('confirm-new-password-section');
-                        }, 600);
-
-                        setTimeout(() => {
-                            this.showSectionWithAnimation('reset-password-btn-container');
-                        }, 900);
-
-                        this.showToast('OTP sent successfully!', 'success');
-                    } else {
-                        this.showMessage(errorElement, response.message || 'Failed to send OTP');
-                    }
-                } catch (error) {
-                    console.error('Send OTP error:', error);
-                    this.showMessage(errorElement, error.message || 'Failed to send OTP. Please try again.');
-                } finally {
-                    this.setButtonLoading(sendOtpBtn, false, 'Resend OTP');
-                }
-            }
-
-            async handlePasswordReset() {
-                const email = document.getElementById('forgot-email').value.trim();
-                const otp = document.getElementById('forgot-otp').value;
-                const newPassword = document.getElementById('new-password').value;
-                const confirmPassword = document.getElementById('confirm-new-password').value;
-                const errorElement = document.getElementById('forgot-error');
-                const successElement = document.getElementById('forgot-success');
-                const resetBtn = document.getElementById('reset-password-btn-container').querySelector('button');
-
-                // Reset messages
-                this.clearForgotPasswordMessages();
-
-                // Validation
-                if (!otp) {
-                    this.showMessage(errorElement, 'Please enter the OTP');
-                    return;
-                }
-
-                if (!newPassword || !confirmPassword) {
-                    this.showMessage(errorElement, 'Please fill in all password fields');
-                    return;
-                }
-
-                if (!this.validatePassword(newPassword)) {
-                    this.showMessage(errorElement, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
-                    return;
-                }
-
-                if (newPassword !== confirmPassword) {
-                    this.showMessage(errorElement, 'Passwords do not match');
-                    return;
-                }
-
-                // Show loading state
-                this.setButtonLoading(resetBtn, true, 'Resetting Password...');
-
-                try {
-                    const response = await this.apiRequest('/auth/reset-password', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            email: email.toLowerCase(),
-                            otp: otp,
-                            newPassword: newPassword
-                        })
-                    });
-
-                    if (response.success) {
-                        this.showMessage(successElement, response.message || 'Password reset successfully!');
-
-                        // Redirect to login after success
-                        setTimeout(() => {
-                            this.switchTab('login');
-                            this.resetForgotPasswordForm();
-                            this.showToast('Password reset successfully! You can now login with your new password.', 'success');
-                        }, 2000);
-                    } else {
-                        this.showMessage(errorElement, response.message || 'Failed to reset password');
-                    }
-                } catch (error) {
-                    console.error('Reset password error:', error);
-                    this.showMessage(errorElement, error.message || 'Failed to reset password. Please try again.');
-                    this.setButtonLoading(resetBtn, false);
-                }
-            }
-
-            async verifyToken() {
-                try {
-                    const token = localStorage.getItem('authToken');
-                    if (!token) {
-                        this.handleLogout();
+                    if (courses.length === 0) {
+                        coursesContainer.innerHTML = this.getNoCoursesHTML();
                         return;
                     }
 
-                    const response = await this.apiRequest('/auth/me', {
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
+                    coursesContainer.innerHTML = courses.map(course => {
+                        // Generate random rating between 4.2 and 4.8
+                        const rating = this.generateRandomRating();
 
-                    if (!response.success) {
-                        this.handleLogout();
-                    }
-                } catch (error) {
-                    console.error('Token verification failed:', error);
-                    this.handleLogout();
-                }
-            }
+                        // Check if course has discount
+                        const hasDiscount = course.onlineOriginalPrice && course.onlineOriginalPrice > course.onlinePrice;
 
-            // Utility functions
-            validateEmail = (email) => {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            }
+                        // Ensure image URL is valid
+                        const courseImage = course.images && course.images[0]
+                            ? course.images[0]
+                            : 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
 
-            validatePassword = (password) => {
-                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                return passwordRegex.test(password);
-            }
+                        // Get course description (prefer miniDescription, fallback to description)
+                        const courseDescription = course.miniDescription || course.description || 'No description available.';
 
-            setButtonLoading(button, isLoading, loadingText = 'Loading...') {
-                if (isLoading) {
-                    button.disabled = true;
-                    button.dataset.originalText = button.textContent;
-                    button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${loadingText}`;
-                } else {
-                    button.disabled = false;
-                    button.textContent = button.dataset.originalText || button.textContent;
-                }
-            }
-
-            showSectionWithAnimation(sectionId) {
-                const section = document.getElementById(sectionId);
-                section.style.display = 'block';
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(10px)';
-
-                setTimeout(() => {
-                    section.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }, 10);
-            }
-
-            showMessage(element, message) {
-                element.textContent = message;
-                element.style.display = 'block';
-                element.style.opacity = '0';
-
-                setTimeout(() => {
-                    element.style.transition = 'opacity 0.3s ease';
-                    element.style.opacity = '1';
-                }, 10);
-
-                // Hide message after 5 seconds
-                setTimeout(() => {
-                    element.style.opacity = '0';
-                    setTimeout(() => {
-                        element.style.display = 'none';
-                    }, 300);
-                }, 5000);
-            }
-
-            clearAllMessages() {
-                document.querySelectorAll('.message').forEach(message => {
-                    message.style.display = 'none';
-                    message.textContent = '';
-                });
-            }
-
-            clearForgotPasswordMessages() {
-                document.getElementById('forgot-error').style.display = 'none';
-                document.getElementById('forgot-success').style.display = 'none';
-            }
-
-            showToast(message, type = 'info') {
-                const toastContainer = document.getElementById('toast-container');
-                const toast = document.createElement('div');
-                toast.className = `toast toast-${type}`;
-
-                // Add icon based on type
-                const icons = {
-                    success: 'fa-check-circle',
-                    error: 'fa-exclamation-circle',
-                    warning: 'fa-exclamation-triangle',
-                    info: 'fa-info-circle'
-                };
-
-                toast.innerHTML = `
-                    <i class="fas ${icons[type]}" aria-hidden="true"></i>
-                    <span>${message}</span>
-                `;
-
-                toastContainer.appendChild(toast);
-
-                // Animate in
-                setTimeout(() => {
-                    toast.style.transform = 'translateX(0)';
-                }, 10);
-
-                // Auto remove after 5 seconds
-                const autoRemove = setTimeout(() => {
-                    toast.style.transform = 'translateX(100%)';
-                    setTimeout(() => {
-                        if (toast.parentNode) {
-                            toast.parentNode.removeChild(toast);
-                        }
-                    }, 300);
-                }, 5000);
-
-                // Allow manual dismissal
-                toast.addEventListener('click', () => {
-                    clearTimeout(autoRemove);
-                    toast.style.transform = 'translateX(100%)';
-                    setTimeout(() => {
-                        if (toast.parentNode) {
-                            toast.parentNode.removeChild(toast);
-                        }
-                    }, 300);
-                });
-            }
-
-            updateUIForLoggedInUser() {
-                if (this.isLoggedIn && this.currentUser) {
-                    const signinButtons = [
-                        document.getElementById('header-signin-btn'),
-                        document.getElementById('mobile-signin-btn')
-                    ];
-
-                    signinButtons.forEach(button => {
-                        if (button) {
-                            button.innerHTML = `
-                                <div class="flex items-center">
-                                    <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
-                                    <span>${this.currentUser.name}</span>
-                                </div>
-                            `;
-                            button.onclick = () => this.showUserMenu();
-                        }
-                    });
-                }
-            }
-
-            showUserMenu() {
-                // Create user dropdown menu
-                const userMenu = document.createElement('div');
-                userMenu.className = 'absolute top-16 right-4 bg-white shadow-lg rounded-lg p-4 min-w-48 z-50';
-                userMenu.innerHTML = `
-                    <div class="border-b border-gray-200 pb-2 mb-2">
-                        <p class="font-semibold text-gray-800">${this.currentUser.name}</p>
-                        <p class="text-sm text-gray-600">${this.currentUser.email}</p>
-                    </div>
-                    <button id="user-profile-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-gray-700">
-                        <i class="fas fa-user mr-2"></i>Profile
-                    </button>
-                    <button id="user-logout-btn" class="w-full text-left py-2 px-2 hover:bg-gray-100 rounded text-red-600">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </button>
-                `;
-
-                // Remove any existing menu
-                const existingMenu = document.querySelector('.user-dropdown-menu');
-                if (existingMenu) {
-                    existingMenu.remove();
-                }
-
-                userMenu.classList.add('user-dropdown-menu');
-                document.body.appendChild(userMenu);
-
-                // Add event listeners
-                document.getElementById('user-profile-btn').addEventListener('click', () => {
-                    this.showToast(`Welcome, ${this.currentUser.name}!`, 'info');
-                    userMenu.remove();
-                });
-
-                document.getElementById('user-logout-btn').addEventListener('click', () => {
-                    this.handleLogout();
-                    userMenu.remove();
-                });
-
-                // Close menu when clicking outside
-                const closeMenu = (e) => {
-                    if (!userMenu.contains(e.target) && !e.target.closest('#header-signin-btn') && !e.target.closest('#mobile-signin-btn')) {
-                        userMenu.remove();
-                        document.removeEventListener('click', closeMenu);
-                    }
-                };
-
-                setTimeout(() => {
-                    document.addEventListener('click', closeMenu);
-                }, 100);
-            }
-
-            handleLogout() {
-                // Clear user data from localStorage
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('currentUser');
-
-                this.currentUser = null;
-                this.isLoggedIn = false;
-
-                const signinButtons = [
-                    document.getElementById('header-signin-btn'),
-                    document.getElementById('mobile-signin-btn')
-                ];
-
-                signinButtons.forEach(button => {
-                    if (button) {
-                        button.innerHTML = 'Sign In';
-                        button.onclick = () => this.openAuthModal();
-                    }
-                });
-
-                this.showToast('Logged out successfully', 'success');
-            }
-
-            resetForms() {
-                document.querySelectorAll('.auth-form input').forEach(input => {
-                    input.value = '';
-                    input.style.borderColor = '';
-                });
-                this.clearAllMessages();
-                this.switchTab('login');
-            }
-        }
-
-        // Initialize the authentication system
-        const authSystem = new AuthSystem();
-
-        // Quick fix for sign in buttons to ensure they work
-        const headerSignInBtn = document.getElementById('header-signin-btn');
-        const mobileSignInBtn = document.getElementById('mobile-signin-btn');
-
-        function openAuthModalDirect() {
-            const modal = document.getElementById('auth-modal');
-            if (modal) {
-                modal.style.display = 'flex';
-                modal.style.opacity = '1';
-                modal.style.visibility = 'visible';
-
-                // Ensure login form is active
-                document.querySelectorAll('.auth-form').forEach(form => {
-                    form.classList.remove('active');
-                    form.style.display = 'none';
-                });
-                document.querySelectorAll('.tab-button').forEach(tab => tab.classList.remove('active'));
-
-                document.getElementById('login-form').classList.add('active');
-                document.getElementById('login-form').style.display = 'block';
-                document.getElementById('login-tab').classList.add('active');
-
-                // Clear any messages
-                document.querySelectorAll('.message').forEach(msg => {
-                    msg.style.display = 'none';
-                    msg.textContent = '';
-                });
-            }
-        }
-
-        if (headerSignInBtn) {
-            headerSignInBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                openAuthModalDirect();
-            });
-        }
-
-        if (mobileSignInBtn) {
-            mobileSignInBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                openAuthModalDirect();
-            });
-        }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Courses/Programs Section Functionality
-        class CoursesManager {
-            constructor() {
-                this.apiBaseUrl = window.AppConfig.API_BASE_URL + '/api';
-                this.init();
-            }
-
-            init() {
-                this.loadCourses();
-            }
-
-            async loadCourses() {
-                const coursesContainer = document.getElementById('courses-container');
-                if (!coursesContainer) return;
-
-                try {
-                    // Show loading state
-                    coursesContainer.innerHTML = this.getLoadingHTML();
-
-                    const response = await fetch(`${this.apiBaseUrl}/courses?limit=100&status=active`);
-                    
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const result = await response.json();
-
-                    if (result.success && result.data.courses.length > 0) {
-                        const allCourses = result.data.courses;
-                        
-                        // Get 3 random courses
-                        const randomCourses = this.getRandomCourses(allCourses, 3);
-                        
-                        // Update the courses section
-                        this.updateCoursesSection(randomCourses);
-                    } else {
-                        // Fallback to demo courses if no courses found
-                        this.showFallbackCourses();
-                    }
-                } catch (error) {
-                    console.error('Error loading courses:', error);
-                    // Fallback to demo courses on error
-                    this.showFallbackCourses();
-                }
-            }
-
-            getRandomCourses(courses, count) {
-                const shuffled = [...courses].sort(() => 0.5 - Math.random());
-                return shuffled.slice(0, count);
-            }
-
-            formatINR(amount) {
-                return '₹' + amount.toLocaleString('en-IN');
-            }
-
-            generateRandomRating() {
-                return (Math.random() * 0.6 + 4.2).toFixed(1);
-            }
-
-            createSellerBadge(seller) {
-                if (!seller) return '';
-
-                const sellerClassMap = {
-                    'Best Seller': 'best-seller',
-                    'Top Rated': 'top-rated',
-                    'Most Popular': 'most-popular',
-                    'Trending Now': 'trending-now',
-                    'Student Favorite': 'student-favorite',
-                    'Bestseller': 'bestseller',
-                    'Hot Pick': 'hot-pick',
-                    'Editor\'s Choice': 'editors-choice',
-                    'Featured Course': 'featured-course',
-                    'Highly Recommended': 'highly-recommended',
-                    'Top Choice': 'top-choice'
-                };
-
-                const badgeClass = sellerClassMap[seller] || 'best-seller';
-
-                return `<span class="seller-badge ${badgeClass}">${seller}</span>`;
-            }
-
-            updateCoursesSection(courses) {
-                const coursesContainer = document.getElementById('courses-container');
-                if (!coursesContainer) return;
-
-                if (courses.length === 0) {
-                    coursesContainer.innerHTML = this.getNoCoursesHTML();
-                    return;
-                }
-
-                coursesContainer.innerHTML = courses.map(course => {
-                    // Generate random rating between 4.2 and 4.8
-                    const rating = this.generateRandomRating();
-                    
-                    // Check if course has discount
-                    const hasDiscount = course.onlineOriginalPrice && course.onlineOriginalPrice > course.onlinePrice;
-                    
-                    // Ensure image URL is valid
-                    const courseImage = course.images && course.images[0] 
-                        ? course.images[0] 
-                        : 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
-
-                    // Get course description (prefer miniDescription, fallback to description)
-                    const courseDescription = course.miniDescription || course.description || 'No description available.';
-
-                    return `
+                        return `
                         <div class="course-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl">
                             <div class="relative">
                                 <img src="${courseImage}" 
                                      alt="${course.title || 'Course Image'}" 
                                      class="w-full h-48 object-cover"
                                      onerror="this.src='https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'">
-                                ${course.seller ? 
-                                    `<div class="absolute top-2 right-2">
+                                ${course.seller ?
+                                `<div class="absolute top-2 right-2">
                                         ${this.createSellerBadge(course.seller)}
                                     </div>` : ''
-                                }
+                            }
                             </div>
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">${course.title || 'Untitled Course'}</h3>
@@ -2796,9 +1397,9 @@
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <span class="text-lg font-bold text-[#800020]">${this.formatINR(course.onlinePrice || 0)}</span>
-                                        ${hasDiscount ? 
-                                            `<span class="text-sm text-gray-500 line-through ml-2">${this.formatINR(course.onlineOriginalPrice)}</span>` : ''
-                                        }
+                                        ${hasDiscount ?
+                                `<span class="text-sm text-gray-500 line-through ml-2">${this.formatINR(course.onlineOriginalPrice)}</span>` : ''
+                            }
                                     </div>
                                     <a href="info.html?id=${course._id || course.id}">
                                         <button class="px-4 py-2 bg-[#800020] hover:bg-[#600018] text-white text-sm rounded transition duration-300">
@@ -2809,69 +1410,108 @@
                             </div>
                         </div>
                     `;
-                }).join('');
-            }
+                    }).join('');
+                }
 
-            getLoadingHTML() {
-                return `
-                    <div class="col-span-3 text-center py-8">
-                        <div class="loading-spinner mx-auto"></div>
-                        <p class="text-gray-600 mt-4">Loading courses...</p>
+                getSkeletonHTML() {
+                    return `
+                    <div class="course-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-6">
+                            <div class="skeleton skeleton-title mb-2"></div>
+                            <div class="skeleton skeleton-text mb-3 w-3/4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="flex items-center justify-between">
+                                <div class="skeleton skeleton-text w-1/3"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-6">
+                            <div class="skeleton skeleton-title mb-2"></div>
+                            <div class="skeleton skeleton-text mb-3 w-3/4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="flex items-center justify-between">
+                                <div class="skeleton skeleton-text w-1/3"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="p-6">
+                            <div class="skeleton skeleton-title mb-2"></div>
+                            <div class="skeleton skeleton-text mb-3 w-3/4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="skeleton skeleton-text mb-4"></div>
+                            <div class="flex items-center justify-between">
+                                <div class="skeleton skeleton-text w-1/3"></div>
+                                <div class="skeleton skeleton-button"></div>
+                            </div>
+                        </div>
                     </div>
                 `;
-            }
+                }
 
-            getNoCoursesHTML() {
-                return `
+                getNoCoursesHTML() {
+                    return `
                     <div class="col-span-3 text-center py-8">
                         <p class="text-gray-600">No courses available at the moment.</p>
                     </div>
                 `;
+                }
+
+                showFallbackCourses() {
+                    // Demo courses data as fallback
+                    const demoCourses = [
+                        {
+                            id: '1',
+                            title: 'Computer Science',
+                            description: 'Learn programming, algorithms, and software development with industry experts.',
+                            category: 'B.Tech',
+                            images: ['https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80'],
+                            onlinePrice: 3200,
+                            onlineOriginalPrice: 4000,
+                            duration: '4 Years'
+                        },
+                        {
+                            id: '2',
+                            title: 'Business Administration',
+                            description: 'Master business strategies, management principles, and leadership skills.',
+                            category: 'MBA',
+                            images: ['https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
+                            onlinePrice: 4500,
+                            onlineOriginalPrice: 5500,
+                            duration: '2 Years'
+                        },
+                        {
+                            id: '3',
+                            title: 'Electrical Engineering',
+                            description: 'Explore electrical systems, power generation, and electronic circuits.',
+                            category: 'B.Tech',
+                            images: ['https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
+                            onlinePrice: 3400,
+                            onlineOriginalPrice: 4200,
+                            duration: '4 Years'
+                        }
+                    ];
+
+                    this.updateCoursesSection(demoCourses);
+                }
             }
 
-            showFallbackCourses() {
-                // Demo courses data as fallback
-                const demoCourses = [
-                    {
-                        id: '1',
-                        title: 'Computer Science',
-                        description: 'Learn programming, algorithms, and software development with industry experts.',
-                        category: 'B.Tech',
-                        images: ['https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80'],
-                        onlinePrice: 3200,
-                        onlineOriginalPrice: 4000,
-                        duration: '4 Years'
-                    },
-                    {
-                        id: '2',
-                        title: 'Business Administration',
-                        description: 'Master business strategies, management principles, and leadership skills.',
-                        category: 'MBA',
-                        images: ['https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
-                        onlinePrice: 4500,
-                        onlineOriginalPrice: 5500,
-                        duration: '2 Years'
-                    },
-                    {
-                        id: '3',
-                        title: 'Electrical Engineering',
-                        description: 'Explore electrical systems, power generation, and electronic circuits.',
-                        category: 'B.Tech',
-                        images: ['https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'],
-                        onlinePrice: 3400,
-                        onlineOriginalPrice: 4200,
-                        duration: '4 Years'
-                    }
-                ];
+            // Initialize the courses manager
+            const coursesManager = new CoursesManager();
+        });
+    </script>
+    <script src="apply.js"></script>
+    <script src="Join_Our_Community.js"></script>
 
-                this.updateCoursesSection(demoCourses);
-            }
-        }
 
-        // Initialize the courses manager
-        const coursesManager = new CoursesManager();
-    });
-</script>
-
+</body>
 
 </html>
