@@ -20,7 +20,6 @@
     <meta property="og:image"
         content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
 
-
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.U1Technology.co.in/">
@@ -337,6 +336,98 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+        }
+
+        .toast {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border-left: 4px solid #800020;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-left-color: #10B981;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+
+        .toast.warning {
+            border-left-color: #F59E0B;
+        }
+
+        .toast.info {
+            border-left-color: #3B82F6;
+        }
+
+        .toast-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+
+        .toast.success .toast-icon {
+            color: #10B981;
+        }
+
+        .toast.error .toast-icon {
+            color: #EF4444;
+        }
+
+        .toast.warning .toast-icon {
+            color: #F59E0B;
+        }
+
+        .toast.info .toast-icon {
+            color: #3B82F6;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #9CA3AF;
+            margin-left: 10px;
+        }
+
+        .toast-close:hover {
+            color: #6B7280;
+        }
+
         @media (max-width: 768px) {
             .about-container {
                 height: auto;
@@ -359,6 +450,13 @@
             .about-content {
                 padding: 0 20px;
             }
+
+            .toast-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
         }
     </style>
 
@@ -372,7 +470,7 @@
         "url": "https://www.U1Technology.co.in/",
         "logo": "https://via.placeholder.com/50x50/800020/FFFFFF?text=U1",
         "telephone": "+91-99523-91994",
-        "email": "info@U1Technology.co.in",
+        "email": "info@u1technology.co.in",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "123 Education Street",
@@ -393,6 +491,9 @@
 </head>
 
 <body class="font-sans antialiased">
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
     <!-- Skip to content link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -410,7 +511,7 @@
                 </div>
                 <div class="flex items-center">
                     <i class="fas fa-envelope mr-2 text-[#DC143C]" aria-hidden="true"></i>
-                    <span>info@U1Technology.co.in</span>
+                    <span>info@u1technology.co.in</span>
                 </div>
             </div>
             <div class="flex space-x-4">
@@ -445,9 +546,9 @@
                 <a href="#contact" class="text-gray-600 hover:text-[#800020]">Contact</a>
             </div>
             <div class="flex items-center">
-                <button onclick="createCoursePopupForm()"
+                <button onclick="createAuthSystem()"
                     class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-all">
-                    Apply Now
+                    Login Now
                 </button>
                 <button class="md:hidden text-gray-600 ml-4" id="mobile-menu-button" aria-controls="mobile-menu"
                     aria-expanded="false" aria-label="Toggle navigation menu">
@@ -464,9 +565,9 @@
                 <a href="#admissions" class="text-gray-600 hover:text-[#800020]">Admissions</a>
                 <a href="#placements" class="text-gray-600 hover:text-[#800020]">Placements</a>
                 <a href="#contact" class="text-gray-600 hover:text-[#800020]">Contact</a>
-                <button
+                <button onclick="createAuthSystem()"
                     class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-all w-full">
-                    Apply Now
+                    Login Now
                 </button>
             </div>
         </div>
@@ -486,7 +587,7 @@
                             class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
                             Explore Programs
                         </button>
-                        <button
+                        <button onclick="createCoursePopupForm()"
                             class="bg-white hover:bg-gray-100 text-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
                             Apply Now
                         </button>
@@ -1032,7 +1133,7 @@
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-gray-900 mb-1">Email</h4>
-                                        <p class="text-gray-600">info@U1Technology.co.in</p>
+                                        <p class="text-gray-600">info@u1technology.co.in</p>
                                     </div>
                                 </div>
                                 <div class="flex items-start">
@@ -1055,23 +1156,23 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div>
                                         <label for="name" class="block text-gray-700 mb-2">Full Name</label>
-                                        <input type="text" id="name" name="name"
+                                        <input type="text" id="name" name="name" required
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
                                     </div>
                                     <div>
                                         <label for="email" class="block text-gray-700 mb-2">Email Address</label>
-                                        <input type="email" id="email" name="email"
+                                        <input type="email" id="email" name="email" required
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <label for="subject" class="block text-gray-700 mb-2">Subject</label>
-                                    <input type="text" id="subject" name="subject"
+                                    <input type="text" id="subject" name="subject" required
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
                                 </div>
                                 <div class="mb-4">
                                     <label for="message" class="block text-gray-700 mb-2">Message</label>
-                                    <textarea id="message" name="message" rows="5"
+                                    <textarea id="message" name="message" rows="5" required
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]"></textarea>
                                 </div>
                                 <button type="submit"
@@ -1175,7 +1276,7 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-envelope text-[#DC143C] mt-1 mr-2" aria-hidden="true"></i>
-                            <span class="text-gray-400">info@U1Technology.co.in</span>
+                            <span class="text-gray-400">info@u1technology.co.in</span>
                         </li>
                     </ul>
                 </div>
@@ -1188,6 +1289,87 @@
     </footer>
 
     <script>
+        // Toast Notification System
+        class ToastNotification {
+            constructor() {
+                this.container = document.getElementById('toast-container');
+                this.toastId = 0;
+            }
+
+            show(message, type = 'info', title = '', duration = 5000) {
+                const toastId = `toast-${this.toastId++}`;
+                const icons = {
+                    success: 'fas fa-check-circle',
+                    error: 'fas fa-exclamation-circle',
+                    warning: 'fas fa-exclamation-triangle',
+                    info: 'fas fa-info-circle'
+                };
+
+                const toast = document.createElement('div');
+                toast.id = toastId;
+                toast.className = `toast ${type}`;
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        <i class="${icons[type]}" aria-hidden="true"></i>
+                    </div>
+                    <div class="toast-content">
+                        ${title ? `<div class="toast-title">${title}</div>` : ''}
+                        <div class="toast-message">${message}</div>
+                    </div>
+                    <button class="toast-close" onclick="toastSystem.close('${toastId}')">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                `;
+
+                this.container.appendChild(toast);
+
+                // Show animation
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+
+                // Auto remove if duration is set
+                if (duration > 0) {
+                    setTimeout(() => {
+                        this.close(toastId);
+                    }, duration);
+                }
+
+                return toastId;
+            }
+
+            close(toastId) {
+                const toast = document.getElementById(toastId);
+                if (toast) {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                    }, 300);
+                }
+            }
+
+            success(message, title = 'Success') {
+                return this.show(message, 'success', title);
+            }
+
+            error(message, title = 'Error') {
+                return this.show(message, 'error', title);
+            }
+
+            warning(message, title = 'Warning') {
+                return this.show(message, 'warning', title);
+            }
+
+            info(message, title = 'Information') {
+                return this.show(message, 'info', title);
+            }
+        }
+
+        // Initialize toast system
+        const toastSystem = new ToastNotification();
+
         document.addEventListener('DOMContentLoaded', function () {
             // Main content ID for accessibility
             const mainContent = document.getElementById('main-content');
@@ -1247,7 +1429,7 @@
             });
 
             // Contact Form Handler
-            document.getElementById('contact-form').addEventListener('submit', function (e) {
+            document.getElementById('contact-form').addEventListener('submit', async function (e) {
                 e.preventDefault();
 
                 // Get form data
@@ -1256,14 +1438,14 @@
 
                 // Simple validation
                 if (!data.name || !data.email || !data.subject || !data.message) {
-                    alert('Please fill in all fields');
+                    toastSystem.error('Please fill in all fields');
                     return;
                 }
 
                 // Simple email validation
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(data.email)) {
-                    alert('Please enter a valid email address');
+                    toastSystem.error('Please enter a valid email address');
                     return;
                 }
 
@@ -1273,19 +1455,42 @@
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Sending...';
 
-                // Simulate API call
-                setTimeout(() => {
+                try {
+                    // Send email using server API
+                    const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/contact`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        toastSystem.success('Message sent successfully! We will get back to you soon.');
+                        this.reset();
+                    } else {
+                        toastSystem.error(result.message || 'Failed to send message. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Contact form error:', error);
+                    toastSystem.error('Failed to send message. Please try again later.');
+                } finally {
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalText;
-                    alert('Message sent successfully! We will get back to you soon.');
-                    this.reset();
-                }, 2000);
+                }
             });
 
             // Courses/Programs Section Functionality
             class CoursesManager {
                 constructor() {
-                    this.apiBaseUrl = window.AppConfig ? window.AppConfig.API_BASE_URL + '/api' : '/api';
+                    this.apiBaseUrl = window.AppConfig
+                        ? `${window.AppConfig.API_BASE_URL}/api`
+                        : '/api';
+
                     this.init();
                 }
 
@@ -1304,7 +1509,7 @@
                         // Simulate API call delay
                         setTimeout(async () => {
                             try {
-                                const response = await fetch(`${this.apiBaseUrl}/courses?limit=100&status=active`);
+                                const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/courses?limit=100&status=active`);
 
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -1540,6 +1745,7 @@
     </script>
     <script src="apply.js"></script>
     <script src="Join_Our_Community.js"></script>
+    <script src="login.js"></script>
 
 
 </body>

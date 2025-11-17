@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="img/favicon-16x16.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="config.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -133,6 +134,67 @@
         .timer-warning {
             background-color: #EF4444 !important;
         }
+
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10001;
+            max-width: 400px;
+        }
+
+        .toast {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-left: 4px solid #3b82f6;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast.hide {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+
+        .toast.success {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+            color: #065f46;
+        }
+
+        .toast.error {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .toast.info {
+            border-left-color: #3b82f6;
+            background: #eff6ff;
+            color: #1e40af;
+        }
+
+        .toast.warning {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+            color: #92400e;
+        }
     </style>
 </head>
 
@@ -141,7 +203,7 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <img src="img/favicon-32x32.png" alt="logo" class="w-8 h-8">
-                <span class="text-xl font-semibold text-primary">U1 Technology Institute</span>
+                <span class="text-xl font-semibold text-primary">U1 Technology</span>
             </div>
 
             <div class="hidden md:flex space-x-8">
@@ -383,9 +445,91 @@
         const timerText = document.getElementById('timer-text');
         const timerBar = document.getElementById('timer-bar');
 
+        // Toast Notification System
+        const toastUtils = {
+            createToast(message, type = 'info') {
+                let toastContainer = document.querySelector('.toast-container');
+                if (!toastContainer) {
+                    toastContainer = document.createElement('div');
+                    toastContainer.className = 'toast-container';
+                    document.body.appendChild(toastContainer);
+                }
+
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                
+                toast.innerHTML = `
+                    <span>${message}</span>
+                `;
+
+                toastContainer.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+
+                setTimeout(() => {
+                    this.removeToast(toast);
+                }, 5000);
+
+                return toast;
+            },
+
+            removeToast(toast) {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+                
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            },
+
+            showSuccess(message) {
+                return this.createToast(message, 'success');
+            },
+
+            showError(message) {
+                return this.createToast(message, 'error');
+            },
+
+            showInfo(message) {
+                return this.createToast(message, 'info');
+            },
+
+            showWarning(message) {
+                return this.createToast(message, 'warning');
+            }
+        };
+
+        // Check if user is logged in
+        function checkUserAuthentication() {
+            const authToken = localStorage.getItem('authToken');
+            const userData = localStorage.getItem('userData');
+            
+            if (!authToken || !userData) {
+                console.log("User not authenticated, redirecting to index page");
+                toastUtils.showWarning("Please log in to access the quiz");
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return false;
+            }
+            
+            console.log("User authenticated:", JSON.parse(userData).name);
+            return true;
+        }
+
         // Initialize the quiz
         document.addEventListener('DOMContentLoaded', function () {
             console.log("Quiz initialization started...");
+            
+            // Check authentication first
+            if (!checkUserAuthentication()) {
+                return;
+            }
+            
             loadQuizData();
 
             // Event listeners
@@ -703,6 +847,12 @@
 
         // Show next question
         function showNextQuestion() {
+            // Check if user has selected an answer for the current question
+            if (userAnswers[currentQuestionIndex] === null) {
+                toastUtils.showWarning("Please select an answer before proceeding to the next question");
+                return;
+            }
+            
             console.log(`Moving from question ${currentQuestionIndex + 1} to ${currentQuestionIndex + 2}`);
             if (currentQuestionIndex < quizData.length - 1) {
                 currentQuestionIndex++;
@@ -760,12 +910,75 @@
             }
         }
 
+        // Function to store redeem code in database
+        async function storeRedeemCode(redeemCode, score, totalQuestions) {
+            try {
+                const authToken = localStorage.getItem('authToken');
+                const userData = JSON.parse(localStorage.getItem('userData'));
+                
+                if (!authToken || !userData) {
+                    console.error('User not authenticated');
+                    toastUtils.showError('Authentication failed. Please log in again.');
+                    return false;
+                }
+
+                const payload = {
+                    userId: userData._id,
+                    userName: userData.name,
+                    userEmail: userData.email,
+                    score: score,
+                    totalQuestions: totalQuestions,
+                    redeemCode: redeemCode,
+                    quizType: 'programming_math'
+                };
+
+                console.log('Storing redeem code:', payload);
+
+                const API_BASE_URL = window.AppConfig?.API_BASE_URL || 'http://localhost:3000';
+                
+                const response = await fetch(`${API_BASE_URL}/api/quiz/redeem`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    console.log('Redeem code stored successfully:', data.data.redeemId);
+                    toastUtils.showSuccess('Redeem code saved successfully!');
+                    return true;
+                } else {
+                    console.error('Failed to store redeem code:', data.message);
+                    toastUtils.showError('Failed to save redeem code: ' + data.message);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error storing redeem code:', error);
+                toastUtils.showError('Network error. Please check your connection.');
+                return false;
+            }
+        }
+
         // Show redeem code popup
-        function showRedeemPopup() {
+        async function showRedeemPopup() {
             console.log("Showing redeem popup");
+            
             // Generate a random redeem code
             const code = generateRedeemCode();
             redeemCode.textContent = code;
+
+            // Store the redeem code in database
+            const stored = await storeRedeemCode(code, score, quizData.length);
+            
+            if (!stored) {
+                console.warn("Failed to store redeem code in database");
+                toastUtils.showWarning("Failed to save redeem code. Please take a screenshot of this code.");
+                // Continue to show popup even if storage fails
+            }
 
             // Reset and start countdown
             countdownBar.style.width = '100%';
@@ -795,19 +1008,16 @@
         // Generate a random redeem code
         function generateRedeemCode() {
             const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const lowercase = 'abcdefghijklmnopqrstuvwxyz';
             const numbers = '0123456789';
-            const symbols = '!@#$%^&*';
-
-            const allChars = uppercase + lowercase + numbers + symbols;
-            let code = '';
-
-            for (let i = 0; i < 12; i++) {
-                if (i > 0 && i % 4 === 0) {
-                    code += '-';
-                }
-                code += allChars.charAt(Math.floor(Math.random() * allChars.length));
+            
+            let code = 'U1TECH-';
+            
+            for (let i = 0; i < 6; i++) {
+                const chars = i < 3 ? uppercase : numbers;
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
             }
+            
+            code += '-QUIZ';
 
             console.log(`Generated redeem code: ${code}`);
             return code;
