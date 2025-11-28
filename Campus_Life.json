@@ -1,0 +1,55 @@
+{
+  "images": [
+    {
+      "url": "./cam/img1.jpg",
+      "alt": "Person playing black acoustic guitar"
+    },
+    {
+      "url": "./cam/img2.jpg",
+      "alt": "Brown mountain under blue sky"
+    },
+    {
+      "url": "./cam/img3.jpg",
+      "alt": "Waves crashing on shore during daytime"
+    },
+    {
+      "url": "./cam/img4.jpg",
+      "alt": "Brown wooden dock between green trees during daytime"
+    },
+    {
+      "url": "./cam/img5.jpg",
+      "alt": "Silhouette of person standing on rock formation during golden hour"
+    },
+    {
+      "url": "./cam/img6.jpg",
+      "alt": "White and brown concrete buildings under blue sky during daytime"
+    },
+    {
+      "url": "./cam/img7.jpg",
+      "alt": "Snow covered mountain during daytime"
+    },
+    {
+      "url": "./cam/img1.jpg",
+      "alt": "Green trees under white clouds during daytime"
+    },
+    {
+      "url": "./cam/img2.jpg",
+      "alt": "Forest with fog during daytime"
+    },
+    {
+      "url": "./cam/img3.jpg",
+      "alt": "Snow covered mountain during daytime"
+    },
+    {
+      "url": "./cam/img4.jpg",
+      "alt": "Colorful abstract painting"
+    },
+    {
+      "url": "./cam/img5.jpg",
+      "alt": "Person holding black camera"
+    },{
+      "url": "./cam/img6.jpg",
+      "alt": "City skyline during golden hour"
+    }
+  ]
+}

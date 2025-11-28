@@ -598,14 +598,14 @@ function createAuthSystem() {
 
     // Initialize with login form
     popup.innerHTML = formTemplates.login;
-    
+
     // Add close button
     const closeButton = document.createElement('button');
     closeButton.className = 'close-button';
     closeButton.innerHTML = '×';
     closeButton.addEventListener('click', closePopup);
     popup.appendChild(closeButton);
-    
+
     overlay.appendChild(popup);
     document.body.appendChild(overlay);
 
@@ -630,7 +630,7 @@ function createAuthSystem() {
 
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            
+
             toast.innerHTML = `
                 <span>${message}</span>
             `;
@@ -651,7 +651,7 @@ function createAuthSystem() {
         removeToast(toast) {
             toast.classList.remove('show');
             toast.classList.add('hide');
-            
+
             setTimeout(() => {
                 if (toast.parentNode) {
                     toast.parentNode.removeChild(toast);
@@ -681,7 +681,7 @@ function createAuthSystem() {
         showFieldError(fieldId, message) {
             const errorElement = popup.querySelector(`.error-message[data-field="${fieldId}"]`);
             const inputElement = popup.querySelector(`#${fieldId}`);
-            
+
             if (errorElement && inputElement) {
                 errorElement.textContent = message;
                 errorElement.style.display = 'block';
@@ -692,7 +692,7 @@ function createAuthSystem() {
         hideFieldError(fieldId) {
             const errorElement = popup.querySelector(`.error-message[data-field="${fieldId}"]`);
             const inputElement = popup.querySelector(`#${fieldId}`);
-            
+
             if (errorElement && inputElement) {
                 errorElement.style.display = 'none';
                 inputElement.classList.remove('error');
@@ -702,11 +702,11 @@ function createAuthSystem() {
         clearAllErrors() {
             const errorElements = popup.querySelectorAll('.error-message');
             const inputElements = popup.querySelectorAll('input, select');
-            
+
             errorElements.forEach(element => {
                 element.style.display = 'none';
             });
-            
+
             inputElements.forEach(element => {
                 element.classList.remove('error');
             });
@@ -714,45 +714,45 @@ function createAuthSystem() {
 
         showLoading(formType) {
             const spinner = popup.querySelector(`#${formType}LoadingSpinner`);
-            const submitBtn = popup.querySelector(`#${formType}SubmitBtn`) || 
-                            popup.querySelector(`#${formType === 'forgotPassword' ? 'sendOtpBtn' : 
-                                               formType === 'verifyOtp' ? 'verifyOtpBtn' : 
-                                               formType === 'resetPassword' ? 'resetPasswordBtn' : 'submitBtn'}`);
+            const submitBtn = popup.querySelector(`#${formType}SubmitBtn`) ||
+                popup.querySelector(`#${formType === 'forgotPassword' ? 'sendOtpBtn' :
+                    formType === 'verifyOtp' ? 'verifyOtpBtn' :
+                        formType === 'resetPassword' ? 'resetPasswordBtn' : 'submitBtn'}`);
             const errorMessage = popup.querySelector(`#${formType}ErrorMessage`);
-            
+
             if (spinner) spinner.style.display = 'block';
             if (submitBtn) {
                 submitBtn.disabled = true;
-                submitBtn.textContent = formType === 'login' ? 'Signing in...' : 
-                                      formType === 'register' ? 'Creating account...' :
-                                      formType === 'forgotPassword' ? 'Sending OTP...' : 
-                                      formType === 'verifyOtp' ? 'Verifying OTP...' :
-                                      formType === 'resetPassword' ? 'Resetting password...' : 'Processing...';
+                submitBtn.textContent = formType === 'login' ? 'Signing in...' :
+                    formType === 'register' ? 'Creating account...' :
+                        formType === 'forgotPassword' ? 'Sending OTP...' :
+                            formType === 'verifyOtp' ? 'Verifying OTP...' :
+                                formType === 'resetPassword' ? 'Resetting password...' : 'Processing...';
             }
             if (errorMessage) errorMessage.style.display = 'none';
         },
 
         hideLoading(formType) {
             const spinner = popup.querySelector(`#${formType}LoadingSpinner`);
-            const submitBtn = popup.querySelector(`#${formType}SubmitBtn`) || 
-                            popup.querySelector(`#${formType === 'forgotPassword' ? 'sendOtpBtn' : 
-                                               formType === 'verifyOtp' ? 'verifyOtpBtn' : 
-                                               formType === 'resetPassword' ? 'resetPasswordBtn' : 'submitBtn'}`);
-            
+            const submitBtn = popup.querySelector(`#${formType}SubmitBtn`) ||
+                popup.querySelector(`#${formType === 'forgotPassword' ? 'sendOtpBtn' :
+                    formType === 'verifyOtp' ? 'verifyOtpBtn' :
+                        formType === 'resetPassword' ? 'resetPasswordBtn' : 'submitBtn'}`);
+
             if (spinner) spinner.style.display = 'none';
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.textContent = formType === 'login' ? 'Sign In' : 
-                                      formType === 'register' ? 'Create Account' :
-                                      formType === 'forgotPassword' ? 'Send OTP' : 
-                                      formType === 'verifyOtp' ? 'Verify OTP' :
-                                      formType === 'resetPassword' ? 'Reset Password' : 'Submit';
+                submitBtn.textContent = formType === 'login' ? 'Sign In' :
+                    formType === 'register' ? 'Create Account' :
+                        formType === 'forgotPassword' ? 'Send OTP' :
+                            formType === 'verifyOtp' ? 'Verify OTP' :
+                                formType === 'resetPassword' ? 'Reset Password' : 'Submit';
             }
         },
 
         showError(formType, message) {
             const errorMessage = popup.querySelector(`#${formType}ErrorMessage`);
-            
+
             if (errorMessage) {
                 errorMessage.textContent = message;
                 errorMessage.style.display = 'block';
@@ -784,7 +784,7 @@ function createAuthSystem() {
         async makeRequest(url, options = {}) {
             try {
                 console.log(`Making API request to: ${url}`);
-                
+
                 const response = await fetch(url, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -801,7 +801,7 @@ function createAuthSystem() {
                     // If not JSON, get text and create a proper error
                     const text = await response.text();
                     console.error('Non-JSON response:', text.substring(0, 200));
-                    
+
                     throw new Error(`Server returned non-JSON response: ${response.status} ${response.statusText}`);
                 }
 
@@ -815,16 +815,16 @@ function createAuthSystem() {
                 return data;
             } catch (error) {
                 console.error('API request failed:', error);
-                
+
                 // Enhanced error messages
                 if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
                     throw new Error('Network error: Unable to connect to server. Please check your internet connection and try again.');
                 }
-                
+
                 if (error.message.includes('non-JSON response')) {
                     throw new Error('Server error: Please try again later or contact support.');
                 }
-                
+
                 throw error;
             }
         },
@@ -869,23 +869,23 @@ function createAuthSystem() {
     function switchToLogin() {
         currentForm = 'login';
         popup.innerHTML = formTemplates.login;
-        
+
         // Re-add close button
         const newCloseButton = document.createElement('button');
         newCloseButton.className = 'close-button';
         newCloseButton.innerHTML = '×';
         newCloseButton.addEventListener('click', closePopup);
         popup.appendChild(newCloseButton);
-        
+
         popup.classList.add('fade-in');
         attachLoginEventListeners();
-        
+
         // Add scrollbar class
         const formContent = popup.querySelector('div > div');
         if (formContent) {
             formContent.classList.add('popup-form-content');
         }
-        
+
         // Focus on first input
         setTimeout(() => {
             const firstInput = popup.querySelector('input');
@@ -896,23 +896,23 @@ function createAuthSystem() {
     function switchToRegister() {
         currentForm = 'register';
         popup.innerHTML = formTemplates.register;
-        
+
         // Re-add close button
         const newCloseButton = document.createElement('button');
         newCloseButton.className = 'close-button';
         newCloseButton.innerHTML = '×';
         newCloseButton.addEventListener('click', closePopup);
         popup.appendChild(newCloseButton);
-        
+
         popup.classList.add('fade-in');
         attachRegisterEventListeners();
-        
+
         // Add scrollbar class
         const formContent = popup.querySelector('div > div');
         if (formContent) {
             formContent.classList.add('popup-form-content');
         }
-        
+
         // Focus on first input
         setTimeout(() => {
             const firstInput = popup.querySelector('input');
@@ -923,23 +923,23 @@ function createAuthSystem() {
     function switchToForgotPassword() {
         currentForm = 'forgotPassword';
         popup.innerHTML = formTemplates.forgotPassword;
-        
+
         // Re-add close button
         const newCloseButton = document.createElement('button');
         newCloseButton.className = 'close-button';
         newCloseButton.innerHTML = '×';
         newCloseButton.addEventListener('click', closePopup);
         popup.appendChild(newCloseButton);
-        
+
         popup.classList.add('fade-in');
         attachForgotPasswordEventListeners();
-        
+
         // Add scrollbar class
         const formContent = popup.querySelector('div > div');
         if (formContent) {
             formContent.classList.add('popup-form-content');
         }
-        
+
         // Focus on first input
         setTimeout(() => {
             const firstInput = popup.querySelector('input');
@@ -951,23 +951,23 @@ function createAuthSystem() {
         forgotPasswordEmail = email;
         currentForm = 'verifyOtp';
         popup.innerHTML = formTemplates.verifyOtp;
-        
+
         // Re-add close button
         const newCloseButton = document.createElement('button');
         newCloseButton.className = 'close-button';
         newCloseButton.innerHTML = '×';
         newCloseButton.addEventListener('click', closePopup);
         popup.appendChild(newCloseButton);
-        
+
         popup.classList.add('fade-in');
         attachVerifyOtpEventListeners();
-        
+
         // Add scrollbar class
         const formContent = popup.querySelector('div > div');
         if (formContent) {
             formContent.classList.add('popup-form-content');
         }
-        
+
         // Focus on OTP input
         setTimeout(() => {
             const otpInput = popup.querySelector('#otpCode');
@@ -978,23 +978,23 @@ function createAuthSystem() {
     function switchToResetPassword() {
         currentForm = 'resetPassword';
         popup.innerHTML = formTemplates.resetPassword;
-        
+
         // Re-add close button
         const newCloseButton = document.createElement('button');
         newCloseButton.className = 'close-button';
         newCloseButton.innerHTML = '×';
         newCloseButton.addEventListener('click', closePopup);
         popup.appendChild(newCloseButton);
-        
+
         popup.classList.add('fade-in');
         attachResetPasswordEventListeners();
-        
+
         // Add scrollbar class
         const formContent = popup.querySelector('div > div');
         if (formContent) {
             formContent.classList.add('popup-form-content');
         }
-        
+
         // Focus on first input
         setTimeout(() => {
             const firstInput = popup.querySelector('input');
@@ -1006,7 +1006,7 @@ function createAuthSystem() {
     function setupPasswordToggle() {
         const toggleButtons = popup.querySelectorAll('.toggle-password');
         toggleButtons.forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const input = this.parentElement.querySelector('input');
                 if (input.type === 'password') {
                     input.type = 'text';
@@ -1020,7 +1020,7 @@ function createAuthSystem() {
     }
 
     // Experience field handler
-    window.handleExperienceChange = function(selectElement) {
+    window.handleExperienceChange = function (selectElement) {
         const otherContainer = document.getElementById('otherExperienceContainer');
         if (selectElement && otherContainer) {
             if (selectElement.value === 'Others') {
@@ -1032,7 +1032,7 @@ function createAuthSystem() {
     };
 
     // Phone number input handler - only allow numbers and limit to 10 digits
-    window.handlePhoneInput = function(inputElement) {
+    window.handlePhoneInput = function (inputElement) {
         inputElement.value = inputElement.value.replace(/[^0-9]/g, '').slice(0, 10);
     };
 
@@ -1178,9 +1178,9 @@ function createAuthSystem() {
         setupPasswordToggle();
 
         if (loginForm) {
-            loginForm.addEventListener('submit', async function(e) {
+            loginForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                
+
                 const formData = {
                     email: document.getElementById('loginEmail').value,
                     password: document.getElementById('loginPassword').value
@@ -1195,16 +1195,16 @@ function createAuthSystem() {
 
                 try {
                     const result = await apiService.login(formData.email, formData.password);
-                    
+
                     if (result.success) {
                         toastUtils.showSuccess('Welcome back! Redirecting...');
-                        
+
                         // Store token and user data
                         if (result.data && result.data.token) {
                             localStorage.setItem('authToken', result.data.token);
                             localStorage.setItem('userData', JSON.stringify(result.data.user));
                         }
-                        
+
                         setTimeout(() => {
                             closePopup();
                             // Redirect or update UI here
@@ -1244,15 +1244,15 @@ function createAuthSystem() {
 
         // Add phone input validation
         if (phoneInput) {
-            phoneInput.addEventListener('input', function(e) {
+            phoneInput.addEventListener('input', function (e) {
                 this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
             });
         }
 
         if (registerForm) {
-            registerForm.addEventListener('submit', async function(e) {
+            registerForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                
+
                 const formData = {
                     name: document.getElementById('registerName').value,
                     email: document.getElementById('registerEmail').value,
@@ -1282,10 +1282,10 @@ function createAuthSystem() {
 
                 try {
                     const result = await apiService.register(apiData);
-                    
+
                     if (result.success) {
                         toastUtils.showSuccess('Account created successfully! Redirecting to login...');
-                        
+
                         setTimeout(() => {
                             switchToLogin();
                         }, 3000);
@@ -1314,9 +1314,9 @@ function createAuthSystem() {
         const backToLoginBtn = document.getElementById('backToLogin');
 
         if (forgotPasswordForm) {
-            forgotPasswordForm.addEventListener('submit', async function(e) {
+            forgotPasswordForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                
+
                 const formData = {
                     email: document.getElementById('forgotPasswordEmail').value
                 };
@@ -1330,10 +1330,10 @@ function createAuthSystem() {
 
                 try {
                     const result = await apiService.sendOtp(formData.email);
-                    
+
                     if (result.success) {
                         toastUtils.showSuccess('OTP sent successfully! Check your email.');
-                        
+
                         // Switch to OTP verification form
                         setTimeout(() => {
                             switchToVerifyOtp(formData.email);
@@ -1364,9 +1364,9 @@ function createAuthSystem() {
         const resendOtpBtn = document.getElementById('resendOtpBtn');
 
         if (verifyOtpForm) {
-            verifyOtpForm.addEventListener('submit', async function(e) {
+            verifyOtpForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                
+
                 const formData = {
                     otp: document.getElementById('otpCode').value
                 };
@@ -1380,13 +1380,13 @@ function createAuthSystem() {
 
                 try {
                     const result = await apiService.verifyOtp(forgotPasswordEmail, formData.otp);
-                    
+
                     if (result.success) {
                         toastUtils.showSuccess('OTP verified successfully!');
-                        
+
                         // Store verified OTP for password reset
                         verifiedOtp = formData.otp;
-                        
+
                         // Switch to reset password form
                         setTimeout(() => {
                             switchToResetPassword();
@@ -1411,12 +1411,12 @@ function createAuthSystem() {
         }
 
         if (resendOtpBtn) {
-            resendOtpBtn.addEventListener('click', async function() {
+            resendOtpBtn.addEventListener('click', async function () {
                 utils.showLoading('forgotPassword');
-                
+
                 try {
                     const result = await apiService.sendOtp(forgotPasswordEmail);
-                    
+
                     if (result.success) {
                         toastUtils.showSuccess('OTP resent successfully!');
                     } else {
@@ -1441,9 +1441,9 @@ function createAuthSystem() {
         setupPasswordToggle();
 
         if (resetPasswordForm) {
-            resetPasswordForm.addEventListener('submit', async function(e) {
+            resetPasswordForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                
+
                 const formData = {
                     newPassword: document.getElementById('newPassword').value,
                     confirmNewPassword: document.getElementById('confirmNewPassword').value
@@ -1462,13 +1462,13 @@ function createAuthSystem() {
                     }
 
                     const result = await apiService.resetPassword(forgotPasswordEmail, verifiedOtp, formData.newPassword);
-                    
+
                     if (result.success) {
                         toastUtils.showSuccess('Password reset successfully! Redirecting to login...');
-                        
+
                         // Clear stored OTP
                         verifiedOtp = '';
-                        
+
                         // Redirect to login
                         setTimeout(() => {
                             switchToLogin();
@@ -1489,7 +1489,7 @@ function createAuthSystem() {
         }
 
         if (backToVerifyOtpBtn) {
-            backToVerifyOtpBtn.addEventListener('click', function() {
+            backToVerifyOtpBtn.addEventListener('click', function () {
                 // Go back to verify OTP form
                 switchToVerifyOtp(forgotPasswordEmail);
             });
@@ -1508,13 +1508,13 @@ function createAuthSystem() {
     attachLoginEventListeners();
 
     // Close handlers
-    overlay.addEventListener('click', function(e) {
+    overlay.addEventListener('click', function (e) {
         if (e.target === overlay) {
             closePopup();
         }
     });
 
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             closePopup();
         }
@@ -1535,12 +1535,12 @@ window.openAuthSystem = createAuthSystem;
 window.openLogin = createAuthSystem;
 
 // Auto-initialize when auth buttons are clicked
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Attach to login buttons
     const loginButtons = document.querySelectorAll('[onclick*="login"], [onclick*="auth"], .login-btn, .auth-btn, [data-action="login"], [data-action="auth"]');
-    
+
     loginButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             createAuthSystem();
@@ -1552,7 +1552,7 @@ document.addEventListener('DOMContentLoaded', function() {
     buttonsWithOnclick.forEach(button => {
         const onclickAttr = button.getAttribute('onclick') || '';
         if (onclickAttr.includes('login') || onclickAttr.includes('auth') || onclickAttr.includes('Login') || onclickAttr.includes('Auth')) {
-            button.addEventListener('click', function(e) {
+            button.addEventListener('click', function (e) {
                 if (!onclickAttr.includes('createAuthSystem') && !onclickAttr.includes('openAuthSystem')) {
                     e.preventDefault();
                     e.stopPropagation();

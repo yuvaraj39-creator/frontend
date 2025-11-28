@@ -300,10 +300,10 @@ function createCoursePopupForm() {
             // Create toast element
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            
+
             // Set icon based on type
             let icon = 'ℹ️';
-            switch(type) {
+            switch (type) {
                 case 'success':
                     icon = ' ';
                     break;
@@ -342,7 +342,7 @@ function createCoursePopupForm() {
         removeToast(toast) {
             toast.classList.remove('show');
             toast.classList.add('hide');
-            
+
             setTimeout(() => {
                 if (toast.parentNode) {
                     toast.parentNode.removeChild(toast);
@@ -372,10 +372,10 @@ function createCoursePopupForm() {
         // Show error for specific field
         showFieldError(fieldName, message) {
             const errorElement = popup.querySelector(`.error-message[data-field="${fieldName}"]`);
-            const inputElement = popup.querySelector(`#applicant${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`) || 
-                               popup.querySelector(`#${fieldName.charAt(0).toLowerCase() + fieldName.slice(1)}`) ||
-                               popup.querySelector(`#selected${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`);
-            
+            const inputElement = popup.querySelector(`#applicant${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`) ||
+                popup.querySelector(`#${fieldName.charAt(0).toLowerCase() + fieldName.slice(1)}`) ||
+                popup.querySelector(`#selected${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`);
+
             if (errorElement && inputElement) {
                 errorElement.textContent = message;
                 errorElement.style.display = 'block';
@@ -386,10 +386,10 @@ function createCoursePopupForm() {
         // Hide error for specific field
         hideFieldError(fieldName) {
             const errorElement = popup.querySelector(`.error-message[data-field="${fieldName}"]`);
-            const inputElement = popup.querySelector(`#applicant${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`) || 
-                               popup.querySelector(`#${fieldName.charAt(0).toLowerCase() + fieldName.slice(1)}`) ||
-                               popup.querySelector(`#selected${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`);
-            
+            const inputElement = popup.querySelector(`#applicant${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`) ||
+                popup.querySelector(`#${fieldName.charAt(0).toLowerCase() + fieldName.slice(1)}`) ||
+                popup.querySelector(`#selected${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`);
+
             if (errorElement && inputElement) {
                 errorElement.style.display = 'none';
                 inputElement.classList.remove('error');
@@ -400,11 +400,11 @@ function createCoursePopupForm() {
         clearAllErrors() {
             const errorElements = popup.querySelectorAll('.error-message');
             const inputElements = popup.querySelectorAll('input, select, textarea');
-            
+
             errorElements.forEach(element => {
                 element.style.display = 'none';
             });
-            
+
             inputElements.forEach(element => {
                 element.classList.remove('error');
             });
@@ -416,7 +416,7 @@ function createCoursePopupForm() {
             const loadingSpinner = popup.querySelector('#loadingSpinner');
             const errorMessage = popup.querySelector('#errorMessage');
             const successMessage = popup.querySelector('#successMessage');
-            
+
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
             loadingSpinner.style.display = 'block';
@@ -428,7 +428,7 @@ function createCoursePopupForm() {
         hideLoading() {
             const submitBtn = popup.querySelector('#submitBtn');
             const loadingSpinner = popup.querySelector('#loadingSpinner');
-            
+
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit Application';
             loadingSpinner.style.display = 'none';
@@ -438,7 +438,7 @@ function createCoursePopupForm() {
         showSuccess(applicationId = '') {
             const successMessage = popup.querySelector('#successMessage');
             const errorMessage = popup.querySelector('#errorMessage');
-            
+
             if (applicationId) {
                 successMessage.innerHTML = `
                     <div class="success-checkmark">✓</div>
@@ -447,7 +447,7 @@ function createCoursePopupForm() {
                     <div style="font-size: 0.8rem;">We will contact you shortly.</div>
                 `;
             }
-            
+
             successMessage.style.display = 'block';
             errorMessage.style.display = 'none';
         },
@@ -456,7 +456,7 @@ function createCoursePopupForm() {
         showError(message) {
             const errorMessage = popup.querySelector('#errorMessage');
             const successMessage = popup.querySelector('#successMessage');
-            
+
             errorMessage.textContent = message;
             errorMessage.style.display = 'block';
             successMessage.style.display = 'none';
@@ -476,12 +476,9 @@ function createCoursePopupForm() {
 
         // Get API base URL
         getApiBaseUrl() {
-            // Use relative URL for same domain, or configure your API URL
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                return 'http://localhost:3000/api';
-            }
-            return '/api'; // Same domain for production
+            return `${window.AppConfig.API_BASE_URL}/api`;
         },
+
 
         // Sanitize input
         sanitizeInput(input) {
@@ -547,9 +544,9 @@ function createCoursePopupForm() {
 
     // Form submission handler
     const form = popup.querySelector('#applicationForm');
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        
+
         const applicationData = {
             name: document.getElementById('applicantName').value,
             phone: document.getElementById('applicantPhone').value,
@@ -592,13 +589,13 @@ function createCoursePopupForm() {
             if (result.success) {
                 // Show success message with application ID
                 utils.showSuccess(result.data?.applicationId);
-                
+
                 // Show success toast
                 toastUtils.showSuccess('Application submitted successfully! We will contact you soon.');
-                
+
                 // Reset form
                 form.reset();
-                
+
                 // Close popup after 3 seconds
                 setTimeout(() => {
                     if (document.body.contains(overlay)) {
@@ -606,7 +603,7 @@ function createCoursePopupForm() {
                         document.head.removeChild(style);
                     }
                 }, 3000);
-                
+
             } else {
                 // Handle backend validation errors
                 if (result.errors && Array.isArray(result.errors)) {
@@ -630,14 +627,14 @@ function createCoursePopupForm() {
     // Real-time validation
     const inputs = popup.querySelectorAll('input, select, textarea');
     inputs.forEach(input => {
-        input.addEventListener('blur', function() {
+        input.addEventListener('blur', function () {
             const fieldName = this.id.replace('applicant', '')
-                                   .replace('selected', '')
-                                   .toLowerCase();
+                .replace('selected', '')
+                .toLowerCase();
             const value = this.value;
-            
+
             // Basic validation on blur
-            switch(fieldName) {
+            switch (fieldName) {
                 case 'name':
                     if (value && value.trim().length < 2) {
                         utils.showFieldError(fieldName, 'Name must be at least 2 characters long');
@@ -680,17 +677,17 @@ function createCoursePopupForm() {
         });
 
         // Clear error when user starts typing
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function () {
             const fieldName = this.id.replace('applicant', '')
-                                   .replace('selected', '')
-                                   .toLowerCase();
+                .replace('selected', '')
+                .toLowerCase();
             utils.hideFieldError(fieldName);
         });
     });
 
     // Cancel button handler
     const cancelBtn = popup.querySelector('#cancelBtn');
-    cancelBtn.addEventListener('click', function() {
+    cancelBtn.addEventListener('click', function () {
         if (document.body.contains(overlay)) {
             document.body.removeChild(overlay);
             document.head.removeChild(style);
@@ -698,7 +695,7 @@ function createCoursePopupForm() {
     });
 
     // Close on overlay click
-    overlay.addEventListener('click', function(e) {
+    overlay.addEventListener('click', function (e) {
         if (e.target === overlay) {
             if (document.body.contains(overlay)) {
                 document.body.removeChild(overlay);
@@ -708,7 +705,7 @@ function createCoursePopupForm() {
     });
 
     // Close on Escape key
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             if (document.body.contains(overlay)) {
                 document.body.removeChild(overlay);
@@ -729,7 +726,7 @@ function createCoursePopupForm() {
 // Enhanced function to open application form with additional options
 function openCourseApplication(courseName = '', studyMode = '') {
     createCoursePopupForm();
-    
+
     // Pre-select course if provided
     setTimeout(() => {
         if (courseName) {
@@ -744,7 +741,7 @@ function openCourseApplication(courseName = '', studyMode = '') {
                 }
             }
         }
-        
+
         // Pre-select study mode if provided
         if (studyMode) {
             const studyModeSelect = document.getElementById('studyMode');
@@ -756,25 +753,25 @@ function openCourseApplication(courseName = '', studyMode = '') {
 }
 
 // Auto-initialize if there are apply buttons on the page
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Find all apply buttons and attach event listeners
     const applyButtons = document.querySelectorAll('[data-action="apply"], .apply-btn, .course-apply, button[onclick*="apply"], a[href*="apply"]');
-    
+
     applyButtons.forEach(button => {
         // Remove any existing click listeners to prevent duplicates
         button.replaceWith(button.cloneNode(true));
-        
+
         const newButton = document.querySelector(`[data-action="apply"], .apply-btn, .course-apply, button[onclick*="apply"], a[href*="apply"]`);
-        
-        newButton.addEventListener('click', function(e) {
+
+        newButton.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
-            const courseName = this.getAttribute('data-course') || 
-                             this.closest('[data-course]')?.getAttribute('data-course') || 
-                             '';
+
+            const courseName = this.getAttribute('data-course') ||
+                this.closest('[data-course]')?.getAttribute('data-course') ||
+                '';
             const studyMode = this.getAttribute('data-study-mode') || '';
-            
+
             openCourseApplication(courseName, studyMode);
         });
     });
@@ -784,7 +781,7 @@ document.addEventListener('DOMContentLoaded', function() {
     buttonsWithOnclick.forEach(button => {
         const onclickAttr = button.getAttribute('onclick');
         if (onclickAttr && onclickAttr.includes('apply') || onclickAttr.includes('Application')) {
-            button.addEventListener('click', function(e) {
+            button.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 openCourseApplication();

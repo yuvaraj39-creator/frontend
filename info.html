@@ -69,13 +69,25 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .animate-fadeIn {
@@ -93,17 +105,60 @@
             margin-bottom: 4px;
         }
 
-        .seller-badge.best-seller { background-color: #FFD700; color: #000000; }
-        .seller-badge.top-rated { background-color: #4ADE80; color: #000000; }
-        .seller-badge.most-popular { background-color: #60A5FA; color: #000000; }
-        .seller-badge.trending-now { background-color: #F97316; color: #FFFFFF; }
-        .seller-badge.student-favorite { background-color: #A855F7; color: #FFFFFF; }
-        .seller-badge.bestseller { background-color: #FACC15; color: #000000; }
-        .seller-badge.hot-pick { background-color: #EF4444; color: #FFFFFF; }
-        .seller-badge.editors-choice { background-color: #3B82F6; color: #FFFFFF; }
-        .seller-badge.featured-course { background-color: #10B981; color: #FFFFFF; }
-        .seller-badge.highly-recommended { background-color: #EAB308; color: #000000; }
-        .seller-badge.top-choice { background-color: #6366F1; color: #FFFFFF; }
+        .seller-badge.best-seller {
+            background-color: #FFD700;
+            color: #000000;
+        }
+
+        .seller-badge.top-rated {
+            background-color: #4ADE80;
+            color: #000000;
+        }
+
+        .seller-badge.most-popular {
+            background-color: #60A5FA;
+            color: #000000;
+        }
+
+        .seller-badge.trending-now {
+            background-color: #F97316;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.student-favorite {
+            background-color: #A855F7;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.bestseller {
+            background-color: #FACC15;
+            color: #000000;
+        }
+
+        .seller-badge.hot-pick {
+            background-color: #EF4444;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.editors-choice {
+            background-color: #3B82F6;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.featured-course {
+            background-color: #10B981;
+            color: #FFFFFF;
+        }
+
+        .seller-badge.highly-recommended {
+            background-color: #EAB308;
+            color: #000000;
+        }
+
+        .seller-badge.top-choice {
+            background-color: #6366F1;
+            color: #FFFFFF;
+        }
 
         .toast-container {
             position: fixed;
@@ -129,23 +184,50 @@
             border-left: 4px solid #800020;
         }
 
-        .toast.show { transform: translateX(0); }
-        .toast.success { border-left-color: #10B981; }
-        .toast.error { border-left-color: #EF4444; }
-        .toast.warning { border-left-color: #F59E0B; }
-        .toast.info { border-left-color: #3B82F6; }
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            border-left-color: #10B981;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+
+        .toast.warning {
+            border-left-color: #F59E0B;
+        }
+
+        .toast.info {
+            border-left-color: #3B82F6;
+        }
 
         .toast-icon {
             font-size: 20px;
             flex-shrink: 0;
         }
 
-        .toast.success .toast-icon { color: #10B981; }
-        .toast.error .toast-icon { color: #EF4444; }
-        .toast.warning .toast-icon { color: #F59E0B; }
-        .toast.info .toast-icon { color: #3B82F6; }
+        .toast.success .toast-icon {
+            color: #10B981;
+        }
 
-        .toast-content { flex: 1; }
+        .toast.error .toast-icon {
+            color: #EF4444;
+        }
+
+        .toast.warning .toast-icon {
+            color: #F59E0B;
+        }
+
+        .toast.info .toast-icon {
+            color: #3B82F6;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
 
         .toast-title {
             font-weight: 600;
@@ -182,8 +264,136 @@
         }
 
         @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        
+        /* Enquiry Form Styles */
+        .enquiry-form-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .enquiry-form-popup {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 95%;
+            max-width: 420px;
+            max-height: 95vh;
+            overflow: hidden;
+            margin: 20px;
+        }
+        
+        .enquiry-form-header {
+            background: #800020;
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .enquiry-form-content {
+            padding: 15px;
+            max-height: calc(95vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .enquiry-form-input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: border-color 0.3s;
+        }
+        
+        .enquiry-form-input:focus {
+            outline: none;
+            border-color: #800020 !important;
+        }
+        
+        .enquiry-form-label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            color: #333;
+            font-size: 0.85rem;
+        }
+        
+        .enquiry-form-button {
+            padding: 8px 16px;
+            background: #800020;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 0.85rem;
+        }
+        
+        .enquiry-form-button:hover {
+            background: #600018;
+        }
+        
+        .enquiry-form-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .enquiry-form-cancel {
+            padding: 8px 16px;
+            border: 1px solid #d1d5db;
+            background: white;
+            color: #374151;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+        
+        .enquiry-form-cancel:hover {
+            background: #f3f4f6;
+        }
+        
+        .enquiry-form-error {
+            color: #dc2626;
+            font-size: 0.75rem;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        .enquiry-form-loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .enquiry-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #800020;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
     </style>
 </head>
@@ -199,9 +409,14 @@
             </div>
 
             <div class="hidden md:flex space-x-8">
-                <a href="index.html" class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Home</a>
-                <a href="courses.html" class="text-primary font-medium relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary">Courses</a>
-                <a href="index.html#contact" class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Contact</a>
+                <a href="index.html"
+                    class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Home</a>
+                <a href="courses.html"
+                    class="text-primary font-medium relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary">Courses</a>
+                <a href="quiz.html"
+                    class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Quiz</a>
+                <a href="index.html#contact"
+                    class="text-gray-700 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Contact</a>
             </div>
 
             <button class="md:hidden text-gray-700 focus:outline-none">
@@ -220,19 +435,19 @@
                         <div class="skeleton h-6 w-32 mb-4"></div>
                         <div class="skeleton h-12 w-3/4 mb-4"></div>
                         <div class="skeleton h-6 w-full mb-8"></div>
-                        
+
                         <div class="flex flex-wrap gap-4 mb-8">
                             <div class="skeleton h-6 w-24"></div>
                             <div class="skeleton h-6 w-28"></div>
                             <div class="skeleton h-6 w-20"></div>
                         </div>
-                        
+
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
                             <div class="skeleton h-12 w-40 rounded-full"></div>
                             <div class="skeleton h-12 w-40 rounded-lg"></div>
                         </div>
                     </div>
-                    
+
                     <div class="lg:w-1/2">
                         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
                             <div class="flex border-b">
@@ -243,11 +458,11 @@
                                     <div class="skeleton h-6 w-32 mx-auto"></div>
                                 </div>
                             </div>
-                            
+
                             <div class="relative h-80 md:h-96 overflow-hidden">
                                 <div class="skeleton h-full w-full"></div>
                             </div>
-                            
+
                             <div class="p-6">
                                 <div class="skeleton h-6 w-48 mb-4"></div>
                                 <div class="space-y-3">
@@ -262,7 +477,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Course description skeleton -->
         <section class="container mx-auto px-6 py-16">
             <div class="max-w-4xl mx-auto">
@@ -276,7 +491,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- What you'll learn skeleton -->
         <section class="bg-gray-50 py-16">
             <div class="container mx-auto px-6">
@@ -309,7 +524,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Curriculum skeleton -->
         <section class="container mx-auto px-6 py-16">
             <div class="skeleton h-8 w-64 mx-auto mb-12"></div>
@@ -340,7 +555,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- CTA section skeleton -->
         <section class="bg-primary py-16">
             <div class="container mx-auto px-6 text-center">
@@ -358,9 +573,11 @@
                 <div class="flex flex-col lg:flex-row items-center gap-10">
 
                     <div class="lg:w-1/2 text-white">
-                        <div id="seller-badge" class="inline-flex items-center bg-badgeOrange px-3 py-1 rounded-full mb-4">
+                        <div id="seller-badge"
+                            class="inline-flex items-center bg-badgeOrange px-3 py-1 rounded-full mb-4">
                             <i class="fas fa-star text-white mr-2"></i>
-                            <span id="seller-text" class="text-white font-semibold uppercase tracking-wide text-sm">Best Seller</span>
+                            <span id="seller-text" class="text-white font-semibold uppercase tracking-wide text-sm">Best
+                                Seller</span>
                         </div>
                         <h1 id="course-title" class="text-4xl md:text-5xl font-bold mb-4">Course Title</h1>
                         <p id="course-mini-description" class="text-xl mb-8 text-gray-200">Course mini description</p>
@@ -370,13 +587,15 @@
                         </div>
 
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-                            <div id="price-tag" class="price-tag bg-primary text-white px-6 py-3 rounded-full shadow-lg">
+                            <div id="price-tag"
+                                class="price-tag bg-primary text-white px-6 py-3 rounded-full shadow-lg">
                                 <span id="online-price" class="font-bold text-xl">₹2999</span>
                                 <span id="original-price" class="text-sm line-through ml-2 opacity-75 hidden"></span>
                                 <span id="discount-percentage" class="text-sm font-bold ml-2 hidden"></span>
                             </div>
-                            <button class="enroll-btn bg-accent text-primary px-8 py-3 rounded-lg font-bold shadow-lg transition-all hover:bg-white hover:text-primaryDark transform hover:scale-105">
-                                Enroll Now
+                            <button id="enquiry-btn"
+                                class="bg-accent text-primary px-8 py-3 rounded-lg font-bold shadow-lg transition-all hover:bg-white hover:text-primaryDark transform hover:scale-105">
+                                Enquiry Now
                             </button>
                         </div>
                     </div>
@@ -384,7 +603,8 @@
                     <div class="lg:w-1/2">
                         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
                             <div class="flex border-b">
-                                <button class="mode-toggle flex-1 py-4 text-center font-semibold active" data-mode="online">
+                                <button class="mode-toggle flex-1 py-4 text-center font-semibold active"
+                                    data-mode="online">
                                     <i class="fas fa-laptop-house mr-2"></i>Online Class
                                 </button>
                                 <button class="mode-toggle flex-1 py-4 text-center font-semibold" data-mode="offline">
@@ -394,8 +614,10 @@
 
                             <div class="relative h-80 md:h-96 overflow-hidden">
                                 <div class="hero-slide absolute inset-0 opacity-100" data-mode="online">
-                                    <img id="course-image-online" src="" alt="Online Course" class="h-full w-full object-cover">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end">
+                                    <img id="course-image-online" src="" alt="Online Course"
+                                        class="h-full w-full object-cover">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end">
                                         <div class="p-6 text-white">
                                             <h3 class="text-xl font-bold mb-2">Learn from Anywhere</h3>
                                             <p>Join live interactive sessions with expert instructors</p>
@@ -404,8 +626,10 @@
                                 </div>
 
                                 <div class="hero-slide absolute inset-0 opacity-0" data-mode="offline">
-                                    <img id="course-image-offline" src="" alt="Offline Course" class="h-full w-full object-cover">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end">
+                                    <img id="course-image-offline" src="" alt="Offline Course"
+                                        class="h-full w-full object-cover">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end">
                                         <div class="p-6 text-white">
                                             <h3 class="text-xl font-bold mb-2">Hands-on Classroom Experience</h3>
                                             <p>Learn in our state-of-the-art facilities with direct mentorship</p>
@@ -486,9 +710,12 @@
 
         <section class="bg-primary py-16">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Take the next step in your learning journey</h2>
-                <p class="text-white/90 mb-8 max-w-2xl mx-auto">Join thousands of students who have transformed their careers with our comprehensive courses.</p>
-                <button class="bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all hover:bg-primaryDark hover:text-white transform hover:scale-105">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Take the next step in your learning journey
+                </h2>
+                <p class="text-white/90 mb-8 max-w-2xl mx-auto">Join thousands of students who have transformed their
+                    careers with our comprehensive courses.</p>
+                <button onclick="createCommunityPopupForm()"
+                    class="bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all hover:bg-primaryDark hover:text-white transform hover:scale-105">
                     Join Now
                 </button>
             </div>
@@ -500,7 +727,8 @@
             <i class="fas fa-exclamation-triangle text-6xl text-red-500 mb-4"></i>
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Course Not Found</h2>
             <p class="text-gray-600 mb-8">The course you're looking for doesn't exist or may have been removed.</p>
-            <a href="courses.html" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primaryDark transition-colors">
+            <a href="courses.html"
+                class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primaryDark transition-colors">
                 Browse All Courses
             </a>
         </div>
@@ -514,15 +742,18 @@
                         <img src="img/favicon-32x32.png" alt="logo" class="w-8 h-8 mr-2">
                         <span class="text-xl font-semibold">U1 Technology Institute</span>
                     </div>
-                    <p class="text-gray-400">Empowering the next generation of technology professionals through innovative education.</p>
+                    <p class="text-gray-400">Empowering the next generation of technology professionals through
+                        innovative education.</p>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
                         <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors">Courses</a></li>
-                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors">Courses</a>
+                        </li>
+                        <li><a href="index.html#contact"
+                                class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
@@ -539,7 +770,7 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
-                            <span>123 Tech Park, Bangalore, India</span>
+                            <span>1, OMR Service Rd, near Jain College, Customs Colony, Jothi Nagar, Thoraipakkam, Chennai, Tamil Nadu 600097</span>
                         </li>
                     </ul>
                 </div>
@@ -547,16 +778,20 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
@@ -570,7 +805,7 @@
     </footer>
 
     <script>
-        const API_BASE_URL = window.AppConfig?.API_BASE_URL || 'http://localhost:3000';
+        const API_BASE_URL = window.AppConfig.API_BASE_URL;
 
         let loadingState;
         let courseContent;
@@ -591,6 +826,7 @@
         let toolsContainer;
         let learnContainer;
         let curriculumContainer;
+        let enquiryBtn;
 
         let currentCourse = null;
 
@@ -619,6 +855,7 @@
             toolsContainer = document.getElementById('tools-container');
             learnContainer = document.getElementById('learn-container');
             curriculumContainer = document.getElementById('curriculum-container');
+            enquiryBtn = document.getElementById('enquiry-btn');
         }
 
         function showToast(title, message, type = 'info', duration = 5000) {
@@ -838,11 +1075,11 @@
                             <div class="p-6 border-t">
                                 <ul class="space-y-3">
                                     ${(section.lectures || []).map(lecture =>
-                                        `<li class="flex items-center">
+                    `<li class="flex items-center">
                                             <i class="fas fa-play-circle text-primary mr-3"></i>
                                             <span>${lecture || 'Untitled Lecture'}</span>
                                         </li>`
-                                    ).join('')}
+                ).join('')}
                                 </ul>
                             </div>
                         </div>
@@ -969,22 +1206,13 @@
                 });
             });
 
-            const enrollButtons = document.querySelectorAll('.enroll-btn');
-            enrollButtons.forEach(button => {
-                button.addEventListener('click', function () {
+            // Enquiry button functionality
+            if (enquiryBtn) {
+                enquiryBtn.addEventListener('click', function () {
                     const activeMode = document.querySelector('.mode-toggle.active').getAttribute('data-mode');
-                    const price = activeMode === 'online' ?
-                        (currentCourse.onlinePrice ? formatINR(currentCourse.onlinePrice) : 'Contact for pricing') :
-                        (currentCourse.offlinePrice ? formatINR(currentCourse.offlinePrice) : 'Contact for pricing');
-
-                    showToast(
-                        'Enrollment',
-                        `You've selected ${activeMode} mode. Price: ${price}`,
-                        'info',
-                        4000
-                    );
+                    showEnquiryForm(activeMode);
                 });
-            });
+            }
 
             const ctaButton = document.querySelector('.bg-white.text-primary');
             if (ctaButton) {
@@ -998,7 +1226,224 @@
                 });
             }
         }
+
+        // Enquiry Form Functions
+        function showEnquiryForm(studyMode) {
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'enquiry-form-overlay';
+            
+            // Create popup
+            const popup = document.createElement('div');
+            popup.className = 'enquiry-form-popup';
+            
+            popup.innerHTML = `
+                <div class="enquiry-form-header">
+                    <img src="img/favicon-32x32.png" alt="Logo" style="width: 20px; height: 20px;">
+                    <h2 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Course Enquiry</h2>
+                </div>
+                
+                <div class="enquiry-form-content">
+                    <form id="enquiryForm">
+                        <div style="margin-bottom: 12px;">
+                            <label class="enquiry-form-label">Full Name *</label>
+                            <input type="text" id="enquiryName" required class="enquiry-form-input" placeholder="Enter your full name">
+                            <div class="enquiry-form-error" data-field="name"></div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                            <div style="flex: 1;">
+                                <label class="enquiry-form-label">Phone *</label>
+                                <input type="tel" id="enquiryPhone" required class="enquiry-form-input" placeholder="Phone number">
+                                <div class="enquiry-form-error" data-field="phone"></div>
+                            </div>
+                            <div style="flex: 1;">
+                                <label class="enquiry-form-label">Email *</label>
+                                <input type="email" id="enquiryEmail" required class="enquiry-form-input" placeholder="Email address">
+                                <div class="enquiry-form-error" data-field="email"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <label class="enquiry-form-label">Course</label>
+                            <input type="text" id="enquiryCourse" class="enquiry-form-input" value="${currentCourse.title}" readonly>
+                        </div>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <label class="enquiry-form-label">Study Mode</label>
+                            <input type="text" id="enquiryStudyMode" class="enquiry-form-input" value="${studyMode}" readonly>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <label class="enquiry-form-label">Message (Optional)</label>
+                            <textarea id="enquiryMessage" rows="3" class="enquiry-form-input" placeholder="Any specific questions or requirements"></textarea>
+                        </div>
+                        
+                        <div id="enquiryLoading" class="enquiry-form-loading">
+                            <div class="enquiry-spinner"></div>
+                            <span style="margin-left: 8px; font-size: 0.85rem; color: #666;">Sending enquiry...</span>
+                        </div>
+                        
+                        <div id="enquirySuccess" style="display: none; text-align: center; margin: 10px 0; padding: 10px; background: #d1fae5; color: #065f46; border-radius: 6px; font-size: 0.85rem;">
+                            <div style="font-weight: 600; margin-bottom: 5px;">Enquiry Sent Successfully!</div>
+                            <div style="font-size: 0.8rem;">We will contact you shortly with more information.</div>
+                        </div>
+                        
+                        <div id="enquiryError" style="display: none; text-align: center; margin: 10px 0; padding: 10px; background: #fee2e2; color: #dc2626; border-radius: 6px; font-size: 0.85rem;"></div>
+                        
+                        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                            <button type="button" id="enquiryCancel" class="enquiry-form-cancel">Cancel</button>
+                            <button type="submit" id="enquirySubmit" class="enquiry-form-button">Send Enquiry</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            overlay.appendChild(popup);
+            document.body.appendChild(overlay);
+            
+            // Form submission handler
+            const form = popup.querySelector('#enquiryForm');
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const enquiryData = {
+                    name: document.getElementById('enquiryName').value.trim(),
+                    phone: document.getElementById('enquiryPhone').value.trim(),
+                    email: document.getElementById('enquiryEmail').value.trim(),
+                    course: document.getElementById('enquiryCourse').value,
+                    studyMode: document.getElementById('enquiryStudyMode').value,
+                    message: document.getElementById('enquiryMessage').value.trim()
+                };
+                
+                // Validate form
+                if (!validateEnquiryForm(enquiryData)) {
+                    return;
+                }
+                
+                // Show loading state
+                const loadingEl = popup.querySelector('#enquiryLoading');
+                const submitBtn = popup.querySelector('#enquirySubmit');
+                const successEl = popup.querySelector('#enquirySuccess');
+                const errorEl = popup.querySelector('#enquiryError');
+                
+                loadingEl.style.display = 'block';
+                submitBtn.disabled = true;
+                successEl.style.display = 'none';
+                errorEl.style.display = 'none';
+                
+                try {
+                    // Send enquiry data to backend
+                    const response = await fetch(`${API_BASE_URL}/api/enquiry`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(enquiryData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        loadingEl.style.display = 'none';
+                        successEl.style.display = 'block';
+                        form.reset();
+                        
+                        // Close popup after 3 seconds
+                        setTimeout(() => {
+                            document.body.removeChild(overlay);
+                        }, 3000);
+                    } else {
+                        loadingEl.style.display = 'none';
+                        errorEl.textContent = result.message || 'Failed to send enquiry. Please try again.';
+                        errorEl.style.display = 'block';
+                        submitBtn.disabled = false;
+                    }
+                } catch (error) {
+                    console.error('Enquiry submission error:', error);
+                    loadingEl.style.display = 'none';
+                    errorEl.textContent = 'Network error. Please check your connection and try again.';
+                    errorEl.style.display = 'block';
+                    submitBtn.disabled = false;
+                }
+            });
+            
+            // Cancel button handler
+            const cancelBtn = popup.querySelector('#enquiryCancel');
+            cancelBtn.addEventListener('click', function() {
+                document.body.removeChild(overlay);
+            });
+            
+            // Close on overlay click
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    document.body.removeChild(overlay);
+                }
+            });
+            
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (document.body.contains(overlay)) {
+                        document.body.removeChild(overlay);
+                    }
+                }
+            });
+            
+            // Focus on first input
+            setTimeout(() => {
+                const firstInput = popup.querySelector('input');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }, 100);
+        }
+        
+        function validateEnquiryForm(data) {
+            let isValid = true;
+            
+            // Clear all errors
+            const errorElements = document.querySelectorAll('.enquiry-form-error');
+            errorElements.forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Validate name
+            if (!data.name) {
+                showEnquiryFieldError('name', 'Full name is required');
+                isValid = false;
+            }
+            
+            // Validate phone
+            if (!data.phone) {
+                showEnquiryFieldError('phone', 'Phone number is required');
+                isValid = false;
+            } else if (!/^[0-9+\-\s()]{10,15}$/.test(data.phone)) {
+                showEnquiryFieldError('phone', 'Please enter a valid phone number');
+                isValid = false;
+            }
+            
+            // Validate email
+            if (!data.email) {
+                showEnquiryFieldError('email', 'Email address is required');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+                showEnquiryFieldError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        function showEnquiryFieldError(fieldName, message) {
+            const errorElement = document.querySelector(`.enquiry-form-error[data-field="${fieldName}"]`);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
     </script>
+    <script src="Join_Our_Community.js"></script>
 </body>
 
 </html>

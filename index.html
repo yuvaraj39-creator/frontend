@@ -9,14 +9,14 @@
 
     <script src="config.js"></script>
     <meta name="description"
-        content="U1 Technology Institute provides industry-focused training in engineering, science, commerce, and arts. Empower your future with expert faculty, hands-on learning, and real-world career opportunities. Join us today!">
+        content="U1 Technology Institute offers industry-focused training in engineering, science, commerce, and arts. Join our vibrant learning community with expert faculty, hands-on learning, and real-world career opportunities. Transform your future with our comprehensive programs and excellent placement record.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.U1Technology.co.in/">
     <meta property="og:title" content="U1 Technology Institute - Premier Education Destination">
     <meta property="og:description"
-        content="Join our vibrant learning community and unlock your potential with industry-relevant programs.">
+        content="Join our vibrant learning community and unlock your potential with industry-relevant programs. Expert faculty, hands-on learning, and excellent placement opportunities await you.">
     <meta property="og:image"
         content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
 
@@ -25,7 +25,7 @@
     <meta property="twitter:url" content="https://www.U1Technology.co.in/">
     <meta property="twitter:title" content="U1 Technology Institute - Premier Education Destination">
     <meta property="twitter:description"
-        content="Join our vibrant learning community and unlock your potential with industry-relevant programs.">
+        content="Join our vibrant learning community and unlock your potential with industry-relevant programs. Expert faculty, hands-on learning, and excellent placement opportunities await you.">
     <meta property="twitter:image"
         content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
 
@@ -71,12 +71,10 @@
             transition: all 0.3s ease;
         }
 
-        /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Skip to content link */
         .skip-link {
             position: absolute;
             top: -40px;
@@ -92,7 +90,6 @@
             top: 0;
         }
 
-        /* Seller Badge Styles */
         .seller-badge {
             display: inline-flex;
             align-items: center;
@@ -157,7 +154,6 @@
             color: #FFFFFF;
         }
 
-        /* Line clamp utility */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -165,7 +161,6 @@
             overflow: hidden;
         }
 
-        /* Skeleton Loading Styles */
         .skeleton {
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
@@ -203,7 +198,6 @@
             }
         }
 
-        /* How It Works Section Styles */
         .how-it-works-step {
             position: relative;
             padding: 30px 20px;
@@ -252,7 +246,6 @@
             display: none;
         }
 
-        /* Map Container Styles */
         .map-container {
             position: relative;
             width: 100%;
@@ -268,7 +261,6 @@
             border: none;
         }
 
-        /* About Section Flip Animation */
         .about-container {
             perspective: 1000px;
             position: relative;
@@ -326,7 +318,6 @@
             justify-content: center;
         }
 
-        /* Testimonial Zoom Effect */
         .testimonial-zoom {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -336,7 +327,6 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
-        /* Toast Notification Styles */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -428,6 +418,153 @@
             color: #6B7280;
         }
 
+        .campus-gallery-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            background-color: #f9fafb;
+        }
+
+        .campus-gallery-track {
+            display: flex;
+            gap: 16px;
+            animation: slideRightToLeft 30s linear infinite;
+            animation-play-state: paused;
+            /* FIX: Start paused until images load */
+        }
+
+        .campus-gallery-item {
+            flex: 0 0 300px;
+            height: 192px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .campus-gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .campus-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .campus-gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .campus-gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 12px;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .campus-gallery-item:hover .campus-gallery-caption {
+            transform: translateY(0);
+        }
+
+        @keyframes slideRightToLeft {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-300px * 6 - 16px * 6));
+            }
+        }
+
+        .campus-gallery-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Top Recruiters Slider Styles */
+        .recruiters-slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            padding: 20px 0;
+            background-color: #f9fafb;
+        }
+
+        .recruiters-slider-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+        }
+
+        .recruiters-slider-row {
+            display: flex;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .recruiters-slider-item {
+            flex: 0 0 180px;
+            height: 80px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .recruiters-slider-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .recruiters-slider-item span {
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .slider-row-1 {
+            animation: slideRightToLeft 25s linear infinite;
+        }
+
+        .slider-row-2 {
+            animation: slideLeftToRight 30s linear infinite;
+        }
+
+        @keyframes slideLeftToRight {
+            0% {
+                transform: translateX(calc(-180px * 6 - 20px * 6));
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .recruiters-slider-track:hover .slider-row-1,
+        .recruiters-slider-track:hover .slider-row-2 {
+            animation-play-state: paused;
+        }
+
         @media (max-width: 768px) {
             .about-container {
                 height: auto;
@@ -456,6 +593,36 @@
                 right: 10px;
                 left: 10px;
                 max-width: none;
+            }
+
+            .campus-gallery-item {
+                flex: 0 0 250px;
+                height: 160px;
+            }
+
+            @keyframes slideRightToLeft {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(calc(-250px * 4 - 16px * 4));
+                }
+            }
+
+            .recruiters-slider-item {
+                flex: 0 0 140px;
+                height: 60px;
+            }
+
+            @keyframes slideLeftToRight {
+                0% {
+                    transform: translateX(calc(-140px * 6 - 20px * 6));
+                }
+
+                100% {
+                    transform: translateX(0);
+                }
             }
         }
     </style>
@@ -546,7 +713,7 @@
                 <a href="#contact" class="text-gray-600 hover:text-[#800020]">Contact</a>
             </div>
             <div class="flex items-center">
-                <button onclick="createAuthSystem()"
+                <button id="auth-button" onclick="createAuthSystem()"
                     class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-all">
                     Login Now
                 </button>
@@ -565,7 +732,7 @@
                 <a href="#admissions" class="text-gray-600 hover:text-[#800020]">Admissions</a>
                 <a href="#placements" class="text-gray-600 hover:text-[#800020]">Placements</a>
                 <a href="#contact" class="text-gray-600 hover:text-[#800020]">Contact</a>
-                <button onclick="createAuthSystem()"
+                <button id="mobile-auth-button" onclick="createAuthSystem()"
                     class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-all w-full">
                     Login Now
                 </button>
@@ -604,156 +771,144 @@
         <!-- About Us Section -->
         <section id="about" class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
+
+                <!-- Heading -->
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">About U1 Technology Institute</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">About U1 Technology</h2>
                     <div class="w-20 h-1 bg-[#800020] mx-auto"></div>
                 </div>
 
                 <!-- Flip Card Container -->
                 <div class="about-container">
                     <div class="about-flip-card" id="about-flip-card">
-                        <!-- Front Side (Default View) -->
+
+                        <!-- FRONT SIDE -->
                         <div class="about-front">
                             <div class="about-image">
-                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1470&q=80"
                                     alt="U1 Technology Institute Campus" loading="lazy">
                             </div>
-                            <div class="about-content">
-                                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision & Mission</h3>
-                                <p class="text-gray-600 mb-6">To be a globally recognized center of excellence in
-                                    education,
-                                    research, and innovation that transforms students into leaders and responsible
-                                    citizens.</p>
 
-                                <div class="space-y-4">
-                                    <div class="flex items-start">
-                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                            <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="font-medium text-gray-900">35+ Years of Excellence</h4>
-                                            <p class="text-gray-600">Providing quality education since 1988</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                            <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="font-medium text-gray-900">Industry-Aligned Curriculum</h4>
-                                            <p class="text-gray-600">Programs designed with industry experts</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                            <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="font-medium text-gray-900">Global Recognition</h4>
-                                            <p class="text-gray-600">Accredited by international education bodies</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="about-content">
+                                <h3 class="text-2xl font-semibold text-gray-900 mb-4">About U1 Technology</h3>
+                                <p class="text-gray-600 mb-6">
+                                    U1 Technology is a skill-development and career-building platform created to help
+                                    students
+                                    and professionals become industry-ready with real-time, practical IT training.
+                                    We focus on hands-on learning, high-quality education, and complete placement
+                                    support to
+                                    ensure every learner is fully prepared for real-world challenges.
+                                </p>
+
+                                <p class="text-gray-600 mb-6">
+                                    Our trainers come from top IT companies with strong industry experience.
+                                    We believe in training that is practical, simple, clear, and job-focused — not just
+                                    theory.
+                                    Through structured learning, guided mentorship, and real-time project exposure,
+                                    U1 Technology prepares you to confidently start your IT career.
+                                </p>
 
                                 <button id="learn-more-btn"
-                                    class="mt-8 bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
-                                    Learn More About Us
+                                    class="mt-6 bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
+                                    Learn More
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Back Side (Detailed View) -->
+                        <!-- BACK SIDE -->
                         <div class="about-back">
                             <div class="about-content">
-                                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our History & Achievements</h3>
-                                <p class="text-gray-600 mb-6">Founded in 1988, U1 Technology Institute has grown from a
-                                    small technical training center to a premier educational institution with over
-                                    10,000 successful alumni worldwide.</p>
+                                <h3 class="text-2xl font-semibold text-gray-900 mb-4">History & Achievements</h3>
 
-                                <div class="space-y-4 mb-6">
-                                    <div class="flex items-start">
-                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                            <i class="fas fa-trophy text-[#800020]" aria-hidden="true"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="font-medium text-gray-900">Award-Winning Faculty</h4>
-                                            <p class="text-gray-600">Our faculty members have received numerous national
-                                                and international awards for teaching excellence</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                            <i class="fas fa-graduation-cap text-[#800020]" aria-hidden="true"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="font-medium text-gray-900">95% Placement Rate</h4>
-                                            <p class="text-gray-600">Consistently high placement rates with top
-                                                companies across industries</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                            <i class="fas fa-handshake text-[#800020]" aria-hidden="true"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="font-medium text-gray-900">Industry Partnerships</h4>
-                                            <p class="text-gray-600">Strong collaborations with 200+ companies for
-                                                internships and research projects</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <p class="text-gray-600 mb-6">
+                                    U1 Technology was founded with a simple but powerful vision — to make high-quality
+                                    IT
+                                    training accessible, practical, and fully career-focused.
+                                    What started as a small mentoring initiative has grown into a trusted platform
+                                    offering
+                                    real-time projects, industry-driven guidance, and job-ready training programs.
+                                </p>
+
+                                <p class="text-gray-600 mb-6">
+                                    Over the years, we have shaped the careers of hundreds of learners through hands-on
+                                    practice,
+                                    structured training, and continuous mentor support.
+                                    Our journey reflects passion, dedication, and a commitment to helping every student
+                                    achieve
+                                    their dream IT career.
+                                </p>
 
                                 <button id="back-to-normal-btn"
                                     class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition-all">
                                     Back to Overview
                                 </button>
                             </div>
+
                             <div class="about-image">
-                                <img src="https://images.unsplash.com/photo-1562813733-b31f71025d54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
-                                    alt="U1 Technology Institute Achievements" loading="lazy">
+                                <img src="https://images.unsplash.com/photo-1562813733-b31f71025d54?auto=format&fit=crop&w=1470&q=80"
+                                    alt="U1 Technology History" loading="lazy">
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- How It Works Section -->
-        <section id="how-it-works" class="py-16">
+
+        <!-- Why Choose Us Section -->
+        <section id="why-choose-us" class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
+
+                <!-- Heading -->
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Your Skill Growth Simplified</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">We provide practical learning, strong guidance, and
+                        complete career support</p>
                     <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
                 </div>
 
+                <!-- 3 Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+
+                    <!-- Card 01 -->
                     <div class="how-it-works-step">
                         <div class="step-number">01</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Select Your Path</h3>
-                        <p class="text-gray-600">Browse through our curated learning tracks designed for every career
-                            level. Pick the course that aligns with your ambitions and start your journey toward
-                            mastery.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Real-Time Projects</h3>
+                        <p class="text-gray-600">
+                            Work on real industry-level projects covering frontend, backend, and database.
+                            You receive source code, documentation, and complete mentor guidance — helping you explain
+                            your project confidently in interviews and build a strong resume portfolio.
+                        </p>
                     </div>
 
+                    <!-- Card 02 -->
                     <div class="how-it-works-step">
                         <div class="step-number">02</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Join Our Community</h3>
-                        <p class="text-gray-600">Connect with mentors and peers who share your passion. Collaborate on
-                            projects, exchange ideas, and stay motivated throughout your learning experience.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Resume Building Support</h3>
+                        <p class="text-gray-600">
+                            Get professionally designed, ATS-friendly resumes tailored for IT roles such as
+                            Developers, Testers, Analysts, Cloud Engineers, and DevOps.
+                            We ensure your resume stands out and gets shortlisted quickly by recruiters.
+                        </p>
                     </div>
 
+                    <!-- Card 03 -->
                     <div class="how-it-works-step">
                         <div class="step-number">03</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Achieve Excellence</h3>
-                        <p class="text-gray-600">Apply what you learn through real-world challenges and guided practice.
-                            Gain confidence, earn certifications, and elevate your professional profile.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Practical Training & Interview Prep</h3>
+                        <p class="text-gray-600">
+                            Learn through structured hands-on training with real-time examples and mentor-led guidance.
+                            We conduct mock interviews, communication training, and job-ready skill sessions so you can
+                            face real interviews with full confidence.
+                        </p>
                     </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Rest of the content remains the same -->
+
         <!-- Courses/Programs Section -->
         <section id="courses" class="py-16">
             <div class="container mx-auto px-4">
@@ -838,7 +993,8 @@
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Software Development</h3>
                         <p class="text-gray-600 mb-4">Full-stack development, mobile apps, and software engineering</p>
-                        <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                        <a href="courses.html#category-Software%20Development"
+                            class="text-[#800020] font-medium hover:underline">Explore →</a>
                     </div>
 
                     <!-- Department Card 2 -->
@@ -848,7 +1004,8 @@
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Data Science & AI</h3>
                         <p class="text-gray-600 mb-4">Machine learning, data analytics, and artificial intelligence</p>
-                        <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                        <a href="courses.html#category-Data%20Science%20%26%20AI"
+                            class="text-[#800020] font-medium hover:underline">Explore →</a>
                     </div>
 
                     <!-- Department Card 3 -->
@@ -858,7 +1015,8 @@
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Cyber Security</h3>
                         <p class="text-gray-600 mb-4">Network security, ethical hacking, and digital forensics</p>
-                        <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                        <a href="courses.html#category-Cyber%20Security"
+                            class="text-[#800020] font-medium hover:underline">Explore →</a>
                     </div>
 
                     <!-- Department Card 4 -->
@@ -868,7 +1026,8 @@
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Cloud Computing</h3>
                         <p class="text-gray-600 mb-4">AWS, Azure, Google Cloud, and cloud infrastructure management</p>
-                        <a href="#" class="text-[#800020] font-medium hover:underline">Explore →</a>
+                        <a href="courses.html#category-Cloud%20Computing"
+                            class="text-[#800020] font-medium hover:underline">Explore →</a>
                     </div>
                 </div>
             </div>
@@ -877,70 +1036,91 @@
         <!-- Admissions Section -->
         <section id="admissions" class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
+
+                <!-- Heading -->
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Admissions</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Start your journey with U1 Technology Institute</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Join Our Community</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        We’re delighted that you’re considering U1 Technology Institute for your learning journey.
+                        Our admissions process is simple, transparent, and designed to help motivated learners begin
+                        their IT career with confidence.
+                    </p>
                     <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
                 </div>
 
                 <div class="flex flex-col lg:flex-row items-center">
+
+                    <!-- Image -->
                     <div class="lg:w-1/2 mb-8 lg:mb-0">
-                        <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&w=1470&q=80"
                             alt="Students discussing in campus" class="rounded-lg shadow-md w-full" width="700"
                             height="467" loading="lazy">
                     </div>
-                    <div class="lg:w-1/2 lg:pl-12">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Join Our Community</h3>
-                        <p class="text-gray-600 mb-6">We're excited that you're considering U1 Technology Institute for
-                            your
-                            educational journey. Our admissions process is designed to identify talented and motivated
-                            students who will thrive in our academic environment.</p>
 
-                        <div class="space-y-4 mb-8">
+                    <!-- Content -->
+                    <div class="lg:w-1/2 lg:pl-12">
+
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Simple Admission Process</h3>
+
+                        <div class="space-y-6 mb-10">
+                            <!-- Step 1 -->
                             <div class="flex items-start">
                                 <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                    <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                                    <i class="fas fa-check text-[#800020]"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-medium text-gray-900">Application Process</h4>
-                                    <p class="text-gray-600">Submit your application online with required documents</p>
+                                    <h4 class="font-medium text-gray-900">Apply Online</h4>
+                                    <p class="text-gray-600">
+                                        Complete a simple online form to begin your admission process.
+                                    </p>
                                 </div>
                             </div>
+
+                            <!-- Step 2 -->
                             <div class="flex items-start">
                                 <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                    <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                                    <i class="fas fa-check text-[#800020]"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-medium text-gray-900">Entrance Exams</h4>
-                                    <p class="text-gray-600">Prepare for our entrance examination or submit standardized
-                                        test scores</p>
+                                    <h4 class="font-medium text-gray-900"> Skill Evaluation</h4>
+                                    <p class="text-gray-600">
+                                        Attend a short assessment to check your learning readiness.
+                                    </p>
                                 </div>
                             </div>
+
+                            <!-- Step 3 -->
                             <div class="flex items-start">
                                 <div class="bg-[#FFB6C1] p-2 rounded-full mr-4">
-                                    <i class="fas fa-check text-[#800020]" aria-hidden="true"></i>
+                                    <i class="fas fa-check text-[#800020]"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-medium text-gray-900">Interview</h4>
-                                    <p class="text-gray-600">Selected candidates will be invited for an interview</p>
+                                    <h4 class="font-medium text-gray-900"> Final Enrollment</h4>
+                                    <p class="text-gray-600">
+                                        Meet our team for a quick discussion and secure your seat.
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Buttons -->
                         <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                             <button onclick="createCommunityPopupForm()"
                                 class="bg-[#800020] hover:bg-[#600018] text-white px-6 py-3 rounded-lg font-medium transition-all">
                                 Join Now
                             </button>
+
                             <button
                                 class="bg-white hover:bg-gray-100 text-[#800020] border border-[#800020] px-6 py-3 rounded-lg font-medium transition-all">
                                 Download Brochure
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Placements Section -->
         <section id="placements" class="py-16">
@@ -987,24 +1167,41 @@
 
                     <div class="bg-white rounded-lg shadow-md p-8">
                         <h3 class="text-2xl font-bold text-gray-900 mb-4">Top Recruiters</h3>
-                        <div class="grid grid-cols-3 gap-4">
-                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                                <span class="font-bold text-gray-700">Google</span>
-                            </div>
-                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                                <span class="font-bold text-gray-700">Microsoft</span>
-                            </div>
-                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                                <span class="font-bold text-gray-700">Amazon</span>
-                            </div>
-                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                                <span class="font-bold text-gray-700">Infosys</span>
-                            </div>
-                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                                <span class="font-bold text-gray-700">TCS</span>
-                            </div>
-                            <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center">
-                                <span class="font-bold text-gray-700">Accenture</span>
+
+                        <!-- Top Recruiters Slider -->
+                        <div class="recruiters-slider-container">
+                            <div class="recruiters-slider-track">
+                                <!-- Row 1: Right to Left -->
+                                <div class="recruiters-slider-row slider-row-1">
+                                    <div class="recruiters-slider-item"><span>Google</span></div>
+                                    <div class="recruiters-slider-item"><span>Microsoft</span></div>
+                                    <div class="recruiters-slider-item"><span>Amazon</span></div>
+                                    <div class="recruiters-slider-item"><span>Infosys</span></div>
+                                    <div class="recruiters-slider-item"><span>TCS</span></div>
+                                    <div class="recruiters-slider-item"><span>Accenture</span></div>
+                                    <div class="recruiters-slider-item"><span>Cognizant</span></div>
+                                    <div class="recruiters-slider-item"><span>Wipro</span></div>
+                                    <div class="recruiters-slider-item"><span>HCL</span></div>
+                                    <div class="recruiters-slider-item"><span>IBM</span></div>
+                                    <div class="recruiters-slider-item"><span>Oracle</span></div>
+                                    <div class="recruiters-slider-item"><span>PayPal</span></div>
+                                </div>
+
+                                <!-- Row 2: Left to Right -->
+                                <div class="recruiters-slider-row slider-row-2">
+                                    <div class="recruiters-slider-item"><span>Adobe</span></div>
+                                    <div class="recruiters-slider-item"><span>Intel</span></div>
+                                    <div class="recruiters-slider-item"><span>Dell</span></div>
+                                    <div class="recruiters-slider-item"><span>Capgemini</span></div>
+                                    <div class="recruiters-slider-item"><span>Tech Mahindra</span></div>
+                                    <div class="recruiters-slider-item"><span>Mindtree</span></div>
+                                    <div class="recruiters-slider-item"><span>L&T Infotech</span></div>
+                                    <div class="recruiters-slider-item"><span>Mphasis</span></div>
+                                    <div class="recruiters-slider-item"><span>Hexaware</span></div>
+                                    <div class="recruiters-slider-item"><span>Persistent</span></div>
+                                    <div class="recruiters-slider-item"><span>Zoho</span></div>
+                                    <div class="recruiters-slider-item"><span>Freshworks</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1012,54 +1209,64 @@
 
                 <div class="bg-white rounded-lg shadow-md p-8">
                     <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Student Testimonials</h3>
+
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                        <!-- Review 1 - Sabari -->
                         <div
                             class="flex flex-col items-center text-center testimonial-zoom transition-all p-6 bg-gray-50 rounded-lg">
                             <img src="https://i.pinimg.com/1200x/de/dc/d4/dedcd4a67c30f4635eb6d3ee6b7828f1.jpg"
-                                alt="Emily Chen" class="w-20 h-20 rounded-full mb-4" width="80" height="80"
-                                loading="lazy">
+                                alt="Sabari" class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
+
                             <p class="text-gray-600 italic mb-4">
-                                "The placement cell at U1 Technology Institute gave me strong guidance and continuous
-                                support throughout my training. The projects and AI-focused learning environment helped
-                                me build real confidence, and I secured a role in my dream company."
+                                "Training at U1 Technology was really good. Everything was explained in a simple way and
+                                the projects helped me understand things clearly. The team supported me throughout, and
+                                finally I got placed. Really happy with the journey."
                             </p>
+
                             <h4 class="font-bold text-gray-900">Sabari</h4>
                             <p class="text-[#800020]">AI & Software Developer at TCS</p>
-
                         </div>
+
+                        <!-- Review 2 - Rahul -->
                         <div
                             class="flex flex-col items-center text-center testimonial-zoom transition-all p-6 bg-gray-50 rounded-lg">
                             <img src="https://i.pinimg.com/736x/0b/d0/8d/0bd08d5c0e33816234ad3ce6be77b8f5.jpg"
-                                alt="Raj Patel" class="w-20 h-20 rounded-full mb-4" width="80" height="80"
-                                loading="lazy">
+                                alt="Rahul" class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
+
                             <p class="text-gray-600 italic mb-4">
-                                "The industry-oriented curriculum and real-time automation testing practice at U1
-                                Technology helped me master Java-based automation frameworks. The hands-on training and
-                                mock interviews played a major role in helping me secure my position at Cognizant."
+                                "The placement team kept guiding me at every step. They helped me with my resume,
+                                interviews, and cleared my doubts anytime. Because of their support, I was able to
+                                attend interviews with confidence and get my job."
                             </p>
+
                             <h4 class="font-bold text-gray-900">Rahul</h4>
                             <p class="text-[#800020]">Automation Test Engineer at Cognizant</p>
-
                         </div>
+
+                        <!-- Review 3 - Suriya -->
                         <div
                             class="flex flex-col items-center text-center testimonial-zoom transition-all p-6 bg-gray-50 rounded-lg">
                             <img src="https://i.pinimg.com/1200x/8d/f1/09/8df10971aa4f0d07db53bf51df6d2785.jpg"
-                                alt="Priya Sharma" class="w-20 h-20 rounded-full mb-4" width="80" height="80"
-                                loading="lazy">
+                                alt="Suriya" class="w-20 h-20 rounded-full mb-4" width="80" height="80" loading="lazy">
+
                             <p class="text-gray-600 italic mb-4">
-                                "The hands-on projects and expert mentorship at U1 Technology helped me build strong
-                                data analysis skills and secure my role as a Data Analyst at PayPal."
+                                "I joined with very basic knowledge, but the trainers taught everything from scratch.
+                                The real-time practice and examples made learning easy for me. Now I feel confident
+                                working in an IT company thanks to U1 Technology."
                             </p>
 
                             <h4 class="font-bold text-gray-900">Suriya</h4>
                             <p class="text-[#800020]">Data Analyst at PayPal</p>
                         </div>
+
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- Gallery Section -->
+        <!-- Campus Life Section with 4-Column Grid -->
         <section class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
@@ -1068,26 +1275,10 @@
                     <div class="w-20 h-1 bg-[#800020] mx-auto mt-4"></div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="gallery-item transition-all">
-                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                            alt="Students in library" class="w-full h-48 object-cover rounded-lg" width="300"
-                            height="192" loading="lazy">
-                    </div>
-                    <div class="gallery-item transition-all">
-                        <img src="https://media.istockphoto.com/id/882215368/photo/hes-a-great-tutor.webp?a=1&b=1&s=612x612&w=0&k=20&c=CSIs1x0XKDDptmpffMlQGewM280I4PmQFd7ujpdrEyc="
-                            alt="Graduation ceremony" class="w-full h-48 object-cover rounded-lg" width="300"
-                            height="192" loading="lazy">
-                    </div>
-                    <div class="gallery-item transition-all">
-                        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1490&q=80"
-                            alt="Sports event" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
-                            loading="lazy">
-                    </div>
-                    <div class="gallery-item transition-all">
-                        <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
-                            alt="Cultural festival" class="w-full h-48 object-cover rounded-lg" width="300" height="192"
-                            loading="lazy">
+                <!-- Campus Gallery Container -->
+                <div class="campus-gallery-container">
+                    <div class="campus-gallery-track" id="campus-gallery-track">
+                        <!-- Gallery items will be dynamically loaded from JSON -->
                     </div>
                 </div>
             </div>
@@ -1289,7 +1480,6 @@
     </footer>
 
     <script>
-        // Toast Notification System
         class ToastNotification {
             constructor() {
                 this.container = document.getElementById('toast-container');
@@ -1323,12 +1513,10 @@
 
                 this.container.appendChild(toast);
 
-                // Show animation
                 setTimeout(() => {
                     toast.classList.add('show');
                 }, 10);
 
-                // Auto remove if duration is set
                 if (duration > 0) {
                     setTimeout(() => {
                         this.close(toastId);
@@ -1367,14 +1555,164 @@
             }
         }
 
-        // Initialize toast system
         const toastSystem = new ToastNotification();
 
+        class CampusLifeGallery {
+            constructor() {
+                this.galleryTrack = document.getElementById('campus-gallery-track');
+                this.init();
+            }
+
+            async init() {
+                await this.loadImages();
+                await this.createGallery(); // FIX: Wait for gallery creation
+            }
+
+            async loadImages() {
+                try {
+                    const response = await fetch('Campus_Life.json');
+                    const data = await response.json();
+                    this.images = data.images;
+                } catch (error) {
+                    console.error('Error loading campus life images:', error);
+                    this.images = [
+                        {
+                            url: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                            alt: "Students in library"
+                        },
+                        {
+                            url: "https://media.istockphoto.com/id/882215368/photo/hes-a-great-tutor.webp?a=1&b=1&s=612x612&w=0&k=20&c=CSIs1x0XKDDptmpffMlQGewM280I4PmQFd7ujpdrEyc=",
+                            alt: "Classroom learning"
+                        },
+                        {
+                            url: "https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1490&q=80",
+                            alt: "Sports event"
+                        },
+                        {
+                            url: "https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
+                            alt: "Cultural festival"
+                        },
+                        {
+                            url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                            alt: "Campus building"
+                        },
+                        {
+                            url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                            alt: "Student collaboration"
+                        },
+                        {
+                            url: "https://images.unsplash.com/photo-1562813733-b31f71025d54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
+                            alt: "Graduation ceremony"
+                        },
+                        {
+                            url: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                            alt: "Student discussion"
+                        }
+                    ];
+                }
+            }
+
+            async createGallery() {
+                this.galleryTrack.innerHTML = '';
+
+                const promises = [];
+
+                this.images.forEach((image) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'campus-gallery-item';
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image.url;
+                    imgElement.alt = image.alt;
+                    imgElement.loading = 'lazy';
+
+                    const caption = document.createElement('div');
+                    caption.className = 'campus-gallery-caption';
+                    caption.innerHTML = `<h3 class="text-white font-semibold">${image.alt}</h3>`;
+
+                    galleryItem.appendChild(imgElement);
+                    galleryItem.appendChild(caption);
+                    this.galleryTrack.appendChild(galleryItem);
+
+                    // Add image load promise
+                    promises.push(
+                        new Promise(resolve => {
+                            imgElement.onload = resolve;
+                            imgElement.onerror = resolve; // Resolve even if image fails to load
+                        })
+                    );
+                });
+
+                // Duplicate items for seamless loop
+                const duplicateItems = this.galleryTrack.innerHTML;
+                this.galleryTrack.innerHTML += duplicateItems;
+
+                // Wait for ALL images to load before starting animation
+                await Promise.all(promises);
+
+                // FIX: Start animation only after all images are loaded
+                this.galleryTrack.style.animationPlayState = "running";
+
+                console.log('Campus gallery loaded and animation started');
+            }
+        }
+
+        class UserAuthManager {
+            constructor() {
+                this.authButton = document.getElementById('auth-button');
+                this.mobileAuthButton = document.getElementById('mobile-auth-button');
+                this.isLoggedIn = false;
+
+                this.init();
+            }
+
+            init() {
+                this.checkLoginStatus();
+                this.updateAuthButtons();
+            }
+
+            checkLoginStatus() {
+                const token = localStorage.getItem('authToken');
+                const userData = localStorage.getItem('userData');
+
+                this.isLoggedIn = !!(token && userData);
+            }
+
+            updateAuthButtons() {
+                const buttonText = this.isLoggedIn ? 'Join Now' : 'Login Now';
+
+                if (this.authButton) {
+                    this.authButton.textContent = buttonText;
+                }
+
+                if (this.mobileAuthButton) {
+                    this.mobileAuthButton.textContent = buttonText;
+                }
+            }
+
+            login() {
+                localStorage.setItem('authToken', 'demo-token');
+                localStorage.setItem('userData', JSON.stringify({ name: 'User', email: 'user@example.com' }));
+                this.isLoggedIn = true;
+                this.updateAuthButtons();
+                toastSystem.success('Successfully logged in!');
+            }
+
+            logout() {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userData');
+                this.isLoggedIn = false;
+                this.updateAuthButtons();
+                toastSystem.info('Logged out successfully');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
-            // Main content ID for accessibility
+            const campusGallery = new CampusLifeGallery();
+            const userAuthManager = new UserAuthManager();
+
             const mainContent = document.getElementById('main-content');
 
-            // Mobile menu toggle
             document.getElementById('mobile-menu-button').addEventListener('click', function () {
                 const mobileMenu = document.getElementById('mobile-menu');
                 const isExpanded = this.getAttribute('aria-expanded') === 'true';
@@ -1382,7 +1720,6 @@
                 mobileMenu.classList.toggle('hidden');
                 this.setAttribute('aria-expanded', !isExpanded);
 
-                // Update icon
                 const icon = this.querySelector('i');
                 if (icon.classList.contains('fa-bars')) {
                     icon.classList.remove('fa-bars');
@@ -1393,7 +1730,6 @@
                 }
             });
 
-            // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -1407,7 +1743,6 @@
                 });
             });
 
-            // Explore Programs button scroll to courses section
             document.getElementById('explore-programs-btn').addEventListener('click', function () {
                 document.getElementById('courses').scrollIntoView({
                     behavior: 'smooth',
@@ -1415,7 +1750,6 @@
                 });
             });
 
-            // About section flip functionality
             const learnMoreBtn = document.getElementById('learn-more-btn');
             const backToNormalBtn = document.getElementById('back-to-normal-btn');
             const aboutFlipCard = document.getElementById('about-flip-card');
@@ -1428,35 +1762,29 @@
                 aboutFlipCard.classList.remove('flipped');
             });
 
-            // Contact Form Handler
             document.getElementById('contact-form').addEventListener('submit', async function (e) {
                 e.preventDefault();
 
-                // Get form data
                 const formData = new FormData(this);
                 const data = Object.fromEntries(formData);
 
-                // Simple validation
                 if (!data.name || !data.email || !data.subject || !data.message) {
                     toastSystem.error('Please fill in all fields');
                     return;
                 }
 
-                // Simple email validation
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(data.email)) {
                     toastSystem.error('Please enter a valid email address');
                     return;
                 }
 
-                // Simulate form submission
                 const submitBtn = this.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Sending...';
 
                 try {
-                    // Send email using server API
                     const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/contact`, {
                         method: "POST",
                         headers: {
@@ -1464,8 +1792,6 @@
                         },
                         body: JSON.stringify(data),
                     });
-
-
 
                     const result = await response.json();
 
@@ -1484,7 +1810,6 @@
                 }
             });
 
-            // Courses/Programs Section Functionality
             class CoursesManager {
                 constructor() {
                     this.apiBaseUrl = window.AppConfig
@@ -1503,10 +1828,8 @@
                     if (!coursesContainer) return;
 
                     try {
-                        // Show skeleton loading state
                         coursesContainer.innerHTML = this.getSkeletonHTML();
 
-                        // Simulate API call delay
                         setTimeout(async () => {
                             try {
                                 const response = await fetch(`${window.AppConfig.API_BASE_URL}/api/courses?limit=100&status=active`);
@@ -1519,25 +1842,18 @@
 
                                 if (result.success && result.data.courses.length > 0) {
                                     const allCourses = result.data.courses;
-
-                                    // Get 3 random courses
                                     const randomCourses = this.getRandomCourses(allCourses, 3);
-
-                                    // Update the courses section
                                     this.updateCoursesSection(randomCourses);
                                 } else {
-                                    // Fallback to demo courses if no courses found
                                     this.showFallbackCourses();
                                 }
                             } catch (error) {
                                 console.error('Error loading courses:', error);
-                                // Fallback to demo courses on error
                                 this.showFallbackCourses();
                             }
-                        }, 1500); // Simulate network delay
+                        }, 1500);
                     } catch (error) {
                         console.error('Error loading courses:', error);
-                        // Fallback to demo courses on error
                         this.showFallbackCourses();
                     }
                 }
@@ -1587,18 +1903,11 @@
                     }
 
                     coursesContainer.innerHTML = courses.map(course => {
-                        // Generate random rating between 4.2 and 4.8
                         const rating = this.generateRandomRating();
-
-                        // Check if course has discount
                         const hasDiscount = course.onlineOriginalPrice && course.onlineOriginalPrice > course.onlinePrice;
-
-                        // Ensure image URL is valid
                         const courseImage = course.images && course.images[0]
                             ? course.images[0]
                             : 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
-
-                        // Get course description (prefer miniDescription, fallback to description)
                         const courseDescription = course.miniDescription || course.description || 'No description available.';
 
                         return `
@@ -1701,7 +2010,6 @@
                 }
 
                 showFallbackCourses() {
-                    // Demo courses data as fallback
                     const demoCourses = [
                         {
                             id: '1',
@@ -1739,14 +2047,22 @@
                 }
             }
 
-            // Initialize the courses manager
             const coursesManager = new CoursesManager();
         });
+
+        function createAuthSystem() {
+            const userAuthManager = new UserAuthManager();
+
+            if (userAuthManager.isLoggedIn) {
+                createCommunityPopupForm();
+            } else {
+                userAuthManager.login();
+            }
+        }
     </script>
     <script src="apply.js"></script>
     <script src="Join_Our_Community.js"></script>
     <script src="login.js"></script>
-
 
 </body>
 

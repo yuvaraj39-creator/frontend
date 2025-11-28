@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Courses | U1 Technology</title>
     <link rel="icon" type="image/png" href="img/favicon-16x16.png">
+    <meta name="description"
+        content="U1 Technology Institute offers industry-focused training in engineering, science, commerce, and arts. Join our vibrant learning community with expert faculty, hands-on learning, and real-world career opportunities. Transform your future with our comprehensive programs and excellent placement record.">
 
     <script src="config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -45,17 +47,22 @@
         .course-card {
             transition: all 0.3s ease;
             border: 1px solid var(--gray-200);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .course-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         .category-chip {
             transition: all 0.3s ease;
             background-color: var(--gray-100);
             color: var(--gray-800);
+            white-space: nowrap;
+            cursor: pointer;
         }
 
         .category-chip:hover {
@@ -75,10 +82,11 @@
         }
 
         .promo-banner {
-            height: 300px;
+            height: 250px;
             background-size: cover;
             background-position: center;
             position: relative;
+            margin-bottom: 2rem;
         }
 
         .promo-banner::after {
@@ -232,7 +240,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .show-all-btn {
@@ -242,6 +250,7 @@
             border-radius: 0.375rem;
             font-weight: 500;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .show-all-btn:hover {
@@ -249,7 +258,9 @@
         }
 
         .category-section {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            scroll-margin-top: 120px;
+            /* Add scroll margin for smooth scrolling */
         }
 
         /* Skeleton Loading Styles */
@@ -264,25 +275,26 @@
             0% {
                 background-position: 200% 0;
             }
+
             100% {
                 background-position: -200% 0;
             }
         }
 
         .skeleton-card {
-            height: 320px;
+            height: 280px;
             border-radius: 8px;
             overflow: hidden;
         }
 
         .skeleton-image {
-            height: 192px;
+            height: 150px;
             width: 100%;
         }
 
         .skeleton-text {
-            height: 16px;
-            margin: 8px 0;
+            height: 14px;
+            margin: 6px 0;
         }
 
         .skeleton-text.short {
@@ -294,35 +306,35 @@
         }
 
         .skeleton-rating {
-            height: 16px;
+            height: 14px;
             width: 100px;
-            margin: 8px 0;
+            margin: 6px 0;
         }
 
         .skeleton-price {
-            height: 20px;
+            height: 18px;
             width: 80px;
-            margin: 8px 0;
+            margin: 6px 0;
         }
 
         .skeleton-button {
-            height: 32px;
+            height: 28px;
             width: 100px;
             border-radius: 4px;
         }
 
         .skeleton-category {
-            height: 40px;
-            width: 120px;
-            border-radius: 20px;
-            margin: 0 8px 8px 0;
+            height: 32px;
+            width: 100px;
+            border-radius: 16px;
+            margin: 0 6px 6px 0;
         }
 
         .category-nav-container {
             overflow-x: auto;
             white-space: nowrap;
-            padding: 16px 0;
-            margin-bottom: 16px;
+            padding: 10px 0;
+            margin-bottom: 10px;
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
@@ -333,7 +345,7 @@
 
         .category-nav {
             display: inline-flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         /* New Header Layout */
@@ -367,6 +379,82 @@
 
         .nav-link.active {
             color: var(--primary);
+        }
+
+        .course-image {
+            height: 160px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .course-info {
+            padding: 12px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .transition-section {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Highlight animation for category sections */
+        .category-highlight {
+            animation: highlight-pulse 2s ease-in-out;
+        }
+
+        @keyframes highlight-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(128, 0, 32, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 10px rgba(128, 0, 32, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(128, 0, 32, 0);
+            }
+        }
+
+        /* Utility classes for layout fixes */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .min-h-0 {
+            min-height: 0;
+        }
+
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+
+        /* Grid layout fixes */
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        @media (min-width: 640px) {
+            .sm\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 768px) {
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
         }
     </style>
 </head>
@@ -414,7 +502,7 @@
             </div>
 
             <!-- Category Navigation -->
-            <div class="border-t border-gray-200 py-3">
+            <div class="border-t border-gray-200">
                 <div class="category-nav-container">
                     <div class="category-nav" id="category-navigation">
                         <!-- Categories will be loaded here -->
@@ -451,25 +539,25 @@
         </div>
     </nav>
 
-    <div class="container py-8">
+    <div class="container py-6">
         <!-- Main Content -->
         <div>
             <!-- Search Bar (for mobile) -->
-            <div class="mb-8 md:hidden">
+            <div class="mb-6 md:hidden">
                 <div class="relative w-full">
                     <input type="text" id="search-input-mobile" placeholder="Search courses..."
                         class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#800020] focus:border-transparent">
                     <i class="fas fa-search absolute left-4 top-4 text-gray-400"></i>
                 </div>
             </div>
-            
+
             <!-- Promo Banner -->
             <div id="promo-banner-container">
                 <!-- Promo banner will be loaded here -->
             </div>
 
             <!-- Search Results Section (Hidden by default) -->
-            <div id="search-results-container" class="hidden">
+            <div id="search-results-container" class="hidden transition-section">
                 <div class="section-header">
                     <h2 class="text-2xl font-bold text-gray-900">Search Results</h2>
                     <button class="show-all-btn" id="clear-search-btn">
@@ -482,7 +570,7 @@
             </div>
 
             <!-- Featured Courses Section -->
-            <div class="category-section" id="featured-section">
+            <div class="category-section transition-section" id="featured-section">
                 <div class="section-header">
                     <h2 class="text-2xl font-bold text-gray-900">Featured Courses</h2>
                     <button class="show-all-btn hidden" id="show-all-featured">
@@ -543,7 +631,7 @@
             </div>
 
             <!-- Category-based Course Sections -->
-            <div id="category-sections-container">
+            <div id="category-sections-container" class="transition-section">
                 <!-- Category sections will be dynamically generated here -->
                 <div class="category-section">
                     <div class="section-header">
@@ -617,10 +705,10 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="courses.html" class="text-gray-400 hover:text-white">Courses</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white">Instructors</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white">Contact</a></li>
                     </ul>
                 </div>
                 <div>
@@ -797,17 +885,17 @@
         // Clear search and show normal sections
         function clearSearch() {
             isSearching = false;
-            
+
             // Clear search inputs
             if (searchInputMobile) searchInputMobile.value = '';
             if (headerSearchInput) headerSearchInput.value = '';
-            
+
             // Hide search results
             hideSearchResults();
-            
+
             // Show normal sections
             showNormalSections();
-            
+
             // Reset active category
             if (categoryNavigation) {
                 const allChips = categoryNavigation.querySelectorAll('.category-chip');
@@ -823,7 +911,7 @@
             if (searchResultsContainer) {
                 searchResultsContainer.classList.remove('hidden');
             }
-            
+
             // Hide normal sections
             hideNormalSections();
         }
@@ -879,10 +967,10 @@
         // Display category navigation
         function displayCategoryNavigation() {
             if (!categoryNavigation) return;
-            
+
             // Clear skeleton loading
             categoryNavigation.innerHTML = '';
-            
+
             // Add "All Courses" option
             const allCoursesChip = document.createElement('button');
             allCoursesChip.className = 'category-chip active-category px-4 py-2 rounded-full font-medium text-sm';
@@ -894,16 +982,22 @@
                 });
                 // Add active class to clicked chip
                 allCoursesChip.classList.add('active-category');
+                // Scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
                 // Reset filters
                 resetFilters();
             });
             categoryNavigation.appendChild(allCoursesChip);
-            
+
             // Add each category as a chip
             categories.forEach(category => {
                 const categoryChip = document.createElement('button');
                 categoryChip.className = 'category-chip px-4 py-2 rounded-full font-medium text-sm';
                 categoryChip.textContent = category;
+                categoryChip.setAttribute('data-category', category);
                 categoryChip.addEventListener('click', () => {
                     // Remove active class from all chips
                     document.querySelectorAll('.category-chip').forEach(chip => {
@@ -911,11 +1005,40 @@
                     });
                     // Add active class to clicked chip
                     categoryChip.classList.add('active-category');
-                    // Filter by category
-                    filterCourses('', category);
+                    // Scroll to category section
+                    scrollToCategorySection(category);
                 });
                 categoryNavigation.appendChild(categoryChip);
             });
+        }
+
+        // Scroll to specific category section
+        function scrollToCategorySection(category) {
+            const sectionId = `category-${category.replace(/\s+/g, '-').toLowerCase()}`;
+            const sectionElement = document.getElementById(sectionId);
+
+            if (sectionElement) {
+                // Hide search results if visible
+                hideSearchResults();
+                showNormalSections();
+
+                // Scroll to the section with smooth behavior
+                sectionElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+
+                // Add highlight animation
+                sectionElement.classList.add('category-highlight');
+
+                // Remove highlight animation after 2 seconds
+                setTimeout(() => {
+                    sectionElement.classList.remove('category-highlight');
+                }, 2000);
+            } else {
+                // If section doesn't exist, filter by category
+                filterCourses('', category);
+            }
         }
 
         // Load promo banner from API
@@ -947,7 +1070,7 @@
             if (!promoBannerContainer) return;
 
             promoBannerContainer.innerHTML = `
-            <div class="promo-banner rounded-lg overflow-hidden mb-10" style="background-image: url('${poster.image}')">
+            <div class="promo-banner rounded-lg overflow-hidden" style="background-image: url('${poster.image}')">
                 <div class="h-full flex items-center justify-center promo-content text-white p-8 text-center">
                     <div>
                         <h3 class="text-3xl font-bold mb-4">${poster.title}</h3>
@@ -966,7 +1089,7 @@
             if (!promoBannerContainer) return;
 
             promoBannerContainer.innerHTML = `
-            <div class="promo-banner rounded-lg overflow-hidden mb-10" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+            <div class="promo-banner rounded-lg overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
                 <div class="h-full flex items-center justify-center promo-content text-white p-8 text-center">
                     <div>
                         <h3 class="text-3xl font-bold mb-4">Start Learning Today</h3>
@@ -1063,7 +1186,7 @@
                     (course.miniDescription && course.miniDescription.toLowerCase().includes(searchTerm)) ||
                     (course.seller && course.seller.toLowerCase().includes(searchTerm)) ||
                     (course.category && course.category.toLowerCase().includes(searchTerm)) ||
-                    (course.toolsLanguage && course.toolsLanguage.some(tool => 
+                    (course.toolsLanguage && course.toolsLanguage.some(tool =>
                         tool.toLowerCase().includes(searchTerm)
                     ))
                 );
@@ -1101,7 +1224,7 @@
             displayCategorySections(allCoursesData);
         }
 
-        // Display featured courses section
+        // Display featured courses section - FIXED LAYOUT
         function displayFeaturedCourses(featuredCoursesData) {
             if (!featuredCoursesContainer) return;
 
@@ -1109,11 +1232,12 @@
                 const isExpanded = expandedSections.has('featured');
                 const coursesToShow = isExpanded ? featuredCoursesData : featuredCoursesData.slice(0, 4);
 
+                // FIX: Use courses-grid class for proper grid layout
                 featuredCoursesContainer.innerHTML = `
-                <div class="courses-grid">
-                    ${coursesToShow.map(course => createCourseCard(course)).join('')}
-                </div>
-            `;
+                    <div class="courses-grid">
+                        ${coursesToShow.map(course => createCourseCard(course)).join('')}
+                    </div>
+                `;
 
                 // Show "Show All" button if there are more than 4 featured courses
                 if (showAllFeaturedBtn) {
@@ -1221,7 +1345,7 @@
             return `<span class="seller-badge ${badgeClass}">${seller}</span>`;
         }
 
-        // Function to create course card HTML
+        // Function to create course card HTML - FIXED LAYOUT ISSUES
         function createCourseCard(course) {
             // Generate random rating between 4.2 and 4.8
             const rating = generateRandomRating();
@@ -1235,25 +1359,27 @@
                 : 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
 
             return `
-            <div class="course-card bg-white rounded-lg overflow-hidden shadow-sm">
-                <div class="relative">
-                    <img class="w-full h-48 object-cover" src="${courseImage}" alt="${course.title || 'Course Image'}" onerror="this.src='https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'">
+            <div class="course-card bg-white rounded-lg overflow-hidden shadow-sm flex flex-col min-h-0">
+                <div class="relative flex-shrink-0">
+                    <img class="course-image w-full" src="${courseImage}" alt="${course.title || 'Course Image'}" onerror="this.src='https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'">
                     ${course.seller ?
                     `<div class="absolute top-2 right-2">
                                 ${createSellerBadge(course.seller)}
                             </div>` : ''
                 }
                 </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-900 mb-1">${course.title || 'Untitled Course'}</h3>
-                    <p class="text-sm text-gray-600 mb-2">${course.category || 'General'}</p>
-                    <div class="flex items-center mb-3">
-                        <div class="text-yellow-400 mr-1">
-                            ${'★'.repeat(Math.floor(rating))}${'☆'.repeat(5 - Math.floor(rating))}
+                <div class="course-info flex-1 flex flex-col min-h-0">
+                    <div class="flex-1 min-h-0">
+                        <h3 class="text-lg font-bold text-gray-900 mb-1 line-clamp-2">${course.title || 'Untitled Course'}</h3>
+                        <p class="text-sm text-gray-600 mb-2">${course.category || 'General'}</p>
+                        <div class="flex items-center mb-3">
+                            <div class="text-yellow-400 mr-1">
+                                ${'★'.repeat(Math.floor(rating))}${'☆'.repeat(5 - Math.floor(rating))}
+                            </div>
+                            <span class="text-sm text-gray-600">${rating}</span>
                         </div>
-                        <span class="text-sm text-gray-600">${rating}</span>
                     </div>
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
                         <div>
                             <span class="text-lg font-bold text-[#800020]">${formatINR(course.onlinePrice || 0)}</span>
                             ${hasDiscount ?
@@ -1261,7 +1387,7 @@
                 }
                         </div>
                         <a href="info.html?id=${course._id}">
-                            <button class="px-3 py-1 bg-[#800020] hover:bg-[#600018] text-white text-sm rounded transition duration-300">
+                            <button class="px-3 py-1 bg-[#800020] hover:bg-[#600018] text-white text-sm rounded transition duration-300 whitespace-nowrap">
                                 View Details
                             </button>
                         </a>

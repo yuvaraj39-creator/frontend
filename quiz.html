@@ -149,7 +149,7 @@
             border-radius: 8px;
             padding: 16px 20px;
             margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             border-left: 4px solid #3b82f6;
             display: flex;
             align-items: center;
@@ -225,87 +225,101 @@
 
     <main class="container mx-auto px-6 py-12">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-primary mb-4">Think >> Solve >> Succeed</h1>
-                <p class="text-xl text-gray-600">Put your mind to the test — conquer all 10 questions and claim your
-                    reward!</p>
+            <!-- Authentication Check -->
+            <div id="auth-check" class="hidden bg-red-50 border border-red-200 rounded-lg p-6 mb-8 text-center">
+                <div class="text-red-500 text-4xl mb-4">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <h2 class="text-xl font-bold text-red-800 mb-2">Authentication Required</h2>
+                <p class="text-red-600 mb-4">Please log in to access the quiz.</p>
+                <a href="index.html" class="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-primaryDark transition-colors">
+                    Go to Login
+                </a>
             </div>
 
-            <!-- Quiz Progress -->
-            <div class="mb-8">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-sm font-medium text-gray-700">Progress</span>
-                    <span class="text-sm font-medium text-primary" id="progress-text">0/10</span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-3">
-                    <div id="progress-bar" class="progress-bar h-3 rounded-full bg-primary" style="width: 0%"></div>
-                </div>
-            </div>
-
-            <!-- Quiz Container -->
-            <div id="quiz-container" class="bg-white rounded-2xl shadow-xl p-8">
-                <!-- Loading State -->
-                <div id="loading-state" class="text-center py-12">
-                    <div class="loading-spinner mb-4"></div>
-                    <p class="text-gray-600">Loading quiz questions...</p>
+            <div id="quiz-content-wrapper">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl font-bold text-primary mb-4">Think >> Solve >> Succeed</h1>
+                    <p class="text-xl text-gray-600">Put your mind to the test — conquer all 10 questions and claim your
+                        reward!</p>
                 </div>
 
-                <!-- Quiz Content -->
-                <div id="quiz-content" class="hidden">
-                    <div class="mb-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 id="question-text" class="text-2xl font-bold text-gray-800"></h2>
-                            <div id="timer-container" class="flex items-center">
-                                <span id="timer-text" class="text-sm font-medium text-primary mr-2">30s</span>
-                                <div class="w-24 bg-gray-200 rounded-full h-2">
-                                    <div id="timer-bar" class="timer-bar h-2 rounded-full bg-primary"
-                                        style="width: 100%"></div>
+                <!-- Quiz Progress -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">Progress</span>
+                        <span class="text-sm font-medium text-primary" id="progress-text">0/10</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div id="progress-bar" class="progress-bar h-3 rounded-full bg-primary" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Quiz Container -->
+                <div id="quiz-container" class="bg-white rounded-2xl shadow-xl p-8">
+                    <!-- Loading State -->
+                    <div id="loading-state" class="text-center py-12">
+                        <div class="loading-spinner mb-4"></div>
+                        <p class="text-gray-600">Loading quiz questions...</p>
+                    </div>
+
+                    <!-- Quiz Content -->
+                    <div id="quiz-content" class="hidden">
+                        <div class="mb-8">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 id="question-text" class="text-2xl font-bold text-gray-800"></h2>
+                                <div id="timer-container" class="flex items-center">
+                                    <span id="timer-text" class="text-sm font-medium text-primary mr-2">30s</span>
+                                    <div class="w-24 bg-gray-200 rounded-full h-2">
+                                        <div id="timer-bar" class="timer-bar h-2 rounded-full bg-primary"
+                                            style="width: 100%"></div>
+                                    </div>
                                 </div>
                             </div>
+                            <div id="question-number" class="text-sm text-gray-500 mb-2"></div>
+                            <div id="question-category" class="text-sm text-primary font-medium"></div>
                         </div>
-                        <div id="question-number" class="text-sm text-gray-500 mb-2"></div>
-                        <div id="question-category" class="text-sm text-primary font-medium"></div>
+
+                        <div id="options-container" class="space-y-4 mb-8"></div>
+
+                        <div class="flex justify-between items-center">
+                            <button id="next-btn"
+                                class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-primaryDark transition-colors ml-auto">
+                                Next <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                            <button id="submit-btn"
+                                class="bg-green-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors hidden">
+                                Submit Answers
+                            </button>
+                        </div>
                     </div>
 
-                    <div id="options-container" class="space-y-4 mb-8"></div>
-
-                    <div class="flex justify-between items-center">
-                        <button id="next-btn"
-                            class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-primaryDark transition-colors ml-auto">
-                            Next <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                        <button id="submit-btn"
-                            class="bg-green-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors hidden">
-                            Submit Answers
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Results -->
-                <div id="results-container" class="hidden text-center py-12">
-                    <div id="success-message" class="hidden">
-                        <div class="text-green-500 text-6xl mb-6">
-                            <i class="fas fa-trophy"></i>
+                    <!-- Results -->
+                    <div id="results-container" class="hidden text-center py-12">
+                        <div id="success-message" class="hidden">
+                            <div class="text-green-500 text-6xl mb-6">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-4">Congratulations!</h2>
+                            <p class="text-xl text-gray-600 mb-8">You answered all questions correctly!</p>
+                            <button id="show-redeem-btn"
+                                class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-primaryDark transition-colors">
+                                Claim Your Reward
+                            </button>
                         </div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Congratulations!</h2>
-                        <p class="text-xl text-gray-600 mb-8">You answered all questions correctly!</p>
-                        <button id="show-redeem-btn"
-                            class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-primaryDark transition-colors">
-                            Claim Your Reward
-                        </button>
-                    </div>
 
-                    <div id="failure-message" class="hidden">
-                        <div class="text-red-500 text-6xl mb-6">
-                            <i class="fas fa-times-circle"></i>
+                        <div id="failure-message" class="hidden">
+                            <div class="text-red-500 text-6xl mb-6">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-4">Keep Practicing!</h2>
+                            <p id="score-text" class="text-xl text-gray-600 mb-4"></p>
+                            <p class="text-gray-600 mb-8">Try again to improve your score and win the reward.</p>
+                            <button id="retry-btn"
+                                class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-primaryDark transition-colors">
+                                Try Again
+                            </button>
                         </div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Keep Practicing!</h2>
-                        <p id="score-text" class="text-xl text-gray-600 mb-4"></p>
-                        <p class="text-gray-600 mb-8">Try again to improve your score and win the reward.</p>
-                        <button id="retry-btn"
-                            class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-primaryDark transition-colors">
-                            Try Again
-                        </button>
                     </div>
                 </div>
             </div>
@@ -327,6 +341,13 @@
                         <p class="text-sm text-gray-500 mb-1">Your discount code:</p>
                         <p id="redeem-code" class="text-2xl font-bold text-primary">U1TECH20</p>
                     </div>
+                </div>
+
+                <div id="storage-warning" class="hidden bg-yellow-50 border border-yellow-200 rounded p-3 mt-4 mb-4">
+                    <p class="text-yellow-800 text-sm">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <span id="warning-text">Failed to save redeem code. Please take a screenshot of this code.</span>
+                    </p>
                 </div>
 
                 <div class="mb-6">
@@ -377,7 +398,7 @@
                             <span>+91 9876543210</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <i class="fas fa-map-marker-alt mt=1 mr-3"></i>
                             <span>123 Tech Park, Bangalore, India</span>
                         </li>
                     </ul>
@@ -420,8 +441,11 @@
         let score = 0;
         let timerInterval;
         let timeLeft = 30;
+        let currentUser = null;
 
         // DOM elements
+        const authCheck = document.getElementById('auth-check');
+        const quizContentWrapper = document.getElementById('quiz-content-wrapper');
         const quizContainer = document.getElementById('quiz-container');
         const loadingState = document.getElementById('loading-state');
         const quizContent = document.getElementById('quiz-content');
@@ -444,6 +468,8 @@
         const retryBtn = document.getElementById('retry-btn');
         const timerText = document.getElementById('timer-text');
         const timerBar = document.getElementById('timer-bar');
+        const storageWarning = document.getElementById('storage-warning');
+        const warningText = document.getElementById('warning-text');
 
         // Toast Notification System
         const toastUtils = {
@@ -457,7 +483,7 @@
 
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
-                
+
                 toast.innerHTML = `
                     <span>${message}</span>
                 `;
@@ -478,7 +504,7 @@
             removeToast(toast) {
                 toast.classList.remove('show');
                 toast.classList.add('hide');
-                
+
                 setTimeout(() => {
                     if (toast.parentNode) {
                         toast.parentNode.removeChild(toast);
@@ -507,29 +533,46 @@
         function checkUserAuthentication() {
             const authToken = localStorage.getItem('authToken');
             const userData = localStorage.getItem('userData');
-            
+
             if (!authToken || !userData) {
-                console.log("User not authenticated, redirecting to index page");
-                toastUtils.showWarning("Please log in to access the quiz");
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
+                console.log("User not authenticated, showing auth check");
+                authCheck.classList.remove('hidden');
+                quizContentWrapper.classList.add('hidden');
                 return false;
             }
-            
-            console.log("User authenticated:", JSON.parse(userData).name);
-            return true;
+
+            try {
+                currentUser = JSON.parse(userData);
+                console.log("User authenticated:", currentUser);
+                
+                // Ensure currentUser has the expected structure
+                if (!currentUser.userId && currentUser._id) {
+                    currentUser.userId = currentUser._id;
+                }
+                if (!currentUser.name && currentUser.userName) {
+                    currentUser.name = currentUser.userName;
+                }
+                
+                authCheck.classList.add('hidden');
+                quizContentWrapper.classList.remove('hidden');
+                return true;
+            } catch (error) {
+                console.error("Error parsing user data:", error);
+                authCheck.classList.remove('hidden');
+                quizContentWrapper.classList.add('hidden');
+                return false;
+            }
         }
 
         // Initialize the quiz
         document.addEventListener('DOMContentLoaded', function () {
             console.log("Quiz initialization started...");
-            
+
             // Check authentication first
             if (!checkUserAuthentication()) {
                 return;
             }
-            
+
             loadQuizData();
 
             // Event listeners
@@ -852,7 +895,7 @@
                 toastUtils.showWarning("Please select an answer before proceeding to the next question");
                 return;
             }
-            
+
             console.log(`Moving from question ${currentQuestionIndex + 1} to ${currentQuestionIndex + 2}`);
             if (currentQuestionIndex < quizData.length - 1) {
                 currentQuestionIndex++;
@@ -914,28 +957,76 @@
         async function storeRedeemCode(redeemCode, score, totalQuestions) {
             try {
                 const authToken = localStorage.getItem('authToken');
-                const userData = JSON.parse(localStorage.getItem('userData'));
                 
-                if (!authToken || !userData) {
+                if (!authToken) {
                     console.error('User not authenticated');
-                    toastUtils.showError('Authentication failed. Please log in again.');
-                    return false;
+                    return { success: false, message: 'Authentication failed. Please log in again.' };
                 }
 
+                // Get user data from localStorage or decode from JWT token
+                let userData = null;
+                try {
+                    const userDataStr = localStorage.getItem('userData');
+                    if (userDataStr) {
+                        userData = JSON.parse(userDataStr);
+                        console.log('User data from localStorage:', userData);
+                    }
+                } catch (e) {
+                    console.error('Error parsing user data from localStorage:', e);
+                }
+
+                // If no user data in localStorage, try to decode from JWT token
+                if (!userData) {
+                    try {
+                        // Decode JWT token to get user info
+                        const payload = JSON.parse(atob(authToken.split('.')[1]));
+                        userData = {
+                            userId: payload.userId || payload.id || payload._id,
+                            name: payload.name || payload.userName || 'Quiz User',
+                            email: payload.email || payload.userEmail || `user${Date.now()}@example.com`
+                        };
+                        console.log('User data from JWT:', userData);
+                    } catch (e) {
+                        console.error('Error decoding JWT token:', e);
+                    }
+                }
+
+                // If still no user data, create a fallback
+                if (!userData) {
+                    userData = {
+                        userId: 'anonymous_' + Date.now(),
+                        name: 'Quiz User',
+                        email: 'user@example.com'
+                    };
+                    console.log('Using fallback user data:', userData);
+                }
+
+                // Ensure all required fields are present
                 const payload = {
-                    userId: userData._id,
-                    userName: userData.name,
-                    userEmail: userData.email,
+                    userId: userData.userId || userData._id || `user_${Date.now()}`,
+                    userName: userData.name || userData.userName || 'Quiz Participant',
+                    userEmail: userData.email || userData.userEmail || `user${Date.now()}@example.com`,
                     score: score,
                     totalQuestions: totalQuestions,
                     redeemCode: redeemCode,
                     quizType: 'programming_math'
                 };
 
-                console.log('Storing redeem code:', payload);
+                console.log('Storing redeem code with payload:', payload);
 
-                const API_BASE_URL = window.AppConfig?.API_BASE_URL || 'http://localhost:3000';
-                
+                // Validate required fields
+                if (!payload.userId || !payload.userName || !payload.userEmail || !payload.redeemCode) {
+                    console.error('Missing required fields:', {
+                        userId: !!payload.userId,
+                        userName: !!payload.userName,
+                        userEmail: !!payload.userEmail,
+                        redeemCode: !!payload.redeemCode
+                    });
+                    return { success: false, message: 'Missing user information. Please log in again.' };
+                }
+
+                const API_BASE_URL = window.AppConfig.API_BASE_URL;
+
                 const response = await fetch(`${API_BASE_URL}/api/quiz/redeem`, {
                     method: 'POST',
                     headers: {
@@ -946,38 +1037,45 @@
                 });
 
                 const data = await response.json();
+                return data;
 
-                if (data.success) {
-                    console.log('Redeem code stored successfully:', data.data.redeemId);
-                    toastUtils.showSuccess('Redeem code saved successfully!');
-                    return true;
-                } else {
-                    console.error('Failed to store redeem code:', data.message);
-                    toastUtils.showError('Failed to save redeem code: ' + data.message);
-                    return false;
-                }
             } catch (error) {
                 console.error('Error storing redeem code:', error);
-                toastUtils.showError('Network error. Please check your connection.');
-                return false;
+                
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    return { success: false, message: 'Network error. Please check your internet connection.' };
+                } else {
+                    return { success: false, message: 'Unexpected error occurred. Please try again.' };
+                }
             }
         }
 
         // Show redeem code popup
         async function showRedeemPopup() {
             console.log("Showing redeem popup");
-            
+
             // Generate a random redeem code
             const code = generateRedeemCode();
             redeemCode.textContent = code;
 
+            // Show popup immediately
+            redeemPopup.classList.remove('hidden');
+            storageWarning.classList.add('hidden');
+
             // Store the redeem code in database
-            const stored = await storeRedeemCode(code, score, quizData.length);
-            
-            if (!stored) {
-                console.warn("Failed to store redeem code in database");
-                toastUtils.showWarning("Failed to save redeem code. Please take a screenshot of this code.");
-                // Continue to show popup even if storage fails
+            const storageResult = await storeRedeemCode(code, score, quizData.length);
+
+            if (storageResult.success) {
+                console.log('Redeem code stored successfully');
+                toastUtils.showSuccess('Redeem code saved successfully!');
+            } else {
+                console.warn("Failed to store redeem code in database:", storageResult.message);
+                
+                // Show warning in popup
+                storageWarning.classList.remove('hidden');
+                warningText.textContent = `Failed to save redeem code: ${storageResult.message}. Please take a screenshot of this code.`;
+                
+                toastUtils.showError('Failed to save redeem code: ' + storageResult.message);
             }
 
             // Reset and start countdown
@@ -985,9 +1083,6 @@
             countdownBar.classList.remove('countdown');
             void countdownBar.offsetWidth; // Trigger reflow
             countdownBar.classList.add('countdown');
-
-            // Show popup
-            redeemPopup.classList.remove('hidden');
 
             // Auto-close after 10 seconds and redirect to index.html
             setTimeout(() => {
@@ -1009,14 +1104,14 @@
         function generateRedeemCode() {
             const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const numbers = '0123456789';
-            
+
             let code = 'U1TECH-';
-            
+
             for (let i = 0; i < 6; i++) {
                 const chars = i < 3 ? uppercase : numbers;
                 code += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            
+
             code += '-QUIZ';
 
             console.log(`Generated redeem code: ${code}`);

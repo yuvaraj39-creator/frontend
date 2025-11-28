@@ -1,0 +1,3060 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Course Management</title>
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png">
+
+    <!-- Updated config.js with correct API URL -->
+    <script src="config.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #800020;
+            --primary-dark: #600018;
+            --primary-light: #a0334d;
+            --secondary: #660099;
+            --secondary-dark: #b01030;
+            --secondary-light: #e34362;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --gray: #e0e0e0;
+            --dark-gray: #333333;
+            --black: #000000;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 350px;
+        }
+
+        .toast {
+            padding: 15px 20px;
+            border-radius: 6px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            max-width: 100%;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast.hide {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+
+        .toast.success {
+            background-color: var(--success);
+        }
+
+        .toast.error {
+            background-color: var(--danger);
+        }
+
+        .toast.warning {
+            background-color: var(--warning);
+            color: var(--dark-gray);
+        }
+
+        .toast.info {
+            background-color: var(--info);
+        }
+
+        .toast-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .toast-message {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            flex-shrink: 0;
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-content h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .login-input {
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1);
+        }
+
+        .login-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .error-message {
+            color: var(--danger);
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 20px 0;
+            transition: all 0.3s;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid var(--primary-light);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid transparent;
+        }
+
+        .menu-item:hover {
+            background-color: var(--primary-light);
+        }
+
+        .menu-item.active {
+            background-color: var(--primary);
+            border-left: 4px solid var(--secondary-light);
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            transition: all 0.3s;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-error {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-control.error {
+            border-color: var(--danger);
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-primary:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: var(--white);
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--gray);
+            color: var(--dark-gray);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* Price Container */
+        .price-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .price-container .form-group {
+            flex: 1;
+        }
+
+        /* Dynamic Item Styles */
+        .curriculum-item,
+        .learn-item,
+        .image-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .curriculum-item input,
+        .learn-item input,
+        .image-item input {
+            flex: 1;
+        }
+
+        .remove-btn {
+            background-color: var(--secondary-light);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .remove-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .add-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .add-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Image Preview Styles */
+        .image-preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .image-preview {
+            width: 100px;
+            height: 80px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--gray);
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-preview .remove-preview {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        /* Course List Styles */
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .course-table th,
+        .course-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .course-table th {
+            background-color: var(--light-gray);
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .course-table th:hover {
+            background-color: var(--gray);
+        }
+
+        .course-table tr:hover {
+            background-color: rgba(128, 0, 32, 0.03);
+        }
+
+        .course-thumbnail {
+            width: 60px;
+            height: 40px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: rgba(40, 167, 69, 0.15);
+            color: var(--success);
+        }
+
+        .status-draft {
+            background-color: rgba(255, 193, 7, 0.15);
+            color: var(--warning);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Search and Filter Styles */
+        .search-filter-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sort-btn {
+            background: none;
+            border: 1px solid var(--gray);
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sort-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border: 1px solid var(--gray);
+            background-color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination button.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Settings Styles */
+        .settings-section {
+            margin-bottom: 30px;
+        }
+
+        .settings-section h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        /* Confirmation Modal */
+        .confirmation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .confirmation-content {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .confirmation-content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .confirmation-content p {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: fixed;
+                transform: translateX(-100%);
+                z-index: 1000;
+                height: 100vh;
+                overflow-y: auto;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-menu {
+                display: block;
+            }
+
+            .menu-item {
+                padding: 12px 15px;
+                white-space: nowrap;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+
+            .main-content {
+                width: 100%;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                display: none;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .price-container {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .user-info {
+                flex-direction: column;
+            }
+
+            .card-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .course-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .toast-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+
+            .search-filter-container {
+                flex-direction: column;
+            }
+
+            .sort-options {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--gray);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Login Modal - Fixed with email and password fields -->
+    <div class="login-modal" id="login-modal">
+        <div class="login-content">
+            <h2><i class="fas fa-lock"></i> Admin Login</h2>
+
+            <div class="login-form">
+                <input type="email" id="admin-email" class="login-input" placeholder="Enter Admin Email" required>
+                <input type="password" id="admin-password" class="login-input" placeholder="Enter Password" required>
+
+                <button class="login-btn" id="login-btn">Login</button>
+                <div class="error-message" id="error-message">Invalid email or password</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirmation-modal hidden" id="confirmation-modal">
+        <div class="confirmation-content">
+            <h3 id="confirmation-title">Confirm Action</h3>
+            <p id="confirmation-message">Are you sure you want to proceed?</p>
+            <div class="confirmation-buttons">
+                <button class="btn btn-secondary" id="confirmation-cancel">Cancel</button>
+                <button class="btn btn-danger" id="confirmation-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container" id="dashboard-container" style="display: none;">
+        <!-- Overlay for mobile sidebar -->
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-graduation-cap"></i> U1 Technology</h3>
+                <button class="hamburger-menu" id="sidebar-toggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-section="courses">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </div>
+                <div class="menu-item" data-section="posters">
+                    <i class="fas fa-image"></i>
+                    <span>Posters</span>
+                </div>
+                <div class="menu-item" id="lobby-dashboard-btn">
+                    <i class="fas fa-users"></i>
+                    <span>Lobby Dashboard</span>
+                </div>
+                <div class="menu-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="menu-item" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="main-content" id="main-content">
+            <div class="header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="hamburger-menu" id="mobile-menu-toggle" style="color: var(--primary);">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="section-title">Course Management Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=800020&color=fff" alt="Admin User">
+                    <div class="user-details">
+                        <span class="user-name">Admin User</span>
+                        <span class="user-role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses Section -->
+            <div id="courses-section">
+                <!-- Courses List View -->
+                <div class="card" id="courses-list">
+                    <div class="card-header">
+                        <h2>All Courses</h2>
+                        <button class="btn btn-primary" id="add-course-btn">
+                            <i class="fas fa-plus"></i> Add New Course
+                        </button>
+                    </div>
+
+                    <!-- Search and Filter -->
+                    <div class="search-filter-container">
+                        <div class="search-box">
+                            <input type="text" id="course-search" class="form-control" placeholder="Search courses...">
+                        </div>
+                        <div class="sort-options">
+                            <button class="sort-btn" data-sort="title" data-order="asc">
+                                <span>Title</span>
+                                <i class="fas fa-sort"></i>
+                            </button>
+                            <button class="sort-btn" data-sort="price" data-order="asc">
+                                <span>Price</span>
+                                <i class="fas fa-sort"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <table class="course-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="courses-table-body">
+                            <!-- Courses will be dynamically added here -->
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination buttons will be added here -->
+                    </div>
+                </div>
+
+                <!-- Add Course Form -->
+                <form id="course-form" class="hidden">
+                    <!-- Basic Information -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Basic Information</h2>
+                            <button type="button" class="btn btn-outline" id="back-to-list">
+                                <i class="fas fa-arrow-left"></i> Back to Courses
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-title">Course Title</label>
+                            <input type="text" id="course-title" class="form-control" placeholder="Enter course title"
+                                required>
+                            <div class="form-error" id="title-error">Title is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-description">Description</label>
+                            <textarea id="course-description" class="form-control"
+                                placeholder="Enter course description" required></textarea>
+                            <div class="form-error" id="description-error">Description is required</div>
+                        </div>
+
+                        <!-- Category Section -->
+                        <div class="form-group">
+                            <label for="course-category">Category</label>
+                            <select id="course-category" class="form-control" required>
+                                <option value="">Select a category</option>
+                                <option value="Programming">Programming</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Artificial Intelligence (AI)">Artificial Intelligence (AI)</option>
+                                <option value="Machine Learning (ML)">Machine Learning (ML)</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="Cloud Computing">Cloud Computing</option>
+                                <option value="Cybersecurity">Cybersecurity</option>
+                                <option value="Mobile App Development">Mobile App Development</option>
+                                <option value="DevOps">DevOps</option>
+                                <option value="Database Management">Database Management</option>
+                                <option value="Software Testing">Software Testing</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                                <option value="Blockchain">Blockchain</option>
+                                <option value="Internet of Things (IoT)">Internet of Things (IoT)</option>
+                                <option value="Game Development">Game Development</option>
+                                <option value="Automation & RPA">Automation & RPA</option>
+                                <option value="Digital Marketing">Digital Marketing</option>
+                                <option value="Networking">Networking</option>
+                                <option value="Big Data Analytics">Big Data Analytics</option>
+                                <option value="Full Stack Development">Full Stack Development</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="form-error" id="category-error">Category is required</div>
+                        </div>
+
+                        <!-- Other Category Input (Initially Hidden) -->
+                        <div class="form-group hidden" id="other-category-container">
+                            <label for="other-category">Specify Other Category</label>
+                            <input type="text" id="other-category" class="form-control"
+                                placeholder="Enter custom category">
+                            <div class="form-error" id="other-category-error">Please specify the category</div>
+                        </div>
+
+                        <!-- Seller Section -->
+                        <div class="form-group">
+                            <label for="course-seller">Seller (Optional)</label>
+                            <select id="course-seller" class="form-control">
+                                <option value="">Select seller type (optional)</option>
+                                <option value="Top Rated">Top Rated</option>
+                                <option value="Most Popular">Most Popular</option>
+                                <option value="Trending Now">Trending Now</option>
+                                <option value="Student Favorite">Student Favorite</option>
+                                <option value="Bestseller">Bestseller</option>
+                                <option value="Hot Pick">Hot Pick</option>
+                                <option value="Editor's Choice">Editor's Choice</option>
+                                <option value="Featured Course">Featured Course</option>
+                                <option value="Highly Recommended">Highly Recommended</option>
+                                <option value="Top Choice">Top Choice</option>
+                            </select>
+                        </div>
+
+                        <!-- Mini Description Section -->
+                        <div class="form-group">
+                            <label for="course-mini-description">Mini Description</label>
+                            <textarea id="course-mini-description" class="form-control"
+                                placeholder="Enter a brief mini description (2-3 lines)" maxlength="200"></textarea>
+                            <div class="form-error" id="mini-description-error">Mini description is required</div>
+                            <small style="color: var(--gray); font-size: 0.8rem;">Maximum 200 characters</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Course Images</label>
+                            <div id="image-items-container">
+                                <div class="image-item">
+                                    <input type="url" class="form-control image-url-input" placeholder="Enter image URL"
+                                        required>
+                                    <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="image-preview-container" id="image-preview-container">
+                                <!-- Image previews will be added here -->
+                            </div>
+                            <button type="button" class="add-btn" id="add-image-item">
+                                <i class="fas fa-plus"></i> Add Another Image
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pricing -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Offline Pricing</h2>
+                        </div>
+                        <div class="price-container">
+                            <div class="form-group">
+                                <label for="offline-price">Price (₹)</label>
+                                <input type="number" id="offline-price" class="form-control"
+                                    placeholder="Enter current price" step="0.01" min="0" required>
+                                <div class="form-error" id="offline-price-error">Price must be a positive number</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="offline-original-price">Original Price (₹)</label>
+                                <input type="number" id="offline-original-price" class="form-control"
+                                    placeholder="Enter original price" step="0.01" min="0">
+                                <div class="form-error" id="offline-original-price-error">Price must be a positive
+                                    number</div>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <h2>Online Pricing</h2>
+                        </div>
+                        <div class="price-container">
+                            <div class="form-group">
+                                <label for="online-price">Price (₹)</label>
+                                <input type="number" id="online-price" class="form-control"
+                                    placeholder="Enter current price" step="0.01" min="0" required>
+                                <div class="form-error" id="online-price-error">Price must be a positive number</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="online-original-price">Original Price (₹)</label>
+                                <input type="number" id="online-original-price" class="form-control"
+                                    placeholder="Enter original price" step="0.01" min="0">
+                                <div class="form-error" id="online-original-price-error">Price must be a positive number
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Tools & Language Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Learning Tools & Language</h2>
+                        </div>
+                        <div id="tools-language-container">
+                            <div class="learn-item">
+                                <input type="text" class="form-control tools-language-input"
+                                    placeholder="Enter tool or language (e.g., Python, React, Photoshop)" required>
+                                <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-btn" id="add-tools-language-item">
+                            <i class="fas fa-plus"></i> Add Tool or Language
+                        </button>
+                    </div>
+
+                    <!-- What You'll Learn -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>What You'll Learn</h2>
+                        </div>
+                        <div id="learn-items-container">
+                            <div class="learn-item">
+                                <input type="text" class="form-control" placeholder="Enter learning point" required>
+                                <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-btn" id="add-learn-item">
+                            <i class="fas fa-plus"></i> Add Learning Point
+                        </button>
+                    </div>
+
+                    <!-- Curriculum -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Curriculum</h2>
+                        </div>
+                        <div id="curriculum-container">
+                            <div class="form-group">
+                                <label class="section-title">Section 1: <input type="text"
+                                        style="width: auto; display: inline-block; padding: 5px; border: 1px solid var(--gray); border-radius: 4px;"
+                                        placeholder="Section title" value="Introduction"></label>
+                                <div class="curriculum-lectures">
+                                    <div class="curriculum-item">
+                                        <input type="text" class="form-control" placeholder="Enter lecture title"
+                                            required>
+                                        <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-20">
+                            <button type="button" class="add-btn" id="add-curriculum-item">
+                                <i class="fas fa-plus"></i> Add Lecture
+                            </button>
+                            <button type="button" class="add-btn" id="add-section"
+                                style="background-color: var(--secondary);">
+                                <i class="fas fa-plus"></i> Add Section
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="form-group text-right">
+                        <button type="button" class="btn btn-secondary" id="cancel-course-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="save-course-btn">Save Course</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Poster Section -->
+            <div id="poster-section" class="hidden">
+                <!-- Posters List View -->
+                <div class="card" id="posters-list">
+                    <div class="card-header">
+                        <h2>All Posters</h2>
+                        <button class="btn btn-primary" id="add-poster-btn">
+                            <i class="fas fa-plus"></i> Add New Poster
+                        </button>
+                    </div>
+
+                    <!-- Search and Filter -->
+                    <div class="search-filter-container">
+                        <div class="search-box">
+                            <input type="text" id="poster-search" class="form-control" placeholder="Search posters...">
+                        </div>
+                        <div class="sort-options">
+                            <button class="sort-btn" data-sort="title" data-order="asc">
+                                <span>Title</span>
+                                <i class="fas fa-sort"></i>
+                            </button>
+                            <button class="sort-btn" data-sort="createdAt" data-order="desc">
+                                <span>Date</span>
+                                <i class="fas fa-sort"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <table class="course-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Content Items</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="posters-table-body">
+                            <!-- Posters will be dynamically added here -->
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="poster-pagination">
+                        <!-- Pagination buttons will be added here -->
+                    </div>
+                </div>
+
+                <!-- Add Poster Form (Initially Hidden) -->
+                <form id="poster-form" class="hidden">
+                    <!-- Basic Information -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Poster Information</h2>
+                            <button type="button" class="btn btn-outline" id="back-to-posters-list">
+                                <i class="fas fa-arrow-left"></i> Back to Posters
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label for="poster-title">Poster Title</label>
+                            <input type="text" id="poster-title" class="form-control" placeholder="Enter poster title"
+                                required>
+                            <div class="form-error" id="poster-title-error">Title is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Poster Images</label>
+                            <div id="poster-image-container">
+                                <div class="image-item">
+                                    <input type="url" class="form-control poster-image-url"
+                                        placeholder="Enter image URL" required>
+                                    <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="image-preview-container" id="poster-image-preview">
+                                <!-- Image preview will be added here -->
+                            </div>
+                            <button type="button" class="add-btn" id="add-poster-image-item">
+                                <i class="fas fa-plus"></i> Add Another Image
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Content</h2>
+                        </div>
+                        <div id="content-items-container">
+                            <div class="learn-item">
+                                <input type="text" class="form-control content-input" placeholder="Enter content point"
+                                    required>
+                                <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-btn" id="add-content-item">
+                            <i class="fas fa-plus"></i> Add Content Point
+                        </button>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="form-group text-right">
+                        <button type="button" class="btn btn-secondary" id="cancel-poster-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="save-poster-btn">Save Poster</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Settings Section (Initially Hidden) -->
+            <div id="settings-section" class="hidden">
+                <div class="card">
+                    <div class="settings-section">
+                        <h2>Profile Settings</h2>
+                        <div class="form-group">
+                            <label for="settings-name">Admin Name</label>
+                            <input type="text" id="settings-name" class="form-control" placeholder="Enter admin name">
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-email">Admin Email</label>
+                            <input type="email" id="settings-email" class="form-control"
+                                placeholder="Enter admin email">
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h2>Security Settings</h2>
+                        <div class="form-group">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" class="form-control"
+                                placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" class="form-control"
+                                placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm New Password</label>
+                            <input type="password" id="confirm-password" class="form-control"
+                                placeholder="Confirm new password">
+                        </div>
+                    </div>
+
+                    <div class="form-group text-right">
+                        <button class="btn btn-primary" id="save-settings-btn">Save Settings</button>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary" onclick="openLobbyRegister()">Create Lobby Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const loginModal = document.getElementById('login-modal');
+        const dashboardContainer = document.getElementById('dashboard-container');
+        const adminEmailInput = document.getElementById('admin-email');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const loginBtn = document.getElementById('login-btn');
+        const errorMessage = document.getElementById('error-message');
+        const toastContainer = document.getElementById('toast-container');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const overlay = document.getElementById('overlay');
+        const menuItems = document.querySelectorAll('.menu-item');
+        const sectionTitle = document.getElementById('section-title');
+        const sections = {
+            courses: document.getElementById('courses-section'),
+            settings: document.getElementById('settings-section'),
+            posters: document.getElementById('poster-section')
+        };
+        const logoutBtn = document.getElementById('logout-btn');
+        const coursesList = document.getElementById('courses-list');
+        const courseForm = document.getElementById('course-form');
+        const addCourseBtn = document.getElementById('add-course-btn');
+        const backToListBtn = document.getElementById('back-to-list');
+        const cancelCourseBtn = document.getElementById('cancel-course-btn');
+        const saveCourseBtn = document.getElementById('save-course-btn');
+        const courseSearch = document.getElementById('course-search');
+        const sortButtons = document.querySelectorAll('.sort-btn');
+        const coursesTableBody = document.getElementById('courses-table-body');
+        const pagination = document.getElementById('pagination');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const confirmationTitle = document.getElementById('confirmation-title');
+        const confirmationMessage = document.getElementById('confirmation-message');
+        const confirmationCancel = document.getElementById('confirmation-cancel');
+        const confirmationConfirm = document.getElementById('confirmation-confirm');
+        const saveSettingsBtn = document.getElementById('save-settings-btn');
+        const postersList = document.getElementById('posters-list');
+        const posterForm = document.getElementById('poster-form');
+        const addPosterBtn = document.getElementById('add-poster-btn');
+        const backToPostersListBtn = document.getElementById('back-to-posters-list');
+        const cancelPosterBtn = document.getElementById('cancel-poster-btn');
+        const savePosterBtn = document.getElementById('save-poster-btn');
+        const posterSearch = document.getElementById('poster-search');
+        const postersTableBody = document.getElementById('posters-table-body');
+        const posterPagination = document.getElementById('poster-pagination');
+        const addPosterImageItemBtn = document.getElementById('add-poster-image-item');
+
+        // Global Variables
+        let courses = [];
+        let currentCourseId = null;
+        let currentPage = 1;
+        const coursesPerPage = 10;
+        let searchTerm = '';
+        let sortField = 'createdAt';
+        let sortOrder = 'desc';
+        let posters = [];
+        let currentPosterId = null;
+        let currentPosterPage = 1;
+        const postersPerPage = 10;
+        let posterSearchTerm = '';
+        let posterSortField = 'createdAt';
+        let posterSortOrder = 'desc';
+
+        const API_BASE = window.AppConfig.API_BASE_URL;
+
+        // Initialize Dashboard
+        function initDashboard() {
+            const token = localStorage.getItem('adminToken');
+            if (token) {
+                verifyToken(token);
+            } else {
+                showLoginModal();
+            }
+            setupEventListeners();
+        }
+
+        document.getElementById("lobby-dashboard-btn").addEventListener("click", () => {
+            window.location.href = "loby_dashbord.html";
+        });
+
+
+        // Verify Admin Token
+        async function verifyToken(token) {
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success && result.data.user.role === 'admin') {
+                        showDashboard();
+                        loadCourses();
+                        return;
+                    }
+                }
+                localStorage.removeItem('adminToken');
+                showLoginModal();
+            } catch (error) {
+                console.error('Token verification failed:', error);
+                localStorage.removeItem('adminToken');
+                showLoginModal();
+            }
+        }
+
+        // Show Login Modal
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            dashboardContainer.style.display = 'none';
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            loginModal.style.display = 'none';
+            dashboardContainer.style.display = 'flex';
+            showSection('courses');
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            loginBtn.addEventListener('click', handleLogin);
+            adminEmailInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleLogin();
+            });
+            adminPasswordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleLogin();
+            });
+
+            sidebarToggle.addEventListener('click', toggleSidebar);
+            mobileMenuToggle.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+
+            menuItems.forEach(item => {
+                if (item.id !== 'logout-btn') {
+                    item.addEventListener('click', (e) => {
+                        const section = item.getAttribute('data-section');
+                        showSection(section);
+                        if (window.innerWidth <= 992) {
+                            toggleSidebar();
+                        }
+                    });
+                }
+            });
+
+            logoutBtn.addEventListener('click', handleLogout);
+            addCourseBtn.addEventListener('click', () => showCourseForm());
+            backToListBtn.addEventListener('click', showCoursesList);
+            cancelCourseBtn.addEventListener('click', handleCancelCourse);
+            courseForm.addEventListener('submit', handleSaveCourse);
+            courseSearch.addEventListener('input', debounce(handleSearch, 300));
+
+            sortButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const field = btn.getAttribute('data-sort');
+                    const order = btn.getAttribute('data-order');
+
+                    sortButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const newOrder = order === 'asc' ? 'desc' : 'asc';
+                    btn.setAttribute('data-order', newOrder);
+
+                    const icon = btn.querySelector('i');
+                    icon.className = newOrder === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down';
+
+                    sortField = field;
+                    sortOrder = newOrder;
+                    renderCoursesTable();
+                });
+            });
+
+            setupFormValidation();
+            setupDynamicFormElements();
+            saveSettingsBtn.addEventListener('click', saveSettings);
+
+            confirmationCancel.addEventListener('click', () => {
+                confirmationModal.classList.add('hidden');
+            });
+
+            addPosterBtn.addEventListener('click', () => showPosterForm());
+            backToPostersListBtn.addEventListener('click', showPostersList);
+            cancelPosterBtn.addEventListener('click', handleCancelPoster);
+            posterForm.addEventListener('submit', handleSavePoster);
+            posterSearch.addEventListener('input', debounce(handlePosterSearch, 300));
+
+            setupPosterFormValidation();
+            setupDynamicPosterFormElements();
+
+            document.getElementById('add-tools-language-item').addEventListener('click', () => {
+                const container = document.getElementById('tools-language-container');
+                const newItem = createToolsLanguageItem();
+                container.appendChild(newItem);
+                setupDynamicFormElements();
+            });
+
+            const categorySelect = document.getElementById('course-category');
+            if (categorySelect) {
+                categorySelect.addEventListener('change', function () {
+                    validateField(this);
+                    validateForm();
+                    const otherCategoryContainer = document.getElementById('other-category-container');
+                    if (this.value === 'other') {
+                        otherCategoryContainer.classList.remove('hidden');
+                    } else {
+                        otherCategoryContainer.classList.add('hidden');
+                    }
+                });
+            }
+
+            const otherCategoryInput = document.getElementById('other-category');
+            if (otherCategoryInput) {
+                otherCategoryInput.addEventListener('input', function () {
+                    validateField(this);
+                    validateForm();
+                });
+            }
+
+            addPosterImageItemBtn.addEventListener('click', () => {
+                const container = document.getElementById('poster-image-container');
+                const newItem = createPosterImageItem();
+                container.appendChild(newItem);
+                setupDynamicPosterFormElements();
+            });
+        }
+
+        // Debounce Function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Handle Admin Login
+        async function handleLogin() {
+            const email = adminEmailInput.value.trim();
+            const password = adminPasswordInput.value.trim();
+
+            if (!email || !password) {
+                showError('Please enter both email and password');
+                return;
+            }
+
+            try {
+                showToast('Logging in...', 'info');
+                const response = await fetch(`${API_BASE}/api/admin/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (result.success && result.data.user.role === 'admin') {
+                    localStorage.setItem('adminToken', result.data.token);
+                    showDashboard();
+                    showToast('Login successful!', 'success');
+                } else {
+                    showError(result.message || 'Invalid admin credentials');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('Login failed. Please check your credentials and try again.');
+            }
+        }
+
+        // Show Error Message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            adminEmailInput.classList.add('error');
+            adminPasswordInput.classList.add('error');
+        }
+
+        // Handle Logout
+        function handleLogout() {
+            localStorage.removeItem('adminToken');
+            showLoginModal();
+            adminEmailInput.value = '';
+            adminPasswordInput.value = '';
+            errorMessage.style.display = 'none';
+            adminEmailInput.classList.remove('error');
+            adminPasswordInput.classList.remove('error');
+            showToast('You have been logged out.', 'info');
+        }
+
+        // Toggle Sidebar
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Show Section
+        function showSection(section) {
+            Object.values(sections).forEach(sec => {
+                if (sec) sec.classList.add('hidden');
+            });
+
+            if (sections[section]) {
+                sections[section].classList.remove('hidden');
+            }
+
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === section) {
+                    item.classList.add('active');
+                }
+            });
+
+            const titles = {
+                courses: 'Course Management',
+                settings: 'Platform Settings',
+                posters: 'Poster Management'
+            };
+            sectionTitle.textContent = titles[section] || 'Dashboard';
+
+            if (section === 'posters') {
+                loadPosters();
+            }
+        }
+
+        // Load Courses
+        async function loadCourses() {
+            try {
+                const token = localStorage.getItem('adminToken');
+                const queryParams = new URLSearchParams({
+                    page: currentPage,
+                    limit: coursesPerPage,
+                    search: searchTerm,
+                    sortBy: sortField,
+                    sortOrder: sortOrder
+                });
+
+                const response = await fetch(`${API_BASE}/api/courses?${queryParams}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch courses');
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    courses = result.data.courses || [];
+                    renderCoursesTable(result.data.pagination);
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                console.error('Load courses error:', error);
+                showToast('Failed to load courses', 'error');
+                courses = [];
+                renderCoursesTable({ currentPage: 1, totalPages: 0, totalCourses: 0 });
+            }
+        }
+
+        // Show Courses List
+        function showCoursesList() {
+            coursesList.classList.remove('hidden');
+            courseForm.classList.add('hidden');
+            loadCourses();
+        }
+
+        // Show Course Form
+        function showCourseForm(courseId = null) {
+            coursesList.classList.add('hidden');
+            courseForm.classList.remove('hidden');
+            currentCourseId = courseId;
+
+            if (courseId) {
+                const course = courses.find(c => c._id === courseId);
+                if (course) {
+                    populateCourseForm(course);
+                }
+            } else {
+                resetCourseForm();
+            }
+        }
+
+        // Populate Course Form
+        function populateCourseForm(course) {
+            document.getElementById('course-title').value = course.title || '';
+            document.getElementById('course-description').value = course.description || '';
+            document.getElementById('course-mini-description').value = course.miniDescription || '';
+            document.getElementById('course-category').value = course.category || '';
+            document.getElementById('course-seller').value = course.seller || '';
+
+            const otherCategoryContainer = document.getElementById('other-category-container');
+            if (course.category === 'other') {
+                otherCategoryContainer.classList.remove('hidden');
+                document.getElementById('other-category').value = course.otherCategory || '';
+            } else {
+                otherCategoryContainer.classList.add('hidden');
+            }
+
+            const imageContainer = document.getElementById('image-items-container');
+            imageContainer.innerHTML = '';
+            if (course.images && course.images.length > 0) {
+                course.images.forEach((image) => {
+                    const imageItem = createImageItem();
+                    imageItem.querySelector('.image-url-input').value = image;
+                    imageContainer.appendChild(imageItem);
+                });
+            } else {
+                imageContainer.appendChild(createImageItem());
+            }
+            updateImagePreviews();
+
+            document.getElementById('offline-price').value = course.offlinePrice || '';
+            document.getElementById('offline-original-price').value = course.offlineOriginalPrice || '';
+            document.getElementById('online-price').value = course.onlinePrice || '';
+            document.getElementById('online-original-price').value = course.onlineOriginalPrice || '';
+
+            const toolsContainer = document.getElementById('tools-language-container');
+            toolsContainer.innerHTML = '';
+            if (course.toolsLanguage && course.toolsLanguage.length > 0) {
+                course.toolsLanguage.forEach(tool => {
+                    const toolItem = createToolsLanguageItem();
+                    toolItem.querySelector('.tools-language-input').value = tool;
+                    toolsContainer.appendChild(toolItem);
+                });
+            } else {
+                toolsContainer.appendChild(createToolsLanguageItem());
+            }
+
+            const learnContainer = document.getElementById('learn-items-container');
+            learnContainer.innerHTML = '';
+            if (course.learn && course.learn.length > 0) {
+                course.learn.forEach(point => {
+                    const learnItem = createLearnItem();
+                    learnItem.querySelector('input').value = point;
+                    learnContainer.appendChild(learnItem);
+                });
+            } else {
+                learnContainer.appendChild(createLearnItem());
+            }
+
+            const curriculumContainer = document.getElementById('curriculum-container');
+            curriculumContainer.innerHTML = '';
+            if (course.curriculum && course.curriculum.length > 0) {
+                course.curriculum.forEach((section, index) => {
+                    const sectionElement = createCurriculumSection(section.section || `Section ${index + 1}`);
+                    const lecturesContainer = sectionElement.querySelector('.curriculum-lectures');
+
+                    section.lectures.forEach(lecture => {
+                        const lectureItem = createCurriculumItem();
+                        lectureItem.querySelector('input').value = lecture;
+                        lecturesContainer.appendChild(lectureItem);
+                    });
+
+                    curriculumContainer.appendChild(sectionElement);
+                });
+            } else {
+                curriculumContainer.appendChild(createCurriculumSection('Introduction'));
+            }
+
+            setupDynamicFormElements();
+            validateForm();
+        }
+
+        // Reset Course Form
+        function resetCourseForm() {
+            document.getElementById('course-title').value = '';
+            document.getElementById('course-description').value = '';
+            document.getElementById('course-mini-description').value = '';
+            document.getElementById('course-category').value = '';
+            document.getElementById('course-seller').value = '';
+            document.getElementById('other-category').value = '';
+            document.getElementById('other-category-container').classList.add('hidden');
+
+            const imageContainer = document.getElementById('image-items-container');
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(createImageItem());
+            updateImagePreviews();
+
+            document.getElementById('offline-price').value = '';
+            document.getElementById('offline-original-price').value = '';
+            document.getElementById('online-price').value = '';
+            document.getElementById('online-original-price').value = '';
+
+            const toolsContainer = document.getElementById('tools-language-container');
+            toolsContainer.innerHTML = '';
+            toolsContainer.appendChild(createToolsLanguageItem());
+
+            const learnContainer = document.getElementById('learn-items-container');
+            learnContainer.innerHTML = '';
+            learnContainer.appendChild(createLearnItem());
+
+            const curriculumContainer = document.getElementById('curriculum-container');
+            curriculumContainer.innerHTML = '';
+            curriculumContainer.appendChild(createCurriculumSection('Introduction'));
+
+            setupDynamicFormElements();
+            validateForm();
+        }
+
+        // Create Image Item
+        function createImageItem() {
+            const div = document.createElement('div');
+            div.className = 'image-item';
+            div.innerHTML = `
+            <input type="url" class="form-control image-url-input" placeholder="Enter image URL" required>
+            <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+        `;
+            return div;
+        }
+
+        // Create Tools Language Item
+        function createToolsLanguageItem() {
+            const div = document.createElement('div');
+            div.className = 'learn-item';
+            div.innerHTML = `
+            <input type="text" class="form-control tools-language-input" placeholder="Enter tool or language (e.g., Python, React, Photoshop)" required>
+            <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+        `;
+            return div;
+        }
+
+        // Create Learn Item
+        function createLearnItem() {
+            const div = document.createElement('div');
+            div.className = 'learn-item';
+            div.innerHTML = `
+            <input type="text" class="form-control" placeholder="Enter learning point" required>
+            <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+        `;
+            return div;
+        }
+
+        // Create Curriculum Section
+        function createCurriculumSection(title = 'New Section') {
+            const div = document.createElement('div');
+            div.className = 'form-group';
+            div.innerHTML = `
+            <label class="section-title">Section: 
+                <input type="text" style="width: auto; display: inline-block; padding: 5px; border: 1px solid var(--gray); border-radius: 4px;" 
+                    placeholder="Section title" value="${title}" required>
+            </label>
+            <div class="curriculum-lectures">
+                <div class="curriculum-item">
+                    <input type="text" class="form-control" placeholder="Enter lecture title" required>
+                    <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        `;
+            return div;
+        }
+
+        // Create Curriculum Item
+        function createCurriculumItem() {
+            const div = document.createElement('div');
+            div.className = 'curriculum-item';
+            div.innerHTML = `
+            <input type="text" class="form-control" placeholder="Enter lecture title" required>
+            <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+        `;
+            return div;
+        }
+
+        // Setup Dynamic Form Elements
+        function setupDynamicFormElements() {
+            document.querySelectorAll('.image-url-input').forEach(input => {
+                input.removeEventListener('input', handleImageUrlInput);
+                input.addEventListener('input', handleImageUrlInput);
+            });
+
+            document.querySelectorAll('#image-items-container .remove-btn').forEach(btn => {
+                btn.removeEventListener('click', handleRemoveImageItem);
+                btn.addEventListener('click', handleRemoveImageItem);
+            });
+
+            document.querySelectorAll('#learn-items-container .remove-btn').forEach(btn => {
+                btn.removeEventListener('click', handleRemoveLearnItem);
+                btn.addEventListener('click', handleRemoveLearnItem);
+            });
+
+            document.querySelectorAll('#tools-language-container .remove-btn').forEach(btn => {
+                btn.removeEventListener('click', handleRemoveToolsLanguageItem);
+                btn.addEventListener('click', handleRemoveToolsLanguageItem);
+            });
+
+            document.querySelectorAll('.curriculum-item .remove-btn').forEach(btn => {
+                btn.removeEventListener('click', handleRemoveCurriculumItem);
+                btn.addEventListener('click', handleRemoveCurriculumItem);
+            });
+
+            document.getElementById('add-image-item').onclick = () => {
+                const container = document.getElementById('image-items-container');
+                const newItem = createImageItem();
+                container.appendChild(newItem);
+                setupDynamicFormElements();
+            };
+
+            document.getElementById('add-learn-item').onclick = () => {
+                const container = document.getElementById('learn-items-container');
+                const newItem = createLearnItem();
+                container.appendChild(newItem);
+                setupDynamicFormElements();
+            };
+
+            document.getElementById('add-curriculum-item').onclick = () => {
+                const lastSection = document.querySelector('#curriculum-container .form-group:last-child');
+                if (lastSection) {
+                    const lecturesContainer = lastSection.querySelector('.curriculum-lectures');
+                    const newItem = createCurriculumItem();
+                    lecturesContainer.appendChild(newItem);
+                    setupDynamicFormElements();
+                }
+            };
+
+            document.getElementById('add-section').onclick = () => {
+                const container = document.getElementById('curriculum-container');
+                const sections = container.querySelectorAll('.form-group');
+                const newSection = createCurriculumSection(`Section ${sections.length + 1}`);
+                container.appendChild(newSection);
+                setupDynamicFormElements();
+            };
+
+            document.querySelectorAll('#course-form input, #course-form textarea, #course-form select').forEach(input => {
+                input.removeEventListener('input', validateForm);
+                input.addEventListener('input', validateForm);
+            });
+        }
+
+        // Handle Remove Image Item
+        function handleRemoveImageItem(e) {
+            const container = document.getElementById('image-items-container');
+            if (container.children.length > 1) {
+                e.target.closest('.image-item').remove();
+                updateImagePreviews();
+            } else {
+                showToast('At least one image is required', 'warning');
+            }
+        }
+
+        // Handle Remove Learn Item
+        function handleRemoveLearnItem(e) {
+            const container = document.getElementById('learn-items-container');
+            if (container.children.length > 1) {
+                e.target.closest('.learn-item').remove();
+            } else {
+                showToast('At least one learning point is required', 'warning');
+            }
+        }
+
+        // Handle Remove Tools Language Item
+        function handleRemoveToolsLanguageItem(e) {
+            const container = document.getElementById('tools-language-container');
+            if (container.children.length > 1) {
+                e.target.closest('.learn-item').remove();
+            } else {
+                showToast('At least one tool or language is required', 'warning');
+            }
+        }
+
+        // Handle Remove Curriculum Item
+        function handleRemoveCurriculumItem(e) {
+            const curriculumItem = e.target.closest('.curriculum-item');
+            const lecturesContainer = curriculumItem.parentElement;
+
+            if (lecturesContainer.children.length > 1) {
+                curriculumItem.remove();
+            } else {
+                showToast('Each section must have at least one lecture', 'warning');
+            }
+        }
+
+        // Handle Image URL Input
+        function handleImageUrlInput(e) {
+            updateImagePreviews();
+        }
+
+        // Update Image Previews
+        function updateImagePreviews() {
+            const container = document.getElementById('image-preview-container');
+            container.innerHTML = '';
+
+            document.querySelectorAll('.image-url-input').forEach((input, index) => {
+                const url = input.value.trim();
+                if (url) {
+                    const preview = document.createElement('div');
+                    preview.className = 'image-preview';
+                    preview.innerHTML = `
+                    <img src="${url}" alt="Preview ${index + 1}" onerror="this.style.display='none'">
+                    <span>Image ${index + 1}</span>
+                `;
+                    container.appendChild(preview);
+                }
+            });
+        }
+
+        // Setup Form Validation
+        function setupFormValidation() {
+            const form = document.getElementById('course-form');
+            const inputs = form.querySelectorAll('input, textarea, select');
+
+            inputs.forEach(input => {
+                input.addEventListener('blur', (e) => validateField(e.target));
+                input.addEventListener('input', (e) => {
+                    validateField(e.target);
+                    validateForm();
+                });
+            });
+        }
+
+        // Validate Field
+        function validateField(field) {
+            const errorElement = document.getElementById(`${field.id}-error`);
+            if (!errorElement) return true;
+
+            let isValid = true;
+            let errorMessage = '';
+
+            switch (field.type) {
+                case 'text':
+                case 'textarea':
+                    if (field.required && !field.value.trim()) {
+                        isValid = false;
+                        errorMessage = 'This field is required';
+                    }
+                    break;
+                case 'number':
+                    if (field.required && (!field.value || parseFloat(field.value) < 0)) {
+                        isValid = false;
+                        errorMessage = 'Price must be a positive number';
+                    }
+                    break;
+                case 'select-one':
+                    if (field.required && !field.value) {
+                        isValid = false;
+                        errorMessage = 'This field is required';
+                    }
+                    break;
+                case 'url':
+                    if (field.required && !field.value.trim()) {
+                        isValid = false;
+                        errorMessage = 'Image URL is required';
+                    } else if (field.value.trim() && !isValidUrl(field.value.trim())) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid URL';
+                    }
+                    break;
+            }
+
+            if (field.id === 'other-category') {
+                const categorySelect = document.getElementById('course-category');
+                if (categorySelect.value === 'other' && !field.value.trim()) {
+                    isValid = false;
+                    errorMessage = 'Please specify the category';
+                }
+            }
+
+            if (isValid) {
+                field.classList.remove('error');
+                errorElement.style.display = 'none';
+            } else {
+                field.classList.add('error');
+                errorElement.textContent = errorMessage;
+                errorElement.style.display = 'block';
+            }
+
+            return isValid;
+        }
+
+        // Check if URL is valid
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Validate Form
+        function validateForm() {
+            const form = document.getElementById('course-form');
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+
+            const categorySelect = document.getElementById('course-category');
+            const otherCategoryInput = document.getElementById('other-category');
+            if (categorySelect.value === 'other' && !otherCategoryInput.value.trim()) {
+                isValid = false;
+            }
+
+            const imageUrls = document.querySelectorAll('.image-url-input');
+            let hasValidImage = false;
+            imageUrls.forEach(input => {
+                if (input.value.trim() && isValidUrl(input.value.trim())) {
+                    hasValidImage = true;
+                }
+            });
+            if (!hasValidImage) {
+                isValid = false;
+            }
+
+            saveCourseBtn.disabled = !isValid;
+            return isValid;
+        }
+
+        // Handle Cancel Course
+        function handleCancelCourse() {
+            showCoursesList();
+        }
+
+        // Handle Save Course
+        async function handleSaveCourse(e) {
+            e.preventDefault();
+
+            if (!validateForm()) {
+                showToast('Please fix the errors in the form', 'error');
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('adminToken');
+                const formData = getCourseFormData();
+
+                showToast('Saving course...', 'info');
+
+                let response;
+                if (currentCourseId) {
+                    response = await fetch(`${API_BASE}/api/courses/${currentCourseId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                } else {
+                    response = await fetch(`${API_BASE}/api/courses`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showToast(`Course ${currentCourseId ? 'updated' : 'created'} successfully!`, 'success');
+                    showCoursesList();
+                    loadCourses();
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                console.error('Save course error:', error);
+                showToast('Failed to save course. Please try again.', 'error');
+            }
+        }
+
+        // Get Course Form Data
+        function getCourseFormData() {
+            const categorySelect = document.getElementById('course-category');
+            const selectedCategory = categorySelect.value;
+
+            const curriculum = Array.from(document.querySelectorAll('#curriculum-container .form-group')).map(section => ({
+                section: section.querySelector('.section-title input').value.trim(),
+                lectures: Array.from(section.querySelectorAll('.curriculum-item input'))
+                    .map(input => input.value.trim())
+                    .filter(lecture => lecture)
+            }));
+
+            return {
+                title: document.getElementById('course-title').value.trim(),
+                description: document.getElementById('course-description').value.trim(),
+                miniDescription: document.getElementById('course-mini-description').value.trim(),
+                category: selectedCategory === 'other' ? document.getElementById('other-category').value.trim() : selectedCategory,
+                seller: document.getElementById('course-seller').value || null,
+                images: Array.from(document.querySelectorAll('.image-url-input'))
+                    .map(input => input.value.trim())
+                    .filter(url => url),
+                offlinePrice: parseFloat(document.getElementById('offline-price').value) || 0,
+                offlineOriginalPrice: parseFloat(document.getElementById('offline-original-price').value) || undefined,
+                onlinePrice: parseFloat(document.getElementById('online-price').value) || 0,
+                onlineOriginalPrice: parseFloat(document.getElementById('online-original-price').value) || undefined,
+                toolsLanguage: Array.from(document.querySelectorAll('.tools-language-input'))
+                    .map(input => input.value.trim())
+                    .filter(tool => tool),
+                learn: Array.from(document.querySelectorAll('#learn-items-container input'))
+                    .map(input => input.value.trim())
+                    .filter(point => point),
+                curriculum: curriculum,
+                status: 'active'
+            };
+        }
+
+        // Handle Search
+        function handleSearch(e) {
+            searchTerm = e.target.value.toLowerCase();
+            currentPage = 1;
+            loadCourses();
+        }
+
+        // Render Courses Table
+        function renderCoursesTable(paginationData = {}) {
+            coursesTableBody.innerHTML = '';
+
+            if (courses.length === 0) {
+                coursesTableBody.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center">No courses found</td>
+                </tr>
+            `;
+            } else {
+                courses.forEach(course => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td>
+                        ${course.images && course.images.length > 0 ?
+                            `<img src="${course.images[0]}" alt="${course.title}" class="course-thumbnail" onerror="this.style.display='none'">` :
+                            '<div class="no-image">No Image</div>'
+                        }
+                    </td>
+                    <td>
+                        <div class="course-title">${course.title}</div>
+                        <div class="course-category" style="font-size: 0.8rem; color: #666;">${course.category}</div>
+                    </td>
+                    <td>
+                        <div class="price">₹${course.onlinePrice || course.offlinePrice || 0}</div>
+                        ${course.onlineOriginalPrice ? `<div class="original-price" style="text-decoration: line-through; color: #999; font-size: 0.8rem;">₹${course.onlineOriginalPrice}</div>` : ''}
+                    </td>
+                    <td>
+                        <span class="status-badge status-${course.status || 'active'}">
+                            ${(course.status || 'active').charAt(0).toUpperCase() + (course.status || 'active').slice(1)}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-sm btn-outline edit-btn" data-id="${course._id}" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-btn" data-id="${course._id}" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                    coursesTableBody.appendChild(row);
+                });
+            }
+
+            renderPagination(paginationData, 'courses');
+            setupTableEventListeners();
+        }
+
+        // Render Pagination
+        function renderPagination(paginationData, type) {
+            const container = type === 'courses' ? pagination : posterPagination;
+            const data = paginationData || { currentPage: 1, totalPages: 1, totalCourses: 0 };
+
+            container.innerHTML = '';
+
+            if (data.totalPages <= 1) return;
+
+            const prevButton = document.createElement('button');
+            prevButton.className = 'pagination-btn';
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevButton.disabled = data.currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (type === 'courses') {
+                    currentPage = data.currentPage - 1;
+                    loadCourses();
+                } else {
+                    currentPosterPage = data.currentPage - 1;
+                    loadPosters();
+                }
+            });
+            container.appendChild(prevButton);
+
+            for (let i = 1; i <= data.totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.className = `pagination-btn ${i === data.currentPage ? 'active' : ''}`;
+                pageButton.textContent = i;
+                pageButton.addEventListener('click', () => {
+                    if (type === 'courses') {
+                        currentPage = i;
+                        loadCourses();
+                    } else {
+                        currentPosterPage = i;
+                        loadPosters();
+                    }
+                });
+                container.appendChild(pageButton);
+            }
+
+            const nextButton = document.createElement('button');
+            nextButton.className = 'pagination-btn';
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextButton.disabled = data.currentPage === data.totalPages;
+            nextButton.addEventListener('click', () => {
+                if (type === 'courses') {
+                    currentPage = data.currentPage + 1;
+                    loadCourses();
+                } else {
+                    currentPosterPage = data.currentPage + 1;
+                    loadPosters();
+                }
+            });
+            container.appendChild(nextButton);
+        }
+
+        // Setup Table Event Listeners
+        function setupTableEventListeners() {
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const courseId = e.currentTarget.getAttribute('data-id');
+                    showCourseForm(courseId);
+                });
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const courseId = e.currentTarget.getAttribute('data-id');
+                    handleDeleteCourse(courseId);
+                });
+            });
+        }
+
+        // Handle Delete Course
+        async function handleDeleteCourse(courseId) {
+            showConfirmation(
+                'Delete Course',
+                'Are you sure you want to delete this course? This action cannot be undone.',
+                async () => {
+                    try {
+                        const token = localStorage.getItem('adminToken');
+                        const response = await fetch(`${API_BASE}/api/courses/${courseId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            showToast('Course deleted successfully', 'success');
+                            loadCourses();
+                        } else {
+                            throw new Error(result.message);
+                        }
+                    } catch (error) {
+                        console.error('Delete course error:', error);
+                        showToast('Failed to delete course', 'error');
+                    }
+                }
+            );
+        }
+
+        // Show Confirmation Modal
+        function showConfirmation(title, message, onConfirm) {
+            confirmationTitle.textContent = title;
+            confirmationMessage.textContent = message;
+            confirmationModal.classList.remove('hidden');
+
+            const confirmHandler = () => {
+                confirmationModal.classList.add('hidden');
+                confirmationConfirm.removeEventListener('click', confirmHandler);
+                onConfirm();
+            };
+
+            confirmationConfirm.addEventListener('click', confirmHandler);
+        }
+
+        // Show Toast Notification
+        function showToast(message, type = 'info', duration = 5000) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+            <div class="toast-icon">
+                <i class="fas ${getToastIcon(type)}"></i>
+            </div>
+            <div class="toast-message">${message}</div>
+            <button class="toast-close">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+            toastContainer.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 100);
+
+            const closeToast = () => {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+                setTimeout(() => {
+                    if (toast.parentElement) {
+                        toast.remove();
+                    }
+                }, 300);
+            };
+
+            toast.querySelector('.toast-close').addEventListener('click', closeToast);
+            setTimeout(closeToast, duration);
+        }
+
+        // Get Toast Icon
+        function getToastIcon(type) {
+            switch (type) {
+                case 'success': return 'fa-check-circle';
+                case 'error': return 'fa-exclamation-circle';
+                case 'warning': return 'fa-exclamation-triangle';
+                case 'info': return 'fa-info-circle';
+                default: return 'fa-info-circle';
+            }
+        }
+
+        // Save Settings
+        async function saveSettings() {
+            const token = localStorage.getItem('adminToken');
+
+            // Get profile fields
+            const name = document.getElementById('site-name')?.value.trim() || '';
+            const email = document.getElementById('admin-email')?.value.trim() || '';
+
+            // Get password fields
+            const currentPassword = document.getElementById('admin-password')?.value.trim() || '';
+            const newPassword = document.getElementById('confirm-password')?.value.trim() || '';
+
+            try {
+                let profileUpdated = false;
+                let passwordUpdated = false;
+
+                // Update profile if name or email changed
+                if (name || email) {
+                    const profileData = {};
+                    if (name) profileData.name = name;
+                    if (email) profileData.email = email;
+
+                    const profileResponse = await fetch(`${API_BASE}/api/admin/profile`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(profileData)
+                    });
+
+                    const profileResult = await profileResponse.json();
+
+                    if (profileResult.success) {
+                        profileUpdated = true;
+                        showToast('Profile updated successfully', 'success');
+                    } else {
+                        throw new Error(profileResult.message || 'Failed to update profile');
+                    }
+                }
+
+                // Update password if new password provided
+                if (newPassword) {
+                    if (!currentPassword) {
+                        showToast('Current password is required to set new password', 'error');
+                        return;
+                    }
+
+                    if (newPassword.length < 6) {
+                        showToast('New password must be at least 6 characters long', 'error');
+                        return;
+                    }
+
+                    const passwordResponse = await fetch(`${API_BASE}/api/admin/change-password`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            currentPassword: currentPassword,
+                            newPassword: newPassword
+                        })
+                    });
+
+                    const passwordResult = await passwordResponse.json();
+
+                    if (passwordResult.success) {
+                        passwordUpdated = true;
+                        showToast('Password changed successfully', 'success');
+
+                        // Clear password fields after successful update
+                        document.getElementById('admin-password').value = '';
+                        document.getElementById('confirm-password').value = '';
+                    } else {
+                        throw new Error(passwordResult.message || 'Failed to change password');
+                    }
+                }
+
+                // Show appropriate message based on what was updated
+                if (!name && !email && !newPassword) {
+                    showToast('No changes to save', 'info');
+                } else if (profileUpdated || passwordUpdated) {
+                    const messages = [];
+                    if (profileUpdated) messages.push('profile');
+                    if (passwordUpdated) messages.push('password');
+                    showToast(`${messages.join(' and ')} updated successfully`, 'success');
+                }
+
+            } catch (error) {
+                console.error('Save settings error:', error);
+                showToast(error.message || 'Failed to save settings', 'error');
+            }
+        }
+        // Poster Management Functions
+        async function loadPosters() {
+            try {
+                const token = localStorage.getItem('adminToken');
+                const queryParams = new URLSearchParams({
+                    page: currentPosterPage,
+                    limit: postersPerPage,
+                    search: posterSearchTerm
+                });
+
+                const response = await fetch(`${API_BASE}/api/posters?${queryParams}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch posters');
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    posters = result.data.posters || [];
+                    renderPostersTable(result.data.pagination);
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                console.error('Load posters error:', error);
+                showToast('Failed to load posters', 'error');
+                posters = [];
+                renderPostersTable({ currentPage: 1, totalPages: 0, totalPosters: 0 });
+            }
+        }
+
+        // Show Posters List
+        function showPostersList() {
+            postersList.classList.remove('hidden');
+            posterForm.classList.add('hidden');
+            loadPosters();
+        }
+
+        // Show Poster Form
+        function showPosterForm(posterId = null) {
+            postersList.classList.add('hidden');
+            posterForm.classList.remove('hidden');
+            currentPosterId = posterId;
+
+            if (posterId) {
+                const poster = posters.find(p => p._id === posterId);
+                if (poster) {
+                    populatePosterForm(poster);
+                }
+            } else {
+                resetPosterForm();
+            }
+        }
+
+        // Populate Poster Form
+        function populatePosterForm(poster) {
+            document.getElementById('poster-title').value = poster.title || '';
+
+            const imageContainer = document.getElementById('poster-image-container');
+            imageContainer.innerHTML = '';
+            if (poster.images && poster.images.length > 0) {
+                poster.images.forEach((image) => {
+                    const imageItem = createPosterImageItem();
+                    imageItem.querySelector('.poster-image-url').value = image;
+                    imageContainer.appendChild(imageItem);
+                });
+            } else {
+                imageContainer.appendChild(createPosterImageItem());
+            }
+            updatePosterImagePreviews();
+
+            const contentContainer = document.getElementById('content-items-container');
+            contentContainer.innerHTML = '';
+            if (poster.content && poster.content.length > 0) {
+                poster.content.forEach(point => {
+                    const contentItem = createContentItem();
+                    contentItem.querySelector('input').value = point;
+                    contentContainer.appendChild(contentItem);
+                });
+            } else {
+                contentContainer.appendChild(createContentItem());
+            }
+
+            setupDynamicPosterFormElements();
+            validatePosterForm();
+        }
+
+        // Reset Poster Form
+        function resetPosterForm() {
+            document.getElementById('poster-title').value = '';
+
+            const imageContainer = document.getElementById('poster-image-container');
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(createPosterImageItem());
+            updatePosterImagePreviews();
+
+            const contentContainer = document.getElementById('content-items-container');
+            contentContainer.innerHTML = '';
+            contentContainer.appendChild(createContentItem());
+
+            setupDynamicPosterFormElements();
+            validatePosterForm();
+        }
+
+        // Create Poster Image Item
+        function createPosterImageItem() {
+            const div = document.createElement('div');
+            div.className = 'image-item';
+            div.innerHTML = `
+            <input type="url" class="form-control poster-image-url" placeholder="Enter image URL" required>
+            <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+        `;
+            return div;
+        }
+
+        // Create Content Item
+        function createContentItem() {
+            const div = document.createElement('div');
+            div.className = 'learn-item';
+            div.innerHTML = `
+            <input type="text" class="form-control content-input" placeholder="Enter content point" required>
+            <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+        `;
+            return div;
+        }
+
+        // Setup Dynamic Poster Form Elements
+        function setupDynamicPosterFormElements() {
+            document.querySelectorAll('.poster-image-url').forEach(input => {
+                input.removeEventListener('input', handlePosterImageUrlInput);
+                input.addEventListener('input', handlePosterImageUrlInput);
+            });
+
+            document.querySelectorAll('#poster-image-container .remove-btn').forEach(btn => {
+                btn.removeEventListener('click', handleRemovePosterImageItem);
+                btn.addEventListener('click', handleRemovePosterImageItem);
+            });
+
+            document.querySelectorAll('#content-items-container .remove-btn').forEach(btn => {
+                btn.removeEventListener('click', handleRemoveContentItem);
+                btn.addEventListener('click', handleRemoveContentItem);
+            });
+
+            document.getElementById('add-content-item').onclick = () => {
+                const container = document.getElementById('content-items-container');
+                const newItem = createContentItem();
+                container.appendChild(newItem);
+                setupDynamicPosterFormElements();
+            };
+
+            document.querySelectorAll('#poster-form input').forEach(input => {
+                input.removeEventListener('input', validatePosterForm);
+                input.addEventListener('input', validatePosterForm);
+            });
+        }
+
+        // Handle Remove Poster Image Item
+        function handleRemovePosterImageItem(e) {
+            const container = document.getElementById('poster-image-container');
+            if (container.children.length > 1) {
+                e.target.closest('.image-item').remove();
+                updatePosterImagePreviews();
+            } else {
+                showToast('At least one image is required', 'warning');
+            }
+        }
+
+        // Handle Remove Content Item
+        function handleRemoveContentItem(e) {
+            const container = document.getElementById('content-items-container');
+            if (container.children.length > 1) {
+                e.target.closest('.learn-item').remove();
+            } else {
+                showToast('At least one content point is required', 'warning');
+            }
+        }
+
+        // Handle Poster Image URL Input
+        function handlePosterImageUrlInput(e) {
+            updatePosterImagePreviews();
+        }
+
+        // Update Poster Image Previews
+        function updatePosterImagePreviews() {
+            const container = document.getElementById('poster-image-preview');
+            container.innerHTML = '';
+
+            document.querySelectorAll('.poster-image-url').forEach((input, index) => {
+                const url = input.value.trim();
+                if (url) {
+                    const preview = document.createElement('div');
+                    preview.className = 'image-preview';
+                    preview.innerHTML = `
+                    <img src="${url}" alt="Preview ${index + 1}" onerror="this.style.display='none'">
+                    <span>Image ${index + 1}</span>
+                `;
+                    container.appendChild(preview);
+                }
+            });
+        }
+
+        // Setup Poster Form Validation
+        function setupPosterFormValidation() {
+            const form = document.getElementById('poster-form');
+            const inputs = form.querySelectorAll('input');
+
+            inputs.forEach(input => {
+                input.addEventListener('blur', (e) => validatePosterField(e.target));
+                input.addEventListener('input', (e) => {
+                    validatePosterField(e.target);
+                    validatePosterForm();
+                });
+            });
+        }
+
+        // Validate Poster Field
+        function validatePosterField(field) {
+            const errorElement = document.getElementById(`${field.id}-error`);
+            if (!errorElement) return true;
+
+            let isValid = true;
+            let errorMessage = '';
+
+            switch (field.type) {
+                case 'text':
+                    if (field.required && !field.value.trim()) {
+                        isValid = false;
+                        errorMessage = 'This field is required';
+                    }
+                    break;
+                case 'url':
+                    if (field.required && !field.value.trim()) {
+                        isValid = false;
+                        errorMessage = 'Image URL is required';
+                    } else if (field.value.trim() && !isValidUrl(field.value.trim())) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid URL';
+                    }
+                    break;
+            }
+
+            if (isValid) {
+                field.classList.remove('error');
+                errorElement.style.display = 'none';
+            } else {
+                field.classList.add('error');
+                errorElement.textContent = errorMessage;
+                errorElement.style.display = 'block';
+            }
+
+            return isValid;
+        }
+
+        // Validate Poster Form
+        function validatePosterForm() {
+            const form = document.getElementById('poster-form');
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!validatePosterField(field)) {
+                    isValid = false;
+                }
+            });
+
+            const imageUrls = document.querySelectorAll('.poster-image-url');
+            let hasValidImage = false;
+            imageUrls.forEach(input => {
+                if (input.value.trim() && isValidUrl(input.value.trim())) {
+                    hasValidImage = true;
+                }
+            });
+            if (!hasValidImage) {
+                isValid = false;
+            }
+
+            savePosterBtn.disabled = !isValid;
+            return isValid;
+        }
+
+        // Handle Cancel Poster
+        function handleCancelPoster() {
+            showPostersList();
+        }
+
+        // Handle Save Poster
+        async function handleSavePoster(e) {
+            e.preventDefault();
+
+            if (!validatePosterForm()) {
+                showToast('Please fix the errors in the form', 'error');
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('adminToken');
+                const formData = getPosterFormData();
+
+                showToast('Saving poster...', 'info');
+
+                let response;
+                if (currentPosterId) {
+                    response = await fetch(`${API_BASE}/api/posters/${currentPosterId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                } else {
+                    response = await fetch(`${API_BASE}/api/posters`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showToast(`Poster ${currentPosterId ? 'updated' : 'created'} successfully!`, 'success');
+                    showPostersList();
+                    loadPosters();
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                console.error('Save poster error:', error);
+                showToast('Failed to save poster. Please try again.', 'error');
+            }
+        }
+
+        // Get Poster Form Data
+        function getPosterFormData() {
+            const images = Array.from(document.querySelectorAll('.poster-image-url'))
+                .map(input => input.value.trim())
+                .filter(url => url);
+
+            return {
+                title: document.getElementById('poster-title').value.trim(),
+                image: images.length > 0 ? images[0] : "",   // backend REQUIRES this
+                content: Array.from(document.querySelectorAll('.content-input'))
+                    .map(input => input.value.trim())
+                    .filter(point => point),
+                status: 'active'
+            };
+        }
+
+
+        // Handle Poster Search
+        function handlePosterSearch(e) {
+            posterSearchTerm = e.target.value.toLowerCase();
+            currentPosterPage = 1;
+            loadPosters();
+        }
+
+        // Render Posters Table
+        function renderPostersTable(paginationData = {}) {
+            postersTableBody.innerHTML = '';
+
+            if (posters.length === 0) {
+                postersTableBody.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center">No posters found</td>
+                </tr>
+            `;
+            } else {
+                posters.forEach(poster => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                   <td>
+    ${poster.image && poster.image.trim() !== "" ?
+                            `<img src="${poster.image}" alt="${poster.title}" class="course-thumbnail" onerror="this.style.display='none'">` :
+                            '<div class="no-image">No Image</div>'
+                        }
+</td>
+
+                    <td>
+                        <div class="course-title">${poster.title}</div>
+                    </td>
+                    <td>
+                        <div class="content-count">${poster.content ? poster.content.length : 0} items</div>
+                    </td>
+                    <td>
+                        <span class="status-badge status-${poster.status || 'active'}">
+                            ${(poster.status || 'active').charAt(0).toUpperCase() + (poster.status || 'active').slice(1)}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-sm btn-outline edit-btn" data-id="${poster._id}" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-btn" data-id="${poster._id}" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                    postersTableBody.appendChild(row);
+                });
+            }
+
+            renderPagination(paginationData, 'posters');
+            setupPosterTableEventListeners();
+        }
+
+        // Setup Poster Table Event Listeners
+        function setupPosterTableEventListeners() {
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const posterId = e.currentTarget.getAttribute('data-id');
+                    showPosterForm(posterId);
+                });
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const posterId = e.currentTarget.getAttribute('data-id');
+                    handleDeletePoster(posterId);
+                });
+            });
+        }
+
+        // Handle Delete Poster
+        async function handleDeletePoster(posterId) {
+            showConfirmation(
+                'Delete Poster',
+                'Are you sure you want to delete this poster? This action cannot be undone.',
+                async () => {
+                    try {
+                        const token = localStorage.getItem('adminToken');
+                        const response = await fetch(`${API_BASE}/api/posters/${posterId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            showToast('Poster deleted successfully', 'success');
+                            loadPosters();
+                        } else {
+                            throw new Error(result.message);
+                        }
+                    } catch (error) {
+                        console.error('Delete poster error:', error);
+                        showToast('Failed to delete poster', 'error');
+                    }
+                }
+            );
+        }
+
+        // Initialize Dashboard on DOM Load
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+
+    <!-- Updated Lobby Login System -->
+    <script src="lobylogin.js"></script>
+</body>
+
+</html>

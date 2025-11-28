@@ -706,7 +706,8 @@ function createCommunityPopupForm() {
             loadingSpinner.style.display = 'block';
 
             // Get API base URL from config or use default
-            const apiBaseUrl = window.AppConfig?.API_BASE_URL || 'http://localhost:3000';
+            const apiBaseUrl = window.AppConfig.API_BASE_URL;
+
             
             // Send data to backend
             const response = await fetch(`${apiBaseUrl}/api/community/join`, {
