@@ -1,0 +1,44 @@
+{
+    "image": [
+        {
+            "src": "./patner/TCS.png",
+            "alt": "TCS Logo"
+        },
+        {
+            "src": "./patner/paypal.png",
+            "alt": "Paypal Logo"
+        },
+        {
+            "src": "./patner/1280px-Accenture.svg.png",
+            "alt": "Accenture Logo"
+        },
+        {
+            "src": "./patner/2560px-Infosys_logo.svg.png",
+            "alt": "Infosys Logo"
+        },
+        {
+            "src": "./patner/2560px-Wipro_Primary_Logo_Color_RGB.svg.png",
+            "alt": "Wipro Logo"
+        },
+        {
+            "src": "./patner/capgemini-201x.svg",
+            "alt": "Capgemini Logo"
+        },
+        {
+            "src": "./patner/HCL_Technologies-Logo.wine.png",
+            "alt": "HCL Technologies Logo"
+        },
+        {
+            "src": "./patner/1200px-Qualcomm-Logo.svg.png",
+            "alt": "Qualcomm Logo"
+        },
+        {
+            "src": "./patner/1200px-Ramco_Systems_logo.png",
+            "alt": "Ramco Systems Logo"
+        },
+        {
+            "src": "./patner/HTC-logo.png",
+            "alt": "HTC Logo"
+        }
+    ]
+}

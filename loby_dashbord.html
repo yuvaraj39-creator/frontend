@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lobby Dashboard - U1 Technology</title>
     <link rel="icon" type="image/png" href="img/favicon-16x16.png">
     <script src="config.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <style>
         :root {
@@ -27,7 +30,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
@@ -100,6 +103,11 @@
             background-color: var(--primary-dark);
         }
 
+        .login-btn:disabled {
+            background-color: var(--secondary-color);
+            cursor: not-allowed;
+        }
+
         .error-message {
             color: var(--danger-color);
             margin-top: 10px;
@@ -163,11 +171,11 @@
             overflow: hidden;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links a:hover,
+        .nav-links a.active {
             background-color: rgba(128, 0, 32, 0.05);
             color: var(--primary-color);
             border-left: 4px solid var(--primary-color);
-            transform: translateX(5px);
         }
 
         .nav-links a::before {
@@ -387,7 +395,12 @@
 
         .btn-primary:hover {
             background-color: var(--primary-dark);
-            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            background-color: var(--secondary-color);
+            cursor: not-allowed;
+            transform: none;
         }
 
         .btn-outline {
@@ -398,7 +411,6 @@
 
         .btn-outline:hover {
             background-color: var(--light-color);
-            transform: translateY(-2px);
         }
 
         .btn-success {
@@ -408,7 +420,6 @@
 
         .btn-success:hover {
             background-color: #38a169;
-            transform: translateY(-2px);
         }
 
         .btn-warning {
@@ -418,7 +429,6 @@
 
         .btn-warning:hover {
             background-color: #dd6b20;
-            transform: translateY(-2px);
         }
 
         .btn-danger {
@@ -428,7 +438,6 @@
 
         .btn-danger:hover {
             background-color: #e53e3e;
-            transform: translateY(-2px);
         }
 
         .btn-info {
@@ -438,7 +447,6 @@
 
         .btn-info:hover {
             background-color: #3182ce;
-            transform: translateY(-2px);
         }
 
         .table-container {
@@ -451,10 +459,11 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px;
+            min-width: 600px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
@@ -525,6 +534,12 @@
 
         .action-btn:hover {
             transform: translateY(-1px);
+        }
+
+        .action-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .collect-btn {
@@ -635,10 +650,17 @@
             cursor: pointer;
             color: var(--secondary-color);
             transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .modal-close:hover {
             color: var(--primary-color);
+            background-color: rgba(0, 0, 0, 0.05);
         }
 
         .modal-body {
@@ -673,6 +695,16 @@
             padding: 8px 12px;
             background-color: var(--light-color);
             border-radius: 6px;
+            word-break: break-word;
+        }
+
+        .info-value a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .info-value a:hover {
+            text-decoration: underline;
         }
 
         .status-select {
@@ -758,6 +790,11 @@
             cursor: pointer;
             opacity: 0.8;
             transition: opacity 0.2s ease;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .toast-close:hover {
@@ -769,14 +806,21 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
+            border: 3px solid rgba(128, 0, 32, 0.3);
             border-radius: 50%;
-            border-top-color: #fff;
+            border-top-color: var(--primary-color);
             animation: spin 1s ease-in-out infinite;
         }
 
+        .loading.white {
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-top-color: #fff;
+        }
+
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Confirmation Modal Styles */
@@ -817,6 +861,15 @@
             gap: 10px;
         }
 
+        /* Focus styles for accessibility */
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
         /* Responsive Styles */
         @media (max-width: 992px) {
             .sidebar {
@@ -824,30 +877,31 @@
                 height: auto;
                 position: relative;
             }
-            
+
             .main-content {
                 margin-left: 0;
                 max-width: 100%;
             }
-            
+
             .nav-links {
                 display: flex;
                 overflow-x: auto;
                 padding-bottom: 10px;
             }
-            
+
             .nav-links li {
                 flex: 0 0 auto;
                 margin-bottom: 0;
             }
-            
+
             .nav-links a {
                 border-left: none;
                 border-bottom: 4px solid transparent;
                 white-space: nowrap;
             }
-            
-            .nav-links a:hover, .nav-links a.active {
+
+            .nav-links a:hover,
+            .nav-links a.active {
                 border-left: none;
                 border-bottom: 4px solid var(--primary-color);
             }
@@ -857,63 +911,105 @@
             .dashboard-cards {
                 grid-template-columns: 1fr;
             }
-            
+
             .redeem-form {
                 grid-template-columns: 1fr;
             }
-            
+
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
-            
+
             .section-actions {
                 width: 100%;
                 justify-content: space-between;
             }
-            
+
             .info-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
             }
-            
+
             .user-info {
                 align-self: flex-end;
             }
-            
+
             .toast-container {
                 top: 10px;
                 right: 10px;
                 left: 10px;
                 max-width: none;
             }
-            
+
             .main-content {
                 padding: 15px;
             }
-            
+
             .data-section {
                 padding: 15px;
+            }
+
+            table {
+                min-width: 500px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-content {
+                padding: 20px;
+            }
+
+            .modal {
+                margin: 10px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+
+            .sidebar,
+            .header,
+            .section-actions,
+            .action-buttons {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+            }
+
+            .data-section {
+                box-shadow: none;
+                border: 1px solid #ccc;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Login Modal -->
     <div class="login-modal" id="login-modal">
         <div class="login-content">
-            <h2><i class="fas fa-lock"></i> Lobby Login</h2>
+            <h2><i class="fas fa-lock" aria-hidden="true"></i> Lobby Login</h2>
             <div class="login-form">
-                <input type="email" id="admin-email" class="login-input" placeholder="Enter Lobby Email" required>
-                <input type="password" id="admin-password" class="login-input" placeholder="Enter Password" required>
+                <input type="email" id="admin-email" class="login-input" placeholder="Enter Lobby Email" required
+                    aria-required="true">
+                <input type="password" id="admin-password" class="login-input" placeholder="Enter Password" required
+                    aria-required="true">
                 <button class="login-btn" id="login-btn">Login</button>
-                <div class="error-message" id="error-message">Invalid email or password</div>
+                <div class="error-message" id="error-message" role="alert">Invalid email or password</div>
             </div>
         </div>
     </div>
@@ -927,11 +1023,15 @@
                 <p>Lobby Dashboard</p>
             </div>
             <ul class="nav-links">
-                <li><a href="#" class="active" data-section="dashboard">Dashboard</a></li>
-                <li><a href="#" data-section="applications">Course Applications</a></li>
-                <li><a href="#" data-section="community">Community</a></li>
-                <li><a href="#" data-section="redeem">Redeem Codes</a></li>
-                <li><a href="#" id="logout-btn">Logout</a></li>
+                <li><a href="#" class="active" data-section="dashboard"><i class="fas fa-tachometer-alt"
+                            aria-hidden="true"></i> Dashboard</a></li>
+                <li><a href="#" data-section="applications"><i class="fas fa-file-alt" aria-hidden="true"></i> Course
+                        Applications</a></li>
+                <li><a href="#" data-section="community"><i class="fas fa-users" aria-hidden="true"></i> Community</a>
+                </li>
+                <li><a href="#" data-section="redeem"><i class="fas fa-gift" aria-hidden="true"></i> Redeem Codes</a>
+                </li>
+                <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</a></li>
             </ul>
         </div>
 
@@ -940,10 +1040,11 @@
             <div class="header">
                 <h2 id="page-title">Lobby Dashboard</h2>
                 <div class="user-info">
-                    <div class="user-avatar" id="user-avatar">L</div>
+                    <div class="user-avatar" id="user-avatar" aria-hidden="true">L</div>
                     <div>
                         <div id="user-name">Lobby User</div>
-                        <div id="user-email" style="font-size: 0.8rem; color: var(--secondary-color);">lobby@u1technology.com</div>
+                        <div id="user-email" style="font-size: 0.8rem; color: var(--secondary-color);">
+                            lobby@u1technology.com</div>
                     </div>
                 </div>
             </div>
@@ -954,7 +1055,7 @@
                     <div class="card applications">
                         <div class="card-header">
                             <div class="card-title">Course Applications</div>
-                            <div class="card-icon" id="applications-card-icon">0</div>
+                            <div class="card-icon" id="applications-card-icon" aria-hidden="true">0</div>
                         </div>
                         <div class="card-value" id="applications-count">0</div>
                         <div class="card-footer" id="applications-footer">Loading...</div>
@@ -962,7 +1063,7 @@
                     <div class="card community">
                         <div class="card-header">
                             <div class="card-title">Community Members</div>
-                            <div class="card-icon" id="community-card-icon">0</div>
+                            <div class="card-icon" id="community-card-icon" aria-hidden="true">0</div>
                         </div>
                         <div class="card-value" id="community-count">0</div>
                         <div class="card-footer" id="community-footer">Loading...</div>
@@ -970,7 +1071,7 @@
                     <div class="card redeem">
                         <div class="card-header">
                             <div class="card-title">Redeem Codes</div>
-                            <div class="card-icon" id="redeem-card-icon">0</div>
+                            <div class="card-icon" id="redeem-card-icon" aria-hidden="true">0</div>
                         </div>
                         <div class="card-value" id="redeem-count">0</div>
                         <div class="card-footer" id="redeem-footer">Loading...</div>
@@ -1097,18 +1198,18 @@
                             <button class="btn btn-primary" id="generate-code-btn">Generate Code</button>
                         </div>
                     </div>
-                    
+
                     <div class="redeem-form">
                         <div class="form-group">
-                            <label class="form-label">User Name</label>
+                            <label class="form-label" for="user-name-input">User Name</label>
                             <input type="text" class="form-input" id="user-name-input" placeholder="Enter user name">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">User Email</label>
+                            <label class="form-label" for="user-email-input">User Email</label>
                             <input type="email" class="form-input" id="user-email-input" placeholder="Enter user email">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Quiz Type</label>
+                            <label class="form-label" for="quiz-type-select">Quiz Type</label>
                             <select class="form-input" id="quiz-type-select">
                                 <option value="general">General</option>
                                 <option value="programming_math">Programming & Math</option>
@@ -1120,7 +1221,7 @@
                             <button class="btn btn-success" id="create-redeem-btn">Create Redeem Code</button>
                         </div>
                     </div>
-                    
+
                     <div class="table-container">
                         <table id="redeem-table">
                             <thead>
@@ -1152,11 +1253,12 @@
     <div class="toast-container" id="toast-container"></div>
 
     <!-- Application Detail Modal -->
-    <div id="application-modal" class="modal-overlay">
+    <div id="application-modal" class="modal-overlay" role="dialog" aria-modal="true"
+        aria-labelledby="application-modal-title" aria-hidden="true">
         <div class="modal">
             <div class="modal-header">
-                <h3 class="modal-title">Application Details</h3>
-                <button class="modal-close" id="close-application-modal">&times;</button>
+                <h3 class="modal-title" id="application-modal-title">Application Details</h3>
+                <button class="modal-close" id="close-application-modal" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="info-grid" id="application-details">
@@ -1171,11 +1273,12 @@
     </div>
 
     <!-- Edit Status Modal -->
-    <div id="status-modal" class="modal-overlay">
+    <div id="status-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="status-modal-title"
+        aria-hidden="true">
         <div class="modal">
             <div class="modal-header">
-                <h3 class="modal-title">Update Application Status</h3>
-                <button class="modal-close" id="close-status-modal">&times;</button>
+                <h3 class="modal-title" id="status-modal-title">Update Application Status</h3>
+                <button class="modal-close" id="close-status-modal" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -1187,7 +1290,7 @@
                     <div class="info-value" id="status-applicant-name">Loading...</div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Status</label>
+                    <label class="form-label" for="status-select">Status</label>
                     <select class="status-select" id="status-select">
                         <option value="pending">Pending</option>
                         <option value="contacted">Contacted</option>
@@ -1196,8 +1299,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Notes (Optional)</label>
-                    <textarea class="form-input" id="status-notes" rows="3" placeholder="Add any notes about this application"></textarea>
+                    <label class="form-label" for="status-notes">Notes (Optional)</label>
+                    <textarea class="form-input" id="status-notes" rows="3"
+                        placeholder="Add any notes about this application"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -1208,12 +1312,14 @@
     </div>
 
     <!-- Confirmation Modal -->
-    <div id="confirmation-modal" class="modal-overlay">
+    <div id="confirmation-modal" class="modal-overlay" role="dialog" aria-modal="true"
+        aria-labelledby="confirmation-modal-title" aria-hidden="true">
         <div class="modal confirmation-modal">
             <div class="modal-body">
-                <div class="confirmation-icon warning" id="confirmation-icon">⚠️</div>
-                <h3 class="confirmation-title" id="confirmation-title">Confirm Action</h3>
-                <p class="confirmation-message" id="confirmation-message">Are you sure you want to proceed with this action?</p>
+                <div class="confirmation-icon warning" id="confirmation-icon" aria-hidden="true">⚠️</div>
+                <h3 class="confirmation-title" id="confirmation-modal-title">Confirm Action</h3>
+                <p class="confirmation-message" id="confirmation-message">Are you sure you want to proceed with this
+                    action?</p>
                 <div class="confirmation-actions">
                     <button class="btn btn-outline" id="confirmation-cancel">Cancel</button>
                     <button class="btn btn-danger" id="confirmation-confirm">Confirm</button>
@@ -1223,9 +1329,16 @@
     </div>
 
     <script>
-        // API Configuration with fallback
-        const API_BASE_URL = window.AppConfig?.API_BASE_URL || "http://localhost:3000";
-        
+        // API Configuration with validation
+        const API_BASE_URL = (function () {
+            const configUrl = window.AppConfig?.API_BASE_URL;
+            if (!configUrl) {
+                console.error('API_BASE_URL not configured in config.js');
+                return 'https://backend-svvg.onrender.com'; // Fallback to secure URL
+            }
+            return configUrl;
+        })();
+
         // DOM Elements
         const loginModal = document.getElementById('login-modal');
         const dashboardContainer = document.getElementById('dashboard-container');
@@ -1234,12 +1347,12 @@
         const loginBtn = document.getElementById('login-btn');
         const errorMessage = document.getElementById('error-message');
         const toastContainer = document.getElementById('toast-container');
-        
+
         // Current application being viewed/edited
         let currentApplicationId = null;
         let currentApplicationData = null;
         let currentRedeemId = null;
-        
+
         // Data storage
         let applicationsData = [];
         let communityData = [];
@@ -1252,56 +1365,84 @@
 
         // Confirmation modal state
         let confirmationCallback = null;
+        let activeModal = null;
+        let previousActiveElement = null;
+
+        // Utility function to sanitize HTML
+        function sanitizeHTML(str) {
+            const temp = document.createElement('div');
+            temp.textContent = str || '';
+            return temp.innerHTML;
+        }
+
+        // Utility function to format date safely
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            try {
+                const date = new Date(dateString);
+                return isNaN(date.getTime()) ? '-' : date.toLocaleDateString();
+            } catch (error) {
+                return '-';
+            }
+        }
+
+        // Utility function to safely join array
+        function safeJoin(array, separator = ', ') {
+            if (!Array.isArray(array)) return '';
+            return array.map(item => String(item || '')).join(separator);
+        }
 
         // Toast notification system
         function showToast(message, type = 'info', duration = 5000) {
             const toastContainer = document.getElementById('toast-container');
             const toastId = 'toast-' + Date.now();
-            
+
             const icons = {
                 success: '✓',
                 error: '✗',
                 warning: '⚠',
                 info: 'ℹ'
             };
-            
+
             const toast = document.createElement('div');
             toast.className = `toast toast-${type}`;
             toast.id = toastId;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
             toast.innerHTML = `
-                <span class="toast-icon">${icons[type]}</span>
-                <span class="toast-message">${message}</span>
-                <button class="toast-close">&times;</button>
-            `;
-            
+            <span class="toast-icon" aria-hidden="true">${icons[type]}</span>
+            <span class="toast-message">${sanitizeHTML(message)}</span>
+            <button class="toast-close" aria-label="Close notification">&times;</button>
+        `;
+
             toastContainer.appendChild(toast);
-            
+
             // Show toast with animation
             setTimeout(() => {
                 toast.classList.add('show');
             }, 10);
-            
+
             // Close button event
             toast.querySelector('.toast-close').addEventListener('click', () => {
                 hideToast(toastId);
             });
-            
+
             // Auto hide after duration
             if (duration > 0) {
                 setTimeout(() => {
                     hideToast(toastId);
                 }, duration);
             }
-            
+
             return toastId;
         }
-        
+
         function hideToast(toastId) {
             const toast = document.getElementById(toastId);
             if (toast) {
                 toast.classList.remove('show');
                 toast.classList.add('hide');
-                
+
                 setTimeout(() => {
                     if (toast.parentNode) {
                         toast.parentNode.removeChild(toast);
@@ -1310,51 +1451,121 @@
             }
         }
 
+        // Modal management system
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+
+            // Store current active element
+            previousActiveElement = document.activeElement;
+
+            // Show modal
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            activeModal = modal;
+
+            // Focus trap
+            const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (focusableElements.length > 0) {
+                focusableElements[0].focus();
+            }
+
+            // Add event listener for escape key
+            document.addEventListener('keydown', handleEscapeKey);
+        }
+
+        function hideModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            activeModal = null;
+
+            // Remove event listener
+            document.removeEventListener('keydown', handleEscapeKey);
+
+            // Restore focus to previous element
+            if (previousActiveElement) {
+                previousActiveElement.focus();
+                previousActiveElement = null;
+            }
+        }
+
+        function handleEscapeKey(event) {
+            if (event.key === 'Escape' && activeModal) {
+                hideModal(activeModal.id);
+            }
+        }
+
         // Function to make API requests
         async function apiRequest(endpoint, options = {}) {
             const url = `${API_BASE_URL}${endpoint}`;
-            
-            // Get token from localStorage
+
+            // Get token from localStorage - FIX: Handle undefined tokens
             const token = localStorage.getItem('lobbyToken');
-            
+            console.log(`API Request to ${endpoint}, Token exists: ${!!token}`); // DEBUG
+
             const config = {
+                method: options.method || 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    ...options.headers
-                },
-                ...options
+                    ...(options.headers || {})
+                }
             };
-            
-            // Add authorization header if token exists
-            if (token) {
+
+            // Add authorization header if token exists and is not "undefined"
+            if (token && token !== 'undefined' && token !== 'null') {
                 config.headers['Authorization'] = `Bearer ${token}`;
+                console.log('Authorization header added with token'); // DEBUG
+            } else {
+                console.log('No valid token found for request'); // DEBUG
             }
-            
+
+            // Handle request body
+            if (options.body) {
+                if (typeof options.body === 'object' && !(options.body instanceof FormData)) {
+                    config.body = JSON.stringify(options.body);
+                } else {
+                    config.body = options.body;
+                }
+            }
+
             try {
                 const response = await fetch(url, config);
-                
+                console.log(`API Response status: ${response.status} for ${endpoint}`); // DEBUG
+
                 if (response.status === 401) {
                     // Token expired or invalid
                     localStorage.removeItem('lobbyToken');
+                    localStorage.removeItem('lobbyUser');
                     showToast('Session expired. Please login again.', 'error');
                     setTimeout(() => {
                         showLoginModal();
                     }, 2000);
-                    return null;
+                    return { success: false, error: 'Authentication failed' };
                 }
-                
-                if (!response.ok) {
-                    throw new Error(`API request failed: ${response.status}`);
-                }
-                
+
                 const data = await response.json();
-                return data;
+
+                if (!response.ok) {
+                    console.error(`API Error ${response.status}:`, data);
+                    return {
+                        success: false,
+                        error: data.message || `Request failed with status ${response.status}`,
+                        status: response.status
+                    };
+                }
+
+                return { success: true, data };
             } catch (error) {
                 console.error('API request error:', error);
-                throw error;
+                return {
+                    success: false,
+                    error: 'Network error occurred. Please check your connection.'
+                };
             }
         }
-
         // Lobby Login Function
         async function handleLogin() {
             const email = adminEmailInput.value.trim();
@@ -1366,34 +1577,78 @@
             }
 
             try {
-                showToast('Logging in...', 'info');
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<div class="loading white"></div> Logging in...';
+
+                console.log('=== LOGIN DEBUG START ===');
+                console.log('Credentials:', { email, password });
+
                 const response = await fetch(`${API_BASE_URL}/api/lobby/login`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                     body: JSON.stringify({ email, password })
                 });
 
-                const result = await response.json();
+                console.log('Response status:', response.status);
 
-                if (result.success) {
-                    localStorage.setItem('lobbyToken', result.data.token);
-                    showDashboard();
-                    showToast('Login successful!', 'success');
+                const result = await response.json();
+                console.log('Full API response:', result);
+
+                // FIX: Check if token exists in the response structure
+                if (response.ok && result.success) {
+                    const token = result.data?.token;
+                    const user = result.data?.user;
+
+                    console.log('Token to store:', token);
+                    console.log('User data to store:', user);
+
+                    if (token && user) {
+                        localStorage.setItem('lobbyToken', token);
+                        localStorage.setItem('lobbyUser', JSON.stringify(user));
+
+                        console.log('LocalStorage after save:', {
+                            token: localStorage.getItem('lobbyToken'),
+                            user: localStorage.getItem('lobbyUser')
+                        });
+
+                        showDashboard();
+                        showToast('Login successful!', 'success');
+                    } else {
+                        console.error('Token or user data missing from response');
+                        showError('Login failed: Missing token or user data');
+                    }
                 } else {
+                    console.log('Login failed:', result.message);
                     showError(result.message || 'Invalid lobby credentials');
                 }
+
+                console.log('=== LOGIN DEBUG END ===');
+
             } catch (error) {
                 console.error('Login error:', error);
                 showError('Login failed. Please check your credentials and try again.');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Login';
             }
         }
+
 
         // Show Error Message
         function showError(message) {
             errorMessage.textContent = message;
             errorMessage.style.display = 'block';
-            adminEmailInput.classList.add('error');
-            adminPasswordInput.classList.add('error');
+            adminEmailInput.style.borderColor = 'var(--danger-color)';
+            adminPasswordInput.style.borderColor = 'var(--danger-color)';
+        }
+
+        // Clear Error Message
+        function clearError() {
+            errorMessage.style.display = 'none';
+            adminEmailInput.style.borderColor = '';
+            adminPasswordInput.style.borderColor = '';
         }
 
         // Show Login Modal
@@ -1402,9 +1657,7 @@
             dashboardContainer.style.display = 'none';
             adminEmailInput.value = '';
             adminPasswordInput.value = '';
-            errorMessage.style.display = 'none';
-            adminEmailInput.classList.remove('error');
-            adminPasswordInput.classList.remove('error');
+            clearError();
         }
 
         // Show Dashboard
@@ -1418,25 +1671,21 @@
         // Verify Lobby Token
         async function verifyToken(token) {
             try {
-                const response = await fetch(`${API_BASE_URL}/api/lobby/me`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+                const result = await apiRequest('/api/lobby/me');
 
-                if (response.ok) {
-                    const result = await response.json();
-                    if (result.success) {
-                        showDashboard();
-                        return true;
-                    }
+                if (result.success) {
+                    showDashboard();
+                    return true;
                 }
+
                 localStorage.removeItem('lobbyToken');
+                localStorage.removeItem('lobbyUser');
                 showLoginModal();
                 return false;
             } catch (error) {
                 console.error('Token verification failed:', error);
                 localStorage.removeItem('lobbyToken');
+                localStorage.removeItem('lobbyUser');
                 showLoginModal();
                 return false;
             }
@@ -1450,38 +1699,72 @@
         }
 
         // Function to load lobby profile
+        // Function to load lobby profile
         async function loadLobbyProfile() {
             try {
-                const response = await apiRequest('/api/lobby/me');
-                if (response) {
-                    updateUserInfo(response.data.user);
+                // FIX: Handle stored user data safely
+                const storedUser = localStorage.getItem('lobbyUser');
+                let userData = null;
+
+                if (storedUser) {
+                    try {
+                        userData = JSON.parse(storedUser);
+                        updateUserInfo(userData);
+                    } catch (parseError) {
+                        console.error('Error parsing stored user data:', parseError);
+                        localStorage.removeItem('lobbyUser');
+                    }
+                }
+
+                const result = await apiRequest('/api/lobby/me');
+                if (result.success) {
+                    updateUserInfo(result.data.user);
+                } else {
+                    // Fallback to stored user data if API fails but we have valid data
+                    if (userData) {
+                        console.log('Using stored user data due to API failure');
+                        updateUserInfo(userData);
+                    }
                 }
             } catch (error) {
                 console.error('Error loading lobby profile:', error);
+                // Fallback to stored user data
+                const storedUser = localStorage.getItem('lobbyUser');
+                if (storedUser) {
+                    try {
+                        const userData = JSON.parse(storedUser);
+                        updateUserInfo(userData);
+                    } catch (parseError) {
+                        console.error('Error parsing stored user data:', parseError);
+                    }
+                }
             }
         }
+
 
         // Function to load dashboard statistics
         async function loadDashboardStats() {
             try {
-                const response = await apiRequest('/api/lobby/dashboard/stats');
-                if (response) {
-                    const stats = response.data;
-                    
-                    // Update applications stats
-                    dashboardStats.applications.total = stats.applications.total;
-                    dashboardStats.applications.recent = stats.applications.recent;
-                    
-                    // Update community stats
-                    dashboardStats.community.total = stats.community.total;
-                    dashboardStats.community.recent = stats.community.recent;
-                    
-                    // Update redeem stats
-                    dashboardStats.redeem.total = stats.redeem.total;
-                    dashboardStats.redeem.recent = stats.redeem.recent;
-                    
-                    updateDashboardCards();
+                // Load all data first, then calculate stats
+                const [applicationsResult, communityResult, redeemResult] = await Promise.all([
+                    apiRequest('/api/applications?limit=1000'),
+                    apiRequest('/api/community/submissions?limit=1000'),
+                    apiRequest('/api/quiz/redeem?limit=1000')
+                ]);
+
+                if (applicationsResult.success) {
+                    dashboardStats.applications.total = applicationsResult.data.applications?.length || 0;
                 }
+
+                if (communityResult.success) {
+                    dashboardStats.community.total = communityResult.data.submissions?.length || 0;
+                }
+
+                if (redeemResult.success) {
+                    dashboardStats.redeem.total = redeemResult.data.redeems?.length || 0;
+                }
+
+                updateDashboardCards();
             } catch (error) {
                 console.error('Error loading dashboard stats:', error);
                 showToast('Failed to load dashboard statistics', 'error');
@@ -1493,35 +1776,34 @@
             // Applications card
             document.getElementById('applications-count').textContent = dashboardStats.applications.total;
             document.getElementById('applications-card-icon').textContent = dashboardStats.applications.total;
-            document.getElementById('applications-footer').textContent = 
-                `+${dashboardStats.applications.recent} from last 30 days`;
-                
+            document.getElementById('applications-footer').textContent = `${dashboardStats.applications.total} total applications`;
+
             // Community card
             document.getElementById('community-count').textContent = dashboardStats.community.total;
             document.getElementById('community-card-icon').textContent = dashboardStats.community.total;
-            document.getElementById('community-footer').textContent = 
-                `+${dashboardStats.community.recent} from last 30 days`;
-                
+            document.getElementById('community-footer').textContent = `${dashboardStats.community.total} total members`;
+
             // Redeem card
             document.getElementById('redeem-count').textContent = dashboardStats.redeem.total;
             document.getElementById('redeem-card-icon').textContent = dashboardStats.redeem.total;
-            document.getElementById('redeem-footer').textContent = 
-                `+${dashboardStats.redeem.recent} from last 30 days`;
+            document.getElementById('redeem-footer').textContent = `${dashboardStats.redeem.total} total codes`;
         }
 
         // Function to load applications
         async function loadApplications(limit = null) {
             try {
-                let endpoint = '/api/lobby/applications';
+                let endpoint = '/api/applications';
                 if (limit) {
                     endpoint += `?limit=${limit}`;
                 }
-                
-                const response = await apiRequest(endpoint);
-                if (response) {
-                    applicationsData = response.data.applications;
+
+                const result = await apiRequest(endpoint);
+                if (result.success) {
+                    applicationsData = result.data.applications || [];
+                } else {
+                    applicationsData = [];
                 }
-                
+
                 return applicationsData;
             } catch (error) {
                 console.error('Error loading applications:', error);
@@ -1533,16 +1815,18 @@
         // Function to load community members
         async function loadCommunity(limit = null) {
             try {
-                let endpoint = '/api/lobby/community';
+                let endpoint = '/api/community/submissions';
                 if (limit) {
                     endpoint += `?limit=${limit}`;
                 }
-                
-                const response = await apiRequest(endpoint);
-                if (response) {
-                    communityData = response.data.submissions;
+
+                const result = await apiRequest(endpoint);
+                if (result.success) {
+                    communityData = result.data.submissions || [];
+                } else {
+                    communityData = [];
                 }
-                
+
                 return communityData;
             } catch (error) {
                 console.error('Error loading community members:', error);
@@ -1554,16 +1838,18 @@
         // Function to load redeem codes
         async function loadRedeemCodes(limit = null) {
             try {
-                let endpoint = '/api/lobby/redeem';
+                let endpoint = '/api/quiz/redeem';
                 if (limit) {
                     endpoint += `?limit=${limit}`;
                 }
-                
-                const response = await apiRequest(endpoint);
-                if (response) {
-                    redeemData = response.data.redeems;
+
+                const result = await apiRequest(endpoint);
+                if (result.success) {
+                    redeemData = result.data.redeems || [];
+                } else {
+                    redeemData = [];
                 }
-                
+
                 return redeemData;
             } catch (error) {
                 console.error('Error loading redeem codes:', error);
@@ -1572,299 +1858,339 @@
             }
         }
 
-        // Function to render applications table
+        // Function to render applications table safely
         function renderApplicationsTable(containerId, data) {
             const tbody = document.getElementById(containerId);
-            
+
             if (!data || data.length === 0) {
                 tbody.innerHTML = `
-                    <tr>
-                        <td colspan="9" style="text-align: center; padding: 20px;">
-                            No applications found
-                        </td>
-                    </tr>
-                `;
+                <tr>
+                    <td colspan="9" style="text-align: center; padding: 20px;">
+                        No applications found
+                    </td>
+                </tr>
+            `;
                 return;
             }
-            
-            tbody.innerHTML = '';
-            
+
+            // Clear existing content safely
+            while (tbody.firstChild) {
+                tbody.removeChild(tbody.firstChild);
+            }
+
             data.forEach(app => {
                 const row = document.createElement('tr');
-                const date = new Date(app.createdAt).toLocaleDateString();
-                
-                row.innerHTML = `
-                    <td>${app.applicationId || app._id}</td>
-                    <td>${app.name}</td>
-                    <td>${app.email}</td>
-                    <td>${app.phone}</td>
-                    <td>${app.course}</td>
-                    <td>${app.studyMode}</td>
-                    <td>${date}</td>
-                    <td><span class="status status-${app.status}">${app.status.charAt(0).toUpperCase() + app.status.slice(1)}</span></td>
-                    <td class="action-buttons">
-                        <button class="action-btn btn-info view-application" data-id="${app._id || app.applicationId}">View</button>
-                        <button class="action-btn btn-warning edit-application" data-id="${app._id || app.applicationId}">Edit</button>
-                    </td>
-                `;
+                const date = formatDate(app.createdAt);
+                const appId = app.applicationId || app._id;
+
+                // Create cells safely
+                const cells = [
+                    createTableCell(appId),
+                    createTableCell(app.name),
+                    createTableCell(app.email),
+                    createTableCell(app.phone),
+                    createTableCell(app.course),
+                    createTableCell(app.studyMode),
+                    createTableCell(date),
+                    createStatusCell(app.status),
+                    createActionCell('application', appId)
+                ];
+
+                cells.forEach(cell => row.appendChild(cell));
                 tbody.appendChild(row);
-            });
-            
-            // Add event listeners to view buttons
-            document.querySelectorAll('.view-application').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const appId = this.getAttribute('data-id');
-                    showApplicationDetails(appId);
-                });
-            });
-            
-            // Add event listeners to edit buttons
-            document.querySelectorAll('.edit-application').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const appId = this.getAttribute('data-id');
-                    showEditStatusModal(appId);
-                });
             });
         }
 
-        // Function to render community table
+        // Function to render community table safely
         function renderCommunityTable(containerId, data) {
             const tbody = document.getElementById(containerId);
-            
+
             if (!data || data.length === 0) {
                 tbody.innerHTML = `
-                    <tr>
-                        <td colspan="9" style="text-align: center; padding: 20px;">
-                            No community members found
-                        </td>
-                    </tr>
-                `;
+                <tr>
+                    <td colspan="9" style="text-align: center; padding: 20px;">
+                        No community members found
+                    </td>
+                </tr>
+            `;
                 return;
             }
-            
-            tbody.innerHTML = '';
-            
+
+            // Clear existing content safely
+            while (tbody.firstChild) {
+                tbody.removeChild(tbody.firstChild);
+            }
+
             data.forEach(member => {
                 const row = document.createElement('tr');
-                const date = new Date(member.createdAt).toLocaleDateString();
-                const experienceText = member.experienceLevel === 'experienced' 
-                    ? `Experienced (${member.yearsExperience} years)`
+                const date = formatDate(member.createdAt);
+                const experienceText = member.experienceLevel === 'experienced'
+                    ? `Experienced (${member.yearsExperience || 0} years)`
                     : 'Fresher';
-                
-                row.innerHTML = `
-                    <td>${member._id}</td>
-                    <td>${member.name}</td>
-                    <td>${member.email}</td>
-                    <td>${member.phone}</td>
-                    <td>${member.skills.join(', ')}</td>
-                    <td>${experienceText}</td>
-                    <td>${date}</td>
-                    <td><span class="status status-${member.status}">${member.status.charAt(0).toUpperCase() + member.status.slice(1)}</span></td>
-                    <td class="action-buttons">
-                        <button class="action-btn btn-info view-community" data-id="${member._id}">View</button>
-                        <button class="action-btn btn-warning edit-community" data-id="${member._id}">Edit</button>
-                    </td>
-                `;
+
+                // Create cells safely
+                const cells = [
+                    createTableCell(member._id),
+                    createTableCell(member.name),
+                    createTableCell(member.email),
+                    createTableCell(member.phone),
+                    createTableCell(safeJoin(member.skills)),
+                    createTableCell(experienceText),
+                    createTableCell(date),
+                    createStatusCell(member.status),
+                    createActionCell('community', member._id)
+                ];
+
+                cells.forEach(cell => row.appendChild(cell));
                 tbody.appendChild(row);
-            });
-            
-            // Add event listeners to view buttons
-            document.querySelectorAll('.view-community').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const memberId = this.getAttribute('data-id');
-                    showCommunityDetails(memberId);
-                });
             });
         }
 
-        // Function to render redeem codes table
+        // Function to render redeem codes table safely
         function renderRedeemTable(containerId, data) {
             const tbody = document.getElementById(containerId);
-            
+
             if (!data || data.length === 0) {
                 tbody.innerHTML = `
-                    <tr>
-                        <td colspan="7" style="text-align: center; padding: 20px;">
-                            No redeem codes found
-                        </td>
-                    </tr>
-                `;
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 20px;">
+                        No redeem codes found
+                    </td>
+                </tr>
+            `;
                 return;
             }
-            
-            tbody.innerHTML = '';
-            
+
+            // Clear existing content safely
+            while (tbody.firstChild) {
+                tbody.removeChild(tbody.firstChild);
+            }
+
             data.forEach(redeem => {
                 const row = document.createElement('tr');
-                const date = new Date(redeem.createdAt).toLocaleDateString();
-                
-                row.innerHTML = `
-                    <td>${redeem.redeemCode}</td>
-                    <td>${redeem.userName}</td>
-                    <td>${redeem.userEmail}</td>
-                    <td>${redeem.score}/${redeem.totalQuestions} (${redeem.percentage}%)</td>
-                    <td>${redeem.quizType}</td>
-                    <td>${date}</td>
-                    <td class="action-buttons">
-                        <button class="action-btn btn-danger delete-redeem" data-id="${redeem._id}">Delete</button>
-                    </td>
-                `;
+                const date = formatDate(redeem.createdAt);
+                const scoreText = `${redeem.score || 0}/${redeem.totalQuestions || 0} (${redeem.percentage || 0}%)`;
+
+                // Create cells safely
+                const cells = [
+                    createTableCell(redeem.redeemCode),
+                    createTableCell(redeem.userName),
+                    createTableCell(redeem.userEmail),
+                    createTableCell(scoreText),
+                    createTableCell(redeem.quizType),
+                    createTableCell(date),
+                    createRedeemActionCell(redeem._id)
+                ];
+
+                cells.forEach(cell => row.appendChild(cell));
                 tbody.appendChild(row);
-            });
-            
-            // Add event listeners to delete buttons
-            document.querySelectorAll('.delete-redeem').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const redeemId = this.getAttribute('data-id');
-                    showConfirmation(
-                        'Delete Redeem Code',
-                        'Are you sure you want to delete this redeem code? This action cannot be undone.',
-                        'warning',
-                        () => deleteRedeemCode(redeemId)
-                    );
-                });
             });
         }
 
-        // Function to show application details in modal
+        // Helper function to create table cell safely
+        function createTableCell(content) {
+            const td = document.createElement('td');
+            td.textContent = content || '-';
+            return td;
+        }
+
+        // Helper function to create status cell
+        function createStatusCell(status) {
+            const td = document.createElement('td');
+            const span = document.createElement('span');
+            span.className = `status status-${status}`;
+            span.textContent = status ? status.charAt(0).toUpperCase() + status.slice(1) : 'Unknown';
+            td.appendChild(span);
+            return td;
+        }
+
+        // Helper function to create action cell for applications/community
+        function createActionCell(type, id) {
+            const td = document.createElement('td');
+            td.className = 'action-buttons';
+
+            const viewBtn = document.createElement('button');
+            viewBtn.className = 'action-btn btn-info view-' + type;
+            viewBtn.textContent = 'View';
+            viewBtn.setAttribute('data-id', id);
+            viewBtn.setAttribute('aria-label', `View ${type} details`);
+
+            const editBtn = document.createElement('button');
+            editBtn.className = 'action-btn btn-warning edit-' + type;
+            editBtn.textContent = 'Edit';
+            editBtn.setAttribute('data-id', id);
+            editBtn.setAttribute('aria-label', `Edit ${type} status`);
+
+            td.appendChild(viewBtn);
+            td.appendChild(editBtn);
+
+            return td;
+        }
+
+        // Helper function to create action cell for redeem codes
+        function createRedeemActionCell(id) {
+            const td = document.createElement('td');
+            td.className = 'action-buttons';
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'action-btn btn-danger delete-redeem';
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.setAttribute('data-id', id);
+            deleteBtn.setAttribute('aria-label', 'Delete redeem code');
+
+            td.appendChild(deleteBtn);
+
+            return td;
+        }
+
+        // Function to show application details in modal safely
         async function showApplicationDetails(appId) {
             try {
-                const response = await apiRequest(`/api/lobby/applications/${appId}`);
-                if (!response) return;
-                
-                const application = response.data.application;
+                const result = await apiRequest(`/api/applications/${appId}`);
+                if (!result.success) return;
+
+                const application = result.data.application;
                 currentApplicationData = application;
-                
+
                 const detailsContainer = document.getElementById('application-details');
-                const date = new Date(application.createdAt).toLocaleDateString();
-                
-                detailsContainer.innerHTML = `
-                    <div class="info-item">
-                        <div class="info-label">Application ID</div>
-                        <div class="info-value">${application.applicationId || application._id}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Full Name</div>
-                        <div class="info-value">${application.name}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Email Address</div>
-                        <div class="info-value">${application.email}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Phone Number</div>
-                        <div class="info-value">${application.phone}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Course</div>
-                        <div class="info-value">${application.course}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Study Mode</div>
-                        <div class="info-value">${application.studyMode}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Application Date</div>
-                        <div class="info-value">${date}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Current Status</div>
-                        <div class="info-value"><span class="status status-${application.status}">${application.status.charAt(0).toUpperCase() + application.status.slice(1)}</span></div>
-                    </div>
-                    ${application.message ? `
-                    <div class="info-item" style="grid-column: 1 / -1;">
-                        <div class="info-label">Message</div>
-                        <div class="info-value">${application.message}</div>
-                    </div>
-                    ` : ''}
-                    ${application.adminNotes ? `
-                    <div class="info-item" style="grid-column: 1 / -1;">
-                        <div class="info-label">Admin Notes</div>
-                        <div class="info-value">${application.adminNotes}</div>
-                    </div>
-                    ` : ''}
+                const date = formatDate(application.createdAt);
+
+                // Clear existing content safely
+                while (detailsContainer.firstChild) {
+                    detailsContainer.removeChild(detailsContainer.firstChild);
+                }
+
+                // Create info items safely
+                const infoItems = [
+                    createInfoItem('Application ID', application.applicationId || application._id),
+                    createInfoItem('Full Name', application.name),
+                    createInfoItem('Email Address', application.email),
+                    createInfoItem('Phone Number', application.phone),
+                    createInfoItem('Course', application.course),
+                    createInfoItem('Study Mode', application.studyMode),
+                    createInfoItem('Application Date', date),
+                    createInfoItem('Current Status', application.status, true)
+                ];
+
+                if (application.message) {
+                    const messageItem = document.createElement('div');
+                    messageItem.className = 'info-item';
+                    messageItem.style.gridColumn = '1 / -1';
+                    messageItem.innerHTML = `
+                    <div class="info-label">Message</div>
+                    <div class="info-value">${sanitizeHTML(application.message)}</div>
                 `;
-                
-                document.getElementById('application-modal').classList.add('active');
+                    infoItems.push(messageItem);
+                }
+
+                if (application.adminNotes) {
+                    const notesItem = document.createElement('div');
+                    notesItem.className = 'info-item';
+                    notesItem.style.gridColumn = '1 / -1';
+                    notesItem.innerHTML = `
+                    <div class="info-label">Admin Notes</div>
+                    <div class="info-value">${sanitizeHTML(application.adminNotes)}</div>
+                `;
+                    infoItems.push(notesItem);
+                }
+
+                infoItems.forEach(item => detailsContainer.appendChild(item));
+
+                showModal('application-modal');
             } catch (error) {
                 console.error('Error loading application details:', error);
                 showToast('Failed to load application details', 'error');
             }
         }
 
-        // Function to show community details in modal
+        // Helper function to create info item
+        function createInfoItem(label, value, isStatus = false) {
+            const item = document.createElement('div');
+            item.className = 'info-item';
+
+            const labelEl = document.createElement('div');
+            labelEl.className = 'info-label';
+            labelEl.textContent = label;
+
+            const valueEl = document.createElement('div');
+            valueEl.className = 'info-value';
+
+            if (isStatus) {
+                const statusSpan = document.createElement('span');
+                statusSpan.className = `status status-${value}`;
+                statusSpan.textContent = value ? value.charAt(0).toUpperCase() + value.slice(1) : 'Unknown';
+                valueEl.appendChild(statusSpan);
+            } else {
+                valueEl.textContent = value || '-';
+            }
+
+            item.appendChild(labelEl);
+            item.appendChild(valueEl);
+
+            return item;
+        }
+
+        // Function to show community details in modal safely
         async function showCommunityDetails(memberId) {
             try {
-                const response = await apiRequest(`/api/lobby/community/${memberId}`);
-                if (!response) return;
-                
-                const member = response.data.submission;
-                const date = new Date(member.createdAt).toLocaleDateString();
-                const experienceText = member.experienceLevel === 'experienced' 
-                    ? `Experienced (${member.yearsExperience} years)`
+                const result = await apiRequest(`/api/community/submissions/${memberId}`);
+                if (!result.success) return;
+
+                const member = result.data.submission;
+                const date = formatDate(member.createdAt);
+                const experienceText = member.experienceLevel === 'experienced'
+                    ? `Experienced (${member.yearsExperience || 0} years)`
                     : 'Fresher';
-                
-                // Create a simple modal for community member details
-                const modalContent = `
-                    <div class="modal-header">
-                        <h3 class="modal-title">Community Member Details</h3>
-                        <button class="modal-close" onclick="document.getElementById('application-modal').classList.remove('active')">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label">Member ID</div>
-                                <div class="info-value">${member._id}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Full Name</div>
-                                <div class="info-value">${member.name}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Email Address</div>
-                                <div class="info-value">${member.email}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Phone Number</div>
-                                <div class="info-value">${member.phone}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Experience Level</div>
-                                <div class="info-value">${experienceText}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Skills</div>
-                                <div class="info-value">${member.skills.join(', ')}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Join Date</div>
-                                <div class="info-value">${date}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Current Status</div>
-                                <div class="info-value"><span class="status status-${member.status}">${member.status.charAt(0).toUpperCase() + member.status.slice(1)}</span></div>
-                            </div>
-                            ${member.portfolioUrl ? `
-                            <div class="info-item">
-                                <div class="info-label">Portfolio URL</div>
-                                <div class="info-value"><a href="${member.portfolioUrl}" target="_blank">View Portfolio</a></div>
-                            </div>
-                            ` : ''}
-                            ${member.linkedinUrl ? `
-                            <div class="info-item">
-                                <div class="info-label">LinkedIn URL</div>
-                                <div class="info-value"><a href="${member.linkedinUrl}" target="_blank">View LinkedIn</a></div>
-                            </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline" onclick="document.getElementById('application-modal').classList.remove('active')">Close</button>
+
+                const detailsContainer = document.getElementById('application-details');
+
+                // Clear existing content safely
+                while (detailsContainer.firstChild) {
+                    detailsContainer.removeChild(detailsContainer.firstChild);
+                }
+
+                // Create info items safely
+                const infoItems = [
+                    createInfoItem('Member ID', member._id),
+                    createInfoItem('Full Name', member.name),
+                    createInfoItem('Email Address', member.email),
+                    createInfoItem('Phone Number', member.phone),
+                    createInfoItem('Experience Level', experienceText),
+                    createInfoItem('Skills', safeJoin(member.skills)),
+                    createInfoItem('Join Date', date),
+                    createInfoItem('Current Status', member.status, true)
+                ];
+
+                if (member.portfolioUrl) {
+                    const portfolioItem = document.createElement('div');
+                    portfolioItem.className = 'info-item';
+                    portfolioItem.innerHTML = `
+                    <div class="info-label">Portfolio URL</div>
+                    <div class="info-value">
+                        <a href="${sanitizeHTML(member.portfolioUrl)}" target="_blank" rel="noopener noreferrer">View Portfolio</a>
                     </div>
                 `;
-                
-                document.getElementById('application-details').innerHTML = modalContent;
-                document.getElementById('application-modal').classList.add('active');
+                    infoItems.push(portfolioItem);
+                }
+
+                if (member.linkedinUrl) {
+                    const linkedinItem = document.createElement('div');
+                    linkedinItem.className = 'info-item';
+                    linkedinItem.innerHTML = `
+                    <div class="info-label">LinkedIn URL</div>
+                    <div class="info-value">
+                        <a href="${sanitizeHTML(member.linkedinUrl)}" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+                    </div>
+                `;
+                    infoItems.push(linkedinItem);
+                }
+
+                infoItems.forEach(item => detailsContainer.appendChild(item));
+
+                // Update modal title
+                document.getElementById('application-modal-title').textContent = 'Community Member Details';
+
+                showModal('application-modal');
             } catch (error) {
                 console.error('Error loading community member details:', error);
                 showToast('Failed to load community member details', 'error');
@@ -1873,51 +2199,61 @@
 
         // Function to show edit status modal
         function showEditStatusModal(appId) {
-            const application = applicationsData.find(app => 
+            const application = applicationsData.find(app =>
                 (app._id === appId) || (app.applicationId === appId)
             );
-            
+
             if (!application) {
                 showToast('Application not found', 'error');
                 return;
             }
-            
+
             currentApplicationId = appId;
-            
+
             document.getElementById('status-application-id').textContent = application.applicationId || application._id;
             document.getElementById('status-applicant-name').textContent = application.name;
             document.getElementById('status-select').value = application.status;
             document.getElementById('status-notes').value = application.adminNotes || '';
-            
-            document.getElementById('status-modal').classList.add('active');
+
+            showModal('status-modal');
         }
 
         // Function to update application status
         async function updateApplicationStatus() {
             const newStatus = document.getElementById('status-select').value;
             const notes = document.getElementById('status-notes').value;
-            
+            const saveBtn = document.getElementById('save-status-btn');
+
             try {
-                const response = await apiRequest(`/api/lobby/applications/${currentApplicationId}/status`, {
+                saveBtn.disabled = true;
+                saveBtn.innerHTML = '<div class="loading white"></div> Saving...';
+
+                const result = await apiRequest(`/api/applications/${currentApplicationId}/status`, {
                     method: 'PUT',
-                    body: JSON.stringify({
+                    body: {
                         status: newStatus,
                         adminNotes: notes
-                    })
+                    }
                 });
-                
-                if (!response) return;
-                
+
+                if (!result.success) {
+                    showToast(result.error || 'Failed to update application status', 'error');
+                    return;
+                }
+
                 // Refresh the tables
                 await refreshApplications();
-                
+
                 // Close the modal
-                document.getElementById('status-modal').classList.remove('active');
-                
+                hideModal('status-modal');
+
                 showToast(`Application status updated to ${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)}`, 'success');
             } catch (error) {
                 console.error('Error updating application status:', error);
                 showToast('Failed to update application status', 'error');
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.textContent = 'Save Changes';
             }
         }
 
@@ -1926,49 +2262,76 @@
             const userName = document.getElementById('user-name-input').value.trim();
             const userEmail = document.getElementById('user-email-input').value.trim();
             const quizType = document.getElementById('quiz-type-select').value;
-            
+            const createBtn = document.getElementById('create-redeem-btn');
+
             if (!userName || !userEmail) {
                 showToast('Please enter both user name and email', 'warning');
                 return;
             }
-            
+
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(userEmail)) {
+                showToast('Please enter a valid email address', 'warning');
+                return;
+            }
+
             try {
-                const response = await apiRequest('/api/lobby/redeem', {
+                createBtn.disabled = true;
+                createBtn.innerHTML = '<div class="loading white"></div> Creating...';
+
+                // Generate a random redeem code
+                const redeemCode = 'U1T-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+
+                const result = await apiRequest('/api/quiz/redeem', {
                     method: 'POST',
-                    body: JSON.stringify({
+                    body: {
+                        userId: 'lobby-generated-' + Date.now(),
                         userName: userName,
                         userEmail: userEmail,
-                        quizType: quizType
-                    })
+                        quizType: quizType,
+                        score: 0,
+                        totalQuestions: 0,
+                        redeemCode: redeemCode
+                    }
                 });
-                
-                if (!response) return;
-                
-                showToast(`Redeem code ${response.data.redeemCode} created successfully!`, 'success');
-                
+
+                if (!result.success) {
+                    showToast(result.error || 'Failed to create redeem code', 'error');
+                    return;
+                }
+
+                showToast(`Redeem code ${redeemCode} created successfully!`, 'success');
+
                 // Clear form
                 document.getElementById('user-name-input').value = '';
                 document.getElementById('user-email-input').value = '';
-                
+
                 // Refresh redeem codes
                 await refreshRedeemCodes();
             } catch (error) {
                 console.error('Error creating redeem code:', error);
                 showToast('Failed to create redeem code', 'error');
+            } finally {
+                createBtn.disabled = false;
+                createBtn.textContent = 'Create Redeem Code';
             }
         }
 
         // Function to delete a redeem code
         async function deleteRedeemCode(redeemId) {
             try {
-                const response = await apiRequest(`/api/quiz/redeem/${redeemId}`, {
+                const result = await apiRequest(`/api/quiz/redeem/${redeemId}`, {
                     method: 'DELETE'
                 });
-                
-                if (!response) return;
-                
+
+                if (!result.success) {
+                    showToast(result.error || 'Failed to delete redeem code', 'error');
+                    return;
+                }
+
                 showToast('Redeem code deleted successfully', 'success');
-                
+
                 // Refresh redeem codes
                 await refreshRedeemCodes();
             } catch (error) {
@@ -1979,19 +2342,41 @@
 
         // Function to refresh applications
         async function refreshApplications() {
-            await loadApplications();
-            renderApplicationsTable('applications-body', applicationsData.slice(0, 5));
-            renderApplicationsTable('applications-full-body', applicationsData);
-            await loadDashboardStats();
-            showToast('Applications refreshed successfully', 'success');
+            const refreshBtn = document.getElementById('refresh-applications');
+            const originalText = refreshBtn.textContent;
+
+            try {
+                refreshBtn.disabled = true;
+                refreshBtn.innerHTML = '<div class="loading white"></div> Refreshing...';
+
+                await loadApplications();
+                renderApplicationsTable('applications-body', applicationsData.slice(0, 5));
+                renderApplicationsTable('applications-full-body', applicationsData);
+                await loadDashboardStats();
+                showToast('Applications refreshed successfully', 'success');
+            } finally {
+                refreshBtn.disabled = false;
+                refreshBtn.textContent = originalText;
+            }
         }
 
         // Function to refresh community
         async function refreshCommunity() {
-            await loadCommunity();
-            renderCommunityTable('community-body', communityData);
-            await loadDashboardStats();
-            showToast('Community members refreshed successfully', 'success');
+            const refreshBtn = document.getElementById('refresh-community');
+            const originalText = refreshBtn.textContent;
+
+            try {
+                refreshBtn.disabled = true;
+                refreshBtn.innerHTML = '<div class="loading white"></div> Refreshing...';
+
+                await loadCommunity();
+                renderCommunityTable('community-body', communityData);
+                await loadDashboardStats();
+                showToast('Community members refreshed successfully', 'success');
+            } finally {
+                refreshBtn.disabled = false;
+                refreshBtn.textContent = originalText;
+            }
         }
 
         // Function to refresh redeem codes
@@ -2008,10 +2393,10 @@
             document.querySelectorAll('.section-content').forEach(section => {
                 section.style.display = 'none';
             });
-            
+
             // Show the selected section
             document.getElementById(sectionId).style.display = 'block';
-            
+
             // Update page title
             const titles = {
                 'dashboard-section': 'Lobby Dashboard',
@@ -2019,7 +2404,7 @@
                 'community-section': 'Community Members',
                 'redeem-section': 'Redeem Codes'
             };
-            
+
             document.getElementById('page-title').textContent = titles[sectionId] || 'Lobby Dashboard';
         }
 
@@ -2029,7 +2414,7 @@
             const icon = document.getElementById('confirmation-icon');
             const titleEl = document.getElementById('confirmation-title');
             const messageEl = document.getElementById('confirmation-message');
-            
+
             // Set content based on type
             if (type === 'danger') {
                 icon.textContent = '🗑️';
@@ -2038,28 +2423,39 @@
                 icon.textContent = '⚠️';
                 icon.className = 'confirmation-icon warning';
             }
-            
+
             titleEl.textContent = title;
             messageEl.textContent = message;
-            
+
             // Store the callback
             confirmationCallback = confirmCallback;
-            
+
             // Show the modal
-            modal.classList.add('active');
+            showModal('confirmation-modal');
         }
 
-        // Function to load all dashboard data
+        // Function to load all dashboard data efficiently
         async function loadDashboardData() {
             try {
-                await Promise.all([
-                    loadDashboardStats(),
-                    loadApplications(5).then(data => renderApplicationsTable('applications-body', data.slice(0, 5))),
-                    loadApplications().then(data => renderApplicationsTable('applications-full-body', data)),
-                    loadCommunity().then(data => renderCommunityTable('community-body', data)),
-                    loadRedeemCodes().then(data => renderRedeemTable('redeem-body', data))
+                // Load all data in parallel
+                const [applications, community, redeem] = await Promise.all([
+                    loadApplications(100),
+                    loadCommunity(100),
+                    loadRedeemCodes(100)
                 ]);
-                
+
+                // Update dashboard stats
+                dashboardStats.applications.total = applications.length;
+                dashboardStats.community.total = community.length;
+                dashboardStats.redeem.total = redeem.length;
+                updateDashboardCards();
+
+                // Render tables
+                renderApplicationsTable('applications-body', applications.slice(0, 5));
+                renderApplicationsTable('applications-full-body', applications);
+                renderCommunityTable('community-body', community);
+                renderRedeemTable('redeem-body', redeem);
+
                 showToast('Dashboard loaded successfully!', 'success');
             } catch (error) {
                 console.error('Error loading dashboard data:', error);
@@ -2073,47 +2469,96 @@
                 'Logout',
                 'Are you sure you want to logout?',
                 'warning',
-                function() {
+                function () {
                     localStorage.removeItem('lobbyToken');
+                    localStorage.removeItem('lobbyUser');
                     showLoginModal();
                     showToast('You have been logged out.', 'info');
                 }
             );
         }
 
+        // Event delegation for dynamic elements
+        function setupEventDelegation() {
+            // Applications table events
+            document.addEventListener('click', function (e) {
+                // View application buttons
+                if (e.target.classList.contains('view-application')) {
+                    const appId = e.target.getAttribute('data-id');
+                    showApplicationDetails(appId);
+                }
+
+                // Edit application buttons
+                if (e.target.classList.contains('edit-application')) {
+                    const appId = e.target.getAttribute('data-id');
+                    showEditStatusModal(appId);
+                }
+
+                // View community buttons
+                if (e.target.classList.contains('view-community')) {
+                    const memberId = e.target.getAttribute('data-id');
+                    showCommunityDetails(memberId);
+                }
+
+                // Edit community buttons
+                if (e.target.classList.contains('edit-community')) {
+                    const memberId = e.target.getAttribute('data-id');
+                    showToast('Edit community member functionality would be implemented here', 'info');
+                }
+
+                // Delete redeem buttons
+                if (e.target.classList.contains('delete-redeem')) {
+                    const redeemId = e.target.getAttribute('data-id');
+                    showConfirmation(
+                        'Delete Redeem Code',
+                        'Are you sure you want to delete this redeem code? This action cannot be undone.',
+                        'danger',
+                        () => deleteRedeemCode(redeemId)
+                    );
+                }
+            });
+        }
+
         // Initialize the dashboard
-        document.addEventListener('DOMContentLoaded', function() {
+        async function initializeDashboard() {
             // Check for existing token
             const token = localStorage.getItem('lobbyToken');
             if (token) {
-                verifyToken(token);
+                const isValid = await verifyToken(token);
+                if (!isValid) {
+                    showLoginModal();
+                }
             } else {
                 showLoginModal();
             }
 
             // Event listeners for login
             loginBtn.addEventListener('click', handleLogin);
-            adminEmailInput.addEventListener('keypress', (e) => {
+            adminEmailInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') handleLogin();
             });
-            adminPasswordInput.addEventListener('keypress', (e) => {
+            adminPasswordInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') handleLogin();
             });
 
+            // Clear error on input
+            adminEmailInput.addEventListener('input', clearError);
+            adminPasswordInput.addEventListener('input', clearError);
+
             // Navigation event listeners
             document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     // Skip logout button
                     if (this.id === 'logout-btn') return;
-                    
+
                     // Update active link
                     document.querySelectorAll('.nav-links a').forEach(a => {
                         a.classList.remove('active');
                     });
                     this.classList.add('active');
-                    
+
                     // Show the corresponding section
                     const section = this.getAttribute('data-section');
                     if (section) {
@@ -2121,88 +2566,100 @@
                     }
                 });
             });
-            
+
             // Event listeners for modals
-            document.getElementById('close-application-modal').addEventListener('click', function() {
-                document.getElementById('application-modal').classList.remove('active');
+            document.getElementById('close-application-modal').addEventListener('click', function () {
+                hideModal('application-modal');
             });
-            
-            document.getElementById('close-modal-btn').addEventListener('click', function() {
-                document.getElementById('application-modal').classList.remove('active');
+
+            document.getElementById('close-modal-btn').addEventListener('click', function () {
+                hideModal('application-modal');
             });
-            
-            document.getElementById('edit-application-btn').addEventListener('click', function() {
-                document.getElementById('application-modal').classList.remove('active');
+
+            document.getElementById('edit-application-btn').addEventListener('click', function () {
+                hideModal('application-modal');
                 if (currentApplicationData) {
                     showEditStatusModal(currentApplicationData._id || currentApplicationData.applicationId);
                 }
             });
-            
-            document.getElementById('close-status-modal').addEventListener('click', function() {
-                document.getElementById('status-modal').classList.remove('active');
+
+            document.getElementById('close-status-modal').addEventListener('click', function () {
+                hideModal('status-modal');
             });
-            
-            document.getElementById('cancel-status-btn').addEventListener('click', function() {
-                document.getElementById('status-modal').classList.remove('active');
+
+            document.getElementById('cancel-status-btn').addEventListener('click', function () {
+                hideModal('status-modal');
             });
-            
+
             document.getElementById('save-status-btn').addEventListener('click', updateApplicationStatus);
-            
+
             // Confirmation modal event listeners
-            document.getElementById('confirmation-cancel').addEventListener('click', function() {
-                document.getElementById('confirmation-modal').classList.remove('active');
+            document.getElementById('confirmation-cancel').addEventListener('click', function () {
+                hideModal('confirmation-modal');
                 confirmationCallback = null;
             });
-            
-            document.getElementById('confirmation-confirm').addEventListener('click', function() {
-                document.getElementById('confirmation-modal').classList.remove('active');
+
+            document.getElementById('confirmation-confirm').addEventListener('click', function () {
+                hideModal('confirmation-modal');
                 if (confirmationCallback) {
                     confirmationCallback();
                 }
                 confirmationCallback = null;
             });
-            
+
             // Close modals when clicking outside
             document.querySelectorAll('.modal-overlay').forEach(overlay => {
-                overlay.addEventListener('click', function(e) {
+                overlay.addEventListener('click', function (e) {
                     if (e.target === this) {
-                        this.classList.remove('active');
+                        hideModal(this.id);
                         if (this.id === 'confirmation-modal') {
                             confirmationCallback = null;
                         }
                     }
                 });
             });
-            
+
             // View all applications button
-            document.getElementById('view-all-applications').addEventListener('click', function() {
+            document.getElementById('view-all-applications').addEventListener('click', function () {
                 showSection('applications-section');
                 document.querySelectorAll('.nav-links a').forEach(a => {
                     a.classList.remove('active');
                 });
                 document.querySelector('[data-section="applications"]').classList.add('active');
             });
-            
+
             // Refresh buttons
             document.getElementById('refresh-applications').addEventListener('click', refreshApplications);
             document.getElementById('refresh-community').addEventListener('click', refreshCommunity);
-            
+
             // Event listeners for redeem codes
             document.getElementById('create-redeem-btn').addEventListener('click', createRedeemCode);
-            document.getElementById('generate-code-btn').addEventListener('click', function() {
+            document.getElementById('generate-code-btn').addEventListener('click', function () {
                 document.getElementById('user-name-input').focus();
             });
-            
+
             // Logout button
             document.getElementById('logout-btn').addEventListener('click', handleLogout);
-            
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                localStorage.removeItem('lobbyToken');
+                localStorage.removeItem('lobbyUser');
+                location.reload(); // reload page → shows login section
+            });
+
             // Export buttons (placeholder functionality)
             document.querySelectorAll('[id^="export-"]').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     showToast('Export functionality would be implemented here', 'info');
                 });
             });
-        });
+
+            // Setup event delegation for dynamic content
+            setupEventDelegation();
+        }
+
+        // Start the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
     </script>
 </body>
+
 </html>

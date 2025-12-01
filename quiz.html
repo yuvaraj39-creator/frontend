@@ -64,11 +64,12 @@
 
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background-color: #f00;
             opacity: 0;
             z-index: 1000;
+            pointer-events: none;
         }
 
         .redeem-popup {
@@ -195,6 +196,44 @@
             background: #fffbeb;
             color: #92400e;
         }
+
+        /* Fix for option text visibility */
+        .option-text {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .question-text {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            line-height: 1.6;
+        }
+
+        .option-radio {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .option-radio.selected {
+            background-color: #800020;
+            border-color: #800020;
+        }
+
+        .option-radio.selected i {
+            display: block;
+        }
     </style>
 </head>
 
@@ -240,15 +279,14 @@
             <div id="quiz-content-wrapper">
                 <div class="text-center mb-12">
                     <h1 class="text-4xl font-bold text-primary mb-4">Think >> Solve >> Succeed</h1>
-                    <p class="text-xl text-gray-600">Put your mind to the test — conquer all 10 questions and claim your
-                        reward!</p>
+                    <p id="quiz-description" class="text-xl text-gray-600">Put your mind to the test — conquer all questions and claim your reward!</p>
                 </div>
 
                 <!-- Quiz Progress -->
                 <div class="mb-8">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-sm font-medium text-gray-700">Progress</span>
-                        <span class="text-sm font-medium text-primary" id="progress-text">0/10</span>
+                        <span class="text-sm font-medium text-primary" id="progress-text">0/0</span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-3">
                         <div id="progress-bar" class="progress-bar h-3 rounded-full bg-primary" style="width: 0%"></div>
@@ -267,7 +305,7 @@
                     <div id="quiz-content" class="hidden">
                         <div class="mb-8">
                             <div class="flex justify-between items-center mb-4">
-                                <h2 id="question-text" class="text-2xl font-bold text-gray-800"></h2>
+                                <h2 id="question-text" class="text-2xl font-bold text-gray-800 question-text"></h2>
                                 <div id="timer-container" class="flex items-center">
                                     <span id="timer-text" class="text-sm font-medium text-primary mr-2">30s</span>
                                     <div class="w-24 bg-gray-200 rounded-full h-2">
@@ -339,7 +377,7 @@
                 <div class="bg-gradient-to-r from-primary to-primaryDark p-1 rounded-lg mb-6">
                     <div class="bg-white p-4 rounded">
                         <p class="text-sm text-gray-500 mb-1">Your discount code:</p>
-                        <p id="redeem-code" class="text-2xl font-bold text-primary">U1TECH20</p>
+                        <p id="redeem-code" class="text-2xl font-bold text-primary">LOADING...</p>
                     </div>
                 </div>
 
@@ -442,6 +480,10 @@
         let timerInterval;
         let timeLeft = 30;
         let currentUser = null;
+        let totalQuestions = 10;
+        let questionsCache = null;
+        let cacheTimestamp = null;
+        const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
         // DOM elements
         const authCheck = document.getElementById('auth-check');
@@ -470,6 +512,7 @@
         const timerBar = document.getElementById('timer-bar');
         const storageWarning = document.getElementById('storage-warning');
         const warningText = document.getElementById('warning-text');
+        const quizDescription = document.getElementById('quiz-description');
 
         // Toast Notification System
         const toastUtils = {
@@ -545,12 +588,14 @@
                 currentUser = JSON.parse(userData);
                 console.log("User authenticated:", currentUser);
                 
-                // Ensure currentUser has the expected structure
                 if (!currentUser.userId && currentUser._id) {
                     currentUser.userId = currentUser._id;
                 }
                 if (!currentUser.name && currentUser.userName) {
                     currentUser.name = currentUser.userName;
+                }
+                if (!currentUser.email && currentUser.userEmail) {
+                    currentUser.email = currentUser.userEmail;
                 }
                 
                 authCheck.classList.add('hidden');
@@ -568,7 +613,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             console.log("Quiz initialization started...");
 
-            // Check authentication first
             if (!checkUserAuthentication()) {
                 return;
             }
@@ -586,7 +630,22 @@
         async function loadQuizData() {
             try {
                 console.log("Loading quiz data...");
-                quizData = await fetchQuizData();
+                
+                // Check cache first
+                if (questionsCache && cacheTimestamp && (Date.now() - cacheTimestamp) < CACHE_DURATION) {
+                    console.log("Using cached questions");
+                    quizData = [...questionsCache];
+                } else {
+                    quizData = await fetchQuizData();
+                    // Cache the questions
+                    questionsCache = [...quizData];
+                    cacheTimestamp = Date.now();
+                }
+                
+                totalQuestions = quizData.length;
+
+                // Update quiz description with dynamic question count
+                quizDescription.textContent = `Put your mind to the test — conquer all ${totalQuestions} questions and claim your reward!`;
 
                 // Log all questions and answers for testing
                 console.log("All Questions Loaded:");
@@ -598,7 +657,7 @@
                 });
 
                 // Initialize user answers array
-                userAnswers = new Array(quizData.length).fill(null);
+                userAnswers = new Array(totalQuestions).fill(null);
 
                 // Hide loading state and show quiz content
                 loadingState.classList.add('hidden');
@@ -622,34 +681,50 @@
             }
         }
 
-        // Fetch quiz questions from API with better error handling
+        // Fetch quiz questions from API with better error handling and caching
         async function fetchQuizData() {
             try {
                 console.log('Fetching questions from API...');
 
-                // Use a single API call with mixed categories to avoid rate limiting
-                const response = await fetch('https://opentdb.com/api.php?amount=10&category=18&type=multiple');
+                // Use mixed categories in single call
+                const response = await fetch('https://opentdb.com/api.php?amount=1&type=multiple');
 
                 if (!response.ok) {
-                    throw new Error(`API responded with status: ${response.status}`);
+                    if (response.status === 429) {
+                        console.warn('API rate limit reached, using fallback questions');
+                        throw new Error('Rate limit exceeded');
+                    }
+                    throw new Error(`API responded with error status: ${response.status}`);
                 }
 
                 const data = await response.json();
 
-                // Check if we got valid data
                 if (data.response_code !== 0 || !data.results || data.results.length === 0) {
                     throw new Error('No questions received from API');
                 }
 
                 console.log('Successfully fetched questions:', data.results.length);
 
-                // Format questions
+                // Format questions with proper category mapping
                 const formattedQuestions = data.results.map((q, index) => {
-                    // Determine category based on question content
-                    let category = "Programming";
-                    if (q.category.includes("Math") || q.category.includes("Mathematics")) {
+                    let category = "General Knowledge";
+                    
+                    // Proper category mapping
+                    if (q.category.includes("Science: Mathematics") || q.category.includes("Math")) {
                         category = "Mathematics";
+                    } else if (q.category.includes("Science: Computers") || q.category.includes("Programming") || 
+                               q.category.includes("Computer")) {
+                        category = "Programming";
+                    } else if (q.category.includes("Science")) {
+                        category = "Science";
+                    } else if (q.category.includes("Entertainment")) {
+                        category = "Entertainment";
+                    } else if (q.category.includes("History")) {
+                        category = "History";
                     }
+                    
+                    // Clean up category name
+                    category = category.replace(/^[^:]+:\s*/, '');
 
                     return {
                         id: index + 1,
@@ -668,14 +743,13 @@
             } catch (error) {
                 console.error('Error fetching from API:', error);
                 console.log('Using fallback questions...');
-                // Fallback to mock data if API fails
                 return getFallbackQuestions();
             }
         }
 
         // Fallback questions if API fails
         function getFallbackQuestions() {
-            return [
+            return shuffleArray([
                 {
                     id: 1,
                     question: "What does HTML stand for?",
@@ -796,7 +870,7 @@
                     correctAnswer: "12",
                     category: "Mathematics"
                 }
-            ];
+            ]);
         }
 
         // Display a question
@@ -808,27 +882,29 @@
 
             // Update question text and number
             questionText.textContent = question.question;
-            questionNumber.textContent = `Question ${index + 1} of ${quizData.length}`;
+            questionNumber.textContent = `Question ${index + 1} of ${totalQuestions}`;
             questionCategory.textContent = question.category;
 
-            // Reset timer
+            // Reset timer completely
             timerText.textContent = `${timeLeft}s`;
             timerBar.style.width = '100%';
+            timerBar.style.backgroundColor = ''; // Reset color
             timerBar.classList.remove('timer-warning');
 
             // Clear options container
             optionsContainer.innerHTML = '';
 
-            // Create option elements
+            // Create option elements with robust structure
             question.options.forEach((option, optionIndex) => {
                 const optionElement = document.createElement('div');
                 optionElement.className = `quiz-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer transition-all ${userAnswers[index] === optionIndex ? 'selected' : ''}`;
+                optionElement.dataset.optionIndex = optionIndex;
                 optionElement.innerHTML = `
-                    <div class="flex items-center">
-                        <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3 ${userAnswers[index] === optionIndex ? 'bg-primary border-primary' : ''}">
-                            ${userAnswers[index] === optionIndex ? '<i class="fas fa-check text-white text-xs"></i>' : ''}
+                    <div class="flex items-start">
+                        <div class="option-radio ${userAnswers[index] === optionIndex ? 'selected' : ''}">
+                            <i class="fas fa-check text-white text-xs" style="display: ${userAnswers[index] === optionIndex ? 'block' : 'none'}"></i>
                         </div>
-                        <span>${option}</span>
+                        <span class="option-text">${option}</span>
                     </div>
                 `;
 
@@ -836,16 +912,22 @@
                 optionsContainer.appendChild(optionElement);
             });
 
-            // Update navigation buttons
-            nextBtn.classList.toggle('hidden', index === quizData.length - 1);
-            submitBtn.classList.toggle('hidden', index !== quizData.length - 1);
+            // Update navigation buttons with validation
+            const hasAnswer = userAnswers[index] !== null;
+            nextBtn.classList.toggle('hidden', index === totalQuestions - 1);
+            submitBtn.classList.toggle('hidden', index !== totalQuestions - 1);
+            
+            // Disable submit if no answer selected
+            if (index === totalQuestions - 1) {
+                submitBtn.disabled = !hasAnswer;
+                submitBtn.classList.toggle('opacity-50', !hasAnswer);
+                submitBtn.classList.toggle('cursor-not-allowed', !hasAnswer);
+            }
 
             // Start timer
             startTimer();
 
-            // Log current question for testing
             console.log(`Displaying Question ${index + 1}: ${question.question}`);
-            console.log(`User answer for this question: ${userAnswers[index] !== null ? question.options[userAnswers[index]] : 'Not answered'}`);
         }
 
         // Start timer for current question
@@ -867,37 +949,68 @@
                     clearInterval(timerInterval);
                     console.log(`Time's up for question ${currentQuestionIndex + 1}`);
 
-                    // Auto-move to next question when time is up
-                    if (currentQuestionIndex < quizData.length - 1) {
+                    // Auto-move to next question when time is up, but don't submit if no answer
+                    if (currentQuestionIndex < totalQuestions - 1) {
+                        toastUtils.showInfo("Time's up! Moving to next question.");
                         currentQuestionIndex++;
                         showQuestion(currentQuestionIndex);
                     } else {
-                        // If it's the last question, submit the quiz
-                        console.log("Last question time's up, submitting quiz...");
-                        submitQuiz();
+                        // If it's the last question and time's up, only submit if answered
+                        if (userAnswers[currentQuestionIndex] !== null) {
+                            console.log("Last question time's up, submitting quiz...");
+                            submitQuiz();
+                        } else {
+                            toastUtils.showWarning("Time's up! Please select an answer to submit.");
+                            // Keep them on the last question to force an answer
+                        }
                     }
                 }
             }, 1000);
         }
 
-        // Select an option
+        // Select an option with robust selection
         function selectOption(optionIndex) {
             console.log(`Question ${currentQuestionIndex + 1}: Selected option ${optionIndex}`);
+            
+            // Store previous answer to update progress correctly
+            const previousAnswer = userAnswers[currentQuestionIndex];
             userAnswers[currentQuestionIndex] = optionIndex;
+            
+            // Update UI with robust selection
+            const options = optionsContainer.querySelectorAll('.quiz-option');
+            options.forEach((option, index) => {
+                const radio = option.querySelector('.option-radio');
+                const icon = radio.querySelector('i');
+                
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                    radio.classList.add('selected');
+                    icon.style.display = 'block';
+                } else {
+                    option.classList.remove('selected');
+                    radio.classList.remove('selected');
+                    icon.style.display = 'none';
+                }
+            });
+            
+            // Enable/disable submit button on last question
+            if (currentQuestionIndex === totalQuestions - 1) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+            
             updateProgress();
-            showQuestion(currentQuestionIndex);
         }
 
         // Show next question
         function showNextQuestion() {
-            // Check if user has selected an answer for the current question
             if (userAnswers[currentQuestionIndex] === null) {
                 toastUtils.showWarning("Please select an answer before proceeding to the next question");
                 return;
             }
 
             console.log(`Moving from question ${currentQuestionIndex + 1} to ${currentQuestionIndex + 2}`);
-            if (currentQuestionIndex < quizData.length - 1) {
+            if (currentQuestionIndex < totalQuestions - 1) {
                 currentQuestionIndex++;
                 showQuestion(currentQuestionIndex);
             }
@@ -906,27 +1019,38 @@
         // Update progress bar
         function updateProgress() {
             const answeredCount = userAnswers.filter(answer => answer !== null).length;
-            const progress = (answeredCount / quizData.length) * 100;
+            const progress = (answeredCount / totalQuestions) * 100;
 
             progressBar.style.width = `${progress}%`;
-            progressText.textContent = `${answeredCount}/${quizData.length}`;
+            progressText.textContent = `${answeredCount}/${totalQuestions}`;
 
-            console.log(`Progress updated: ${answeredCount}/${quizData.length} (${progress}%)`);
+            console.log(`Progress updated: ${answeredCount}/${totalQuestions} (${progress}%)`);
         }
 
         // Submit the quiz
         function submitQuiz() {
+            // Final validation
+            if (userAnswers[currentQuestionIndex] === null) {
+                toastUtils.showWarning("Please select an answer for the current question before submitting");
+                return;
+            }
+
             clearInterval(timerInterval);
 
             console.log("Submitting quiz...");
             console.log("User answers:", userAnswers);
 
-            // Calculate score
+            // Calculate score with text normalization
             score = 0;
             quizData.forEach((question, index) => {
                 const userAnswerIndex = userAnswers[index];
-                const userAnswer = userAnswerIndex !== null ? question.options[userAnswerIndex] : "Not answered";
-                const isCorrect = userAnswer === question.correctAnswer;
+                if (userAnswerIndex === null) {
+                    console.log(`Q${index + 1}: Not answered`);
+                    return;
+                }
+
+                const userAnswer = question.options[userAnswerIndex];
+                const isCorrect = normalizeText(userAnswer) === normalizeText(question.correctAnswer);
 
                 if (isCorrect) {
                     score++;
@@ -935,21 +1059,23 @@
                 console.log(`Q${index + 1}: User: "${userAnswer}" | Correct: "${question.correctAnswer}" | ${isCorrect ? "CORRECT" : "WRONG"}`);
             });
 
-            console.log(`Final Score: ${score}/${quizData.length}`);
+            console.log(`Final Score: ${score}/${totalQuestions}`);
 
             // Hide quiz content and show results
             quizContent.classList.add('hidden');
             resultsContainer.classList.remove('hidden');
 
             // Show appropriate message
-            if (score === quizData.length) {
+            if (score === totalQuestions) {
                 successMessage.classList.remove('hidden');
+                failureMessage.classList.add('hidden');
                 console.log("Perfect score! Showing success message.");
                 createConfetti();
             } else {
                 failureMessage.classList.remove('hidden');
-                scoreText.textContent = `You scored ${score} out of ${quizData.length}.`;
-                console.log(`Score: ${score}/${quizData.length}. Showing failure message.`);
+                successMessage.classList.add('hidden');
+                scoreText.textContent = `You scored ${score} out of ${totalQuestions}.`;
+                console.log(`Score: ${score}/${totalQuestions}. Showing failure message.`);
             }
         }
 
@@ -959,71 +1085,42 @@
                 const authToken = localStorage.getItem('authToken');
                 
                 if (!authToken) {
-                    console.error('User not authenticated');
                     return { success: false, message: 'Authentication failed. Please log in again.' };
                 }
 
-                // Get user data from localStorage or decode from JWT token
+                // Get user data with proper fallbacks
                 let userData = null;
                 try {
                     const userDataStr = localStorage.getItem('userData');
                     if (userDataStr) {
                         userData = JSON.parse(userDataStr);
-                        console.log('User data from localStorage:', userData);
                     }
                 } catch (e) {
-                    console.error('Error parsing user data from localStorage:', e);
+                    console.error('Error parsing user data:', e);
                 }
 
-                // If no user data in localStorage, try to decode from JWT token
-                if (!userData) {
-                    try {
-                        // Decode JWT token to get user info
-                        const payload = JSON.parse(atob(authToken.split('.')[1]));
-                        userData = {
-                            userId: payload.userId || payload.id || payload._id,
-                            name: payload.name || payload.userName || 'Quiz User',
-                            email: payload.email || payload.userEmail || `user${Date.now()}@example.com`
-                        };
-                        console.log('User data from JWT:', userData);
-                    } catch (e) {
-                        console.error('Error decoding JWT token:', e);
-                    }
+                // Create consistent user data structure
+                const userPayload = {
+                    userId: (userData?.userId || userData?._id || `user_${Date.now()}`).toString(),
+                    userName: userData?.name || userData?.userName || 'Quiz Participant',
+                    userEmail: userData?.email || userData?.userEmail || `user${Date.now()}@example.com`
+                };
+
+                // Validate required fields
+                if (!userPayload.userId || !userPayload.userName || !userPayload.userEmail) {
+                    return { success: false, message: 'Missing user information. Please log in again.' };
                 }
 
-                // If still no user data, create a fallback
-                if (!userData) {
-                    userData = {
-                        userId: 'anonymous_' + Date.now(),
-                        name: 'Quiz User',
-                        email: 'user@example.com'
-                    };
-                    console.log('Using fallback user data:', userData);
-                }
-
-                // Ensure all required fields are present
                 const payload = {
-                    userId: userData.userId || userData._id || `user_${Date.now()}`,
-                    userName: userData.name || userData.userName || 'Quiz Participant',
-                    userEmail: userData.email || userData.userEmail || `user${Date.now()}@example.com`,
+                    ...userPayload,
                     score: score,
                     totalQuestions: totalQuestions,
                     redeemCode: redeemCode,
-                    quizType: 'programming_math'
+                    quizType: 'programming_math',
+                    timestamp: new Date().toISOString()
                 };
 
                 console.log('Storing redeem code with payload:', payload);
-
-                // Validate required fields
-                if (!payload.userId || !payload.userName || !payload.userEmail || !payload.redeemCode) {
-                    console.error('Missing required fields:', {
-                        userId: !!payload.userId,
-                        userName: !!payload.userName,
-                        userEmail: !!payload.userEmail,
-                        redeemCode: !!payload.redeemCode
-                    });
-                    return { success: false, message: 'Missing user information. Please log in again.' };
-                }
 
                 const API_BASE_URL = window.AppConfig.API_BASE_URL;
 
@@ -1062,36 +1159,62 @@
             redeemPopup.classList.remove('hidden');
             storageWarning.classList.add('hidden');
 
-            // Store the redeem code in database
-            const storageResult = await storeRedeemCode(code, score, quizData.length);
+            let storageResult = null;
+            let storageCompleted = false;
 
-            if (storageResult.success) {
-                console.log('Redeem code stored successfully');
-                toastUtils.showSuccess('Redeem code saved successfully!');
-            } else {
-                console.warn("Failed to store redeem code in database:", storageResult.message);
-                
-                // Show warning in popup
-                storageWarning.classList.remove('hidden');
-                warningText.textContent = `Failed to save redeem code: ${storageResult.message}. Please take a screenshot of this code.`;
-                
-                toastUtils.showError('Failed to save redeem code: ' + storageResult.message);
-            }
+            // Store the redeem code in database with timeout protection
+            const storagePromise = storeRedeemCode(code, score, totalQuestions)
+                .then(result => {
+                    storageResult = result;
+                    storageCompleted = true;
+                    
+                    if (result.success) {
+                        console.log('Redeem code stored successfully');
+                        toastUtils.showSuccess('Redeem code saved successfully!');
+                    } else {
+                        console.warn("Failed to store redeem code:", result.message);
+                        storageWarning.classList.remove('hidden');
+                        warningText.textContent = `Failed to save redeem code: ${result.message}. Please take a screenshot.`;
+                        toastUtils.showError('Failed to save redeem code: ' + result.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Storage error:', error);
+                    storageCompleted = true;
+                    storageWarning.classList.remove('hidden');
+                    warningText.textContent = 'Storage error. Please take a screenshot of this code.';
+                });
 
             // Reset and start countdown
             countdownBar.style.width = '100%';
             countdownBar.classList.remove('countdown');
-            void countdownBar.offsetWidth; // Trigger reflow
+            void countdownBar.offsetWidth;
             countdownBar.classList.add('countdown');
 
-            // Auto-close after 10 seconds and redirect to index.html
-            setTimeout(() => {
-                if (!redeemPopup.classList.contains('hidden')) {
-                    closeRedeemPopup();
-                    // Redirect to index.html after popup closes
+            // Wait for storage to complete or timeout
+            const timeoutPromise = new Promise(resolve => {
+                setTimeout(() => {
+                    if (!storageCompleted) {
+                        console.log('Storage timeout reached');
+                        storageWarning.classList.remove('hidden');
+                        warningText.textContent = 'Taking longer than expected. Please take a screenshot of this code.';
+                    }
+                    resolve();
+                }, 8000); // 8 second timeout
+            });
+
+            await Promise.race([storagePromise, timeoutPromise]);
+
+            // Wait additional time for user to see the code
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Close popup and redirect if storage was successful
+            closeRedeemPopup();
+            if (storageResult?.success) {
+                setTimeout(() => {
                     window.location.href = 'index.html';
-                }
-            }, 10000);
+                }, 500);
+            }
         }
 
         // Close redeem code popup
@@ -1100,49 +1223,61 @@
             redeemPopup.classList.add('hidden');
         }
 
-        // Generate a random redeem code
+        // Generate a random redeem code with variety
         function generateRedeemCode() {
+            const prefixes = ['U1TECH', 'CODEU1', 'LEARNU1', 'TECHU1', 'SKILLU1'];
+            const suffixes = ['QUIZ', 'WIN', 'REWARD', 'LEARN', 'SKILL'];
             const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const numbers = '0123456789';
 
-            let code = 'U1TECH-';
+            const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+            
+            let code = `${prefix}-`;
 
-            for (let i = 0; i < 6; i++) {
-                const chars = i < 3 ? uppercase : numbers;
+            // Generate 6-8 character code
+            const codeLength = 6 + Math.floor(Math.random() * 3);
+            for (let i = 0; i < codeLength; i++) {
+                const chars = Math.random() > 0.3 ? uppercase : numbers;
                 code += chars.charAt(Math.floor(Math.random() * chars.length));
             }
 
-            code += '-QUIZ';
+            code += `-${suffix}`;
 
             console.log(`Generated redeem code: ${code}`);
             return code;
         }
 
-        // Reset the quiz
+        // Reset the quiz completely
         function resetQuiz() {
             console.log("Resetting quiz");
             currentQuestionIndex = 0;
-            userAnswers = new Array(quizData.length).fill(null);
+            userAnswers = new Array(totalQuestions).fill(null);
             score = 0;
 
-            // Hide results and show quiz content
+            // Clear cache to get new questions
+            questionsCache = null;
+            cacheTimestamp = null;
+
+            // Hide results and show loading
             resultsContainer.classList.add('hidden');
             successMessage.classList.add('hidden');
             failureMessage.classList.add('hidden');
-            quizContent.classList.remove('hidden');
+            quizContent.classList.add('hidden');
+            loadingState.classList.remove('hidden');
 
-            // Show first question
-            showQuestion(currentQuestionIndex);
-            updateProgress();
+            // Reload fresh questions
+            loadQuizData();
         }
 
-        // Create confetti effect
+        // Create optimized confetti effect
         function createConfetti() {
-            console.log("Creating confetti effect");
+            console.log("Creating optimized confetti effect");
             const colors = ['#800020', '#FFB6C1', '#FF8C00', '#10B981', '#3B82F6', '#EAB308'];
             const container = document.body;
+            const confettiCount = window.innerWidth < 768 ? 50 : 80; // Less on mobile
 
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
@@ -1151,27 +1286,52 @@
                 confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
                 container.appendChild(confetti);
 
-                // Animate confetti
+                // Optimized animation
                 const animation = confetti.animate([
                     { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
                     { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
                 ], {
-                    duration: 2000 + Math.random() * 3000,
+                    duration: 1500 + Math.random() * 2000,
                     easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
                 });
 
-                // Remove confetti after animation
-                animation.onfinish = () => {
-                    confetti.remove();
-                };
+                animation.onfinish = () => confetti.remove();
             }
         }
 
         // Utility functions
         function decodeHtmlEntities(text) {
+            if (!text) return '';
+            
             const textArea = document.createElement('textarea');
             textArea.innerHTML = text;
-            return textArea.value;
+            
+            let decoded = textArea.value
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&#039;/g, "'")
+                .replace(/&ldquo;/g, '"')
+                .replace(/&rdquo;/g, '"')
+                .replace(/&lsquo;/g, "'")
+                .replace(/&rsquo;/g, "'")
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&times;/g, '×')
+                .replace(/&divide;/g, '÷')
+                .replace(/&frasl;/g, '/')
+                .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
+            
+            return decoded;
+        }
+
+        function normalizeText(text) {
+            return text
+                .toLowerCase()
+                .trim()
+                .replace(/\s+/g, ' ')
+                .replace(/[^\w\s]/g, '')
+                .replace(/\s+/g, ' ');
         }
 
         function shuffleArray(array) {
