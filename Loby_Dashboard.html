@@ -1,0 +1,2169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U1 Technology - Lobby Dashboard</title>
+    
+    <!-- CDN Resources -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="config.js"></script>
+    
+    <style>
+        /* Custom Styles */
+        .stat-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .course-card:hover {
+            border-color: rgba(128, 0, 32, 0.3);
+            box-shadow: 0 4px 12px rgba(128, 0, 32, 0.1);
+        }
+        
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-pending { background-color: #fef3c7; color: #92400e; }
+        .status-processing { background-color: #dbeafe; color: #1e40af; }
+        .status-completed { background-color: #d1fae5; color: #065f46; }
+        .status-not-interested { background-color: #f3f4f6; color: #374151; }
+        .status-collected { background-color: #d1fae5; color: #065f46; }
+        .status-uncollected { background-color: #fef3c7; color: #92400e; }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #800020;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6b7280;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button:hover {
+            color: #800020;
+        }
+        
+        .tab-button.active {
+            color: #800020;
+            border-bottom-color: #800020;
+            font-weight: 600;
+        }
+        
+        /* Login modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+        }
+        
+        .login-modal-content {
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .login-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .login-input:focus {
+            outline: none;
+            border-color: #800020;
+            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1);
+        }
+        
+        /* Toast animations */
+        .toast-enter {
+            animation: slideInRight 0.3s ease;
+        }
+        
+        .toast-exit {
+            animation: slideOutRight 0.3s ease;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        /* Course image */
+        .compact-course-image {
+            height: 160px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        /* Status dropdown */
+        .status-dropdown {
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        /* Fixed footer */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        main {
+            flex: 1;
+            padding-bottom: 80px;
+        }
+        
+        footer.fixed-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1f2937;
+            z-index: 100;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .compact-course-image {
+                height: 140px;
+            }
+            
+            .modal-content {
+                margin: 2% auto;
+                padding: 15px;
+                width: 95%;
+            }
+            
+            .login-modal-content {
+                padding: 20px;
+            }
+            
+            main {
+                padding-bottom: 100px;
+            }
+            
+            .tab-button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2 max-w-md"></div>
+    
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-50 hidden">
+        <div class="loading-spinner mb-4"></div>
+        <p class="text-gray-600" id="loading-text">Loading...</p>
+    </div>
+    
+    <!-- Login Modal -->
+    <div id="login-modal" class="login-modal">
+        <div class="login-modal-content">
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <img src="img/favicon-32x32.png" alt="U1 Technology Logo" class="w-12 h-12">
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900">Lobby Login</h2>
+                <p class="text-gray-600 mt-2">Enter your credentials to access the dashboard</p>
+            </div>
+            
+            <form id="login-form">
+                <div class="mb-6">
+                    <label for="login-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <input type="email" id="login-email" class="login-input" placeholder="email@example.com" required>
+                </div>
+                
+                <div class="mb-8">
+                    <label for="login-password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" id="login-password" class="login-input" placeholder="••••••••" required>
+                </div>
+                
+                <div class="mb-4">
+                    <button type="submit" id="login-submit" class="w-full bg-[#800020] hover:bg-[#600018] text-white py-3 rounded-lg font-medium transition-colors">
+                        <span id="login-submit-text">Login</span>
+                        <span id="login-loading" class="hidden">
+                            <i class="fas fa-spinner fa-spin mr-2"></i>Logging in...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Status Update Modal -->
+    <div id="status-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-bold text-gray-900">Update Status</h3>
+                <button onclick="closeStatusModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="status-select" class="block text-sm font-medium text-gray-700 mb-2">Select New Status</label>
+                    <select id="status-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]">
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="completed">Completed</option>
+                        <option value="not-interested">Not Interested</option>
+                        <option value="collected">Collected</option>
+                        <option value="uncollected">Uncollected</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="status-notes" class="block text-sm font-medium text-gray-700 mb-2">Notes (Optional)</label>
+                    <textarea id="status-notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020]"></textarea>
+                </div>
+                
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button onclick="closeStatusModal()" 
+                            class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        Cancel
+                    </button>
+                    <button onclick="updateStatus()" 
+                            class="px-4 py-2 bg-[#800020] hover:bg-[#600018] text-white rounded-lg font-medium transition-colors">
+                        Update Status
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Course Details Modal -->
+    <div id="course-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-bold text-gray-900" id="course-modal-title">Course Details</h3>
+                <button onclick="closeCourseModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="course-modal-content">
+                <!-- Course details will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="img/favicon-32x32.png" alt="U1 Technology Logo" class="w-8 h-8">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">U1 Technology Lobby</h1>
+                        <p class="text-xs text-gray-500">Dashboard</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="hidden md:block">
+                        <p class="text-sm text-gray-600">Welcome, <span id="nav-user-name" class="font-medium">User</span></p>
+                    </div>
+                    <button onclick="refreshDashboard()" class="refresh-btn p-2 rounded-lg hover:bg-gray-100 transition-colors" title="Refresh">
+                        <i class="fas fa-redo text-gray-600"></i>
+                    </button>
+                    <button onclick="logout()" class="bg-[#800020] hover:bg-[#600018] text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Dashboard -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- User Welcome -->
+        <div class="mb-6 bg-white rounded-lg shadow p-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-1">Welcome, <span id="user-name" class="text-[#800020]">User</span></h2>
+                    <p class="text-gray-600">Manage your courses, applications, and community submissions</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500">Last Login</p>
+                        <p class="text-sm font-medium" id="last-login">--</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500">Account Type</p>
+                        <p class="text-sm font-medium text-[#800020]">Lobby User</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <!-- Available Courses -->
+            <div class="stat-card bg-white rounded-lg shadow p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Available Courses</p>
+                        <h3 class="text-2xl font-bold text-gray-900" id="courses-count">0</h3>
+                    </div>
+                    <div class="bg-[#FFB6C1] p-2 rounded-full">
+                        <i class="fas fa-graduation-cap text-[#800020] text-lg"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- My Applications -->
+            <div class="stat-card bg-white rounded-lg shadow p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Applications</p>
+                        <h3 class="text-2xl font-bold text-gray-900" id="applications-count">0</h3>
+                    </div>
+                    <div class="bg-[#FFB6C1] p-2 rounded-full">
+                        <i class="fas fa-file-alt text-[#800020] text-lg"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Community Submissions -->
+            <div class="stat-card bg-white rounded-lg shadow p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Community</p>
+                        <h3 class="text-2xl font-bold text-gray-900" id="community-count">0</h3>
+                    </div>
+                    <div class="bg-[#FFB6C1] p-2 rounded-full">
+                        <i class="fas fa-users text-[#800020] text-lg"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Redeem Codes -->
+            <div class="stat-card bg-white rounded-lg shadow p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Redeem Codes</p>
+                        <h3 class="text-2xl font-bold text-gray-900" id="redeem-count">0</h3>
+                    </div>
+                    <div class="bg-[#FFB6C1] p-2 rounded-full">
+                        <i class="fas fa-gift text-[#800020] text-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabs Navigation -->
+        <div class="mb-4 bg-white rounded-lg shadow">
+            <div class="flex space-x-2 overflow-x-auto px-4 pt-4">
+                <button onclick="showTab('courses')" class="tab-button active" id="tab-courses">
+                    <i class="fas fa-graduation-cap mr-2"></i>Available Courses
+                </button>
+                <button onclick="showTab('applications')" class="tab-button" id="tab-applications">
+                    <i class="fas fa-file-alt mr-2"></i>Applications
+                </button>
+                <button onclick="showTab('community')" class="tab-button" id="tab-community">
+                    <i class="fas fa-users mr-2"></i>Community
+                </button>
+                <button onclick="showTab('redeem')" class="tab-button" id="tab-redeem">
+                    <i class="fas fa-gift mr-2"></i>Redeem Codes
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tab Content -->
+        <div id="tab-content">
+            <!-- Courses Tab -->
+            <div id="courses-tab" class="tab-pane">
+                <div class="mb-4">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                        <h3 class="text-lg font-bold text-gray-900">Available Courses</h3>
+                        <div class="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+                            <select id="course-category-filter" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020] text-sm">
+                                <option value="">All Categories</option>
+                            </select>
+                            <div class="relative flex-1 sm:w-64">
+                                <input type="text" id="course-search" placeholder="Search courses..." 
+                                       class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020] text-sm">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="courses-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <!-- Courses will be loaded here -->
+                </div>
+                
+                <div id="no-courses" class="hidden text-center py-8">
+                    <i class="fas fa-graduation-cap text-gray-300 text-4xl mb-4"></i>
+                    <p class="text-gray-500">No courses available at the moment.</p>
+                </div>
+                
+                <div id="courses-pagination" class="mt-6 flex justify-center space-x-2"></div>
+            </div>
+            
+            <!-- Applications Tab -->
+            <div id="applications-tab" class="tab-pane hidden">
+                <div class="mb-4">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                        <h3 class="text-lg font-bold text-gray-900">Course Applications</h3>
+                        <div class="flex items-center space-x-2">
+                            <select id="application-status-filter" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020] text-sm">
+                                <option value="all">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="completed">Completed</option>
+                                <option value="not-interested">Not Interested</option>
+                            </select>
+                            <div class="relative sm:w-48">
+                                <input type="text" id="application-search" placeholder="Search..." 
+                                       class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020] text-sm">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Study Mode</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applied Date</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applications-table-body" class="bg-white divide-y divide-gray-200">
+                                <!-- Applications will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="applications-no-data" class="hidden p-8 text-center">
+                        <i class="fas fa-file-alt text-gray-300 text-4xl mb-4"></i>
+                        <p class="text-gray-500">No applications found.</p>
+                    </div>
+                </div>
+                
+                <div id="applications-pagination" class="mt-6 flex justify-center space-x-2"></div>
+            </div>
+            
+            <!-- Community Tab -->
+            <div id="community-tab" class="tab-pane hidden">
+                <div class="mb-4">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                        <h3 class="text-lg font-bold text-gray-900"></h3>Community Submissions</h3>
+                        <div class="flex items-center space-x-2">
+                            <select id="community-status-filter" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020] text-sm">
+                                <option value="all">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="completed">Completed</option>
+                                <option value="not-interested">Not Interested</option>
+                            </select>
+                            <div class="relative sm:w-48">
+                                <input type="text" id="community-search" placeholder="Search..." 
+                                       class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020] text-sm">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Skills</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Experience</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="community-table-body" class="bg-white divide-y divide-gray-200">
+                                <!-- Community data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="community-no-data" class="hidden p-8 text-center">
+                        <i class="fas fa-users text-gray-300 text-4xl mb-4"></i>
+                        <p class="text-gray-500">No community submissions found.</p>
+                    </div>
+                </div>
+                
+                <div id="community-pagination" class="mt-6 flex justify-center space-x-2"></div>
+            </div>
+            
+            <!-- Redeem Codes Tab -->
+            <div id="redeem-tab" class="tab-pane hidden">
+                <div class="mb-4">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                        <h3 class="text-lg font-bold text-gray-900">Redeem Codes</h3>
+                        <div class="flex items-center space-x-2">
+                            <select id="redeem-status-filter" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020] text-sm">
+                                <option value="all">All Status</option>
+                                <option value="collected">Collected</option>
+                                <option value="uncollected">Uncollected</option>
+                            </select>
+                            <div class="relative sm:w-48">
+                                <input type="text" id="redeem-search" placeholder="Search..." 
+                                       class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-[#800020] text-sm">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Redeem Code</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quiz Type</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="redeem-table-body" class="bg-white divide-y divide-gray-200">
+                                <!-- Redeem codes will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="redeem-no-data" class="hidden p-8 text-center">
+                        <i class="fas fa-gift text-gray-300 text-4xl mb-4"></i>
+                        <p class="text-gray-500">No redeem codes found.</p>
+                    </div>
+                </div>
+                
+                <div id="redeem-pagination" class="mt-6 flex justify-center space-x-2"></div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Fixed Footer -->
+    <footer class="fixed-footer bg-gray-900 text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-sm">&copy; 2024 U1 Technology Institute. All rights reserved.</p>
+                <p class="text-gray-400 text-xs mt-1">Lobby Dashboard v2.0</p>
+            </div>
+        </div>
+    </footer>
+
+   <script>
+    // Global variables
+    const API_BASE_URL = window.AppConfig.API_BASE_URL;
+    let currentUser = null;
+    let currentTab = 'courses';
+    let currentEditingId = null;
+    let currentEditingType = null;
+    
+    // Token management
+    function getAuthToken() {
+        return localStorage.getItem('lobbyToken');
+    }
+    
+    function setAuthToken(token) {
+        localStorage.setItem('lobbyToken', token);
+    }
+    
+    function removeAuthToken() {
+        localStorage.removeItem('lobbyToken');
+    }
+    
+    function getUserData() {
+        const userData = localStorage.getItem('lobbyUser');
+        return userData ? JSON.parse(userData) : null;
+    }
+    
+    function setUserData(user) {
+        localStorage.setItem('lobbyUser', JSON.stringify(user));
+    }
+    
+    function removeUserData() {
+        localStorage.removeItem('lobbyUser');
+    }
+    
+    // Toast notifications
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        
+        toast.className = `p-3 rounded-lg shadow-lg transform transition-all duration-300 ease-in-out toast-enter ${type === 'success' ? 'bg-green-100 text-green-800 border border-green-200' : 
+                          type === 'error' ? 'bg-red-100 text-red-800 border border-red-200' :
+                          type === 'info' ? 'bg-blue-100 text-blue-800 border border-blue-200' :
+                          'bg-yellow-100 text-yellow-800 border border-yellow-200'}`;
+        
+        toast.innerHTML = `
+            <div class="flex items-center">
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 
+                             type === 'error' ? 'fa-exclamation-circle' :
+                             type === 'info' ? 'fa-info-circle' : 'fa-exclamation-triangle'} 
+                   mr-2"></i>
+                <span class="text-sm">${message}</span>
+            </div>
+        `;
+        
+        container.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.add('toast-exit');
+            setTimeout(() => {
+                if (toast.parentNode === container) {
+                    container.removeChild(toast);
+                }
+            }, 300);
+        }, 5000);
+    }
+    
+    // Loading overlay
+    function showLoading(text = 'Loading...') {
+        document.getElementById('loading-text').textContent = text;
+        document.getElementById('loading-overlay').classList.remove('hidden');
+    }
+    
+    function hideLoading() {
+        document.getElementById('loading-overlay').classList.add('hidden');
+    }
+    
+    // Authentication
+    function checkAuth() {
+        const token = getAuthToken();
+        const user = getUserData();
+        
+        if (!token || !user) {
+            showLoginModal();
+            return false;
+        }
+        
+        currentUser = user;
+        return true;
+    }
+    
+    // Login modal
+    function showLoginModal() {
+        document.getElementById('login-modal').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('login-email').focus();
+        }, 100);
+    }
+    
+    function closeLoginModal() {
+        document.getElementById('login-modal').style.display = 'none';
+        document.getElementById('login-form').reset();
+        document.getElementById('login-loading').classList.add('hidden');
+        document.getElementById('login-submit-text').classList.remove('hidden');
+    }
+    
+    // Login function
+    async function handleLogin(event) {
+        if (event) event.preventDefault();
+        
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        
+        if (!email || !password) {
+            showToast('Please enter email and password', 'error');
+            return;
+        }
+        
+        document.getElementById('login-loading').classList.remove('hidden');
+        document.getElementById('login-submit-text').classList.add('hidden');
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/lobby/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                setAuthToken(data.data.token);
+                setUserData(data.data.user);
+                currentUser = data.data.user;
+                showToast('Login successful!', 'success');
+                closeLoginModal();
+                await initializeDashboard();
+            } else {
+                showToast(data.message || 'Login failed', 'error');
+                document.getElementById('login-loading').classList.add('hidden');
+                document.getElementById('login-submit-text').classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            showToast('Login failed. Please try again.', 'error');
+            document.getElementById('login-loading').classList.add('hidden');
+            document.getElementById('login-submit-text').classList.remove('hidden');
+        }
+    }
+    
+    // Logout
+    function logout() {
+        if (confirm('Are you sure you want to logout?')) {
+            removeAuthToken();
+            removeUserData();
+            currentUser = null;
+            showToast('Logged out successfully', 'info');
+            setTimeout(() => showLoginModal(), 500);
+        }
+    }
+    
+    // Initialize dashboard
+    async function initializeDashboard() {
+        try {
+            showLoading('Loading dashboard...');
+            
+            // Load user profile
+            await loadUserProfile();
+            
+            // Update statistics counts
+            await updateStatistics();
+            
+            // Load initial data for current tab
+            switch(currentTab) {
+                case 'courses':
+                    await loadCourses();
+                    break;
+                case 'applications':
+                    await loadMyApplications();
+                    break;
+                case 'community':
+                    await loadMyCommunity();
+                    break;
+                case 'redeem':
+                    await loadMyRedeemCodes();
+                    break;
+            }
+            
+        } catch (error) {
+            console.error('Dashboard initialization error:', error);
+            showToast('Failed to load dashboard', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // API Request Helper
+    async function apiRequest(endpoint, options = {}) {
+        const token = getAuthToken();
+        
+        if (!token) {
+            showToast('Session expired. Please login again.', 'error');
+            setTimeout(() => logout(), 2000);
+            throw new Error('No authentication token');
+        }
+        
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            ...options.headers
+        };
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                headers,
+                ...options
+            });
+            
+            if (response.status === 401) {
+                showToast('Session expired. Please login again.', 'error');
+                logout();
+                return null;
+            }
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.message || 'Request failed');
+            }
+            
+            return data;
+        } catch (error) {
+            console.error('API Request error:', error);
+            throw error;
+        }
+    }
+    
+    // Load user profile
+    async function loadUserProfile() {
+        try {
+            const data = await apiRequest('/api/lobby/me');
+            if (data && data.success) {
+                currentUser = data.data.user;
+                
+                // Update UI
+                document.getElementById('user-name').textContent = currentUser.name;
+                document.getElementById('nav-user-name').textContent = currentUser.name;
+                
+                if (currentUser.lastLogin) {
+                    const lastLogin = new Date(currentUser.lastLogin);
+                    document.getElementById('last-login').textContent = lastLogin.toLocaleDateString('en-IN');
+                }
+                
+                setUserData(currentUser);
+            }
+        } catch (error) {
+            console.error('Failed to load user profile:', error);
+            showToast('Failed to load user profile', 'error');
+        }
+    }
+    
+    // Update statistics counts
+    async function updateStatistics() {
+        try {
+            // Courses count
+            const coursesData = await apiRequest('/api/courses?limit=1&status=active');
+            if (coursesData && coursesData.success) {
+                document.getElementById('courses-count').textContent = coursesData.data.pagination.totalCourses || 0;
+            }
+            
+            // Applications count
+            const appsData = await apiRequest('/api/applications?limit=1');
+            if (appsData && appsData.success) {
+                document.getElementById('applications-count').textContent = appsData.data.pagination.totalApplications || 0;
+            }
+            
+            // Community count
+            const communityData = await apiRequest('/api/community/submissions?limit=1');
+            if (communityData && communityData.success) {
+                document.getElementById('community-count').textContent = communityData.data.pagination.totalSubmissions || 0;
+            }
+            
+            // Redeem codes count
+            if (currentUser && currentUser._id) {
+                const redeemData = await apiRequest(`/api/quiz/redeem/user/${currentUser._id}`);
+                if (redeemData && redeemData.success) {
+                    document.getElementById('redeem-count').textContent = redeemData.data.total || 0;
+                }
+            }
+        } catch (error) {
+            console.error('Failed to update statistics:', error);
+        }
+    }
+    
+    // Load courses
+    async function loadCourses(page = 1) {
+        try {
+            showLoading('Loading courses...');
+            const search = document.getElementById('course-search')?.value || '';
+            const category = document.getElementById('course-category-filter')?.value || '';
+            
+            const data = await apiRequest(`/api/courses?page=${page}&limit=12&status=active&search=${encodeURIComponent(search)}&category=${encodeURIComponent(category)}`);
+            
+            if (data && data.success) {
+                displayCourses(data.data.courses);
+                updateCoursesPagination(data.data.pagination, page);
+                
+                if (!data.data.courses || data.data.courses.length === 0) {
+                    document.getElementById('no-courses').classList.remove('hidden');
+                } else {
+                    document.getElementById('no-courses').classList.add('hidden');
+                }
+                
+                if (page === 1) {
+                    populateCourseCategories();
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load courses:', error);
+            showToast('Failed to load courses', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Display courses
+    function displayCourses(courses) {
+        const container = document.getElementById('courses-container');
+        
+        if (!courses || courses.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
+        
+        container.innerHTML = courses.map(course => `
+            <div class="course-card bg-white rounded-lg shadow overflow-hidden">
+                <div class="relative">
+                    <img src="${course.images?.[0] || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80'}" 
+                         alt="${course.title}" 
+                         class="w-full compact-course-image object-cover cursor-pointer"
+                         onclick="showCourseDetails('${course._id}')">
+                    <div class="absolute top-2 right-2 bg-[#800020] text-white px-2 py-1 rounded text-xs font-medium">
+                        ${course.category || 'IT'}
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h4 class="font-bold text-gray-900 mb-2 cursor-pointer hover:text-[#800020]" 
+                        onclick="showCourseDetails('${course._id}')">${course.title}</h4>
+                    <p class="text-gray-600 text-sm mb-3">${course.miniDescription || course.description.substring(0, 80)}...</p>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold text-[#800020]">₹${course.offlinePrice || 'Contact'}</span>
+                            ${course.offlineOriginalPrice ? 
+                                `<span class="text-gray-400 line-through ml-1 text-sm">₹${course.offlineOriginalPrice}</span>` : ''}
+                        </div>
+                        <span class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i>Offline
+                        </span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // Show course details - UPDATED with both online and offline prices
+    async function showCourseDetails(courseId) {
+        try {
+            showLoading('Loading course details...');
+            const data = await apiRequest(`/api/courses/${courseId}`);
+            
+            if (data && data.success) {
+                const course = data.data.course;
+                
+                document.getElementById('course-modal-title').textContent = course.title;
+                
+                document.getElementById('course-modal-content').innerHTML = `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Category</p>
+                                <p class="font-medium">${course.category || 'N/A'}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Duration</p>
+                                <p class="font-medium">Contact for details</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Instructor</p>
+                                <p class="font-medium">${course.seller || 'U1 Technology Institute'}</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Offline Price Section -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600 mb-1">Offline Course Price</p>
+                            <p class="text-2xl font-bold text-[#800020]">₹${course.offlinePrice || 'Contact'}</p>
+                            ${course.offlineOriginalPrice ? 
+                                `<p class="text-gray-400 line-through">₹${course.offlineOriginalPrice}</p>` : ''}
+                            <p class="text-xs text-gray-500 mt-2">Classroom training with expert instructors</p>
+                        </div>
+                        
+                        <!-- Online Price Section -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600 mb-1">Online Course Price</p>
+                            <p class="text-2xl font-bold text-[#800020]">₹${course.onlinePrice || 'Contact'}</p>
+                            ${course.onlineOriginalPrice ? 
+                                `<p class="text-gray-400 line-through">₹${course.onlineOriginalPrice}</p>` : ''}
+                            <p class="text-xs text-gray-500 mt-2">Online training with recorded sessions</p>
+                        </div>
+                        
+                        <div>
+                            <p class="text-sm text-gray-500 mb-2">Description</p>
+                            <p class="text-gray-700">${course.description}</p>
+                        </div>
+                        
+                        ${course.miniDescription ? `
+                            <div>
+                                <p class="text-sm text-gray-500 mb-2">Overview</p>
+                                <p class="text-gray-700">${course.miniDescription}</p>
+                            </div>
+                        ` : ''}
+                        
+                        ${course.learn && course.learn.length > 0 ? `
+                            <div>
+                                <p class="text-sm text-gray-500 mb-2">What You'll Learn</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    ${course.learn.slice(0, 5).map(item => `<li class="text-gray-700">${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        
+                        ${course.toolsLanguage && course.toolsLanguage.length > 0 ? `
+                            <div>
+                                <p class="text-sm text-gray-500 mb-2">Tools & Languages</p>
+                                <div class="flex flex-wrap gap-2">
+                                    ${course.toolsLanguage.map(tool => `
+                                        <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">${tool}</span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${course.curriculum && course.curriculum.length > 0 ? `
+                            <div>
+                                <p class="text-sm text-gray-500 mb-2">Curriculum (Preview)</p>
+                                <div class="space-y-2">
+                                    ${course.curriculum.slice(0, 3).map(section => `
+                                        <div class="border border-gray-200 rounded p-3">
+                                            <p class="font-medium text-gray-800">${section.section}</p>
+                                            <ul class="text-sm text-gray-600 mt-1">
+                                                ${section.lectures.slice(0, 3).map(lecture => `<li>• ${lecture}</li>`).join('')}
+                                                ${section.lectures.length > 3 ? `<li class="text-gray-500">+ ${section.lectures.length - 3} more lectures</li>` : ''}
+                                            </ul>
+                                        </div>
+                                    `).join('')}
+                                    ${course.curriculum.length > 3 ? 
+                                        `<p class="text-gray-500 text-sm text-center">+ ${course.curriculum.length - 3} more sections</p>` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="pt-4 border-t">
+                            <button onclick="applyForCourse('${course._id}', '${course.title}')" 
+                                    class="w-full bg-[#800020] hover:bg-[#600018] text-white py-3 rounded-lg font-medium transition-colors">
+                                Apply for This Course
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('course-modal').style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Failed to load course details:', error);
+            showToast('Failed to load course details', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Apply for course
+    function applyForCourse(courseId, courseTitle) {
+        if (confirm(`Do you want to apply for "${courseTitle}"?`)) {
+            showToast(`Application for "${courseTitle}" will be submitted`, 'info');
+            // Here you can implement the actual application submission
+            // For now, just show a message
+        }
+    }
+    
+    // Close course modal
+    function closeCourseModal() {
+        document.getElementById('course-modal').style.display = 'none';
+    }
+    
+    // Populate course categories
+    async function populateCourseCategories() {
+        try {
+            const data = await apiRequest('/api/courses/categories');
+            if (data && data.success) {
+                const select = document.getElementById('course-category-filter');
+                select.innerHTML = '<option value="">All Categories</option>' + 
+                    data.data.categories.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+            }
+        } catch (error) {
+            console.error('Failed to load categories:', error);
+        }
+    }
+    
+    // Load my applications - FIXED with proper backend integration
+    async function loadMyApplications(page = 1) {
+        try {
+            showLoading('Loading applications...');
+            const status = document.getElementById('application-status-filter')?.value || '';
+            const search = document.getElementById('application-search')?.value || '';
+            
+            let url = `/api/applications?page=${page}&limit=10`;
+            if (status && status !== 'all') {
+                url += `&status=${status}`;
+            }
+            if (search) {
+                url += `&search=${encodeURIComponent(search)}`;
+            }
+            
+            const data = await apiRequest(url);
+            
+            if (data && data.success) {
+                displayApplications(data.data.applications);
+                updateApplicationsPagination(data.data.pagination, page);
+                
+                if (!data.data.applications || data.data.applications.length === 0) {
+                    document.getElementById('applications-no-data').classList.remove('hidden');
+                } else {
+                    document.getElementById('applications-no-data').classList.add('hidden');
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load applications:', error);
+            showToast('Failed to load applications', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Display applications - UPDATED with View button
+    function displayApplications(applications) {
+        const tbody = document.getElementById('applications-table-body');
+        
+        if (!applications || applications.length === 0) {
+            tbody.innerHTML = '';
+            return;
+        }
+        
+        tbody.innerHTML = applications.map(app => `
+            <tr>
+                <td class="px-4 py-3">
+                    <div class="font-medium text-gray-900 text-sm">${app.course || 'N/A'}</div>
+                    <div class="text-gray-500 text-xs">${app.applicationId || 'N/A'}</div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="text-gray-700 text-sm">${app.studyMode || 'N/A'}</div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="text-gray-700 text-sm">${app.createdAt ? new Date(app.createdAt).toLocaleDateString('en-IN') : 'N/A'}</div>
+                </td>
+                <td class="px-4 py-3">
+                    <span class="status-badge status-${app.status || 'pending'}">${app.status || 'pending'}</span>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="flex space-x-2">
+                        <button onclick="viewApplicationDetails('${app._id}')"
+                                class="text-blue-600 hover:text-blue-800 font-medium text-xs"
+                                title="View Details">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button onclick="openStatusModal('${app._id}', 'application', '${app.status || 'pending'}')"
+                                class="text-[#800020] hover:text-[#600018] font-medium text-xs"
+                                title="Update Status">
+                            <i class="fas fa-edit mr-1"></i>Status
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+    
+    // View application details
+    async function viewApplicationDetails(applicationId) {
+        try {
+            showLoading('Loading application details...');
+            const data = await apiRequest(`/api/applications/${applicationId}`);
+            
+            if (data && data.success) {
+                const app = data.data.application;
+                
+                // Create a modal for application details
+                const modalContent = `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Application ID</p>
+                                <p class="font-medium">${app.applicationId || 'N/A'}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Status</p>
+                                <span class="status-badge status-${app.status || 'pending'}">${app.status || 'pending'}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-gray-900 mb-3">Applicant Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Full Name</p>
+                                    <p class="font-medium">${app.name || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Email</p>
+                                    <p class="font-medium">${app.email || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Phone</p>
+                                    <p class="font-medium">${app.phone || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Applied Date</p>
+                                    <p class="font-medium">${app.createdAt ? new Date(app.createdAt).toLocaleString('en-IN') : 'N/A'}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-gray-900 mb-3">Course Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Course Name</p>
+                                    <p class="font-medium">${app.course || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Study Mode</p>
+                                    <p class="font-medium">${app.studyMode || 'N/A'}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        ${app.message ? `
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-gray-900 mb-3">Additional Message</h4>
+                                <p class="text-gray-700 bg-gray-50 p-3 rounded">${app.message}</p>
+                            </div>
+                        ` : ''}
+                        
+                        ${app.adminNotes ? `
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-gray-900 mb-3">Admin Notes</h4>
+                                <p class="text-gray-700 bg-gray-50 p-3 rounded">${app.adminNotes}</p>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="border-t pt-4">
+                            <div class="flex justify-end">
+                                <button onclick="closeCustomModal()" 
+                                        class="px-4 py-2 bg-[#800020] hover:bg-[#600018] text-white rounded-lg font-medium">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                showCustomModal('Application Details', modalContent);
+            }
+        } catch (error) {
+            console.error('Failed to load application details:', error);
+            showToast('Failed to load application details', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Load my community submissions
+    async function loadMyCommunity(page = 1) {
+        try {
+            showLoading('Loading community submissions...');
+            const status = document.getElementById('community-status-filter')?.value || '';
+            const search = document.getElementById('community-search')?.value || '';
+            
+            let url = `/api/community/submissions?page=${page}&limit=10`;
+            if (status && status !== 'all') {
+                url += `&status=${status}`;
+            }
+            if (search) {
+                url += `&search=${encodeURIComponent(search)}`;
+            }
+            
+            const data = await apiRequest(url);
+            
+            if (data && data.success) {
+                displayCommunity(data.data.submissions);
+                updateCommunityPagination(data.data.pagination, page);
+                
+                if (!data.data.submissions || data.data.submissions.length === 0) {
+                    document.getElementById('community-no-data').classList.remove('hidden');
+                } else {
+                    document.getElementById('community-no-data').classList.add('hidden');
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load community:', error);
+            showToast('Failed to load community submissions', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Display community - UPDATED with View button
+    function displayCommunity(submissions) {
+        const tbody = document.getElementById('community-table-body');
+        
+        if (!submissions || submissions.length === 0) {
+            tbody.innerHTML = '';
+            return;
+        }
+        
+        tbody.innerHTML = submissions.map(sub => `
+            <tr>
+                <td class="px-4 py-3">
+                    <div class="font-medium text-gray-900 text-sm">${sub.name || 'N/A'}</div>
+                    <div class="text-gray-500 text-xs">${sub.email || 'N/A'}</div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="text-gray-700 text-sm">
+                        ${Array.isArray(sub.skills) ? sub.skills.slice(0, 3).join(', ') : (sub.skills || 'N/A')}
+                        ${sub.skills && sub.skills.length > 3 ? '...' : ''}
+                    </div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="text-gray-700 text-sm">
+                        ${sub.experienceLevel === 'experienced' ? `${sub.yearsExperience || 0} years` : 'Fresher'}
+                    </div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="text-gray-700 text-sm">${sub.createdAt ? new Date(sub.createdAt).toLocaleDateString('en-IN') : 'N/A'}</div>
+                </td>
+                <td class="px-4 py-3">
+                    <span class="status-badge status-${sub.status || 'pending'}">${sub.status || 'pending'}</span>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="flex space-x-2">
+                        <button onclick="viewCommunityDetails('${sub._id}')"
+                                class="text-blue-600 hover:text-blue-800 font-medium text-xs"
+                                title="View Details">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button onclick="openStatusModal('${sub._id}', 'community', '${sub.status || 'pending'}')"
+                                class="text-[#800020] hover:text-[#600018] font-medium text-xs"
+                                title="Update Status">
+                            <i class="fas fa-edit mr-1"></i>Status
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+    
+    // View community details
+    async function viewCommunityDetails(communityId) {
+        try {
+            showLoading('Loading community details...');
+            const data = await apiRequest(`/api/community/submissions/${communityId}`);
+            
+            if (data && data.success) {
+                const sub = data.data.submission;
+                
+                const modalContent = `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Submission ID</p>
+                                <p class="font-medium">${sub._id || 'N/A'}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Status</p>
+                                <span class="status-badge status-${sub.status || 'pending'}">${sub.status || 'pending'}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-gray-900 mb-3">Personal Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Full Name</p>
+                                    <p class="font-medium">${sub.name || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Email</p>
+                                    <p class="font-medium">${sub.email || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Phone</p>
+                                    <p class="font-medium">${sub.phone || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Submitted Date</p>
+                                    <p class="font-medium">${sub.createdAt ? new Date(sub.createdAt).toLocaleString('en-IN') : 'N/A'}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-gray-900 mb-3">Professional Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Experience Level</p>
+                                    <p class="font-medium">${sub.experienceLevel === 'experienced' ? 'Experienced' : 'Fresher'}</p>
+                                </div>
+                                ${sub.yearsExperience ? `
+                                    <div>
+                                        <p class="text-xs text-gray-500 mb-1">Years of Experience</p>
+                                        <p class="font-medium">${sub.yearsExperience} years</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-gray-900 mb-3">Skills</h4>
+                            <div class="flex flex-wrap gap-2">
+                                ${Array.isArray(sub.skills) ? sub.skills.map(skill => `
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">${skill}</span>
+                                `).join('') : '<p class="text-gray-500">No skills listed</p>'}
+                            </div>
+                        </div>
+                        
+                        ${sub.portfolioUrl ? `
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-gray-900 mb-3">Portfolio</h4>
+                                <a href="${sub.portfolioUrl}" target="_blank" class="text-[#800020] hover:underline">
+                                    ${sub.portfolioUrl}
+                                </a>
+                            </div>
+                        ` : ''}
+                        
+                        ${sub.linkedinUrl ? `
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-gray-900 mb-3">LinkedIn Profile</h4>
+                                <a href="${sub.linkedinUrl}" target="_blank" class="text-[#800020] hover:underline">
+                                    ${sub.linkedinUrl}
+                                </a>
+                            </div>
+                        ` : ''}
+                        
+                        ${sub.notes ? `
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-gray-900 mb-3">Admin Notes</h4>
+                                <p class="text-gray-700 bg-gray-50 p-3 rounded">${sub.notes}</p>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="border-t pt-4">
+                            <div class="flex justify-end">
+                                <button onclick="closeCustomModal()" 
+                                        class="px-4 py-2 bg-[#800020] hover:bg-[#600018] text-white rounded-lg font-medium">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                showCustomModal('Community Submission Details', modalContent);
+            }
+        } catch (error) {
+            console.error('Failed to load community details:', error);
+            showToast('Failed to load community details', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Load my redeem codes - UPDATED with soft delete handling
+    async function loadMyRedeemCodes(page = 1) {
+        try {
+            showLoading('Loading redeem codes...');
+            const status = document.getElementById('redeem-status-filter')?.value || '';
+            const search = document.getElementById('redeem-search')?.value || '';
+            
+            if (!currentUser || !currentUser._id) {
+                console.error('User ID not available');
+                document.getElementById('redeem-table-body').innerHTML = '';
+                document.getElementById('redeem-no-data').classList.remove('hidden');
+                return;
+            }
+            
+            // Get all redeem codes for the user
+            const data = await apiRequest(`/api/quiz/redeem/user/${currentUser._id}`);
+            
+            if (data && data.success) {
+                let redeems = data.data.redeems;
+                
+                // Filter out soft deleted records
+                redeems = redeems.filter(r => !r.isDeleted);
+                
+                // Filter by status
+                if (status && status !== 'all') {
+                    redeems = redeems.filter(r => r.status === status);
+                }
+                
+                // Filter by search
+                if (search) {
+                    const searchLower = search.toLowerCase();
+                    redeems = redeems.filter(r => 
+                        (r.redeemCode && r.redeemCode.toLowerCase().includes(searchLower)) ||
+                        (r.quizType && r.quizType.toLowerCase().includes(searchLower))
+                    );
+                }
+                
+                // Update count
+                document.getElementById('redeem-count').textContent = redeems.length;
+                
+                // Display redeem codes
+                displayRedeemCodes(redeems);
+                
+                if (!redeems || redeems.length === 0) {
+                    document.getElementById('redeem-no-data').classList.remove('hidden');
+                } else {
+                    document.getElementById('redeem-no-data').classList.add('hidden');
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load redeem codes:', error);
+            showToast('Failed to load redeem codes', 'error');
+            document.getElementById('redeem-table-body').innerHTML = '';
+            document.getElementById('redeem-no-data').classList.remove('hidden');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Display redeem codes - UPDATED with soft delete option
+    function displayRedeemCodes(redeems) {
+        const tbody = document.getElementById('redeem-table-body');
+        
+        if (!redeems || redeems.length === 0) {
+            tbody.innerHTML = '';
+            return;
+        }
+        
+        tbody.innerHTML = redeems.map(redeem => `
+            <tr>
+                <td class="px-4 py-3">
+                    <div class="font-medium text-gray-900 text-sm">${redeem.redeemCode || 'N/A'}</div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="text-gray-700 text-sm">${redeem.quizType || 'General'}</div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="text-gray-700 text-sm">
+                        ${redeem.score || 0}/${redeem.totalQuestions || 0} (${redeem.percentage || 0}%)
+                    </div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="text-gray-700 text-sm">${redeem.createdAt ? new Date(redeem.createdAt).toLocaleDateString('en-IN') : 'N/A'}</div>
+                </td>
+                <td class="px-4 py-3">
+                    <span class="status-badge status-${redeem.status || 'uncollected'}">
+                        ${redeem.status || 'uncollected'}
+                    </span>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="flex space-x-2">
+                        <button onclick="viewRedeemDetails('${redeem._id}')"
+                                class="text-blue-600 hover:text-blue-800 font-medium text-xs"
+                                title="View Details">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button onclick="openStatusModal('${redeem._id}', 'redeem', '${redeem.status || 'uncollected'}')"
+                                class="text-[#800020] hover:text-[#600018] font-medium text-xs"
+                                title="Update Status">
+                            <i class="fas fa-edit mr-1"></i>Status
+                        </button>
+                        <button onclick="softDeleteRedeem('${redeem._id}', '${redeem.redeemCode || 'this code'}')"
+                                class="text-red-600 hover:text-red-800 font-medium text-xs"
+                                title="Delete">
+                            <i class="fas fa-trash mr-1"></i>Delete
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+    
+    // View redeem code details
+    async function viewRedeemDetails(redeemId) {
+        try {
+            showLoading('Loading redeem details...');
+            const data = await apiRequest(`/api/quiz/redeem`);
+            
+            if (data && data.success) {
+                const redeem = data.data.redeems.find(r => r._id === redeemId);
+                
+                if (redeem) {
+                    const modalContent = `
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Redeem Code</p>
+                                    <p class="font-medium text-lg text-[#800020]">${redeem.redeemCode || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Status</p>
+                                    <span class="status-badge status-${redeem.status || 'uncollected'}">
+                                        ${redeem.status || 'uncollected'}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-gray-900 mb-3">Quiz Information</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-xs text-gray-500 mb-1">Quiz Type</p>
+                                        <p class="font-medium">${redeem.quizType || 'General'}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-500 mb-1">Submitted Date</p>
+                                        <p class="font-medium">${redeem.createdAt ? new Date(redeem.createdAt).toLocaleString('en-IN') : 'N/A'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-gray-900 mb-3">Score Details</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                        <p class="text-xs text-gray-500 mb-1">Score</p>
+                                        <p class="text-2xl font-bold text-[#800020]">${redeem.score || 0}/${redeem.totalQuestions || 0}</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                        <p class="text-xs text-gray-500 mb-1">Percentage</p>
+                                        <p class="text-2xl font-bold text-[#800020]">${redeem.percentage || 0}%</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                                        <p class="text-xs text-gray-500 mb-1">Performance</p>
+                                        <p class="text-lg font-medium ${(redeem.percentage || 0) >= 70 ? 'text-green-600' : (redeem.percentage || 0) >= 50 ? 'text-yellow-600' : 'text-red-600'}">
+                                            ${(redeem.percentage || 0) >= 70 ? 'Excellent' : (redeem.percentage || 0) >= 50 ? 'Good' : 'Needs Improvement'}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-gray-900 mb-3">User Information</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-xs text-gray-500 mb-1">User Name</p>
+                                        <p class="font-medium">${redeem.userName || 'N/A'}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-500 mb-1">User Email</p>
+                                        <p class="font-medium">${redeem.userEmail || 'N/A'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            ${redeem.ipAddress ? `
+                                <div class="border-t pt-4">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <p class="text-xs text-gray-500 mb-1">IP Address</p>
+                                            <p class="font-medium text-sm">${redeem.ipAddress}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            <div class="border-t pt-4">
+                                <div class="flex justify-end">
+                                    <button onclick="closeCustomModal()" 
+                                            class="px-4 py-2 bg-[#800020] hover:bg-[#600018] text-white rounded-lg font-medium">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    showCustomModal('Redeem Code Details', modalContent);
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load redeem details:', error);
+            showToast('Failed to load redeem details', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Soft delete redeem code
+    async function softDeleteRedeem(redeemId, redeemCode) {
+        if (confirm(`Are you sure you want to delete redeem code: ${redeemCode}?`)) {
+            try {
+                showLoading('Deleting redeem code...');
+                
+                const data = await apiRequest(`/api/quiz/redeem/${redeemId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (data && data.success) {
+                    showToast('Redeem code deleted successfully', 'success');
+                    await loadMyRedeemCodes();
+                }
+            } catch (error) {
+                console.error('Failed to delete redeem code:', error);
+                showToast('Failed to delete redeem code', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+    }
+    
+    // Custom modal functions
+    function showCustomModal(title, content) {
+        // Create modal if it doesn't exist
+        let modal = document.getElementById('custom-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'custom-modal';
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 800px;">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-bold text-gray-900" id="custom-modal-title">${title}</h3>
+                        <button onclick="closeCustomModal()" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="custom-modal-content"></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        // Set content
+        document.getElementById('custom-modal-title').textContent = title;
+        document.getElementById('custom-modal-content').innerHTML = content;
+        
+        // Show modal
+        modal.style.display = 'block';
+    }
+    
+    function closeCustomModal() {
+        const modal = document.getElementById('custom-modal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+    
+    // Status modal functions
+    function openStatusModal(id, type, currentStatus) {
+        currentEditingId = id;
+        currentEditingType = type;
+        
+        const select = document.getElementById('status-select');
+        select.value = currentStatus;
+        document.getElementById('status-notes').value = '';
+        
+        // Set appropriate status options based on type
+        let statusOptions = '';
+        
+        if (type === 'redeem') {
+            statusOptions = `
+                <option value="uncollected">Uncollected</option>
+                <option value="collected">Collected</option>
+            `;
+        } else {
+            statusOptions = `
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="completed">Completed</option>
+                <option value="not-interested">Not Interested</option>
+            `;
+        }
+        
+        select.innerHTML = statusOptions;
+        select.value = currentStatus;
+        
+        document.getElementById('status-modal').style.display = 'block';
+    }
+    
+    function closeStatusModal() {
+        document.getElementById('status-modal').style.display = 'none';
+        currentEditingId = null;
+        currentEditingType = null;
+    }
+    
+    // Update status - FIXED with proper API endpoints
+    async function updateStatus() {
+        try {
+            const newStatus = document.getElementById('status-select').value;
+            const notes = document.getElementById('status-notes').value;
+            
+            if (!newStatus) {
+                showToast('Please select a status', 'error');
+                return;
+            }
+            
+            showLoading('Updating status...');
+            
+            let endpoint, method, requestBody = {};
+            
+            switch(currentEditingType) {
+                case 'application':
+                    endpoint = `/api/applications/${currentEditingId}/status`;
+                    method = 'PUT';
+                    requestBody = { 
+                        status: newStatus,
+                        ...(notes && { adminNotes: notes })
+                    };
+                    break;
+                    
+                case 'community':
+                    endpoint = `/api/community/submissions/${currentEditingId}/status`;
+                    method = 'PUT';
+                    requestBody = { 
+                        status: newStatus,
+                        ...(notes && { notes: notes })
+                    };
+                    break;
+                    
+                case 'redeem':
+                    // For redeem codes, we need to update via PUT request
+                    endpoint = `/api/quiz/redeem`;
+                    method = 'GET';
+                    // First get all redeems, then update locally (for demo)
+                    // In production, you would have a proper PUT endpoint
+                    showToast('Status update for redeem codes requires backend implementation', 'info');
+                    hideLoading();
+                    closeStatusModal();
+                    return;
+                    
+                default:
+                    throw new Error('Invalid type');
+            }
+            
+            const data = await apiRequest(endpoint, {
+                method: method,
+                body: JSON.stringify(requestBody)
+            });
+            
+            if (data && data.success) {
+                showToast('Status updated successfully', 'success');
+                closeStatusModal();
+                
+                // Reload current tab data
+                switch(currentTab) {
+                    case 'applications':
+                        await loadMyApplications();
+                        break;
+                    case 'community':
+                        await loadMyCommunity();
+                        break;
+                    case 'redeem':
+                        await loadMyRedeemCodes();
+                        break;
+                }
+            }
+        } catch (error) {
+            console.error('Failed to update status:', error);
+            showToast('Failed to update status', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Pagination functions
+    function updateCoursesPagination(pagination, currentPage) {
+        updatePagination('courses-pagination', pagination, currentPage, loadCourses);
+    }
+    
+    function updateApplicationsPagination(pagination, currentPage) {
+        updatePagination('applications-pagination', pagination, currentPage, loadMyApplications);
+    }
+    
+    function updateCommunityPagination(pagination, currentPage) {
+        updatePagination('community-pagination', pagination, currentPage, loadMyCommunity);
+    }
+    
+    function updatePagination(containerId, pagination, currentPage, loadFunction) {
+        const container = document.getElementById(containerId);
+        if (!pagination || pagination.totalPages <= 1) {
+            container.innerHTML = '';
+            return;
+        }
+        
+        let html = '';
+        
+        if (pagination.hasPrev) {
+            html += `<button onclick="${loadFunction.name}(${currentPage - 1})" 
+                     class="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-sm">
+                     <i class="fas fa-chevron-left"></i></button>`;
+        }
+        
+        for (let i = 1; i <= pagination.totalPages; i++) {
+            if (i === currentPage) {
+                html += `<button class="px-3 py-1.5 bg-[#800020] text-white rounded text-sm">${i}</button>`;
+            } else if (i >= currentPage - 2 && i <= currentPage + 2) {
+                html += `<button onclick="${loadFunction.name}(${i})" 
+                         class="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-sm">${i}</button>`;
+            }
+        }
+        
+        if (pagination.hasNext) {
+            html += `<button onclick="${loadFunction.name}(${currentPage + 1})" 
+                     class="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-sm">
+                     <i class="fas fa-chevron-right"></i></button>`;
+        }
+        
+        container.innerHTML = html;
+    }
+    
+    // Tab management
+    function showTab(tabName) {
+        // Update active tab button
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById(`tab-${tabName}`).classList.add('active');
+        
+        // Hide all tab panes
+        document.querySelectorAll('.tab-pane').forEach(pane => {
+            pane.classList.add('hidden');
+        });
+        
+        // Show selected tab pane
+        document.getElementById(`${tabName}-tab`).classList.remove('hidden');
+        currentTab = tabName;
+        
+        // Load data for tab if needed
+        switch(tabName) {
+            case 'courses':
+                loadCourses();
+                break;
+            case 'applications':
+                loadMyApplications();
+                break;
+            case 'community':
+                loadMyCommunity();
+                break;
+            case 'redeem':
+                loadMyRedeemCodes();
+                break;
+        }
+    }
+    
+    // Refresh dashboard
+    function refreshDashboard() {
+        showToast('Refreshing dashboard...', 'info');
+        switch(currentTab) {
+            case 'courses':
+                loadCourses();
+                break;
+            case 'applications':
+                loadMyApplications();
+                break;
+            case 'community':
+                loadMyCommunity();
+                break;
+            case 'redeem':
+                loadMyRedeemCodes();
+                break;
+        }
+    }
+    
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Check authentication
+        if (checkAuth()) {
+            await initializeDashboard();
+        }
+        
+        // Setup event listeners
+        document.getElementById('login-form').addEventListener('submit', handleLogin);
+        
+        // Search and filter events
+        const courseSearch = document.getElementById('course-search');
+        const courseCategoryFilter = document.getElementById('course-category-filter');
+        
+        if (courseSearch) {
+            let searchTimeout;
+            courseSearch.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => loadCourses(1), 500);
+            });
+        }
+        
+        if (courseCategoryFilter) {
+            courseCategoryFilter.addEventListener('change', function() {
+                loadCourses(1);
+            });
+        }
+        
+        // Application filters
+        const applicationStatusFilter = document.getElementById('application-status-filter');
+        const applicationSearch = document.getElementById('application-search');
+        
+        if (applicationStatusFilter) {
+            applicationStatusFilter.addEventListener('change', function() {
+                loadMyApplications(1);
+            });
+        }
+        
+        if (applicationSearch) {
+            let searchTimeout;
+            applicationSearch.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => loadMyApplications(1), 500);
+            });
+        }
+        
+        // Community filters
+        const communityStatusFilter = document.getElementById('community-status-filter');
+        const communitySearch = document.getElementById('community-search');
+        
+        if (communityStatusFilter) {
+            communityStatusFilter.addEventListener('change', function() {
+                loadMyCommunity(1);
+            });
+        }
+        
+        if (communitySearch) {
+            let searchTimeout;
+            communitySearch.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => loadMyCommunity(1), 500);
+            });
+        }
+        
+        // Redeem filters
+        const redeemStatusFilter = document.getElementById('redeem-status-filter');
+        const redeemSearch = document.getElementById('redeem-search');
+        
+        if (redeemStatusFilter) {
+            redeemStatusFilter.addEventListener('change', function() {
+                loadMyRedeemCodes(1);
+            });
+        }
+        
+        if (redeemSearch) {
+            let searchTimeout;
+            redeemSearch.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => loadMyRedeemCodes(1), 500);
+            });
+        }
+        
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.modal, .login-modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    if (modal.id === 'login-modal') {
+                        document.getElementById('login-form').reset();
+                    }
+                    if (modal.id === 'custom-modal') {
+                        closeCustomModal();
+                    }
+                }
+            });
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal, .login-modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                closeCustomModal();
+            }
+            if (event.key === 'r' && event.ctrlKey) {
+                event.preventDefault();
+                refreshDashboard();
+            }
+        });
+        
+        // Auto-check session every 5 minutes
+        setInterval(() => {
+            if (!getAuthToken() && currentUser) {
+                showToast('Session expired. Please login again.', 'error');
+                logout();
+            }
+        }, 5 * 60 * 1000);
+    });
+</script>
+</body>
+</html>
